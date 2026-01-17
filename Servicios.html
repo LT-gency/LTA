@@ -1,0 +1,2179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios | LIFETIMES AGENCY</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Google Maps API - Key modificada para funcionar -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0C1LfPHi9aJRV8Y7bn_1Nf7HqD3XqQ4E&callback=initMap" async defer></script>
+    <style>
+        /* ====== VARIABLES Y RESET ====== */
+        :root {
+            --primary: #c90f0f;
+            --primary-dark: #a80c0c;
+            --primary-light: rgba(201, 15, 15, 0.08);
+            --secondary: #f8f9fa;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --dark-light: #2d3748;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+            --border-radius: 12px;
+            --border-radius-lg: 20px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) #f1f1f1;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background-color: #ffffff;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        /* ====== BARRA DE DESPLAZAMIENTO PERSONALIZADA ====== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+            border-radius: 10px;
+            border: 2px solid #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, var(--primary-dark), #8a0a0a);
+        }
+        
+        /* ====== NAVBAR ====== */
+        .nav{
+            position:sticky;
+            top:0;
+            background:rgba(255,255,255,.98);
+            backdrop-filter:saturate(180%) blur(10px);
+            border-bottom:1px solid #f0f0f0;
+            z-index:1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        .nav-inner{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            height:72px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+        .logo{
+            font-weight:900;
+            letter-spacing:.02em;
+            font-size:1.35rem;
+            text-decoration: none;
+            color: #000;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .logo span{
+            font-weight:300;
+        }
+        .nav-links{
+            display:flex;
+            gap:1.8rem;
+            align-items:center;
+        }
+        .nav-links a{
+            font-weight:600;
+            text-decoration: none;
+            color: #000;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 8px 0;
+        }
+        /* ELIMINADO: Efecto hover del navbar */
+        /* .nav-links a::after{
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after{
+            width: 100%;
+        } */
+        .nav-cta{
+            display:flex;
+            gap:.8rem;
+            align-items:center;
+        }
+        
+        .btn{
+            display:inline-flex;
+            gap:.6rem;
+            align-items:center;
+            font-weight:600;
+            border:1px solid #1a1a1a;
+            padding:.85rem 1.8rem;
+            border-radius:8px;
+            transition:all 0.3s ease;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover{
+            transform:translateY(-2px);
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn.fill{
+            background:#1a1a1a;
+            color:#fff;
+        }
+        
+        .btn.fill:hover{
+            background:#4a4a4a;
+            border-color:#4a4a4a;
+        }
+        
+        .btn.ghost{
+            background:transparent;
+            color:#1a1a1a;
+        }
+        
+        .btn.ghost:hover{
+            background:#1a1a1a;
+            color:#fff;
+        }
+        
+        .mobile-toggle{
+            display:none;
+            background:#000;
+            color:#fff;
+            border:none;
+            width:44px;
+            height:44px;
+            border-radius:10px;
+            cursor: pointer;
+        }
+        
+        .mobile-menu{
+            position:fixed;
+            inset:0 0 auto 0;
+            top:72px;
+            background:#fff;
+            border-top:1px solid #eee;
+            display:none;
+            padding: 1rem 0;
+            z-index: 999;
+        }
+        
+        .mobile-menu.open{display:block}
+        
+        .mobile-menu a{
+            display:block;
+            padding:16px 24px;
+            border-bottom:1px solid #f5f5f5;
+            font-weight:600;
+            text-decoration: none;
+            color: #000;
+            transition: background-color 0.2s;
+        }
+        
+        .mobile-menu a:hover{
+            background-color: #f9f9f9;
+        }
+        
+        @media (max-width: 960px){
+            .nav-links{display:none}
+            .mobile-toggle{display:inline-grid;place-items:center}
+            .nav-inner {
+                padding: 0 24px;
+            }
+        }
+        
+        /* ====== HERO SECTION ====== */
+        .hero {
+            padding: 8rem 2rem;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -1;
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 2;
+            color: white;
+        }
+        
+        .hero-content {
+            z-index: 2;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            background: var(--primary-light);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            color: white;
+        }
+        
+        .hero-title span {
+            color: var(--primary);
+        }
+        
+        .hero-description {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        @media (max-width: 992px) {
+            .hero {
+                padding: 6rem 2rem;
+                min-height: 80vh;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 1.5rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-description {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* ====== SERVICES SECTION - FONDOS DE PANTALLA COMPLETA ====== */
+        .services {
+            padding: 0;
+            position: relative;
+        }
+        
+        .services-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .service-item {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem;
+            overflow: hidden;
+        }
+        
+        /* Fondo de pantalla completa para cada servicio */
+        .service-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -2;
+        }
+        
+        /* Fondo específico para cada servicio - MODIFICADO */
+        .service-item:nth-child(1) .service-background {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+        }
+        
+        .service-item:nth-child(2) .service-background {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-position: center 30%;
+        }
+        
+        /* SERVICIO 3 CON IMAGEN NUEVA */
+        .service-item:nth-child(3) .service-background {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1555099962-4199c345e5dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+        }
+        
+        /* SERVICIO 4 CON IMAGEN NUEVA */
+        .service-item:nth-child(4) .service-background {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+        }
+        
+        /* Overlay para mejorar legibilidad */
+        .service-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+            z-index: -1;
+        }
+        
+        .service-content-wrapper {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .service-content {
+            color: white;
+        }
+        
+        .service-content h3 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .service-description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+        
+        .service-features {
+            margin-bottom: 2.5rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            color: var(--primary);
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+            font-size: 1rem;
+            min-width: 20px;
+        }
+        
+        .feature-text {
+            color: white;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .service-benefit {
+            background: rgba(201, 15, 15, 0.15);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 2.5rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .benefit-title {
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+        
+        .benefit-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        /* Precio sin box */
+        .service-price {
+            margin: 2rem 0;
+        }
+        
+        .service-price-exterior {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.3rem;
+        }
+        
+        .service-price-exterior .currency {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .service-price-exterior.free {
+            color: white;
+            font-size: 2.8rem;
+        }
+        
+        .service-price-note {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+        
+        /* Botón expandir */
+        .expand-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 1.2rem 2.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.1rem;
+            min-width: 200px;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.3px;
+        }
+        
+        .expand-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .expand-btn i {
+            transition: all 0.4s ease;
+            font-size: 1rem;
+        }
+        
+        .expand-btn:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Imagen del servicio - ahora más prominente */
+        .service-image-container {
+            position: relative;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            height: 500px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .service-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .service-image-container:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Contenedor del mapa */
+        .service-map-container {
+            position: relative;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            height: 500px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        #cdmx-map {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Indicador visual de mapa para el servicio 2 */
+        .map-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(201, 15, 15, 0.9);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* ====== MODAL DE DETALLES ====== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 1.5rem;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-container {
+            background: white;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(20px);
+            animation: slideUp 0.4s ease forwards;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            border: 1px solid #f0f0f0;
+        }
+        
+        @keyframes slideUp {
+            to { transform: translateY(0); }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: #f8f9fa;
+            color: var(--dark);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            border: 1px solid #e9ecef;
+        }
+        
+        .modal-close:hover {
+            background: var(--primary);
+            color: white;
+            transform: rotate(90deg);
+        }
+        
+        /* Header del modal minimalista */
+        .modal-header {
+            padding: 3rem 3rem 1.5rem;
+            background: white;
+            color: var(--dark);
+            border-radius: 16px 16px 0 0;
+            position: relative;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .modal-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            line-height: 1.2;
+            color: var(--dark);
+        }
+        
+        .modal-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray);
+            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+        
+        /* Contenido del modal */
+        .modal-body {
+            padding: 2rem 3rem;
+        }
+        
+        .modal-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .modal-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .section-title-modal {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--primary-light);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .section-title-modal i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        /* Nueva sección de descripción con imagen */
+        .description-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 2rem 0;
+            align-items: start;
+        }
+        
+        .description-text {
+            color: var(--dark-light);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            text-align: left;
+        }
+        
+        .description-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 300px;
+        }
+        
+        .description-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .description-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Lista de puntos para características (REEMPLAZA A LAS TARJETAS EXPANDIBLES) */
+        .features-list-modal {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .features-list-modal ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .features-list-modal li {
+            margin-bottom: 1.2rem;
+            padding-left: 0.5rem;
+            position: relative;
+            color: var(--dark-light);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        
+        .features-list-modal li:before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.5rem;
+            position: absolute;
+            left: -1.5rem;
+            top: -0.2rem;
+        }
+        
+        .feature-item-title {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+            display: block;
+        }
+        
+        .feature-item-description {
+            color: var(--dark-light);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        /* Grid de características con 3 boxes y descripciones expandibles (MANTENIDO POR SI ACASO) */
+        .features-grid-modal {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+            display: none; /* OCULTO AHORA */
+        }
+        
+        .feature-card-modal {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.8rem;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .feature-card-modal:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            border-color: var(--primary-light);
+        }
+        
+        .feature-card-modal.expanded {
+            background: white;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon-modal {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card-modal:hover .feature-icon-modal {
+            transform: scale(1.1);
+        }
+        
+        .feature-title-modal {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            font-size: 1.15rem;
+            line-height: 1.3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-grow: 1;
+        }
+        
+        .feature-toggle {
+            color: var(--primary);
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 0.5rem;
+        }
+        
+        .feature-card-modal.expanded .feature-toggle {
+            transform: rotate(180deg);
+        }
+        
+        .feature-description-modal {
+            color: var(--dark-light);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        
+        .feature-card-modal.expanded .feature-description-modal {
+            max-height: 500px;
+            opacity: 1;
+        }
+        
+        /* Lista de beneficios */
+        .benefits-list {
+            margin: 2rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .benefit-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.8rem;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            border-color: var(--primary-light);
+        }
+        
+        .benefit-icon {
+            background: var(--primary-light);
+            color: var(--primary);
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-item:hover .benefit-icon {
+            background: var(--primary);
+            color: white;
+            transform: rotate(5deg);
+        }
+        
+        .benefit-content h4 {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            font-size: 1.15rem;
+        }
+        
+        .benefit-content p {
+            color: var(--dark-light);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        
+        /* Sección de precio minimalista */
+        .pricing-section-modal {
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            text-align: center;
+            border: 1px solid #e9ecef;
+        }
+        
+        .pricing-badge-modal {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .pricing-amount-modal {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+        
+        .pricing-period-modal {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+        
+        .pricing-features-modal {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #e9ecef;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .pricing-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .pricing-feature-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .pricing-feature-item i {
+            color: var(--primary);
+            font-size: 0.9rem;
+            width: 20px;
+        }
+        
+        .pricing-feature-item span {
+            color: var(--dark-light);
+            font-size: 0.95rem;
+            flex: 1;
+        }
+        
+        /* Footer del modal minimalista */
+        .modal-footer {
+            padding: 2rem 3rem;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+            border-radius: 0 0 16px 16px;
+            text-align: center;
+        }
+        
+        .modal-footer-text {
+            color: var(--dark-light);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .modal-cta {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 1rem 2.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modal-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(201, 15, 15, 0.2);
+        }
+        
+        .modal-cta i {
+            font-size: 1.1rem;
+        }
+        
+        /* ====== CTA SECTION ====== */
+        .cta {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, rgba(201,15,15,0.9) 0%, rgba(168,12,12,0.95) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 1;
+        }
+        
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .cta-description {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-button {
+            background-color: white;
+            color: var(--primary);
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 2.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        
+        .cta-button:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .cta-button.ghost {
+            background-color: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .cta-button.ghost:hover {
+            background-color: rgba(255,255,255,0.1);
+            border-color: white;
+        }
+        
+        /* ====== FOOTER ====== */
+        .footer {
+            border-top: 1px solid #eee;
+            padding: 3rem 0 3rem;
+            color: #444;
+            background-color: #f8f9fa;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 2rem; 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding: 0 32px;
+        }
+        
+        .footer h4 {
+            margin: 0 0 1rem;
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+        
+        .footer a {
+            display: block;
+            padding: 0.35rem 0;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer a:hover {
+            color: var(--primary);
+        }
+        
+        .footer .muted {
+            color: #6b7280;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .socials a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: #000;
+            transition: color 0.2s;
+        }
+
+        .socials a:hover {
+            color: var(--primary);
+        }
+
+        .socials i {
+            font-size: 1.3rem;
+            width: 24px;
+        }
+
+        .fa-instagram { color: #C13584; }
+        .fa-youtube { color: #FF0000; }
+        .fa-tiktok { color: #000000; }
+        
+        .footer-bottom {
+            text-align: center;
+            width: 100%;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e9ecef;
+            font-size: 0.9rem;
+            color: #666;
+            max-width: 1400px;
+            margin: 3rem auto 0;
+            padding: 2rem 32px 0;
+        }
+        
+        /* ====== RESPONSIVE STYLES ====== */
+        @media (max-width: 1200px) {
+            .service-content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .service-content h3 {
+                font-size: 2.5rem;
+            }
+            
+            .service-image-container, .service-map-container {
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .service-item {
+                min-height: auto;
+                padding: 4rem 2rem;
+            }
+            
+            .service-content h3 {
+                font-size: 2.2rem;
+            }
+            
+            .service-description {
+                font-size: 1.1rem;
+            }
+            
+            .features-grid-modal {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .modal-header {
+                padding: 2.5rem 2rem 1.5rem;
+            }
+            
+            .modal-body {
+                padding: 2rem;
+            }
+            
+            .modal-footer {
+                padding: 2rem;
+            }
+            
+            .modal-title {
+                font-size: 2rem;
+            }
+            
+            .modal-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                padding: 0 24px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .service-item {
+                padding: 3rem 1.5rem;
+            }
+            
+            .service-content h3 {
+                font-size: 1.8rem;
+            }
+            
+            .service-image-container, .service-map-container {
+                height: 350px;
+            }
+            
+            .cta {
+                padding: 4rem 1.5rem;
+            }
+            
+            .cta-title {
+                font-size: 2rem;
+            }
+            
+            .cta-description {
+                font-size: 1.1rem;
+            }
+            
+            .modal-overlay {
+                padding: 1rem;
+            }
+            
+            .modal-title {
+                font-size: 1.8rem;
+            }
+            
+            .modal-body {
+                padding: 1.5rem;
+            }
+            
+            .modal-footer {
+                padding: 1.5rem;
+            }
+            
+            .section-title-modal {
+                font-size: 1.3rem;
+            }
+            
+            .description-text {
+                font-size: 1rem;
+            }
+            
+            .feature-card-modal {
+                padding: 1.5rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-inner {
+                padding: 0 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .services {
+                padding: 0;
+            }
+            
+            .service-item {
+                padding: 2.5rem 1rem;
+            }
+            
+            .service-image-container, .service-map-container {
+                height: 300px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .cta-button {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .modal-header {
+                padding: 2rem 1.5rem 1.5rem;
+            }
+            
+            .modal-body {
+                padding: 1.5rem;
+            }
+            
+            .modal-footer {
+                padding: 1.5rem;
+            }
+            
+            .pricing-amount-modal {
+                font-size: 2.5rem;
+            }
+            
+            .modal-cta {
+                width: 100%;
+                padding: 1rem 1.5rem;
+            }
+            
+            .expand-btn {
+                padding: 1rem 2rem;
+                min-width: 180px;
+                font-size: 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .description-image {
+                height: 200px;
+            }
+            
+            .service-price-exterior {
+                font-size: 2.2rem;
+            }
+            
+            .service-price-exterior.free {
+                font-size: 2.2rem;
+            }
+            
+            .features-grid-modal {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ====== NAVBAR ====== -->
+    <header class="nav">
+        <div class="nav-inner">
+            <button class="mobile-toggle" aria-label="Abrir menú" id="menuBtn">≡</button>
+            <a class="logo" href="index.html" aria-label="Inicio" title="Inicio">
+                LIFETIMES<span>AGENCY</span>
+            </a>
+            <nav class="nav-links" aria-label="Principal">
+                <a href="general.html">Novedades</a>
+                <a href="terminos-y-condiciones.html">Términos y Condiciones</a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
+            <div class="nav-cta">
+                <a class="btn ghost" href="portal.html" aria-label="Portal">Portal</a>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+            <a href="general.html">Novedades</a>
+            <a href="Terminos y Condiciones.html">Términos y Condiciones</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="servicios.html">Servicios</a>
+        </div>
+    </header>
+
+    <!-- ====== HERO SECTION ====== -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-rocket"></i>
+                    Impulsa tu negocio
+                </div>
+                <h1 class="hero-title">Servicios de <span>Marketing Digital</span></h1>
+                <p class="hero-description">
+                    Transformamos negocios locales con soluciones digitales estratégicas. Desde producción audiovisual hasta presencia web, potenciamos tu visibilidad y conexión con clientes.
+                </p>
+                <p class="hero-description">
+                    En LIFETIMES apoyamos a negocios locales y comerciales a mejorar su visibilidad mediante contenido audiovisual, presencia digital y difusión estratégica.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== SERVICES SECTION ====== -->
+    <section class="services">
+        <div class="services-container">
+            <!-- Servicio 1: Producción de Video -->
+            <div class="service-item">
+                <div class="service-background"></div>
+                <div class="service-overlay"></div>
+                
+                <div class="service-content-wrapper">
+                    <div class="service-content">
+                        <h3>Producción de Video Promocional</h3>
+                        <p class="service-description">
+                            Creamos videos promocionales profesionales diseñados para mostrar tu negocio de forma clara, atractiva y confiable.
+                        </p>
+                        
+                        <div class="service-features">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="feature-text">Producción de video promocional con enfoque profesional</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="feature-text">Presentación clara de tu negocio, productos o servicios</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="feature-text">Contenido optimizado para redes sociales</div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-benefit">
+                            <div class="benefit-title">Beneficio adicional:</div>
+                            <div class="benefit-description">
+                                Al realizar el video, tu negocio se integra automáticamente en la sección de Negocios Destacados dentro del catálogo principal de la web de LIFETIMES, brindándote mayor visibilidad frente a otros negocios.
+                            </div>
+                        </div>
+                        
+                        <button class="expand-btn" data-service="1">
+                            Ver detalles <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="service-image-container">
+                        <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Producción de Video Promocional">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Servicio 2: Catálogo Web -->
+            <div class="service-item">
+                <div class="service-background"></div>
+                <div class="service-overlay"></div>
+                
+                <div class="service-content-wrapper">
+                    <div class="service-content">
+                        <h3>Catalogo Web</h3>
+                        <p class="service-description">
+                            Publicamos tu negocio dentro de nuestro catálogo web, donde las personas pueden descubrir diferentes opciones de comercios y servicios en toda la Ciudad de México.
+                        </p>
+                        
+                        <div class="service-features">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="feature-text">Publicación de tu negocio en el catálogo</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="feature-text">Clasificación por categoría y zona de la CDMX</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="feature-text">Información básica y datos de contacto</div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-price">
+                            <div class="service-price-exterior free">GRATIS</div>
+                            <div class="service-price-note">Servicio completamente gratuito sin límite de tiempo</div>
+                        </div>
+                        
+                        <div class="service-benefit">
+                            <div class="benefit-title">Beneficio:</div>
+                            <div class="benefit-description">
+                                Este servicio permite que tu negocio tenga presencia digital sin costo dentro de nuestra plataforma, con alcance en toda la Ciudad de México.
+                            </div>
+                        </div>
+                        
+                        <button class="expand-btn" data-service="2">
+                            Ver detalles <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="service-map-container">
+                        <div class="map-indicator">
+                            <i class="fas fa-map-marker-alt"></i> CDMX
+                        </div>
+                        <!-- Mapa de Google Maps -->
+                        <iframe 
+                            id="cdmx-map"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120409.91956113874!2d-99.20539920000001!3d19.4326296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce0026db097507%3A0x54061076265ee841!2sCiudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1710304281311!5m2!1ses-419!2smx"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Servicio 3: Página Web -->
+            <div class="service-item">
+                <div class="service-background"></div>
+                <div class="service-overlay"></div>
+                
+                <div class="service-content-wrapper">
+                    <div class="service-content">
+                        <h3>Creación de Página Web de Presentación</h3>
+                        <p class="service-description">
+                            Desarrollamos páginas web de presentación para negocios que buscan un espacio propio donde mostrar quiénes son y qué ofrecen.
+                        </p>
+                        
+                        <div class="service-features">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="feature-text">Página web con diseño limpio y funcional</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="feature-text">Información del negocio, productos o servicios</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="feature-text">Ubicación, horarios y contacto</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="feature-text">Adaptada para celular y computadora</div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-benefit">
+                            <div class="benefit-title">Beneficio adicional:</div>
+                            <div class="benefit-description">
+                                Al crear tu página web, esta se integra automáticamente al catálogo web de LIFETIMES con posicionamiento destacado.
+                            </div>
+                        </div>
+                        
+                        <button class="expand-btn" data-service="3">
+                            Ver detalles <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="service-image-container">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Página Web de Presentación">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Servicio 4: Publicación en Redes -->
+            <div class="service-item">
+                <div class="service-background"></div>
+                <div class="service-overlay"></div>
+                
+                <div class="service-content-wrapper">
+                    <div class="service-content">
+                        <h3>Publicación en Redes Sociales LIFETIMES</h3>
+                        <p class="service-description">
+                            Difundimos tu contenido en nuestras cuentas principales para aumentar su alcance y visibilidad en toda la CDMX.
+                        </p>
+                        
+                        <div class="service-features">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="feature-text">Publicación en Instagram y Facebook</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="feature-text">Alcance a una audiencia ya establecida en CDMX</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="feature-text">Entrega de reporte de métricas (KPIs)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-price">
+                            <div class="service-price-exterior">
+                                $54.00 <span class="currency">MXN</span>
+                            </div>
+                            <div class="service-price-note">Costo por publicación o video</div>
+                        </div>
+                        
+                        <button class="expand-btn" data-service="4">
+                            Ver detalles <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="service-image-container">
+                        <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Publicación en Redes Sociales">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== MODAL ====== -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-container" id="modalContainer">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+   
+    <section class="cta">
+        <div class="cta-container">
+            <h2 class="cta-title">¿Listo para Impulsar tu Negocio?</h2>
+            <p class="cta-description">
+                No importa el tamaño de tu negocio, tenemos soluciones adaptadas a tus necesidades. Contáctanos hoy mismo y descubre cómo podemos ayudarte a alcanzar nuevos clientes y aumentar tus ventas.
+            </p>
+            
+            <div class="cta-buttons">
+                <button class="cta-button" id="whatsappBtn">
+                    <i class="fas fa-whatsapp"></i> Contáctanos por WhatsApp
+                </button>
+                <button class="cta-button ghost" id="emailBtn">
+                    <i class="fas fa-envelope"></i> Solicitar Información
+                </button>
+            </div>
+        </div>
+    </section>
+
+ 
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <h4>Acerca de LIFETIMES</h4>
+                <p class="muted">Impulsamos negocios locales y comerciales mediante soluciones digitales estratégicas. Cualquier inconformidad contactar a Soporte o en caso mayor a WhatsApp.</p>
+            </div>
+
+            <div>
+                <h4>Servicios</h4>
+                <a href="servicios.html">Producción de Video</a>
+                <a href="servicios.html">Catálogo Web</a>
+                <a href="servicios.html">Páginas Web</a>
+                <a href="servicios.html">Publicación en Redes</a>
+            </div>
+
+            <div>
+                <h4>Ayuda</h4>
+                <a href="contacto.html">Cambios de Edición</a>
+                <a href="contacto.html">Devoluciones</a>
+                <a href="contacto.html">Soporte</a>
+                <a href="terminos-y-condiciones.html">Términos y Condiciones</a>
+            </div>
+
+            <div>
+                <h4>Síguenos</h4>
+                <p class="muted">@LIFETIMES AGENCY</p>
+                <div class="socials">
+                    <a href="https://www.instagram.com/crxz_xs?igsh=M3J3aGhmaHVoNmk2" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCqsIJHzN5N47KUR-lrV8kag" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-youtube"></i> YouTube
+                    </a>
+                    <a href="https://www.tiktok.com/@cxrz_xs" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-tiktok"></i> TikTok
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © <span id="year"></span> LIFETIMES AGENCY. Todos los derechos reservados. Marca Registrada.
+        </div>
+    </footer>
+
+    <script>
+        // Datos de los servicios actualizados con 3 características
+        const servicesData = {
+            1: {
+                title: "Producción de Video Promocional",
+                subtitle: "Contenido audiovisual profesional para destacar tu negocio y conectar con tu audiencia objetivo",
+                description: "En LIFETIMES nos especializamos en crear videos promocionales de alta calidad que no solo muestran tu negocio, sino que cuentan su historia de manera emocionante y memorable. Nuestro proceso comienza con una consulta detallada para entender tu visión, valores y objetivos de negocio.",
+                image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                features: [
+                    {
+                        icon: "fa-camera",
+                        title: "Filmación profesional",
+                        description: "Utilizamos cámaras 4K, sistemas de audio profesional, iluminación de estudio y equipos de estabilización para capturar cada detalle con la máxima calidad. Nuestro equipo técnico se encarga de todo el proceso de producción, garantizando tomas nítidas, audio claro y composición visual atractiva."
+                    },
+                    {
+                        icon: "fa-film",
+                        title: "Edición creativa",
+                        description: "Nuestros editores especializados trabajan con software profesional para crear secuencias dinámicas, agregar efectos visuales sutiles, corrección de color cinematográfica, gráficos animados y banda sonora personalizada. Cada video se optimiza para transmitir el mensaje clave de tu marca de manera impactante."
+                    },
+                    {
+                        icon: "fa-mobile-screen",
+                        title: "Optimización multiplataforma",
+                        description: "Creamos versiones específicas para diferentes plataformas: formatos verticales para Instagram Stories y TikTok, formatos cuadrados para Instagram Feed, y versiones horizontales para YouTube y sitio web. Además, incluimos subtítulos para mejorar la accesibilidad y el engagement en redes sociales."
+                    }
+                ],
+                benefits: [
+                    {
+                        icon: "fa-chart-line",
+                        title: "Visibilidad aumentada",
+                        description: "Tu video no solo se publica donde tú lo solicites, sino que automáticamente gana visibilidad en nuestra sección de Negocios Destacados dentro del catálogo principal de LIFETIMES."
+                    },
+                    {
+                        icon: "fa-repeat",
+                        title: "Contenido versátil",
+                        description: "Recibirás un paquete completo con todas las versiones del video, material crudo seleccionado, y archivos editables para utilizar en múltiples contextos."
+                    }
+                ],
+                pricing: {
+                    amount: "Consultar",
+                    period: "Precio personalizado según duración, complejidad y requerimientos específicos",
+                    features: [
+                        "Desarrollo de guión y planificación estratégica incluidos",
+                        "Hasta 3 revisiones completas de edición sin costo adicional",
+                        "Entrega en todos los formatos necesarios para redes sociales",
+                        "Derechos de uso completo y perpetuo del material",
+                        "Soporte post-entrega por 30 días para ajustes menores"
+                    ]
+                }
+            },
+            2: {
+                title: "Catálogo Web LIFETIMES",
+                subtitle: "Presencia digital gratuita que conecta tu negocio con clientes locales en toda la CDMX",
+                description: "Nuestro catálogo web es una plataforma diseñada específicamente para dar visibilidad a negocios locales de toda la Ciudad de México sin necesidad de inversión inicial. Es más que un simple directorio: es un espacio digital donde los clientes pueden descubrir, comparar y contactar negocios como el tuyo de manera intuitiva, con cobertura en toda la CDMX.",
+                image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                features: [
+                    {
+                        icon: "fa-store",
+                        title: "Perfil completo",
+                        description: "Creamos un perfil que incluye: nombre comercial, descripción detallada de productos o servicios, horarios de atención, métodos de pago aceptados, políticas especiales, y todas las formas de contacto. Organizamos la información de manera lógica para que los clientes encuentren rápidamente lo que necesitan."
+                    },
+                    {
+                        icon: "fa-tags",
+                        title: "Categorización por zona CDMX",
+                        description: "Tu negocio aparece clasificado no solo por rubro principal, sino por múltiples categorías secundarias, servicios específicos, ubicación geográfica dentro de la CDMX y características especiales. Esto aumenta exponencialmente las posibilidades de que te encuentren clientes que buscan exactamente lo que ofreces en su zona."
+                    },
+                    {
+                        icon: "fa-magnifying-glass",
+                        title: "Optimización SEO",
+                        description: "Cada perfil está optimizado técnicamente para aparecer en búsquedas de Google y otros motores de búsqueda. Implementamos meta tags, descripciones optimizadas, estructura de datos organizada, y técnicas de SEO local que mejoran tu visibilidad digital en la CDMX."
+                    }
+                ],
+                benefits: [
+                    {
+                        icon: "fa-money-bill-wave",
+                        title: "Cero inversión",
+                        description: "Este servicio es completamente gratuito, sin costos ocultos, comisiones por ventas, o compromisos contractuales. Creemos en apoyar el crecimiento de los negocios locales en la CDMX."
+                    },
+                    {
+                        icon: "fa-rocket",
+                        title: "Alcance en toda la CDMX",
+                        description: "Desde el momento en que publicamos tu perfil, tu negocio se hace visible para todos los usuarios que consultan nuestro catálogo en toda la Ciudad de México."
+                    }
+                ],
+                pricing: {
+                    amount: "GRATIS",
+                    period: "Servicio completamente gratuito sin límite de tiempo",
+                    features: [
+                        "Publicación completa y permanente del perfil de tu negocio",
+                        "Actualizaciones ilimitadas y gratuitas cuando las necesites",
+                        "Sin límite de tiempo - permanece en el catálogo indefinidamente",
+                        "Soporte básico incluido para consultas y modificaciones",
+                        "Optimización SEO continua para mantener visibilidad en CDMX"
+                    ]
+                }
+            },
+            3: {
+                title: "Creación de Página Web de Presentación",
+                subtitle: "Tu espacio digital personalizado que funciona como el escaparate perfecto de tu negocio",
+                description: "Desarrollamos páginas web de presentación que van mucho más allá de una simple página informativa. Creamos experiencias digitales completas que funcionan como la extensión natural de tu negocio en el mundo online.",
+                image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                features: [
+                    {
+                        icon: "fa-paintbrush",
+                        title: "Diseño personalizado",
+                        description: "No utilizamos plantillas genéricas. Cada elemento visual se diseña específicamente para reflejar la personalidad de tu marca. Creamos interfaces intuitivas que guían al visitante naturalmente hacia la información más importante y los llamados a acción más efectivos."
+                    },
+                    {
+                        icon: "fa-mobile-screen-button",
+                        title: "Diseño responsive",
+                        description: "Tu sitio web se verá y funcionará perfectamente en cualquier dispositivo: desde smartphones pequeños hasta tablets, laptops y monitores de escritorio grandes. Implementamos técnicas de diseño adaptativo que reorganizan contenido, ajustan tamaños de texto, y optimizan imágenes automáticamente según el dispositivo del usuario."
+                    },
+                    {
+                        icon: "fa-bolt",
+                        title: "Optimización de rendimiento",
+                        description: "Implementamos técnicas avanzadas de optimización: compresión de imágenes sin pérdida de calidad, minificación de código, carga diferida de recursos, y configuración de caché inteligente. El resultado es un sitio web que carga en menos de 3 segundos."
+                    }
+                ],
+                benefits: [
+                    {
+                        icon: "fa-link",
+                        title: "Integración automática",
+                        description: "Al crear tu página web con nosotros, automáticamente recibes un enlace destacado y posición preferencial dentro del catálogo web de LIFETIMES."
+                    },
+                    {
+                        icon: "fa-shield-halved",
+                        title: "Credibilidad profesional",
+                        description: "En la era digital actual, un sitio web profesional ya no es un lujo sino una expectativa básica de los consumidores."
+                    }
+                ],
+                pricing: {
+                    amount: "Consultar",
+                    period: "Precio variable según complejidad, funcionalidades y escala del proyecto",
+                    features: [
+                        "Diseño 100% personalizado y único para tu marca",
+                        "Hasta 5 secciones principales completamente desarrolladas",
+                        "Formulario de contacto funcional con sistema anti-spam",
+                        "Integración completa con tus redes sociales principales",
+                        "Panel de administración intuitivo para actualizaciones básicas",
+                        "Configuración de dominio y hosting incluidos (primer año)"
+                    ]
+                }
+            },
+            4: {
+                title: "Publicación en Redes Sociales LIFETIMES",
+                subtitle: "Amplificación estratégica del alcance de tu contenido a través de nuestras audiencias establecidas en CDMX",
+                description: "Nuestro servicio de publicación en redes sociales no es simplemente compartir tu contenido; es una estrategia de amplificación cuidadosamente planificada. Publicamos tu contenido en nuestras cuentas principales de Instagram y Facebook con alcance específico en la Ciudad de México.",
+                image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                features: [
+                    {
+                        icon: "fa-bullhorn",
+                        title: "Amplificación de alcance",
+                        description: "Nuestras cuentas tienen seguidores que específicamente siguen a LIFETIMES para descubrir negocios locales interesantes en la CDMX. Cuando publicamos tu contenido, lo exponemos a una audiencia que ya está mentalmente preparada para descubrir y posiblemente contratar servicios como los tuyos en la ciudad."
+                    },
+                    {
+                        icon: "fa-chart-column",
+                        title: "Reporte completo de métricas",
+                        description: "No te damos solo números básicos. Proporcionamos un análisis completo que incluye: alcance orgánico vs. pagado, tasa de engagement, demografía de la audiencia alcanzada, horarios de mayor interacción, clics en enlaces, y comportamiento del usuario específico de CDMX."
+                    },
+                    {
+                        icon: "fa-calendar-check",
+                        title: "Planificación estratégica",
+                        description: "Analizamos patrones de actividad de nuestra audiencia en la CDMX para publicar tu contenido en los momentos de mayor actividad y receptividad. Consideramos días de la semana, horas específicas, eventos locales relevantes, y tendencias estacionales en la ciudad."
+                    }
+                ],
+                benefits: [
+                    {
+                        icon: "fa-user-check",
+                        title: "Acceso inmediato",
+                        description: "Construir una audiencia orgánica significativa desde cero puede tomar meses o incluso años de trabajo constante."
+                    },
+                    {
+                        icon: "fa-chart-pie",
+                        title: "Transparencia total",
+                        description: "Cada peso invertido en este servicio es completamente rastreable. Recibirás capturas de pantalla de las publicaciones, acceso a métricas de la plataforma y análisis interpretado."
+                    }
+                ],
+                pricing: {
+                    amount: "$54.00 MXN",
+                    period: "Costo fijo por cada publicación individual en ambas plataformas",
+                    features: [
+                        "Publicación simultánea en Instagram Feed y Facebook Page",
+                        "Reporte completo de métricas con análisis interpretado",
+                        "Optimización de horarios de publicación según datos de audiencia CDMX",
+                        "Segmentación por ubicación específica en la Ciudad de México",
+                        "Copywriting estratégico y selección de hashtags relevantes",
+                        "Monitoreo de comentarios y engagement durante 48 horas"
+                    ]
+                }
+            }
+        };
+
+        // Elementos DOM
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalContainer = document.getElementById('modalContainer');
+        const modalClose = document.getElementById('modalClose');
+        const expandButtons = document.querySelectorAll('.expand-btn');
+        
+        // Función para crear el contenido del modal
+        function createModalContent(serviceId) {
+            const service = servicesData[serviceId];
+            if (!service) {
+                console.error('Servicio no encontrado:', serviceId);
+                return '';
+            }
+            
+            // Crear características HTML como lista de puntos (REEMPLAZO DE LAS TARJETAS EXPANDIBLES)
+            const featuresHTML = service.features.slice(0, 3).map(feature => `
+                <li>
+                    <span class="feature-item-title">${feature.title}</span>
+                    <div class="feature-item-description">${feature.description}</div>
+                </li>
+            `).join('');
+            
+            // Crear beneficios HTML
+            const benefitsHTML = service.benefits.map(benefit => `
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas ${benefit.icon}"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h4>${benefit.title}</h4>
+                        <p>${benefit.description}</p>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Crear características de precio HTML
+            const pricingFeaturesHTML = service.pricing.features.map(feature => `
+                <div class="pricing-feature-item">
+                    <i class="fas fa-check"></i>
+                    <span>${feature}</span>
+                </div>
+            `).join('');
+            
+            return `
+                <div class="modal-header">
+                    <h3 class="modal-title">${service.title}</h3>
+                    <div class="modal-subtitle">${service.subtitle}</div>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="modal-section">
+                        <h3 class="section-title-modal">
+                            <i class="fas fa-file-alt"></i>
+                            Descripción detallada del servicio
+                        </h3>
+                        <div class="description-grid">
+                            <div class="description-text">
+                                ${service.description}
+                            </div>
+                            <div class="description-image">
+                                <img src="${service.image}" alt="${service.title}">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3 class="section-title-modal">
+                            <i class="fas fa-list-check"></i>
+                            Características principales
+                        </h3>
+                        <div class="features-list-modal">
+                            <ul>
+                                ${featuresHTML}
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3 class="section-title-modal">
+                            <i class="fas fa-gift"></i>
+                            Beneficios exclusivos para tu negocio
+                        </h3>
+                        <div class="benefits-list">
+                            ${benefitsHTML}
+                        </div>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3 class="section-title-modal">
+                            <i class="fas fa-dollar-sign"></i>
+                            Inversión requerida y lo que incluye
+                        </h3>
+                        
+                        <div class="pricing-section-modal">
+                            <div class="pricing-badge-modal">
+                                ${service.pricing.amount === 'GRATIS' ? 'Servicio completamente gratuito' : 'Inversión estratégica'}
+                            </div>
+                            <div class="pricing-amount-modal">${service.pricing.amount}</div>
+                            <div class="pricing-period-modal">${service.pricing.period}</div>
+                            
+                            <div class="pricing-features-modal">
+                                ${pricingFeaturesHTML}
+                            </div>
+                        </div>
+                        
+                        <p class="description-text" style="margin-top: 2rem;">
+                            <strong>Importante:</strong> Todos los precios son transparentes y sin cargos ocultos. Para servicios personalizados como producción de video o desarrollo web, ofrecemos cotizaciones detalladas después de entender exactamente tus necesidades específicas. Contáctanos para una evaluación gratuita y una propuesta personalizada.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <div class="modal-footer-text">
+                        <strong>¿Interesado en este servicio o tienes preguntas específicas?</strong><br>
+                        Nuestro equipo está listo para ayudarte a determinar si esta solución es la ideal para tus objetivos comerciales. Agenda una consulta gratuita sin compromiso para explorar cómo podemos impulsar tu negocio juntos.
+                    </div>
+                    <button class="modal-cta" id="modalCtaBtn">
+                        <i class="fas fa-whatsapp"></i> Contactar por WhatsApp para más información
+                    </button>
+                </div>
+            `;
+        }
+        
+        // Función para abrir el modal
+        function openModal(serviceId) {
+            console.log('Intentando abrir modal para servicio:', serviceId);
+            
+            // Verificar que el servicio existe
+            if (!servicesData[serviceId]) {
+                console.error('Servicio no encontrado:', serviceId);
+                return;
+            }
+            
+            const content = createModalContent(serviceId);
+            if (!content) {
+                console.error('No se pudo generar contenido para el modal');
+                return;
+            }
+            
+            modalContainer.innerHTML = content;
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Agregar evento al botón de WhatsApp dentro del modal
+            const modalCtaBtn = document.getElementById('modalCtaBtn');
+            if (modalCtaBtn) {
+                modalCtaBtn.addEventListener('click', function() {
+                    window.open('https://wa.me/5539445908', '_blank');
+                });
+            }
+            
+            // Asegurarse de que el botón de cerrar funcione
+            const modalCloseInModal = modalContainer.querySelector('.modal-close');
+            if (modalCloseInModal) {
+                modalCloseInModal.addEventListener('click', closeModal);
+            }
+        }
+        
+        // Función para cerrar el modal
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Página cargada, inicializando botones...');
+            
+            // Botones "Ver detalles" - Asegurarnos de que funcionen
+            expandButtons.forEach(button => {
+                console.log('Configurando botón:', button);
+                button.addEventListener('click', function() {
+                    console.log('Botón clickeado, data-service:', this.getAttribute('data-service'));
+                    const serviceId = this.getAttribute('data-service');
+                    if (serviceId) {
+                        openModal(serviceId);
+                    } else {
+                        console.error('Botón no tiene data-service:', this);
+                    }
+                });
+            });
+            
+            // Cerrar modal con el botón de cierre
+            modalClose.addEventListener('click', closeModal);
+            
+            // Cerrar modal al hacer clic fuera
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+            
+            // Cerrar modal con ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+            
+            // Mobile menu
+            const menuBtn = document.getElementById('menuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('open');
+                });
+            }
+            
+            // Año actual en footer
+            document.getElementById('year').textContent = new Date().getFullYear();
+            
+            // Botones de CTA principales
+            const whatsappBtn = document.getElementById('whatsappBtn');
+            const emailBtn = document.getElementById('emailBtn');
+            
+            if (whatsappBtn) {
+                whatsappBtn.addEventListener('click', function() {
+                    window.open('https://wa.me/5539445908', '_blank');
+                });
+            }
+            
+            if (emailBtn) {
+                emailBtn.addEventListener('click', function() {
+                    window.location.href = 'mailto:info@lifetimesagency.com';
+                });
+            }
+            
+            console.log('Total de botones expand-btn encontrados:', expandButtons.length);
+        });
+    </script>
+</body>
+</html>

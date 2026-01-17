@@ -1,0 +1,2810 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directorio de Negocios LIFE TIMES - General</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: #f5f7fa;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        /* Barra lateral con menú fijo */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(to bottom, #c90f0f, #a00c0c);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            text-align: center;
+            padding: 20px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #fff;
+            transition: transform 0.3s;
+        }
+
+        .logo h1:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            color: #ffffff;
+        }
+
+        .logo p {
+            margin-top: 5px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .menu-categorias {
+            padding: 0 15px;
+            flex: 1;
+        }
+
+        .categoria-item {
+            padding: 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            text-decoration: none;
+            color: white;
+        }
+
+        .categoria-item:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+
+        .categoria-item.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid #ffffff;
+        }
+
+        .categoria-item i {
+            margin-right: 12px;
+            width: 24px;
+            text-align: center;
+        }
+
+        /* Botón para subir negocio */
+        .btn-subir-negocio {
+            margin: 20px 15px;
+            padding: 15px;
+            background-color: rgba(128, 128, 128, 0.3);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-align: center;
+            width: calc(100% - 30px);
+        }
+
+        .btn-subir-negocio:hover {
+            background-color: rgba(128, 128, 128, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-subir-negocio i {
+            font-size: 18px;
+        }
+
+        /* Contenido principal */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        /* Navegación superior */
+        .top-nav {
+            background-color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000000;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: #c90f0f;
+        }
+
+        /* Contenedor de tarjetas - FONDO BLANCO */
+        .negocios-container {
+            padding: 30px;
+            flex: 1;
+            background: white;
+        }
+
+        /* BANNER DEL TÍTULO CON IMAGEN PROFESIONAL - SOLO SE CAMBIA LA IMAGEN */
+        .titulo-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 40px 50px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border: none;
+            position: relative;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .titulo-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(201, 15, 15, 0.1), rgba(0, 0, 0, 0.3));
+            z-index: 1;
+        }
+
+        .titulo-banner h2 {
+            color: white;
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .titulo-banner p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            font-weight: 500;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* CONTENEDOR DE NEGOCIOS PRINCIPALES - DOS BOXES LADO A LADO */
+        .negocios-principales-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        /* NEGOCIOS PRINCIPALES - DISEÑO SIMILAR A DESTACADOS PERO MEJORADO */
+        .negocio-principal-box {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: row;
+            height: 420px; /* Altura fija para consistencia */
+            position: relative;
+            border: 1px solid #eee;
+        }
+
+        .negocio-principal-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ETIQUETA PARA CADA NEGOCIO PRINCIPAL */
+        .principal-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #c90f0f;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            z-index: 10;
+            border: none;
+            text-transform: uppercase;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* CONTENIDO DEL NEGOCIO PRINCIPAL */
+        .negocio-principal-contenido {
+            flex: 1.2;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            order: 1; /* Coloca el contenido a la izquierda */
+            height: 100%; /* Ocupa toda la altura del contenedor padre */
+            overflow: hidden; /* Previene desbordamiento */
+        }
+
+        /* TÍTULO */
+        .negocio-principal-contenido h2 {
+            color: #000000;
+            font-size: 22px;
+            margin-bottom: 10px;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        /* CATEGORÍA */
+        .negocio-principal-categoria {
+            color: #c90f0f;
+            font-size: 13px;
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: #ffe6e6;
+            border-radius: 15px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* DESCRIPCIÓN */
+        .negocio-principal-descripcion {
+            color: #555;
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 20px;
+            flex: 1;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            max-height: 90px;
+        }
+
+        /* MAPA MEJORADO - AHORA CUADRADO */
+        .negocio-principal-mapa {
+            margin: 15px 0;
+            width: 100%;
+        }
+
+        .mapa-titulo-principal {
+            color: #000000;
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #c90f0f;
+        }
+
+        .mapa-titulo-principal i {
+            color: #c90f0f;
+            font-size: 16px;
+        }
+
+        .mapa-container-principal {
+            width: 100%;
+            height: 140px; /* Altura fija para hacerlo cuadrado */
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #eaeaea;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .mapa-container-principal:hover {
+            border-color: #c90f0f;
+            box-shadow: 0 6px 20px rgba(201, 15, 15, 0.15);
+        }
+
+        .mapa-container-principal iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* BOTÓN VER GALERÍA */
+        .btn-ver-galeria-principal {
+            background-color: #c90f0f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            box-shadow: 0 3px 8px rgba(201, 15, 15, 0.2);
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-ver-galeria-principal:hover {
+            background-color: #a00c0c;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(201, 15, 15, 0.3);
+        }
+
+        /* BOTÓN VER MÁS - NEGRO CON LETRAS BLANCAS (AGREGADO) */
+        .btn-ver-mas-principal {
+            background-color: #000000;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 15px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-ver-mas-principal:hover {
+            background-color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* INFORMACIÓN DE CONTACTO PRINCIPAL - MODIFICADO */
+        .negocio-principal-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 15px 0 0 0;
+            border-top: 1px solid #f0f0f0;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .info-item-principal {
+            color: #666;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            overflow: hidden;
+        }
+
+        .info-item-principal i {
+            color: #c90f0f;
+            width: 12px;
+            text-align: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .info-item-principal span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 11px;
+        }
+
+        /* IMAGEN PRINCIPAL A LA DERECHA - CONTENEDOR FIJADO */
+        .negocio-principal-imagen {
+            flex: 1;
+            height: 100%; /* Ocupa toda la altura del contenedor padre */
+            overflow: hidden;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            order: 2; /* Coloca la imagen a la derecha */
+        }
+
+        .negocio-principal-imagen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to left, rgba(0,0,0,0.1), transparent);
+            z-index: 1;
+        }
+
+        .negocio-principal-imagen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Mantiene la proporción y cubre el contenedor */
+            transition: transform 0.5s ease;
+        }
+
+        .negocio-principal-box:hover .negocio-principal-imagen img {
+            transform: scale(1.1);
+        }
+
+        /* BANNER DE SEPARACIÓN */
+        .banner-separacion {
+            background: linear-gradient(135deg, #c90f0f, #a00c0c);
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin: 50px 0;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(201, 15, 15, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .banner-contenido {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .banner-titulo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .banner-subtitulo {
+            font-size: 16px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* Patrocinadores banner */
+        .patrocinadores-banner {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin: 30px 0 50px 0;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+        }
+
+        .patrocinadores-titulo {
+            color: #333;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .patrocinadores-titulo i {
+            color: #c90f0f;
+        }
+
+        .patrocinador-principal {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #c90f0f;
+        }
+
+        .patrocinador-nombre {
+            font-size: 22px;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 5px;
+        }
+
+        .patrocinador-descripcion {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Sección de Negocios Destacados */
+        .seccion-destacados {
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+
+        .titulo-destacados {
+            color: #000000;
+            font-size: 28px;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .titulo-destacados i {
+            color: #c90f0f;
+            font-size: 22px;
+            background: transparent;
+            padding: 0;
+        }
+
+        /* GRID DE DESTACADOS - 6 NEGOCIOS EN 3x2 */
+        .grid-destacados {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        /* TARJETAS DE NEGOCIOS DESTACADOS - ESTILO ORIGINAL (IMAGEN IZQUIERDA, CONTENIDO DERECHA) */
+        .negocio-destacado-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: row;
+            min-height: 220px;
+            height: auto;
+            position: relative;
+            border: 1px solid #eee;
+        }
+
+        .negocio-destacado-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ETIQUETA NEGRA CON LETRAS BLANCAS */
+        .destacado-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #000000;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 700;
+            z-index: 2;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid #333;
+        }
+
+        /* BADGE DE VIDEO PARA TARJETAS */
+        .video-badge-card {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* IMAGEN A LA IZQUIERDA - ESTILO ORIGINAL */
+        .negocio-destacado-card .card-imagen {
+            flex: 1;
+            height: auto;
+            min-height: 220px;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .negocio-destacado-card .card-imagen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.1), transparent);
+            z-index: 1;
+        }
+
+        .negocio-destacado-card .card-imagen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .negocio-destacado-card:hover .card-imagen img {
+            transform: scale(1.1);
+        }
+
+        /* CONTENIDO A LA DERECHA - ESTILO ORIGINAL */
+        .negocio-destacado-card .card-contenido {
+            flex: 1.2;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            background: white;
+        }
+
+        .negocio-destacado-card .card-header {
+            padding: 0 0 12px 0;
+        }
+
+        .negocio-destacado-card .card-header h3 {
+            color: #000000;
+            font-size: 20px;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        .card-categoria {
+            color: #c90f0f;
+            font-size: 13px;
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: #ffe6e6;
+            border-radius: 15px;
+            font-weight: 600;
+        }
+
+        .negocio-destacado-card .card-body {
+            padding: 0 0 15px 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* DESCRIPCIÓN MÁS CORTA */
+        .card-descripcion {
+            color: #555;
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 15px;
+            flex: 1;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            height: 66px;
+        }
+
+        /* BOTÓN VER MÁS - NEGRO CON LETRAS BLANCAS */
+        .btn-ver-mas {
+            background-color: #000000;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 15px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-ver-mas:hover {
+            background-color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ESPACIO DE CONTACTO MÁS PEQUEÑO Y MINIMALISTA - SOLO WHATSAPP Y TELÉFONO */
+        .negocio-destacado-card .card-footer {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            padding: 15px 0 0 0;
+            border-top: 1px solid #f0f0f0;
+            font-size: 12px;
+        }
+
+        .card-contacto {
+            color: #666;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            overflow: hidden;
+        }
+
+        .card-contacto i {
+            color: #c90f0f;
+            width: 12px;
+            text-align: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .card-contacto span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 11px;
+        }
+
+        /* MODAL - Galería de Imágenes CON VIDEO */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-galeria {
+            background-color: white;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow: hidden;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-header {
+            grid-column: 1 / span 2;
+            padding: 25px 30px 15px;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            color: #000000;
+            font-size: 28px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        /* ETIQUETA DE CATEGORÍA EN MODAL */
+        .modal-categoria {
+            display: inline-block;
+            background-color: #000000;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* TACHÉ MÁS MINIMALISTA */
+        .btn-cerrar-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 8px;
+            line-height: 1;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .btn-cerrar-modal:hover {
+            color: #c90f0f;
+            background-color: #f8f8f8;
+        }
+
+        /* CONTENEDOR DE VIDEO/IMAGEN GRANDE */
+        .galeria-container {
+            padding: 25px;
+            grid-column: 1;
+            grid-row: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: #fafafa;
+        }
+
+        /* BOX GRANDE PARA VIDEO O IMAGEN */
+        .video-box-grande {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid #333;
+            margin-bottom: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .video-box-grande img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .video-box-grande:hover img {
+            transform: scale(1.02);
+        }
+
+        /* REPRODUCTOR DE VIDEO - SIN CONTROLES VISIBLES */
+        .video-player {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .video-player::-webkit-media-controls {
+            display: none !important;
+        }
+
+        .video-player::-webkit-media-controls-panel {
+            display: none !important;
+        }
+
+        .video-player::-webkit-media-controls-play-button {
+            display: none !important;
+        }
+
+        .video-player::-webkit-media-controls-start-playback-button {
+            display: none !important;
+        }
+
+        /* BOTÓN PLAY CENTRAL */
+        .btn-play-central {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 11;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            opacity: 1;
+        }
+
+        .btn-play-central:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%) scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* TRIÁNGULO PLAY PERSONALIZADO */
+        .play-triangle {
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 12px solid white;
+            margin-left: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* CONTENEDOR DE MINIATURAS CON VIDEO */
+        .todas-imagenes-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .imagen-miniatura {
+            height: 100px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background-color: #f8f9fa;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+
+        .imagen-miniatura:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        .imagen-miniatura.active {
+            border-color: #c90f0f;
+            box-shadow: 0 5px 15px rgba(201, 15, 15, 0.2);
+        }
+
+        .imagen-miniatura img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* BADGE DE VIDEO EN MINIATURA */
+        .video-miniatura-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .descripcion-container {
+            padding: 25px;
+            grid-column: 2;
+            grid-row: 2;
+            background: white;
+            border-left: 1px solid #f0f0f0;
+            overflow-y: auto;
+            max-height: none;
+            height: auto;
+        }
+
+        .descripcion-titulo {
+            color: #000000;
+            font-size: 22px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #c90f0f;
+            font-weight: 700;
+        }
+
+        /* DESCRIPCIÓN ESTRUCTURADA Y MÁS CORTA */
+        .descripcion-texto {
+            color: #444;
+            line-height: 1.7;
+            font-size: 15px;
+            margin-bottom: 25px;
+            max-height: none;
+            overflow-y: visible;
+            padding: 0;
+            background: transparent;
+        }
+
+        .descripcion-texto p {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        .descripcion-texto strong {
+            color: #000;
+            font-weight: 700;
+        }
+
+        .descripcion-texto ul {
+            margin: 12px 0;
+            padding-left: 20px;
+        }
+
+        .descripcion-texto li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .descripcion-texto li:before {
+            content: "•";
+            color: #c90f0f;
+            font-weight: bold;
+            position: absolute;
+            left: -12px;
+        }
+
+        .caracteristicas-negocio {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 3px solid #c90f0f;
+        }
+
+        .caracteristicas-negocio h4 {
+            color: #000000;
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* REDES SOCIALES MINIMALISTAS - SIN BOX, SOLO RECTÁNGULOS */
+        .redes-sociales {
+            padding: 15px 0;
+            margin-bottom: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .redes-sociales h4 {
+            color: #000000;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .redes-sociales h4 i {
+            color: #c90f0f;
+        }
+
+        .redes-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .red-social-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .red-social-item:hover {
+            transform: translateY(-2px);
+            background-color: #f8f8f8;
+            border-radius: 6px;
+        }
+
+        .red-social-item.facebook:hover {
+            background-color: #1877f2;
+            color: white;
+        }
+
+        .red-social-item.instagram:hover {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            color: white;
+        }
+
+        .red-social-item.tiktok:hover {
+            background-color: #000000;
+            color: white;
+        }
+
+        .red-social-item i {
+            width: 18px;
+            text-align: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .facebook i {
+            color: #1877f2;
+        }
+
+        .instagram i {
+            color: #E1306C;
+        }
+
+        .tiktok i {
+            color: #000000;
+        }
+
+        .red-social-item:hover i {
+            color: white;
+        }
+
+        .red-social-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .red-social-nombre {
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .red-social-usuario {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .red-social-item:hover .red-social-usuario {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* SECCIÓN DE CONTACTO EN EL MODAL - SIN COSTOS, CORREO Y WEB - MODIFICADO SIN BOX */
+        .modal-contacto {
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+        }
+
+        .modal-contacto h4 {
+            color: #000000;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-contacto h4 i {
+            color: #c90f0f;
+        }
+
+        .contacto-modal-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contacto-modal-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .contacto-modal-item i {
+            color: #c90f0f;
+            width: 16px;
+            text-align: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        /* Responsividad */
+        @media (max-width: 1200px) {
+            .negocios-principales-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .negocio-principal-box {
+                height: 400px;
+            }
+
+            .grid-destacados {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .negocio-destacado-card {
+                flex-direction: row;
+                min-height: 220px;
+            }
+            
+            .negocio-destacado-card .card-imagen {
+                height: auto;
+                min-height: 220px;
+            }
+
+            .modal-galeria {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr auto;
+                max-height: 95vh;
+                overflow-y: auto;
+            }
+
+            .modal-header {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .galeria-container {
+                grid-column: 1;
+                grid-row: 2;
+            }
+
+            .descripcion-container {
+                grid-column: 1;
+                grid-row: 3;
+                border-left: none;
+                border-top: 1px solid #eee;
+            }
+            
+            .card-descripcion {
+                height: 63px;
+            }
+            
+            .negocio-principal-descripcion {
+                max-height: 85px;
+            }
+            
+            .todas-imagenes-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .video-box-grande {
+                height: 350px;
+            }
+            
+            .btn-play-central {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .play-triangle {
+                border-top: 7px solid transparent;
+                border-bottom: 7px solid transparent;
+                border-left: 10px solid white;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .grid-destacados {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .negocio-principal-box {
+                flex-direction: column;
+                height: auto;
+                min-height: 600px;
+            }
+            
+            .negocio-principal-imagen {
+                order: 1;
+                height: 250px;
+            }
+            
+            .negocio-principal-contenido {
+                order: 2;
+                height: auto;
+            }
+            
+            .titulo-banner h2 {
+                font-size: 36px;
+            }
+            
+            .negocio-principal-contenido h2 {
+                font-size: 20px;
+            }
+            
+            .todas-imagenes-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .banner-titulo {
+                font-size: 22px;
+            }
+            
+            .patrocinador-nombre {
+                font-size: 20px;
+            }
+            
+            .video-box-grande {
+                height: 300px;
+            }
+            
+            .btn-play-central {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .play-triangle {
+                border-top: 6px solid transparent;
+                border-bottom: 6px solid transparent;
+                border-left: 9px solid white;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            body {
+                flex-direction: column;
+            }
+            
+            .top-nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+                justify-content: center;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .negocio-principal-info {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-destacados {
+                grid-template-columns: 1fr;
+            }
+
+            .negocio-destacado-card {
+                flex-direction: row;
+                min-height: 220px;
+            }
+
+            .todas-imagenes-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .modal-header {
+                padding: 20px 20px 10px;
+            }
+
+            .galeria-container, .descripcion-container {
+                padding: 20px;
+            }
+
+            .titulo-banner {
+                padding: 30px;
+                min-height: 150px;
+            }
+
+            .titulo-banner h2 {
+                font-size: 30px;
+            }
+            
+            .titulo-banner p {
+                font-size: 16px;
+            }
+            
+            .negocio-principal-contenido {
+                padding: 20px;
+            }
+            
+            .negocio-principal-contenido h2 {
+                font-size: 18px;
+            }
+            
+            .titulo-destacados {
+                font-size: 24px;
+            }
+            
+            .mapa-container-principal {
+                height: 120px;
+            }
+            
+            .negocio-destacado-card .card-footer {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-descripcion {
+                height: 60px;
+            }
+            
+            .negocio-principal-descripcion {
+                max-height: 80px;
+            }
+            
+            .banner-separacion {
+                padding: 15px 20px;
+                margin: 40px 0;
+            }
+            
+            .banner-titulo {
+                font-size: 20px;
+            }
+            
+            .banner-subtitulo {
+                font-size: 14px;
+            }
+            
+            .patrocinadores-banner {
+                padding: 20px;
+            }
+            
+            .patrocinador-principal {
+                padding: 15px;
+            }
+            
+            .patrocinador-nombre {
+                font-size: 18px;
+            }
+            
+            .video-box-grande {
+                height: 250px;
+            }
+            
+            .btn-play-central {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .play-triangle {
+                border-top: 5px solid transparent;
+                border-bottom: 5px solid transparent;
+                border-left: 8px solid white;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .negocio-destacado-card {
+                flex-direction: column;
+                min-height: 350px;
+            }
+            
+            .negocio-destacado-card .card-imagen {
+                height: 140px;
+                min-height: auto;
+            }
+
+            .imagen-miniatura {
+                height: 80px;
+            }
+
+            .modal-header h2 {
+                font-size: 22px;
+            }
+
+            .btn-ver-galeria-principal {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+
+            .titulo-banner {
+                padding: 25px 20px;
+            }
+
+            .titulo-banner h2 {
+                font-size: 26px;
+            }
+            
+            .titulo-banner p {
+                font-size: 15px;
+            }
+            
+            .negocio-principal-contenido {
+                padding: 15px;
+            }
+            
+            .negocio-principal-contenido h2 {
+                font-size: 18px;
+            }
+            
+            .negocio-destacado-card .card-imagen {
+                height: 140px;
+            }
+            
+            .negocio-principal-imagen {
+                height: 200px;
+            }
+            
+            .mapa-container-principal {
+                height: 100px;
+            }
+            
+            .todas-imagenes-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .card-descripcion {
+                height: 57px;
+                font-size: 13px;
+            }
+            
+            .negocio-principal-descripcion {
+                max-height: 75px;
+                font-size: 13px;
+            }
+            
+            .principal-badge {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            
+            .banner-separacion {
+                padding: 12px 15px;
+                margin: 30px 0;
+            }
+            
+            .banner-titulo {
+                font-size: 18px;
+            }
+            
+            .banner-subtitulo {
+                font-size: 13px;
+            }
+            
+            .patrocinadores-banner {
+                padding: 15px;
+            }
+            
+            .patrocinador-principal {
+                padding: 12px;
+            }
+            
+            .patrocinador-nombre {
+                font-size: 16px;
+            }
+            
+            .patrocinador-descripcion {
+                font-size: 12px;
+            }
+            
+            .video-box-grande {
+                height: 200px;
+            }
+            
+            .btn-play-central {
+                width: 28px;
+                height: 28px;
+            }
+            
+            .play-triangle {
+                border-top: 4px solid transparent;
+                border-bottom: 4px solid transparent;
+                border-left: 7px solid white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menú lateral fijo -->
+    <aside class="sidebar">
+        <div class="logo">
+            <a href="Index.html" style="text-decoration: none; color: inherit;">
+                <h1>LIFE <span>TIMES</span></h1>
+            </a>
+            <p>Directorio de Negocios</p>
+        </div>
+        
+        <div class="menu-categorias">
+            <a href="General.html" class="categoria-item active">
+                <i class="fas fa-home"></i>
+                <span>General</span>
+            </a>
+            <a href="Servicio Minoritario.html" class="categoria-item">
+                <i class="fas fa-handshake"></i>
+                <span>Servicio minoritario</span>
+            </a>
+            <a href="Comercio.html" class="categoria-item">
+                <i class="fas fa-store"></i>
+                <span>Comercio</span>
+            </a>
+            <a href="Alimentos y bebidas.html" class="categoria-item">
+                <i class="fas fa-utensils"></i>
+                <span>Alimentos y bebidas</span>
+            </a>
+            <a href="Servicios-general.html" class="categoria-item">
+                <i class="fas fa-concierge-bell"></i>
+                <span>Servicios</span>
+            </a>
+        </div>
+        
+        <!-- Botón para subir negocio -->
+        <a href="Servicios.html" style="text-decoration: none;">
+            <button class="btn-subir-negocio">
+                <i class="fas fa-plus-circle"></i>
+                <span>¿Cómo puedo subir mi negocio?</span>
+            </button>
+        </a>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <!-- Navegación superior -->
+        <nav class="top-nav">
+            <ul class="nav-links">
+                <li><a href="Terminos y Condiciones.html" id="terminos-link">Términos y Condiciones</a></li>
+                <li><a href="Index.html" id="historia-link">La Historia</a></li>
+                <li><a href="Servicios.html" id="servicios-link">Servicios</a></li>
+            </ul>
+        </nav>
+
+        <!-- Contenedor de negocios -->
+        <section class="negocios-container">
+            <!-- BANNER DEL TÍTULO CON IMAGEN PROFESIONAL -->
+            <div class="titulo-banner">
+                <h2>Directorio General de Negocios</h2>
+                <p>Descubre los negocios principales y los establecimientos más destacados de la ciudad</p>
+            </div>
+            
+            <!-- NEGOCIOS PRINCIPALES - DOS BOXES LADO A LADO -->
+            <div class="negocios-principales-container">
+                <!-- PRIMER NEGOCIO PRINCIPAL -->
+                <div class="negocio-principal-box" id="negocio-principal-1">
+                    <div class="principal-badge">
+                        NEGOCIO PRINCIPAL
+                    </div>
+                    
+                    <!-- Contenido a la izquierda -->
+                    <div class="negocio-principal-contenido">
+                        <h2>Consultoría Intercultural</h2>
+                        <span class="negocio-principal-categoria">Consultoría y Asesoría</span>
+                        <div class="negocio-principal-descripcion">
+                            Asesoría intercultural para empresas, instituciones educativas y organizaciones. Consultoría Intercultural ofrece servicios de asesoramiento para organizaciones que trabajan en entornos multiculturales.
+                        </div>
+                        
+                        <!-- Mapa cuadrado -->
+                        <div class="negocio-principal-mapa">
+                            <h3 class="mapa-titulo-principal">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Ubicación
+                            </h3>
+                            <div class="mapa-container-principal">
+                                <iframe 
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.371231946949!2d-73.98510768459436!3d40.715045979331!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2598c9f677a0f%3A0x8f1e5abf5d5c5c5c!2sOficinas%20Corporativas%2C%20Distrito%20Financiero%2C%20Nueva%20York%2C%20NY%2010001%2C%20EE.%20UU.!5e0!3m2!1ses-419!2smx!4v1648681234567!5m2!1ses-419!2smx" 
+                                    allowfullscreen="" 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                        </div>
+                        
+                        <!-- Información de contacto - MODIFICADO: sin costo y sin correo -->
+                        <div class="negocio-principal-info">
+                            <div class="info-item-principal">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>+1 (555) 666-7788</span>
+                            </div>
+                            <div class="info-item-principal">
+                                <i class="fas fa-clock"></i>
+                                <span>Lun-Vie: 9:00-18:00</span>
+                            </div>
+                        </div>
+                        
+                        <!-- BOTÓN VER MÁS - AGREGADO -->
+                        <button class="btn-ver-mas-principal" data-negocio-id="consultoria-intercultural">
+                            <i class="fas fa-eye"></i>
+                            Ver más
+                        </button>
+                        
+                        <!-- BOTÓN VER GALERÍA -->
+                        <button class="btn-ver-galeria-principal" data-negocio-id="consultoria-intercultural">
+                            <i class="fas fa-images"></i>
+                            Ver Galería Completa
+                        </button>
+                    </div>
+                    
+                    <!-- Imagen a la derecha - AHORA CONTAINER FIJO -->
+                    <div class="negocio-principal-imagen">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Consultoría Intercultural" loading="lazy">
+                    </div>
+                </div>
+                
+                <!-- SEGUNDO NEGOCIO PRINCIPAL -->
+                <div class="negocio-principal-box" id="negocio-principal-2">
+                    <div class="principal-badge">
+                        NEGOCIO PRINCIPAL
+                    </div>
+                    
+                    <!-- Contenido a la izquierda -->
+                    <div class="negocio-principal-contenido">
+                        <h2>Tech Solutions Pro</h2>
+                        <span class="negocio-principal-categoria">Tecnología</span>
+                        <div class="negocio-principal-descripcion">
+                            Líder en soluciones tecnológicas integrales para empresas. Con más de 15 años de experiencia, hemos desarrollado sistemas innovadores que han transformado la forma en que más de 500 empresas gestionan sus operaciones.
+                        </div>
+                        
+                        <!-- Mapa cuadrado -->
+                        <div class="negocio-principal-mapa">
+                            <h3 class="mapa-titulo-principal">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Ubicación
+                            </h3>
+                            <div class="mapa-container-principal">
+                                <iframe 
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.9503398796587!2d-74.00025868459426!3d40.72805797933039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2598c9f677a0f%3A0x8f1e5abf5d5c5c5c!2sCentro%20Empresarial%20Moderno%2C%20Av.%20Tecnolog%C3%ADa%20123%2C%20Nueva%20York%2C%20NY%2010001%2C%20EE.%20UU.!5e0!3m2!1ses-419!2smx!4v1648681234567!5m2!1ses-419!2smx" 
+                                    allowfullscreen="" 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                        </div>
+                        
+                        <!-- Información de contacto - MODIFICADO: sin costo y sin correo -->
+                        <div class="negocio-principal-info">
+                            <div class="info-item-principal">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>+1 (555) 123-4567</span>
+                            </div>
+                            <div class="info-item-principal">
+                                <i class="fas fa-clock"></i>
+                                <span>Lun-Vie: 8:00-20:00</span>
+                            </div>
+                        </div>
+                        
+                        <!-- BOTÓN VER MÁS - AGREGADO -->
+                        <button class="btn-ver-mas-principal" data-negocio-id="tech-solutions">
+                            <i class="fas fa-eye"></i>
+                            Ver más
+                        </button>
+                        
+                        <!-- BOTÓN VER GALERÍA -->
+                        <button class="btn-ver-galeria-principal" data-negocio-id="tech-solutions">
+                            <i class="fas fa-images"></i>
+                            Ver Galería Completa
+                        </button>
+                    </div>
+                    
+                    <!-- Imagen a la derecha - AHORA CONTAINER FIJO -->
+                    <div class="negocio-principal-imagen">
+                        <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Tech Solutions Pro" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- BANNER DE SEPARACIÓN -->
+            <div class="banner-separacion">
+                <div class="banner-contenido">
+                    <div class="banner-titulo">NEGOCIOS DESTACADOS</div>
+                    <div class="banner-subtitulo">Descubre los mejores establecimientos recomendados por nuestra comunidad</div>
+                </div>
+            </div>
+            
+            <!-- SECCIÓN DE NEGOCIOS DESTACADOS - 6 NEGOCIOS EN 3x2 -->
+            <div class="seccion-destacados">
+                <h3 class="titulo-destacados">
+                    <i class="fas fa-star"></i>
+                    Negocios Destacados
+                </h3>
+                
+                <!-- Grid de 3x2 -->
+                <div class="grid-destacados" id="grid-destacados">
+                    <!-- Los 6 negocios destacados se cargarán aquí -->
+                </div>
+            </div>
+            
+        </section>
+    </main>
+
+    <!-- Modal - Galería de Imágenes CON VIDEO -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-galeria">
+            <div class="modal-header">
+                <div>
+                    <h2 id="modal-nombre">Nombre del Negocio</h2>
+                    <span class="modal-categoria" id="modal-categoria">Categoría</span>
+                </div>
+                <button class="btn-cerrar-modal" id="btn-cerrar-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="galeria-container">
+                <!-- BOX GRANDE PARA VIDEO O IMAGEN -->
+                <div class="video-box-grande" id="video-box-grande">
+                    <img id="imagen-grande" src="" alt="">
+                    <video class="video-player" id="video-player" playsinline>
+                        Tu navegador no soporta la reproducción de videos.
+                    </video>
+                    <!-- BOTÓN PLAY CENTRAL - OCULTO POR DEFECTO, SÓLO PARA VIDEOS -->
+                    <button class="btn-play-central" id="btn-play-central">
+                        <div class="play-triangle"></div>
+                    </button>
+                </div>
+                
+                <!-- CONTENEDOR DE MINIATURAS CON VIDEO -->
+                <div class="todas-imagenes-container" id="todas-imagenes-container">
+                    <!-- Las imágenes/videos se cargarán dinámicamente aquí -->
+                </div>
+            </div>
+            
+            <div class="descripcion-container">
+                <h3 class="descripcion-titulo">Descripción del Negocio</h3>
+                <div class="descripcion-texto" id="descripcion-contenido">
+                    <!-- La descripción se cargará dinámicamente aquí -->
+                </div>
+                
+                <!-- REDES SOCIALES MINIMALISTAS - SIN BOX, SOLO RECTÁNGULOS -->
+                <div class="redes-sociales" id="redes-sociales">
+                    <h4><i class="fas fa-hashtag"></i> Redes Sociales</h4>
+                    <div class="redes-grid" id="redes-grid">
+                        <!-- Las redes sociales se cargarán dinámicamente -->
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN DE CONTACTO EN EL MODAL - SIN COSTOS, CORREO Y WEB - MODIFICADO SIN BOX -->
+                <div class="modal-contacto" id="modal-contacto">
+                    <h4><i class="fas fa-address-card"></i> Información de Contacto</h4>
+                    <div class="contacto-modal-grid" id="contacto-modal-grid">
+                        <!-- La información de contacto se cargará dinámicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos de los 2 negocios principales (estructura completa)
+        const negociosPrincipales = {
+            "consultoria-intercultural": {
+                nombre: "Consultoría Intercultural",
+                categoria: "Consultoría y Asesoría",
+                descripcion_larga: `
+                    <div class="caracteristicas-negocio">
+                        <h4>Nuestros servicios incluyen:</h4>
+                        <ul>
+                            <li><strong>Capacitación en competencia intercultural:</strong> Programas personalizados para equipos internacionales</li>
+                            <li><strong>Asesoría para expansión internacional:</strong> Estrategias de entrada a nuevos mercados</li>
+                            <li><strong>Mediación intercultural:</strong> Resolución de conflictos en entornos multiculturales</li>
+                            <li><strong>Desarrollo de políticas inclusivas:</strong> Creación de políticas de diversidad e inclusión</li>
+                            <li><strong>Programas de diversidad:</strong> Diseño e implementación de programas D&I</li>
+                        </ul>
+                    </div>
+                    
+                    <p>Consultoría Intercultural es una firma especializada en asesoramiento para organizaciones que operan en entornos multiculturales. Contamos con un equipo de expertos con más de 20 años de experiencia en más de 40 países.</p>
+                    
+                    <p>Trabajamos con empresas multinacionales, instituciones educativas, ONGs y organismos gubernamentales para fomentar entornos inclusivos, productivos y respetuosos de las diferencias culturales.</p>
+                `,
+                contacto: [
+                    { tipo: "whatsapp", valor: "+1 (555) 666-7788", icono: "fab fa-whatsapp" },
+                    { tipo: "telefono", valor: "+1 (555) 777-8899", icono: "fas fa-phone" },
+                    { tipo: "ubicacion", valor: "Oficinas Corporativas, Distrito Financiero", icono: "fas fa-map-marker-alt" },
+                    { tipo: "horario", valor: "Lunes a Viernes: 9:00 - 18:00", icono: "fas fa-clock" }
+                ],
+                imagen: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                video_poster: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"}
+                ],
+                redes_sociales: [
+                    { 
+                        plataforma: "facebook", 
+                        nombre: "Consultoría Intercultural", 
+                        usuario: "@ConsultoriaIntercultural",
+                        url: "https://facebook.com/ConsultoriaIntercultural"
+                    },
+                    { 
+                        plataforma: "instagram", 
+                        nombre: "Consultoría Inter", 
+                        usuario: "@consultoria_intercultural",
+                        url: "https://instagram.com/consultoria_intercultural"
+                    },
+                    { 
+                        plataforma: "tiktok", 
+                        nombre: "Consultoría Tips", 
+                        usuario: "@consultoriatips",
+                        url: "https://tiktok.com/@consultoriatips"
+                    }
+                ]
+            },
+            "tech-solutions": {
+                nombre: "Tech Solutions Pro",
+                categoria: "Tecnología",
+                descripcion_larga: `
+                    <div class="caracteristicas-negocio">
+                        <h4>Nuestros servicios incluyen:</h4>
+                        <ul>
+                            <li><strong>Consultoría tecnológica:</strong> Personalizada para cada empresa</li>
+                            <li><strong>Desarrollo de software:</strong> Soluciones a medida</li>
+                            <li><strong>Implementación ERP/CRM:</strong> Sistemas de última generación</li>
+                            <li><strong>Ciberseguridad:</strong> Protección avanzada</li>
+                            <li><strong>Soporte técnico:</strong> 24/7 para tu tranquilidad</li>
+                            <li><strong>Transformación digital:</strong> Migración a entornos cloud</li>
+                            <li><strong>Análisis de datos:</strong> Business Intelligence y Analytics</li>
+                        </ul>
+                    </div>
+                    
+                    <p>Tech Solutions Pro es un partner estratégico para la transformación digital. Desde 2008, hemos trabajado con más de 500 empresas implementando soluciones que incrementan su eficiencia operativa en un 40%.</p>
+                    
+                    <p>Nuestro enfoque centrado en el cliente garantiza resultados de calidad y un retorno de inversión comprobado en menos de 12 meses. Contamos con certificaciones internacionales y un equipo de más de 150 profesionales especializados.</p>
+                `,
+                contacto: [
+                    { tipo: "whatsapp", valor: "+1 (555) 123-4567", icono: "fab fa-whatsapp" },
+                    { tipo: "telefono", valor: "+1 (555) 987-6543", icono: "fas fa-phone" },
+                    { tipo: "ubicacion", valor: "Av. Tecnología 123", icono: "fas fa-map-marker-alt" },
+                    { tipo: "horario", valor: "Lunes a Viernes: 8:00 - 20:00", icono: "fas fa-clock" }
+                ],
+                imagen: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                video_poster: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                imagenes_adicionales: [
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"}
+                ],
+                redes_sociales: [
+                    { 
+                        plataforma: "facebook", 
+                        nombre: "Tech Solutions Pro", 
+                        usuario: "@TechSolutionsPro",
+                        url: "https://facebook.com/TechSolutionsPro"
+                    },
+                    { 
+                        plataforma: "instagram", 
+                        nombre: "Tech Solutions Pro", 
+                        usuario: "@techsolutionspro.official",
+                        url: "https://instagram.com/techsolutionspro.official"
+                    },
+                    { 
+                        plataforma: "tiktok", 
+                        nombre: "Tech Solutions", 
+                        usuario: "@techsolutions",
+                        url: "https://tiktok.com/@techsolutions"
+                    }
+                ]
+            }
+        };
+
+        // Datos de los 6 negocios destacados
+        const negociosDestacados = [
+            { 
+                nombre: "Gourmet Delights", 
+                categoria: "Restaurante Gourmet", 
+                descripcion: "Experiencia gastronómica única con menús estacionales creados por chef internacional. Bodega exclusiva con más de 500 etiquetas.", 
+                descripcion_larga: `
+                    <div class="caracteristicas-negocio">
+                        <h4>Nuestra propuesta</h4>
+                        <ul>
+                            <li><strong>Menú degustación:</strong> Experiencia de 7 tiempos</li>
+                            <li><strong>Bodega exclusiva:</strong> Más de 500 etiquetas</li>
+                            <li><strong>Chef internacional:</strong> Tres estrellas Michelin</li>
+                            <li><strong>Ingredientes locales:</strong> Proveedores certificados</li>
+                            <li><strong>Ambiente íntimo:</strong> Capacidad para 40 personas</li>
+                        </ul>
+                    </div>
+                    
+                    <p>En Gourmet Delights, la cocina es un arte que se renueva constantemente. Nuestro equipo, liderado por un chef con tres estrellas Michelin, investiga constantemente ingredientes olvidados y técnicas ancestrales.</p>
+                    
+                    <p>Ofrecemos una experiencia gastronómica completa donde cada detalle ha sido cuidadosamente diseñado para estimular todos los sentidos.</p>
+                `,
+                contacto: [
+                    { tipo: "whatsapp", valor: "+1 (555) 345-6789", icono: "fab fa-whatsapp" },
+                    { tipo: "telefono", valor: "+1 (555) 345-6790", icono: "fas fa-phone" },
+                    { tipo: "ubicacion", valor: "Av. Gourmet 789", icono: "fas fa-map-marker-alt" },
+                    { tipo: "horario", valor: "Martes a Domingo: 19:00 - 23:00", icono: "fas fa-clock" }
+                ],
+                imagen: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+                video_poster: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1554679665-f5537f187268?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"}
+                ],
+                redes_sociales: [
+                    { 
+                        plataforma: "facebook", 
+                        nombre: "Gourmet Delights", 
+                        usuario: "@GourmetDelightsRest",
+                        url: "https://facebook.com/GourmetDelightsRest"
+                    },
+                    { 
+                        plataforma: "instagram", 
+                        nombre: "Gourmet Delights", 
+                        usuario: "@gourmetdelights.official",
+                        url: "https://instagram.com/gourmetdelights.official"
+                    },
+                    { 
+                        plataforma: "tiktok", 
+                        nombre: "Gourmet Delights", 
+                        usuario: "@gourmetdelights",
+                        url: "https://tiktok.com/@gourmetdelights"
+                    }
+                ]
+            },
+            { 
+                nombre: "Cine Paradiso", 
+                categoria: "Complejo Cinematográfico", 
+                descripcion: "Tecnología cinematográfica de vanguardia en 8 salas especializadas. Sala 4DX con efectos multisensoriales únicos.", 
+                descripcion_larga: `
+                    <div class="caracteristicas-negocio">
+                        <h4>Características técnicas</h4>
+                        <ul>
+                            <li><strong>8 salas especializadas:</strong> Tecnología de última generación</li>
+                            <li><strong>Sala 4DX única:</strong> Butacas hidráulicas de 6 ejes</li>
+                            <li><strong>Sonido Dolby Atmos:</strong> Sistema de 64 canales</li>
+                            <li><strong>Pantallas IMAX:</strong> La más grande de la ciudad</li>
+                            { tipo: "horario", valor: "Todos los días: 12:00 - 01:00", icono: "fas fa-clock" }
+                    </div>
+                    
+                    <p>Cine Paradiso no es solo un lugar para ver películas; es un santuario para los amantes del séptimo arte. Nuestras 8 salas han sido diseñadas acústicamente por expertos para ofrecer la mejor experiencia audiovisual.</p>
+                    
+                    <p>Contamos con la única sala 4DX de la región, donde las butacas se mueven en 6 ejes diferentes y se sincronizan con efectos especiales para sumergirte completamente en la película.</p>
+                `,
+                contacto: [
+                    { tipo: "whatsapp", valor: "+1 (555) 789-0123", icono: "fab fa-whatsapp" },
+                    { tipo: "telefono", valor: "+1 (555) 789-0124", icono: "fas fa-phone" },
+                    { tipo: "ubicacion", valor: "Centro Entretenimiento 2727", icono: "fas fa-map-marker-alt" },
+                    { tipo: "horario", valor: "Todos los días: 12:00 - 01:00", icono: "fas fa-clock" }
+                ],
+                imagen: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+                video_poster: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1489599809516-9827b6d1cf13?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"}
+                ],
+                redes_sociales: [
+                    { 
+                        plataforma: "facebook", 
+                        nombre: "Cine Paradiso", 
+                        usuario: "@CineParadisoOficial",
+                        url: "https://facebook.com/CineParadisoOficial"
+                    },
+                    { 
+                        plataforma: "instagram", 
+                        nombre: "Cine Paradiso", 
+                        usuario: "@cineparadiso.oficial",
+                        url: "https://instagram.com/cineparadiso.oficial"
+                    },
+                    { 
+                        plataforma: "tiktok", 
+                        nombre: "Cine Paradiso", 
+                        usuario: "@cineparadiso",
+                        url: "https://tiktok.com/@cineparadiso"
+                    }
+                ]
+            },
+            { 
+                nombre: "Moda Elegante", 
+                categoria: "Ropa y Accesorios", 
+                descripcion: "Curated fashion experience con marcas de diseñador y talento emergente. Servicio de personal shopper y análisis de colorimetría.", 
+                descripcion_larga: `
+                    <div class="caracteristicas-negocio">
+                        <h4>Servicios exclusivos</h4>
+                        <ul>
+                            <li><strong>Personal shopper:</strong> Servicio individualizado</li>
+                            <li><strong>Análisis de colorimetría:</strong> Estudio personal</li>
+                            <li><strong>Diseñadores emergentes:</strong> 40% del inventario</li>
+                            <li><strong>Alteraciones in situ:</strong> Taller propio</li>
+                            <li><strong>Eventos exclusivos:</strong> Presentaciones privadas</li>
+                        </ul>
+                    </div>
+                    
+                    <p>Moda Elegante trasciende el concepto tradicional de tienda de ropa para convertirse en un estudio de estilo personal. Trabajamos con marcas que priorizan la sostenibilidad y la calidad artesanal.</p>
+                    
+                    <p>Más del 40% de nuestro inventario proviene de diseñadores emergentes, ofreciendo piezas únicas y limitadas. Nuestro servicio de personal shopper incluye análisis de colorimetría para identificar las tonalidades que mejor se adaptan a cada persona.</p>
+                `,
+                contacto: [
+                    { tipo: "whatsapp", valor: "+1 (555) 456-7890", icono: "fab fa-whatsapp" },
+                    { tipo: "telefono", valor: "+1 (555) 456-7891", icono: "fas fa-phone" },
+                    { tipo: "ubicacion", valor: "Centro Comercial Moda", icono: "fas fa-map-marker-alt" },
+                    { tipo: "horario", valor: "Lunes a Sábado: 10:00 - 21:00", icono: "fas fa-clock" }
+                ],
+                imagen: "https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                video_poster: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1520006403909-838d6b92c22e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"}
+                ],
+                redes_sociales: [
+                    { 
+                        plataforma: "facebook", 
+                        nombre: "Moda Elegante", 
+                        usuario: "@ModaEleganteShop",
+                        url: "https://facebook.com/ModaEleganteShop"
+                    },
+                    { 
+                        plataforma: "instagram", 
+                        nombre: "Moda Elegante", 
+                        usuario: "@modaelegante.style",
+                        url: "https://instagram.com/modaelegante.style"
+                    },
+                    { 
+                        plataforma: "tiktok", 
+                        nombre: "Moda Elegante", 
+                        usuario: "@modaelegante",
+                        url: "https://tiktok.com/@modaelegante"
+                    }
+                ]
+            },
+            { 
+                nombre: "Fitness Center Plus", 
+                categoria: "Centro Deportivo", 
+                descripcion: "Instalaciones deportivas de última generación con entrenadores personales certificados. Programas especializados para todos los niveles.", 
+                descripcion_larga: `
+                    <div class="caracteristicas-negocio">
+                        <h4>Servicios incluidos</h4>
+                        <ul>
+                            <li><strong>Entrenadores personales:</strong> Certificados internacionalmente</li>
+                            <li><strong>Equipamiento:</strong> Tecnología de última generación</li>
+                            <li><strong>Clases grupales:</strong> Más de 20 disciplinas diferentes</li>
+                            <li><strong>Piscina olímpica:</strong> 50 metros climatizada</li>
+                            <li><strong>Spa y wellness:</strong> Área de recuperación completa</li>
+                        </ul>
+                    </div>
+                    
+                    <p>Fitness Center Plus ofrece un enfoque integral para el bienestar físico y mental. Nuestras instalaciones cuentan con la tecnología más avanzada en equipamiento deportivo, monitorizado con sensores inteligentes.</p>
+                    
+                    <p>Contamos con más de 50 entrenadores personales certificados internacionalmente y ofrecemos más de 100 clases grupales semanales en más de 20 disciplinas diferentes, desde yoga hasta crossfit.</p>
+                `,
+                contacto: [
+                    { tipo: "whatsapp", valor: "+1 (555) 567-8901", icono: "fab fa-whatsapp" },
+                    { tipo: "telefono", valor: "+1 (555) 567-8902", icono: "fas fa-phone" },
+                    { tipo: "ubicacion", valor: "Centro Deportivo 123", icono: "fas fa-map-marker-alt" },
+                    { tipo: "horario", valor: "Lunes a Domingo: 5:00 - 23:00", icono: "fas fa-clock" }
+                ],
+                imagen: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                video_poster: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"}
+                ],
+                redes_sociales: [
+                    { 
+                        plataforma: "facebook", 
+                        nombre: "Fitness Center Plus", 
+                        usuario: "@FitnessCenterPlus",
+                        url: "https://facebook.com/FitnessCenterPlus"
+                    },
+                    { 
+                        plataforma: "instagram", 
+                        nombre: "Fitness Center Plus", 
+                        usuario: "@fitnesscenterplus",
+                        url: "https://instagram.com/fitnesscenterplus"
+                    },
+                    { 
+                        plataforma: "tiktok", 
+                        nombre: "Fitness Center", 
+                        usuario: "@fitnesscenter",
+                        url: "https://tiktok.com/@fitnesscenter"
+                    }
+                ]
+            },
+            { 
+                nombre: "Jardín Botánico Urbano", 
+                categoria: "Naturaleza y Jardinería", 
+                descripcion: "Espacio verde en medio de la ciudad con más de 500 especies de plantas. Talleres de jardinería urbana y venta de plantas exóticas.", 
+                descripcion_larga: `
+                    <div class="caracteristicas-negocio">
+                        <h4>Nuestros servicios</h4>
+                        <ul>
+                            <li><strong>Jardín botánico:</strong> Más de 500 especies de plantas</li>
+                            <li><strong>Talleres de jardinería:</strong> Aprende a cultivar en espacios urbanos</li>
+                            <li><strong>Venta de plantas:</strong> Especies exóticas y nativas</li>
+                            <li><strong>Diseño de jardines:</strong> Personalizado para balcones y terrazas</li>
+                            <li><strong>Eventos especiales:</strong> Bodas y eventos corporativos</li>
+                        </ul>
+                    </div>
+                    
+                    <p>El Jardín Botánico Urbano es un oasis de tranquilidad en medio del bullicio de la ciudad. Contamos con más de 500 especies de plantas cuidadosamente seleccionadas de diferentes partes del mundo.</p>
+                    
+                    <p>Ofrecemos talleres prácticos de jardinería urbana donde enseñamos técnicas para cultivar alimentos y plantas ornamentales en espacios reducidos. También ofrecemos servicios de diseño de jardines verticales y terrazas verdes.</p>
+                `,
+                contacto: [
+                    { tipo: "whatsapp", valor: "+1 (555) 234-5678", icono: "fab fa-whatsapp" },
+                    { tipo: "telefono", valor: "+1 (555) 234-5679", icono: "fas fa-phone" },
+                    { tipo: "ubicacion", valor: "Parque Central 456", icono: "fas fa-map-marker-alt" },
+                    { tipo: "horario", valor: "Martes a Domingo: 9:00 - 18:00", icono: "fas fa-clock" }
+                ],
+                imagen: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+                video_poster: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1563305145-b6e0e8c2d158?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"}
+                ],
+                redes_sociales: [
+                    { 
+                        plataforma: "facebook", 
+                        nombre: "Jardín Botánico Urbano", 
+                        usuario: "@JardinBotanicoUrbano",
+                        url: "https://facebook.com/JardinBotanicoUrbano"
+                    },
+                    { 
+                        plataforma: "instagram", 
+                        nombre: "Jardín Botánico", 
+                        usuario: "@jardinbotanico.urbano",
+                        url: "https://instagram.com/jardinbotanico.urbano"
+                    },
+                    { 
+                        plataforma: "tiktok", 
+                        nombre: "Jardín Tips", 
+                        usuario: "@jardintips",
+                        url: "https://tiktok.com/@jardintips"
+                    }
+                ]
+            },
+            { 
+                nombre: "Arte Contemporáneo Gallery", 
+                categoria: "Galería de Arte", 
+                descripcion: "Exposiciones de arte contemporáneo con artistas emergentes y consagrados. Subastas mensuales y programas de residencia para artistas.", 
+                descripcion_larga: `
+                    <div class="caracteristicas-negocio">
+                        <h4>Nuestros programas</h4>
+                        <ul>
+                            <li><strong>Exposiciones mensuales:</strong> Artistas emergentes y consagrados</li>
+                            <li><strong>Subastas especiales:</strong> Obras únicas y limitadas</li>
+                            <li><strong>Residencia para artistas:</strong> Programa de 6 meses</li>
+                            <li><strong>Talleres de arte:</strong> Impartidos por artistas reconocidos</li>
+                            <li><strong>Asesoría para coleccionistas:</strong> Guía especializada</li>
+                        </ul>
+                    </div>
+                    
+                    <p>Arte Contemporáneo Gallery es un espacio dedicado a la promoción y difusión del arte contemporáneo. Nuestro objetivo es conectar artistas emergentes con coleccionistas y amantes del arte.</p>
+                    
+                    <p>Organizamos exposiciones mensuales, subastas especiales y ofrecemos un programa de residencia para artistas que incluye estudio, mentoría y exposición final. También ofrecemos talleres impartidos por artistas reconocidos internacionalmente.</p>
+                `,
+                contacto: [
+                    { tipo: "whatsapp", valor: "+1 (555) 876-5432", icono: "fab fa-whatsapp" },
+                    { tipo: "telefono", valor: "+1 (555) 876-5433", icono: "fas fa-phone" },
+                    { tipo: "ubicacion", valor: "Distrito de las Artes 789", icono: "fas fa-map-marker-alt" },
+                    { tipo: "horario", valor: "Miércoles a Domingo: 11:00 - 19:00", icono: "fas fa-clock" }
+                ],
+                imagen: "https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                video_poster: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"},
+                    {tipo: "imagen", url: "https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"}
+                ],
+                redes_sociales: [
+                    { 
+                        plataforma: "facebook", 
+                        nombre: "Arte Contemporáneo Gallery", 
+                        usuario: "@ArteContemporaneoGallery",
+                        url: "https://facebook.com/ArteContemporaneoGallery"
+                    },
+                    { 
+                        plataforma: "instagram", 
+                        nombre: "Arte Contemporáneo", 
+                        usuario: "@artecontemporaneo.gallery",
+                        url: "https://instagram.com/artecontemporaneo.gallery"
+                    },
+                    { 
+                        plataforma: "tiktok", 
+                        nombre: "Arte Gallery", 
+                        usuario: "@artegallery",
+                        url: "https://tiktok.com/@artegallery"
+                    }
+                ]
+            }
+        ];
+
+        // Elementos DOM
+        const gridDestacados = document.getElementById('grid-destacados');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const btnCerrarModal = document.getElementById('btn-cerrar-modal');
+        const modalNombre = document.getElementById('modal-nombre');
+        const modalCategoria = document.getElementById('modal-categoria');
+        const imagenGrande = document.getElementById('imagen-grande');
+        const todasImagenesContainer = document.getElementById('todas-imagenes-container');
+        const descripcionContenido = document.getElementById('descripcion-contenido');
+        const contactoModalGrid = document.getElementById('contacto-modal-grid');
+        const redesGrid = document.getElementById('redes-grid');
+        
+        // Elementos del reproductor de video
+        const videoPlayer = document.getElementById('video-player');
+        const videoBoxGrande = document.getElementById('video-box-grande');
+        const btnPlayCentral = document.getElementById('btn-play-central');
+
+        // Variables del reproductor de video
+        let isVideoPlaying = false;
+        let currentVideoUrl = "";
+        let currentVideoPoster = "";
+        let currentMediaType = "imagen";
+        let videoClickHandler = null;
+        let videoPlayHandler = null;
+        let videoPauseHandler = null;
+        let videoEndHandler = null;
+        let playPauseHandler = null;
+
+        // Función para limpiar todos los eventos del video
+        function limpiarEventosVideo() {
+            if (videoPlayHandler) {
+                videoPlayer.removeEventListener('play', videoPlayHandler);
+                videoPlayHandler = null;
+            }
+            if (videoPauseHandler) {
+                videoPlayer.removeEventListener('pause', videoPauseHandler);
+                videoPauseHandler = null;
+            }
+            if (videoEndHandler) {
+                videoPlayer.removeEventListener('ended', videoEndHandler);
+                videoEndHandler = null;
+            }
+            if (playPauseHandler) {
+                btnPlayCentral.removeEventListener('click', playPauseHandler);
+                playPauseHandler = null;
+            }
+            if (videoClickHandler) {
+                videoBoxGrande.removeEventListener('click', videoClickHandler);
+                videoClickHandler = null;
+            }
+            
+            videoPlayer.onplay = null;
+            videoPlayer.onpause = null;
+            videoPlayer.onended = null;
+        }
+
+        // Función para inicializar el reproductor de video
+        function initVideoPlayer(videoUrl, posterUrl, autoplay = true) {
+            limpiarEventosVideo();
+            
+            btnPlayCentral.style.display = 'none';
+            
+            if (isVideoPlaying) {
+                videoPlayer.pause();
+                isVideoPlaying = false;
+            }
+            
+            currentVideoUrl = videoUrl;
+            currentVideoPoster = posterUrl;
+            currentMediaType = "video";
+            
+            videoPlayer.style.display = 'block';
+            imagenGrande.style.display = 'none';
+            
+            videoPlayer.src = videoUrl;
+            videoPlayer.poster = posterUrl;
+            videoPlayer.muted = false;
+            videoPlayer.volume = 1.0;
+            videoPlayer.controls = false;
+            
+            // Configurar el video para que se escuche sin controles
+            videoPlayer.setAttribute('playsinline', '');
+            videoPlayer.setAttribute('webkit-playsinline', '');
+            
+            videoPlayHandler = function() {
+                isVideoPlaying = true;
+                btnPlayCentral.style.display = 'none';
+            };
+            
+            videoPauseHandler = function() {
+                isVideoPlaying = false;
+                btnPlayCentral.style.display = 'flex';
+            };
+            
+            videoEndHandler = function() {
+                isVideoPlaying = false;
+                btnPlayCentral.style.display = 'flex';
+                videoPlayer.currentTime = 0;
+            };
+            
+            playPauseHandler = function(e) {
+                e.stopPropagation();
+                if (isVideoPlaying) {
+                    videoPlayer.pause();
+                } else {
+                    videoPlayer.play();
+                }
+            };
+            
+            videoClickHandler = function(e) {
+                if (currentMediaType === "video") {
+                    if (isVideoPlaying) {
+                        videoPlayer.pause();
+                    } else {
+                        videoPlayer.play();
+                    }
+                }
+            };
+            
+            videoPlayer.addEventListener('play', videoPlayHandler);
+            videoPlayer.addEventListener('pause', videoPauseHandler);
+            videoPlayer.addEventListener('ended', videoEndHandler);
+            btnPlayCentral.addEventListener('click', playPauseHandler);
+            videoBoxGrande.addEventListener('click', videoClickHandler);
+            
+            btnPlayCentral.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+            
+            if (autoplay) {
+                setTimeout(() => {
+                    videoPlayer.play().catch(error => {
+                        console.log("Auto-play no permitido:", error);
+                        btnPlayCentral.style.display = 'flex';
+                    });
+                }, 300);
+            } else {
+                btnPlayCentral.style.display = 'flex';
+            }
+        }
+
+        // Función para mostrar imagen en el box grande
+        function showImageInBox(imageUrl) {
+            limpiarEventosVideo();
+            
+            videoPlayer.style.display = 'none';
+            btnPlayCentral.style.display = 'none';
+            
+            imagenGrande.style.display = 'block';
+            imagenGrande.src = imageUrl;
+            
+            currentMediaType = "imagen";
+            
+            if (isVideoPlaying) {
+                videoPlayer.pause();
+                isVideoPlaying = false;
+            }
+            
+            videoClickHandler = function(e) {
+                // No hacer nada para imágenes
+            };
+            videoBoxGrande.addEventListener('click', videoClickHandler);
+        }
+
+        // Función para cargar los 6 negocios destacados
+        function cargarDestacados() {
+            gridDestacados.innerHTML = '';
+            
+            negociosDestacados.forEach(negocio => {
+                const tarjeta = document.createElement('div');
+                tarjeta.className = `negocio-destacado-card`;
+                
+                // Verificar si tiene video
+                const tieneVideo = negocio.video ? '<div class="video-badge-card"><i class="fas fa-play"></i><span>VIDEO</span></div>' : '';
+                
+                tarjeta.innerHTML = `
+                    <div class="destacado-badge">DESTACADO</div>
+                    <div class="card-imagen">
+                        ${tieneVideo}
+                        <img src="${negocio.imagen}" alt="${negocio.nombre}" loading="lazy">
+                    </div>
+                    <div class="card-contenido">
+                        <div class="card-header">
+                            <h3>${negocio.nombre}</h3>
+                            <span class="card-categoria">${negocio.categoria}</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-descripcion">${negocio.descripcion}</p>
+                            <button class="btn-ver-mas" data-negocio-id="${negocio.nombre}">
+                                <i class="fas fa-eye"></i>
+                                Ver más
+                            </button>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-contacto">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>${negocio.contacto[0].valor}</span>
+                            </div>
+                            <div class="card-contacto">
+                                <i class="fas fa-phone"></i>
+                                <span>${negocio.contacto[1].valor}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                gridDestacados.appendChild(tarjeta);
+                
+                const btnVerMas = tarjeta.querySelector('.btn-ver-mas');
+                btnVerMas.addEventListener('click', function() {
+                    abrirGaleriaNegocio(negocio);
+                });
+            });
+        }
+
+        // Función para cargar información de contacto en el modal (SOLO WHATSAPP, TELÉFONO, UBICACIÓN Y HORARIO)
+        function cargarContactoModal(contactoArray) {
+            contactoModalGrid.innerHTML = '';
+            
+            // Filtrar solo los tipos de contacto que queremos mostrar
+            const contactosFiltrados = contactoArray.filter(contacto => 
+                contacto.tipo === "whatsapp" || 
+                contacto.tipo === "telefono" || 
+                contacto.tipo === "ubicacion" || 
+                contacto.tipo === "horario"
+            );
+            
+            contactosFiltrados.forEach(contacto => {
+                const contactoItem = document.createElement('div');
+                contactoItem.className = 'contacto-modal-item';
+                
+                contactoItem.innerHTML = `
+                    <i class="${contacto.icono}"></i>
+                    <span>${contacto.valor}</span>
+                `;
+                
+                contactoModalGrid.appendChild(contactoItem);
+            });
+        }
+
+        // Función para abrir el modal con la galería del negocio
+        function abrirGaleriaNegocio(negocio) {
+            todasImagenesContainer.innerHTML = '';
+            redesGrid.innerHTML = '';
+            
+            modalNombre.textContent = negocio.nombre;
+            modalCategoria.textContent = negocio.categoria;
+            
+            // Si el negocio tiene video, iniciar con el video
+            if (negocio.video) {
+                initVideoPlayer(negocio.video, negocio.imagen, true);
+            } else {
+                // Si no tiene video, mostrar la imagen principal
+                showImageInBox(negocio.imagen);
+            }
+            
+            descripcionContenido.innerHTML = negocio.descripcion_larga;
+            
+            // Cargar información de contacto (FILTRADA: solo whatsapp, teléfono, ubicación y horario)
+            if (negocio.contacto) {
+                cargarContactoModal(negocio.contacto);
+            }
+            
+            // Crear todas las imágenes/videos
+            const elementosVisuales = [
+                // PRIMER ELEMENTO: Video si existe, sino imagen
+                negocio.video ? 
+                    {tipo: "video", url: negocio.video, poster: negocio.imagen} : 
+                    {tipo: "imagen", url: negocio.imagen},
+                // RESTO DE ELEMENTOS: Solo imágenes
+                ...negocio.imagenes_adicionales
+            ];
+            
+            // Limitar a 6 elementos máximo
+            const elementosLimitados = elementosVisuales.slice(0, 6);
+            
+            elementosLimitados.forEach((elemento, index) => {
+                const miniatura = document.createElement('div');
+                miniatura.className = `imagen-miniatura ${index === 0 ? 'active' : ''}`;
+                miniatura.dataset.tipo = elemento.tipo;
+                miniatura.dataset.index = index;
+                
+                if (elemento.tipo === 'video') {
+                    miniatura.dataset.video = elemento.url;
+                    miniatura.dataset.poster = elemento.poster || negocio.imagen;
+                    
+                    miniatura.innerHTML = `
+                        <img src="${elemento.poster || negocio.imagen}" alt="${negocio.nombre} - Video" loading="lazy">
+                        <div class="video-miniatura-badge">
+                            <i class="fas fa-play"></i>
+                            <span>VIDEO</span>
+                        </div>
+                    `;
+                    
+                    miniatura.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        initVideoPlayer(this.dataset.video, this.dataset.poster, true);
+                        document.querySelectorAll('.imagen-miniatura').forEach(m => {
+                            m.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    });
+                } else {
+                    miniatura.dataset.imagen = elemento.url;
+                    
+                    miniatura.innerHTML = `
+                        <img src="${elemento.url}" alt="${negocio.nombre} - Imagen ${index + 1}" loading="lazy">
+                    `;
+                    
+                    miniatura.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        showImageInBox(this.dataset.imagen);
+                        document.querySelectorAll('.imagen-miniatura').forEach(m => {
+                            m.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    });
+                }
+                
+                todasImagenesContainer.appendChild(miniatura);
+            });
+            
+            if (negocio.redes_sociales && negocio.redes_sociales.length > 0) {
+                negocio.redes_sociales.forEach(red => {
+                    const redItem = document.createElement('a');
+                    redItem.href = red.url || '#';
+                    redItem.target = "_blank";
+                    redItem.className = `red-social-item ${red.plataforma}`;
+                    
+                    let iconClass = '';
+                    switch(red.plataforma) {
+                        case 'facebook':
+                            iconClass = 'fab fa-facebook-f';
+                            break;
+                        case 'instagram':
+                            iconClass = 'fab fa-instagram';
+                            break;
+                        case 'tiktok':
+                            iconClass = 'fab fa-tiktok';
+                            break;
+                        default:
+                            iconClass = 'fas fa-share-alt';
+                    }
+                    
+                    redItem.innerHTML = `
+                        <i class="${iconClass}"></i>
+                        <div class="red-social-info">
+                            <div class="red-social-nombre">${red.nombre}</div>
+                            <div class="red-social-usuario">${red.usuario}</div>
+                        </div>
+                    `;
+                    
+                    redesGrid.appendChild(redItem);
+                });
+            }
+            
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Función para abrir galería de negocios principales
+        function abrirGaleriaPrincipal(negocioId) {
+            const negocio = negociosPrincipales[negocioId];
+            if (negocio) {
+                abrirGaleriaNegocio(negocio);
+            }
+        }
+
+        // Función para cerrar el modal
+        function cerrarModal() {
+            if (isVideoPlaying) {
+                videoPlayer.pause();
+                isVideoPlaying = false;
+            }
+            
+            limpiarEventosVideo();
+            
+            btnPlayCentral.style.display = 'none';
+            
+            videoPlayer.src = '';
+            videoPlayer.poster = '';
+            imagenGrande.src = '';
+            
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Event listeners
+        btnCerrarModal.addEventListener('click', cerrarModal);
+        modalOverlay.addEventListener('click', function(event) {
+            if (event.target === modalOverlay) {
+                cerrarModal();
+            }
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                cerrarModal();
+            }
+        });
+
+        // Eventos para los botones "Ver Galería" de los negocios principales
+        document.querySelectorAll('.btn-ver-galeria-principal').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const negocioId = this.getAttribute('data-negocio-id');
+                abrirGaleriaPrincipal(negocioId);
+            });
+        });
+
+        // Eventos para los botones "Ver más" de los negocios principales
+        document.querySelectorAll('.btn-ver-mas-principal').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const negocioId = this.getAttribute('data-negocio-id');
+                abrirGaleriaPrincipal(negocioId);
+            });
+        });
+
+        // Cargar página inicial
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarDestacados();
+        });
+    </script>
+</body>
+</html>

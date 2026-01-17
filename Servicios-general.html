@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directorio de Negocios LIFE TIMES - Servicios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: #f5f7fa;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(to bottom, #c90f0f, #a00c0c);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            text-align: center;
+            padding: 20px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #fff;
+            transition: transform 0.3s;
+        }
+
+        .logo h1:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            color: #ffffff;
+        }
+
+        .logo p {
+            margin-top: 5px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .menu-categorias {
+            padding: 0 15px;
+            flex: 1;
+        }
+
+        .categoria-item {
+            padding: 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            text-decoration: none;
+            color: white;
+        }
+
+        .categoria-item:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+
+        .categoria-item.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid #ffffff;
+        }
+
+        .categoria-item i {
+            margin-right: 12px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .btn-subir-negocio {
+            margin: 20px 15px;
+            padding: 15px;
+            background-color: rgba(128, 128, 128, 0.3);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-align: center;
+            width: calc(100% - 30px);
+        }
+
+        .btn-subir-negocio:hover {
+            background-color: rgba(128, 128, 128, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-subir-negocio i {
+            font-size: 18px;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .top-nav {
+            background-color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000000;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: #c90f0f;
+        }
+
+        .negocios-container {
+            padding: 30px;
+            flex: 1;
+            background: white;
+        }
+
+        .titulo-banner {
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), 
+                        url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eaeaea;
+            position: relative;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .titulo-banner h2 {
+            color: #000000;
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .titulo-banner p {
+            color: #444;
+            font-size: 16px;
+            font-weight: 500;
+            padding-left: 5px;
+        }
+
+        .menu-desplazamiento {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            padding: 8px 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 10;
+        }
+
+        .pagina-btn {
+            width: 35px;
+            height: 35px;
+            background: #f8f9fa;
+            color: #555;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagina-btn:hover {
+            background: #f0f0f0;
+            color: #333;
+            border-color: #ccc;
+        }
+
+        .pagina-btn.active {
+            background: #c90f0f;
+            color: white;
+            border-color: #c90f0f;
+        }
+
+        .pagina-btn.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background: #f8f9fa;
+            border-color: #e0e0e0;
+            color: #999;
+        }
+
+        .pagina-info {
+            font-size: 13px;
+            color: #777;
+            font-weight: 500;
+            margin-left: 8px;
+            padding-left: 8px;
+            border-left: 1px solid #e0e0e0;
+            white-space: nowrap;
+        }
+
+        .pagina-actual {
+            font-size: 14px;
+            font-weight: 600;
+            color: #c90f0f;
+            margin-right: 5px;
+        }
+
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .servicio-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 500px;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInCard 0.4s ease forwards;
+        }
+
+        @keyframes fadeInCard {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .servicio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-imagen {
+            height: 160px;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .card-imagen.loading {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .card-imagen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card-imagen img.loaded {
+            opacity: 1;
+        }
+
+        .servicio-card:hover .card-imagen img {
+            transform: scale(1.05);
+        }
+
+        .card-header {
+            padding: 20px 20px 10px;
+            background-color: white;
+        }
+
+        .card-header h3 {
+            color: #000000;
+            font-size: 18px;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .card-categoria {
+            color: #c90f0f;
+            font-size: 13px;
+            display: inline-block;
+            padding: 3px 10px;
+            background-color: #ffe6e6;
+            border-radius: 20px;
+        }
+
+        .card-body {
+            padding: 0 20px 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-descripcion {
+            color: #000000;
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 15px;
+            flex: 1;
+            min-height: 90px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        /* ================================ */
+        /* BOTÓN VER MÁS - UN TERCIO DEL ANCHO, NEGRO, LETRAS BLANCAS */
+        /* ================================ */
+        .btn-ver-mas-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .btn-ver-mas {
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 33.33%;
+            max-width: 120px;
+        }
+
+        .btn-ver-mas:hover {
+            background-color: #333333;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-ver-mas i {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-ver-mas.activo i {
+            transform: rotate(180deg);
+        }
+
+        /* ================================ */
+        /* RECTÁNGULO VERDE WHATSAPP - CON ICONO */
+        /* ================================ */
+        .whatsapp-container {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .whatsapp-rectangulo {
+            background-color: #25D366; /* Verde WhatsApp */
+            color: white;
+            border-radius: 6px;
+            padding: 12px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* Espacio entre icono y texto */
+            width: 100%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .whatsapp-rectangulo:hover {
+            background-color: #1da851;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-rectangulo i {
+            font-size: 16px;
+        }
+
+        /* ================================ */
+        /* REDES SOCIALES - OCULTAS POR DEFECTO */
+        /* ================================ */
+        .card-redes {
+            padding-top: 10px;
+            margin-bottom: 10px;
+            border-top: 1px solid #eee;
+            display: none;
+        }
+
+        .card-redes.mostrar {
+            display: block;
+            animation: slideDown 0.3s ease forwards;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .redes-sociales {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        .red-social-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            border-radius: 6px;
+        }
+
+        .red-social-item:hover {
+            transform: translateY(-3px);
+            background-color: #f8f8f8;
+        }
+
+        .red-social-item.facebook:hover {
+            background-color: #1877f2;
+            color: white;
+        }
+
+        .red-social-item.instagram:hover {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            color: white;
+        }
+
+        .red-social-item.tiktok:hover {
+            background-color: #000000;
+            color: white;
+        }
+
+        .red-social-item i {
+            width: 18px;
+            text-align: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .facebook i {
+            color: #1877f2;
+        }
+
+        .instagram i {
+            color: #E1306C;
+        }
+
+        .tiktok i {
+            color: #000000;
+        }
+
+        .red-social-item:hover i {
+            color: white;
+        }
+
+        .red-social-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .red-social-nombre {
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .red-social-usuario {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .red-social-item:hover .red-social-usuario {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* ================================ */
+        /* CONTACTO - SOLO UBICACIÓN AHORA */
+        /* ================================ */
+        .card-contacto {
+            background-color: #ffffff;
+            border-radius: 0 0 12px 12px;
+            padding: 15px 20px;
+            margin-top: auto;
+            border-top: 1px solid #eaeaea;
+        }
+
+        .contacto-contenedor {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contacto-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contacto-item i {
+            color: #c90f0f;
+            width: 16px;
+            text-align: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .contacto-info {
+            color: #000000;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        /* ================================ */
+        /* RESPONSIVE */
+        /* ================================ */
+        @media (max-width: 1200px) {
+            .servicio-card {
+                min-height: 520px;
+            }
+            
+            .menu-desplazamiento {
+                flex-wrap: wrap;
+                justify-content: center;
+                width: auto;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .servicios-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .servicio-card {
+                min-height: 550px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            body {
+                flex-direction: column;
+            }
+            
+            .top-nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+                justify-content: center;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .servicios-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .servicio-card {
+                min-height: auto;
+                max-height: none;
+            }
+
+            .titulo-banner {
+                padding: 20px;
+                min-height: 120px;
+            }
+
+            .titulo-banner h2 {
+                font-size: 26px;
+            }
+
+            .menu-desplazamiento {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                margin-top: 15px;
+                width: fit-content;
+                align-self: center;
+            }
+
+            .btn-ver-mas {
+                width: 40%;
+                max-width: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .titulo-banner {
+                padding: 15px;
+                min-height: 110px;
+            }
+
+            .titulo-banner h2 {
+                font-size: 22px;
+            }
+
+            .pagina-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 12px;
+            }
+            
+            .pagina-info {
+                font-size: 11px;
+            }
+            
+            .card-header h3 {
+                font-size: 16px;
+            }
+            
+            .card-descripcion {
+                font-size: 13px;
+                min-height: 100px;
+            }
+
+            .btn-ver-mas {
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- MENÚ LATERAL -->
+    <aside class="sidebar">
+        <div class="logo">
+            <a href="Index.html" style="text-decoration: none; color: inherit;">
+                <h1>LIFE <span>TIMES</span></h1>
+            </a>
+            <p>Directorio de Negocios</p>
+        </div>
+        
+        <div class="menu-categorias">
+            <a href="General.html" class="categoria-item">
+                <i class="fas fa-home"></i>
+                <span>General</span>
+            </a>
+            <a href="Servicio Minoritario.html" class="categoria-item">
+                <i class="fas fa-handshake"></i>
+                <span>Servicio minoritario</span>
+            </a>
+            <a href="Comercio.html" class="categoria-item">
+                <i class="fas fa-store"></i>
+                <span>Comercio</span>
+            </a>
+            <a href="Alimentos y bebidas.html" class="categoria-item">
+                <i class="fas fa-utensils"></i>
+                <span>Alimentos y bebidas</span>
+            </a>
+            <a href="Servicios-general.html" class="categoria-item active">
+                <i class="fas fa-concierge-bell"></i>
+                <span>Servicios</span>
+            </a>
+        </div>
+        
+        <a href="Servicios.html" style="text-decoration: none;">
+            <button class="btn-subir-negocio">
+                <i class="fas fa-plus-circle"></i>
+                <span>¿Cómo puedo subir mi negocio?</span>
+            </button>
+        </a>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+        <nav class="top-nav">
+            <ul class="nav-links">
+                <li><a href="Terminos y condiciones.html" id="terminos-link">Términos y Condiciones</a></li>
+                <li><a href="Index.html" id="historia-link">La Historia</a></li>
+                <li><a href="Servicios.html" id="servicios-link">Servicios</a></li>
+            </ul>
+        </nav>
+
+        <section class="negocios-container">
+            <div class="titulo-banner" id="titulo-banner">
+                <h2>Servicios Profesionales y Personales</h2>
+                <p>Encuentra servicios especializados para tus necesidades: consultoría, mantenimiento, asesoría y más</p>
+                
+                <div class="menu-desplazamiento" id="menu-desplazamiento">
+                </div>
+            </div>
+            
+            <div class="servicios-grid" id="servicios-grid">
+            </div>
+            
+            <div style="text-align: center; color: #666; font-size: 14px; margin-top: 20px;">
+                Mostrando <span id="contador-negocios">0</span> de <span id="total-negocios">0</span> servicios profesionales
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // ==============================================
+        // FORMATO PARA AGREGAR NEGOCIOS MANUALMENTE
+        // ==============================================
+        // Para agregar o modificar negocios, edita el array "negociosServicios" 
+        // Cada negocio debe tener este formato:
+        /*
+        {
+            id: [número único],
+            nombre: "[Nombre del negocio]",
+            categoria: "[Categoría]",
+            descripcion: "[Descripción del servicio]",
+            imagen: "[URL de la imagen]",
+            telefono: "[Número de teléfono]",
+            ubicacion: "[Ubicación]",
+            redes_sociales: [
+                { 
+                    plataforma: "facebook", // Solo: facebook, instagram, tiktok
+                    nombre: "Facebook", 
+                    usuario: "@usuario", 
+                    url: "#" // Enlace a la red social
+                },
+                // Puedes agregar más redes sociales según necesites
+            ]
+        }
+        */
+
+        // ==============================================
+        // DATOS DE NEGOCIOS (MODIFICA AQUÍ)
+        // ==============================================
+        const negociosServicios = [
+            {
+                id: 1,
+                nombre: "Consultoría de Marketing Digital Avanzada",
+                categoria: "Consultoría",
+                descripcion: "Especializados en estrategias digitales integrales para pequeñas y medianas empresas. Ofrecemos análisis de mercado exhaustivo, desarrollo de estrategias personalizadas, gestión de campañas publicitarias en redes sociales y SEO. Trabajamos con herramientas de análisis avanzadas para maximizar el ROI de cada inversión en marketing digital.",
+                imagen: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                telefono: "+52 55 1234 5678",
+                ubicacion: "Polanco, CDMX",
+                redes_sociales: [
+                    { plataforma: "facebook", nombre: "Facebook", usuario: "@ConsultoriaMD", url: "#" },
+                    { plataforma: "instagram", nombre: "Instagram", usuario: "@consultoria.md", url: "#" },
+                    { plataforma: "tiktok", nombre: "TikTok", usuario: "@consultoriamd", url: "#" }
+                ]
+            },
+            {
+                id: 2,
+                nombre: "Servicios de Plomería Integral y Emergencias",
+                categoria: "Mantenimiento",
+                descripcion: "Servicio completo de plomería residencial, comercial e industrial. Especialistas en reparación de fugas, instalación de tuberías, mantenimiento preventivo y emergencias 24/7. Utilizamos tecnología de detección de fugas sin obra y garantizamos todos nuestros trabajos. Atención inmediata en toda la zona metropolitana.",
+                imagen: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                telefono: "+52 55 2345 6789",
+                ubicacion: "Tlalpan, CDMX",
+                redes_sociales: [
+                    { plataforma: "facebook", nombre: "Facebook", usuario: "@PlomeriaIntegral", url: "#" },
+                    { plataforma: "instagram", nombre: "Instagram", usuario: "@plomeria.integral", url: "#" },
+                    { plataforma: "tiktok", nombre: "TikTok", usuario: "@plomeria_integral", url: "#" }
+                ]
+            },
+            {
+                id: 3,
+                nombre: "Asesoría Legal Empresarial Especializada",
+                categoria: "Legal",
+                descripcion: "Despacho de abogados especializados en derecho corporativo, contratos mercantiles, propiedad intelectual, litigio civil y mercantil. Ofrecemos asesoría personalizada para startups, pymes y grandes corporativos. Servicios de due diligence, constitución de sociedades, defensa fiscal y protección de marcas.",
+                imagen: "https://images.unsplash.com/photo-1589391886085-8b6b0ac72a1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                telefono: "+52 55 3456 7890",
+                ubicacion: "Reforma, CDMX",
+                redes_sociales: [
+                    { plataforma: "facebook", nombre: "Facebook", usuario: "@AsesoriaLegal", url: "#" },
+                    { plataforma: "instagram", nombre: "Instagram", usuario: "@asesoria.legal", url: "#" },
+                    { plataforma: "tiktok", nombre: "TikTok", usuario: "@asesorialegal", url: "#" }
+                ]
+            },
+            {
+                id: 4,
+                nombre: "Diseño Gráfico y Branding Corporativo",
+                categoria: "Diseño",
+                descripcion: "Creación de identidad visual completa para marcas y empresas de todos los sectores. Desarrollo de logotipos, manuales de marca, papelería corporativa, diseño web y material publicitario. Trabajamos con metodologías de design thinking para garantizar soluciones que comuniquen efectivamente los valores de tu empresa.",
+                imagen: "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                telefono: "+52 55 4567 8901",
+                ubicacion: "Condesa, CDMX",
+                redes_sociales: [
+                    { plataforma: "facebook", nombre: "Facebook", usuario: "@DisenoBranding", url: "#" },
+                    { plataforma: "instagram", nombre: "Instagram", usuario: "@diseno.branding", url: "#" },
+                    { plataforma: "tiktok", nombre: "TikTok", usuario: "@disenobranding", url: "#" }
+                ]
+            },
+            {
+                id: 5,
+                nombre: "Clases de Música Personalizadas para Todos los Niveles",
+                categoria: "Educación",
+                descripcion: "Clases particulares y grupales de piano, guitarra, violín, canto y teoría musical para todas las edades y niveles. Metodología personalizada según objetivos del alumno, desde hobby hasta preparación profesional. Profesores titulados con experiencia en pedagogía musical. Horarios flexibles y posibilidad de clases a domicilio.",
+                imagen: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                telefono: "+52 55 5678 9012",
+                ubicacion: "Coyoacán, CDMX",
+                redes_sociales: [
+                    { plataforma: "facebook", nombre: "Facebook", usuario: "@ClasesMusica", url: "#" },
+                    { plataforma: "instagram", nombre: "Instagram", usuario: "@clases.musica", url: "#" },
+                    { plataforma: "tiktok", nombre: "TikTok", usuario: "@clasesmusica", url: "#" }
+                ]
+            },
+            {
+                id: 6,
+                nombre: "Servicio Técnico Especializado en Computadoras",
+                categoria: "Tecnología",
+                descripcion: "Reparación y mantenimiento profesional de computadoras de escritorio, laptops, servidores y equipos de oficina. Diagnóstico gratuito, reparación de hardware, eliminación de virus, recuperación de datos, optimización de sistemas y asesoría en upgrades. Servicio a domicilio y para empresas con planes de mantenimiento preventivo.",
+                imagen: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                telefono: "+52 55 6789 0123",
+                ubicacion: "Santa Fe, CDMX",
+                redes_sociales: [
+                    { plataforma: "facebook", nombre: "Facebook", usuario: "@TecnicoComputadoras", url: "#" },
+                    { plataforma: "instagram", nombre: "Instagram", usuario: "@tecnico.computadoras", url: "#" },
+                    { plataforma: "tiktok", nombre: "TikTok", usuario: "@tecnicocomputadoras", url: "#" }
+                ]
+            },
+            {
+                id: 7,
+                nombre: "Entrenador Personal Certificado y Nutriólogo",
+                categoria: "Salud",
+                descripcion: "Entrenamiento personalizado one-on-one para alcanzar tus objetivos fitness: pérdida de peso, ganancia muscular, preparación física para deportes específicos o rehabilitación. Combinamos entrenamiento funcional, asesoría nutricional y seguimiento de progreso. Sesiones en gimnasio equipado o a domicilio, con planes adaptados a cada persona.",
+                imagen: "https://images.unsplash.com/photo-1534367507877-0edd93bd013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                telefono: "+52 55 7890 1234",
+                ubicacion: "Roma Norte, CDMX",
+                redes_sociales: [
+                    { plataforma: "facebook", nombre: "Facebook", usuario: "@EntrenadorPersonal", url: "#" },
+                    { plataforma: "instagram", nombre: "Instagram", usuario: "@entrenador.personal", url: "#" },
+                    { plataforma: "tiktok", nombre: "TikTok", usuario: "@entrenadorpersonal", url: "#" }
+                ]
+            },
+            {
+                id: 8,
+                nombre: "Fotografía Profesional para Eventos y Productos",
+                categoria: "Fotografía",
+                descripcion: "Servicios de fotografía profesional para bodas, eventos corporativos, retratos familiares, fotografía de producto y gastronómica. Equipo de última generación, estudio propio y edición profesional. Paquetes personalizados que incluyen sesión, edición de imágenes y entrega en alta resolución. También ofrecemos servicios de video y drone.",
+                imagen: "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                telefono: "+52 55 8901 2345",
+                ubicacion: "Juárez, CDMX",
+                redes_sociales: [
+                    { plataforma: "facebook", nombre: "Facebook", usuario: "@FotografiaPro", url: "#" },
+                    { plataforma: "instagram", nombre: "Instagram", usuario: "@fotografia.pro", url: "#" },
+                    { plataforma: "tiktok", nombre: "TikTok", usuario: "@fotografiapro", url: "#" }
+                ]
+            },
+            {
+                id: 9,
+                nombre: "Servicio de Limpieza Residencial y Comercial Ecológico",
+                categoria: "Limpieza",
+                descripcion: "Limpieza profunda de casas, departamentos, oficinas y locales comerciales utilizando productos ecológicos y técnicas profesionales. Servicios regulares, limpieza post-obra, desinfección especial, limpieza de alfombras y muebles. Personal capacitado, seguro de responsabilidad civil y equipo industrial. Planes mensuales con descuento.",
+                imagen: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                telefono: "+52 55 9012 3456",
+                ubicacion: "Nápoles, CDMX",
+                redes_sociales: [
+                    { plataforma: "facebook", nombre: "Facebook", usuario: "@LimpiezaResidencial", url: "#" },
+                    { plataforma: "instagram", nombre: "Instagram", usuario: "@limpieza.ecologica", url: "#" },
+                    { plataforma: "tiktok", nombre: "TikTok", usuario: "@limpiezaecologica", url: "#" }
+                ]
+            },
+            {
+                id: 10,
+                nombre: "Traducción e Interpretación Profesional Multilingüe",
+                categoria: "Idiomas",
+                descripcion: "Servicios de traducción certificada, interpretación simultánea y consecutiva en inglés, francés, alemán, chino, japonés y más. Especializados en traducción legal, médica, técnica y de negocios. Trabajamos con documentos confidenciales, contratos internacionales, sitios web y software. Intérpretes para eventos, conferencias y reuniones ejecutivas.",
+                imagen: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                telefono: "+52 55 0123 4567",
+                ubicacion: "Del Valle, CDMX",
+                redes_sociales: [
+                    { plataforma: "facebook", nombre: "Facebook", usuario: "@TraduccionProfesional", url: "#" },
+                    { plataforma: "instagram", nombre: "Instagram", usuario: "@traducciones.idiomas", url: "#" },
+                    { plataforma: "tiktok", nombre: "TikTok", usuario: "@traduccionidiomas", url: "#" }
+                ]
+            },
+            {
+                id: 11,
+                nombre: "Instalación y Mantenimiento de Sistemas de Climatización",
+                categoria: "Climatización",
+                descripcion: "Instalación, mantenimiento y reparación de sistemas de aire acondicionado, calefacción y ventilación para hogares y empresas. Especialistas en equipos inverter, sistemas centrales, minisplits y calefactores. Servicio preventivo, limpieza de ductos, recarga de gas y solución de problemas eléctricos. Garantía en todos nuestros trabajos.",
+                imagen: "https://images.unsplash.com/photo-1585734264745-7138ad6d3d35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                telefono: "+52 55 1122 3344",
+                ubicacion: "Mixcoac, CDMX",
+                redes_sociales: [
+                    { plataforma: "facebook", nombre: "Facebook", usuario: "@ClimatizaciónExpertos", url: "#" },
+                    { plataforma: "instagram", nombre: "Instagram", usuario: "@climatizacion.expertos", url: "#" },
+                    { plataforma: "tiktok", nombre: "TikTok", usuario: "@climatizacionexpertos", url: "#" }
+                ]
+            },
+            {
+                id: 12,
+                nombre: "Terapia Psicológica y Bienestar Emocional Integral",
+                categoria: "Bienestar",
+                descripcion: "Sesiones de terapia psicológica individual, de pareja y familiar para adultos, adolescentes y niños. Enfoques cognitivo-conductual, humanista y sistémico. Tratamiento de ansiedad, depresión, estrés, problemas de relación y desarrollo personal. También ofrecemos talleres de mindfulness, manejo emocional y coaching de vida. Modalidad presencial y en línea.",
+                imagen: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                telefono: "+52 55 2233 4455",
+                ubicacion: "San Ángel, CDMX",
+                redes_sociales: [
+                    { plataforma: "facebook", nombre: "Facebook", usuario: "@BienestarEmocional", url: "#" },
+                    { plataforma: "instagram", nombre: "Instagram", usuario: "@bienestar.emocional", url: "#" },
+                    { plataforma: "tiktok", nombre: "TikTok", usuario: "@bienestaremocional", url: "#" }
+                ]
+            },
+            {
+                id: 13,
+                nombre: "Desarrollo Web, Apps Móviles y Sistemas a Medida",
+                categoria: "Desarrollo Web",
+                descripcion: "Creación de sitios web responsivos, aplicaciones móviles nativas y multiplataforma, sistemas de gestión empresarial (ERP, CRM) y e-commerce. Usamos tecnologías modernas como React, Node.js, Python, Flutter y bases de datos SQL/NoSQL. Desarrollo ágil, pruebas de calidad, hosting administrado y mantenimiento continuo.",
+                imagen: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                telefono: "+52 55 3344 5566",
+                ubicacion: "Centro Histórico, CDMX",
+                redes_sociales: [
+                    { plataforma: "facebook", nombre: "Facebook", usuario: "@DesarrolloWebApps", url: "#" },
+                    { plataforma: "instagram", nombre: "Instagram", usuario: "@desarrollo.web", url: "#" },
+                    { plataforma: "tiktok", nombre: "TikTok", usuario: "@desarrolloweb", url: "#" }
+                ]
+            },
+            {
+                id: 14,
+                nombre: "Catering Gourmet y Eventos Gastronómicos Personalizados",
+                categoria: "Gastronomía",
+                descripcion: "Servicio de catering para eventos empresariales, bodas, fiestas sociales y reuniones familiares. Menús personalizados según temática y presupuesto, cocina internacional y mexicana contemporánea. Incluye servicio de meseros, equipo de cocina, vajilla y decoración básica. También ofrecemos estaciones de comida, barras de bebidas y postres artesanales.",
+                imagen: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                telefono: "+52 55 4455 6677",
+                ubicacion: "Lomas de Chapultepec, CDMX",
+                redes_sociales: [
+                    { plataforma: "facebook", nombre: "Facebook", usuario: "@CateringEventos", url: "#" },
+                    { plataforma: "instagram", nombre: "Instagram", usuario: "@catering.eventos", url: "#" },
+                    { plataforma: "tiktok", nombre: "TikTok", usuario: "@cateringeventos", url: "#" }
+                ]
+            },
+            {
+                id: 15,
+                nombre: "Contabilidad, Auditoría y Asesoría Fiscal Integral",
+                categoria: "Contabilidad",
+                descripcion: "Servicios contables completos para empresas de todos los tamaños: contabilidad electrónica, declaraciones fiscales mensuales y anuales, nóminas, auditorías, estados financieros y planeación fiscal estratégica. Especialistas en régimen de incorporación fiscal, personas físicas con actividad empresarial y sociedades mercantiles.",
+                imagen: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                telefono: "+52 55 5566 7788",
+                ubicacion: "Insurgentes, CDMX",
+                redes_sociales: [
+                    { plataforma: "facebook", nombre: "Facebook", usuario: "@ContabilidadFinanzas", url: "#" },
+                    { plataforma: "instagram", nombre: "Instagram", usuario: "@contabilidad.finanzas", url: "#" },
+                    { plataforma: "tiktok", nombre: "TikTok", usuario: "@contabilidadfinanzas", url: "#" }
+                ]
+            },
+            {
+                id: 16,
+                nombre: "Organización Integral de Eventos Sociales y Corporativos",
+                categoria: "Eventos",
+                descripcion: "Planeación y organización completa de eventos desde la conceptualización hasta la ejecución: bodas, aniversarios, lanzamientos de producto, convenciones y team buildings. Gestión de proveedores, diseño de ambientación, coordinación logística, entretenimiento y protocolo. Atención personalizada para cada evento con soluciones creativas y dentro de presupuesto.",
+                imagen: "https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                telefono: "+52 55 6677 8899",
+                ubicacion: "Pedregal, CDMX",
+                redes_sociales: [
+                    { plataforma: "facebook", nombre: "Facebook", usuario: "@EventosOrganizados", url: "#" },
+                    { plataforma: "instagram", nombre: "Instagram", usuario: "@eventos.organizados", url: "#" },
+                    { plataforma: "tiktok", nombre: "TikTok", usuario: "@eventosorganizados", url: "#" }
+                ]
+            }
+        ];
+
+        // ==============================================
+        // CONFIGURACIÓN DE PAGINACIÓN
+        // ================================
+        let paginaActual = 1;
+        const negociosPorPagina = 16;
+        const totalNegocios = negociosServicios.length;
+        const totalPaginas = Math.ceil(totalNegocios / negociosPorPagina);
+
+        // ==============================================
+        // ELEMENTOS DOM
+        // ==============================================
+        const serviciosGrid = document.getElementById('servicios-grid');
+        const menuDesplazamiento = document.getElementById('menu-desplazamiento');
+        const contadorNegocios = document.getElementById('contador-negocios');
+        const totalNegociosSpan = document.getElementById('total-negocios');
+
+        // ==============================================
+        // FUNCIÓN PARA CREAR ENLACE DE WHATSAPP
+        // ==============================================
+        function crearEnlaceWhatsapp(numero) {
+            // Limpiar el número (eliminar espacios, guiones, paréntesis)
+            const numeroLimpio = numero.replace(/[\s\-\(\)]/g, '');
+            // Crear mensaje predeterminado
+            const mensaje = encodeURIComponent("Hola, me interesa su servicio. Me gustaría obtener más información.");
+            // Crear enlace de WhatsApp
+            return `https://wa.me/${numeroLimpio}?text=${mensaje}`;
+        }
+
+        // ==============================================
+        // FUNCIÓN PARA FILTRAR REDES SOCIALES (SOLO TIKTOK, IG Y FACEBOOK)
+        // ==============================================
+        function filtrarRedesSociales(redes) {
+            return redes.filter(red => 
+                red.plataforma === 'facebook' || 
+                red.plataforma === 'instagram' || 
+                red.plataforma === 'tiktok'
+            );
+        }
+
+        // ==============================================
+        // FUNCIONES
+        // ==============================================
+
+        function crearMenuDesplazamiento() {
+            menuDesplazamiento.innerHTML = '';
+            
+            const paginaActualSpan = document.createElement('span');
+            paginaActualSpan.className = 'pagina-actual';
+            paginaActualSpan.textContent = `Página ${paginaActual}`;
+            menuDesplazamiento.appendChild(paginaActualSpan);
+            
+            const btnAnterior = document.createElement('button');
+            btnAnterior.className = `pagina-btn ${paginaActual === 1 ? 'disabled' : ''}`;
+            btnAnterior.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            btnAnterior.disabled = paginaActual === 1;
+            btnAnterior.title = "Página anterior";
+            btnAnterior.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (paginaActual > 1) cargarNegociosPagina(paginaActual - 1);
+            });
+            menuDesplazamiento.appendChild(btnAnterior);
+            
+            const inicioPagina = Math.max(1, paginaActual - 2);
+            const finPagina = Math.min(totalPaginas, paginaActual + 2);
+            
+            for (let i = inicioPagina; i <= finPagina; i++) {
+                const btnPagina = document.createElement('button');
+                btnPagina.className = `pagina-btn ${paginaActual === i ? 'active' : ''}`;
+                btnPagina.textContent = i;
+                btnPagina.title = `Ir a página ${i}`;
+                btnPagina.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (paginaActual !== i) cargarNegociosPagina(i);
+                });
+                menuDesplazamiento.appendChild(btnPagina);
+            }
+            
+            const info = document.createElement('span');
+            info.className = 'pagina-info';
+            info.textContent = `de ${totalPaginas}`;
+            menuDesplazamiento.appendChild(info);
+            
+            const btnSiguiente = document.createElement('button');
+            btnSiguiente.className = `pagina-btn ${paginaActual === totalPaginas ? 'disabled' : ''}`;
+            btnSiguiente.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            btnSiguiente.disabled = paginaActual === totalPaginas;
+            btnSiguiente.title = "Página siguiente";
+            btnSiguiente.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (paginaActual < totalPaginas) cargarNegociosPagina(paginaActual + 1);
+            });
+            menuDesplazamiento.appendChild(btnSiguiente);
+        }
+
+        function toggleRedesSociales(boton, redesContainer) {
+            const estaActivo = redesContainer.classList.contains('mostrar');
+            
+            // Cerrar todas las redes abiertas
+            document.querySelectorAll('.card-redes.mostrar').forEach(red => {
+                red.classList.remove('mostrar');
+                const btn = red.previousElementSibling?.previousElementSibling?.querySelector('.btn-ver-mas');
+                if (btn) {
+                    btn.classList.remove('activo');
+                    btn.innerHTML = '<i class="fas fa-chevron-down"></i> Ver más';
+                }
+            });
+            
+            // Si no estaba activo, abrir este
+            if (!estaActivo) {
+                redesContainer.classList.add('mostrar');
+                boton.classList.add('activo');
+                boton.innerHTML = '<i class="fas fa-chevron-up"></i> Ver menos';
+            }
+        }
+
+        function cargarNegociosPagina(pagina) {
+            paginaActual = pagina;
+            
+            const inicio = (pagina - 1) * negociosPorPagina;
+            const fin = inicio + negociosPorPagina;
+            const negociosMostrar = negociosServicios.slice(inicio, fin);
+            
+            serviciosGrid.style.opacity = '0.5';
+            
+            setTimeout(() => {
+                serviciosGrid.innerHTML = '';
+                
+                negociosMostrar.forEach((negocio, index) => {
+                    const tarjeta = document.createElement('div');
+                    tarjeta.className = `servicio-card`;
+                    tarjeta.style.animationDelay = `${index * 0.05}s`;
+                    
+                    // Filtrar redes sociales (solo TikTok, Instagram y Facebook)
+                    const redesFiltradas = filtrarRedesSociales(negocio.redes_sociales || []);
+                    const tieneRedes = redesFiltradas.length > 0;
+                    
+                    // Crear HTML de redes sociales si existen
+                    let redesHTML = '';
+                    if (tieneRedes) {
+                        redesHTML = `
+                            <div class="card-redes">
+                                <div class="redes-sociales">
+                                    ${redesFiltradas.map(red => {
+                                        // Asignar el ícono correcto según la plataforma
+                                        let icono = '';
+                                        switch(red.plataforma) {
+                                            case 'facebook': icono = 'facebook-f'; break;
+                                            case 'instagram': icono = 'instagram'; break;
+                                            case 'tiktok': icono = 'tiktok'; break;
+                                            default: icono = 'share-alt';
+                                        }
+                                        
+                                        return `
+                                            <a href="${red.url || '#'}" class="red-social-item ${red.plataforma}" target="_blank">
+                                                <i class="fab fa-${icono}"></i>
+                                                <div class="red-social-info">
+                                                    <div class="red-social-nombre">${red.nombre}</div>
+                                                    <div class="red-social-usuario">${red.usuario}</div>
+                                                </div>
+                                            </a>
+                                        `;
+                                    }).join('')}
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    // Crear enlace de WhatsApp
+                    const enlaceWhatsapp = crearEnlaceWhatsapp(negocio.telefono);
+                    
+                    tarjeta.innerHTML = `
+                        <div class="card-imagen loading">
+                            <img data-src="${negocio.imagen}" alt="${negocio.nombre}">
+                        </div>
+                        <div class="card-header">
+                            <h3>${negocio.nombre}</h3>
+                            <span class="card-categoria">${negocio.categoria}</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-descripcion">${negocio.descripcion}</p>
+                            
+                            <div class="btn-ver-mas-container">
+                                ${tieneRedes ? 
+                                    `<button class="btn-ver-mas" data-negocio-id="${negocio.id}">
+                                        <i class="fas fa-chevron-down"></i> Ver más
+                                    </button>` 
+                                    : ''
+                                }
+                            </div>
+                            
+                            <div class="whatsapp-container">
+                                <a href="${enlaceWhatsapp}" class="whatsapp-rectangulo" target="_blank">
+                                    <i class="fab fa-whatsapp"></i> ${negocio.telefono}
+                                </a>
+                            </div>
+                            
+                            ${redesHTML}
+                        </div>
+                        <div class="card-contacto">
+                            <div class="contacto-contenedor">
+                                <div class="contacto-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div class="contacto-info">${negocio.ubicacion}</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    serviciosGrid.appendChild(tarjeta);
+                    
+                    // Cargar imagen con efecto
+                    const imgElement = tarjeta.querySelector('img');
+                    if (imgElement) {
+                        setTimeout(() => {
+                            imgElement.src = imgElement.getAttribute('data-src');
+                            imgElement.classList.add('loaded');
+                            imgElement.parentElement.classList.remove('loading');
+                        }, 100);
+                    }
+                    
+                    // Agregar evento al botón "Ver más" si existe
+                    if (tieneRedes) {
+                        const btnVerMas = tarjeta.querySelector('.btn-ver-mas');
+                        const redesContainer = tarjeta.querySelector('.card-redes');
+                        
+                        btnVerMas.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            toggleRedesSociales(this, redesContainer);
+                        });
+                    }
+                });
+                
+                serviciosGrid.style.opacity = '1';
+                
+                contadorNegocios.textContent = negociosMostrar.length;
+                totalNegociosSpan.textContent = totalNegocios;
+                
+                crearMenuDesplazamiento();
+                
+            }, 100);
+        }
+
+        // ==============================================
+        // INICIALIZACIÓN
+        // ==============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarNegociosPagina(1);
+            
+            // Cerrar redes sociales al hacer clic fuera
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.btn-ver-mas') && !e.target.closest('.card-redes')) {
+                    document.querySelectorAll('.card-redes.mostrar').forEach(red => {
+                        red.classList.remove('mostrar');
+                        const btn = red.previousElementSibling?.previousElementSibling?.querySelector('.btn-ver-mas');
+                        if (btn) {
+                            btn.classList.remove('activo');
+                            btn.innerHTML = '<i class="fas fa-chevron-down"></i> Ver más';
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

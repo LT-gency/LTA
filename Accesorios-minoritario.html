@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directorio de Negocios LIFE TIMES - Accesorios Minoritarios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: #f5f7fa;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        /* Barra lateral con menú fijo */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(to bottom, #c90f0f, #a00c0c);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            text-align: center;
+            padding: 20px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #fff;
+            transition: transform 0.3s;
+        }
+
+        .logo h1:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            color: #ffffff;
+        }
+
+        .logo p {
+            margin-top: 5px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .menu-categorias {
+            padding: 0 15px;
+            flex: 1;
+        }
+
+        .categoria-item {
+            padding: 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            text-decoration: none;
+            color: white;
+        }
+
+        .categoria-item:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+
+        .categoria-item.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid #ffffff;
+        }
+
+        .categoria-item i {
+            margin-right: 12px;
+            width: 24px;
+            text-align: center;
+        }
+
+        /* Estilo para subcategorías del menú - SIEMPRE VISIBLE */
+        .subcategorias {
+            max-height: 300px; /* SIEMPRE ABIERTO */
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 8px 8px;
+            margin-top: -8px;
+            margin-bottom: 8px;
+        }
+
+        .subcategoria-item {
+            padding: 12px 15px 12px 45px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border-left: 2px solid transparent;
+        }
+
+        .subcategoria-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left: 2px solid #ffffff;
+            padding-left: 50px;
+        }
+
+        .subcategoria-item.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-left: 3px solid #ffffff;
+            font-weight: 600;
+        }
+
+        .subcategoria-item i {
+            margin-right: 10px;
+            font-size: 12px;
+        }
+
+        /* Botón para subir negocio */
+        .btn-subir-negocio {
+            margin: 20px 15px;
+            padding: 15px;
+            background-color: rgba(128, 128, 128, 0.3);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-align: center;
+            width: calc(100% - 30px);
+        }
+
+        .btn-subir-negocio:hover {
+            background-color: rgba(128, 128, 128, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-subir-negocio i {
+            font-size: 18px;
+        }
+
+        /* Contenido principal */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        /* Navegación superior */
+        .top-nav {
+            background-color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000000;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: #c90f0f;
+        }
+
+        /* Contenedor de tarjetas - FONDO BLANCO */
+        .negocios-container {
+            padding: 30px;
+            flex: 1;
+            background: white;
+        }
+
+        /* BANNER DEL TÍTULO CON FONDO DE ACCESORIOS */
+        .titulo-banner {
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), 
+                        url('https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eaeaea;
+            position: relative;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .titulo-banner h2 {
+            color: #000000;
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .titulo-banner p {
+            color: #444;
+            font-size: 16px;
+            font-weight: 500;
+            padding-left: 5px;
+        }
+
+        /* MENÚ DE DESPLAZAMIENTO EN LA ESQUINA INFERIOR DERECHA - MEJORADO */
+        .menu-desplazamiento {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            padding: 8px 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 10;
+        }
+
+        .pagina-btn {
+            width: 35px;
+            height: 35px;
+            background: #f8f9fa;
+            color: #555;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagina-btn:hover {
+            background: #f0f0f0;
+            color: #333;
+            border-color: #ccc;
+        }
+
+        .pagina-btn.active {
+            background: #c90f0f;
+            color: white;
+            border-color: #c90f0f;
+        }
+
+        .pagina-btn.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background: #f8f9fa;
+            border-color: #e0e0e0;
+            color: #999;
+        }
+
+        /* Indicador de página actual */
+        .pagina-actual {
+            font-size: 14px;
+            font-weight: 600;
+            color: #c90f0f;
+            margin-right: 5px;
+        }
+
+        .pagina-info {
+            font-size: 13px;
+            color: #777;
+            font-weight: 500;
+            margin-left: 8px;
+            padding-left: 8px;
+            border-left: 1px solid #e0e0e0;
+            white-space: nowrap;
+        }
+
+        /* Accesorios grid 4x4 */
+        .accesorios-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        /* Tarjetas de accesorios */
+        .accesorios-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            min-height: 380px;
+        }
+
+        .accesorios-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-imagen {
+            height: 160px;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-imagen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-header {
+            padding: 20px 20px 10px;
+            background-color: white;
+        }
+
+        .card-header h3 {
+            color: #000000;
+            font-size: 18px;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .card-categoria {
+            color: #c90f0f;
+            font-size: 13px;
+            display: inline-block;
+            padding: 3px 10px;
+            background-color: #ffe6e6;
+            border-radius: 20px;
+        }
+
+        .accesorios-precio {
+            color: #2e7d32;
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .card-body {
+            padding: 0 20px 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-descripcion {
+            color: #000000;
+            line-height: 1.5;
+            font-size: 14px;
+            margin-bottom: 15px;
+            flex: 1;
+        }
+
+        /* Botón Ver Más en tarjetas */
+        .btn-ver-mas {
+            background-color: #000000;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .btn-ver-mas:hover {
+            background-color: #333333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* NUEVO BOTÓN DE WHATSAPP LLAMATIVO */
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            text-decoration: none;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp:hover i {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .btn-whatsapp:active {
+            transform: translateY(0);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+        }
+
+        .btn-whatsapp i {
+            font-size: 18px;
+        }
+
+        /* Indicador de que es clickeable */
+        .btn-whatsapp::after {
+            content: "¡Haz clic para contactar!";
+            position: absolute;
+            top: -25px;
+            left: 0;
+            right: 0;
+            background: #25D366;
+            color: white;
+            font-size: 11px;
+            padding: 3px;
+            border-radius: 4px 4px 0 0;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .btn-whatsapp:hover::after {
+            opacity: 1;
+            top: -20px;
+        }
+
+        /* BOTÓN DE WHATSAPP EN EL MODAL */
+        .btn-whatsapp-modal {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-whatsapp-modal:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-whatsapp-modal:hover i {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .btn-whatsapp-modal i {
+            font-size: 20px;
+        }
+
+        /* Indicador en el modal */
+        .btn-whatsapp-modal::before {
+            content: "Contactar por WhatsApp";
+            position: absolute;
+            top: -30px;
+            left: 0;
+            right: 0;
+            background: #25D366;
+            color: white;
+            font-size: 12px;
+            padding: 4px;
+            border-radius: 4px 4px 0 0;
+            opacity: 0;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-whatsapp-modal:hover::before {
+            opacity: 1;
+            top: -25px;
+        }
+
+        /* MODAL - Galería de Imágenes */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-galeria {
+            background-color: white;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 1400px;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 0;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow: hidden;
+        }
+
+        .modal-overlay.active .modal-galeria {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            grid-column: 1 / span 2;
+            padding: 25px 30px 15px;
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .modal-header-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .modal-header h2 {
+            color: #000000;
+            font-size: 28px;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .modal-categoria {
+            display: inline-block;
+            background-color: #ffe6e6;
+            color: #c90f0f;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .btn-cerrar-modal {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #888;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 5px;
+            line-height: 1;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-left: 10px;
+        }
+
+        .btn-cerrar-modal:hover {
+            color: #c90f0f;
+            background-color: #f5f5f5;
+        }
+
+        .galeria-container {
+            padding: 30px;
+            grid-column: 1;
+            grid-row: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .imagen-grande-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .imagen-grande-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* GRID DE 3x2 PARA IMÁGENES EN EL MODAL */
+        .grid-imagenes-modal {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 12px;
+            height: 200px;
+        }
+
+        .imagen-modal-mini {
+            border-radius: 6px;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .imagen-modal-mini:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .imagen-modal-mini.active {
+            border-color: #c90f0f;
+            box-shadow: 0 0 0 2px rgba(201, 15, 15, 0.3);
+        }
+
+        .imagen-modal-mini img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .descripcion-container {
+            padding: 30px;
+            grid-column: 2;
+            grid-row: 2;
+            background-color: #fafafa;
+            border-left: 1px solid #eee;
+            overflow-y: auto;
+            max-height: 70vh;
+        }
+
+        .descripcion-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .descripcion-titulo {
+            color: #000000;
+            font-size: 22px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .descripcion-texto {
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        .descripcion-contacto {
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .descripcion-contacto h4 {
+            color: #000000;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .contacto-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Responsividad */
+        @media (max-width: 1200px) {
+            .accesorios-card {
+                min-height: 380px;
+            }
+            
+            .menu-desplazamiento {
+                flex-wrap: wrap;
+                justify-content: center;
+                width: auto;
+            }
+            
+            .imagen-grande-container {
+                height: 350px;
+            }
+            
+            .grid-imagenes-modal {
+                height: 180px;
+            }
+            
+            .modal-galeria {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                max-height: 95vh;
+                overflow-y: auto;
+            }
+
+            .modal-header {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .galeria-container {
+                grid-column: 1;
+                grid-row: 2;
+            }
+
+            .descripcion-container {
+                grid-column: 1;
+                grid-row: 3;
+                border-left: none;
+                border-top: 1px solid #eee;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .accesorios-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .modal-header h2 {
+                font-size: 24px;
+            }
+            
+            .grid-imagenes-modal {
+                grid-template-columns: repeat(3, 1fr);
+                height: 160px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            body {
+                flex-direction: column;
+            }
+            
+            .top-nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+                justify-content: center;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .accesorios-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .titulo-banner {
+                padding: 20px;
+                min-height: 120px;
+            }
+
+            .titulo-banner h2 {
+                font-size: 26px;
+            }
+
+            .menu-desplazamiento {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                margin-top: 15px;
+                width: fit-content;
+                align-self: center;
+            }
+            
+            .modal-overlay {
+                padding: 0;
+                align-items: flex-start;
+            }
+            
+            .modal-galeria {
+                border-radius: 0;
+                width: 100%;
+                min-height: 100vh;
+                max-height: none;
+            }
+            
+            .imagen-grande-container {
+                height: 350px !important;
+            }
+            
+            .grid-imagenes-modal {
+                height: 140px;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .modal-header {
+                padding: 20px 15px 15px;
+            }
+            
+            .modal-header h2 {
+                font-size: 20px;
+            }
+            
+            .galeria-container, .descripcion-container {
+                padding: 20px;
+            }
+            
+            .descripcion-titulo {
+                font-size: 18px;
+            }
+            
+            .descripcion-texto {
+                font-size: 15px;
+                line-height: 1.6;
+            }
+            
+            .btn-whatsapp-modal {
+                padding: 12px 20px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .imagen-grande-container {
+                height: 300px !important;
+            }
+            
+            .grid-imagenes-modal {
+                height: 120px;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            
+            .modal-header h2 {
+                font-size: 18px;
+            }
+            
+            .btn-ver-mas {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            
+            .btn-whatsapp {
+                padding: 10px 15px;
+                font-size: 13px;
+            }
+            
+            .btn-whatsapp i {
+                font-size: 16px;
+            }
+            
+            .btn-whatsapp::after {
+                font-size: 10px;
+                top: -22px;
+            }
+            
+            .btn-whatsapp:hover::after {
+                top: -18px;
+            }
+
+            .titulo-banner {
+                padding: 15px;
+                min-height: 110px;
+            }
+
+            .titulo-banner h2 {
+                font-size: 22px;
+            }
+
+            .pagina-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 12px;
+            }
+            
+            .pagina-info {
+                font-size: 11px;
+            }
+            
+            .descripcion-texto {
+                font-size: 14px;
+            }
+            
+            .btn-cerrar-modal {
+                width: 35px;
+                height: 35px;
+                font-size: 24px;
+            }
+            
+            .btn-whatsapp-modal {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+            
+            .btn-whatsapp-modal i {
+                font-size: 18px;
+            }
+            
+            .btn-whatsapp-modal::before {
+                font-size: 11px;
+                top: -25px;
+            }
+            
+            .btn-whatsapp-modal:hover::before {
+                top: -20px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .imagen-grande-container {
+                height: 250px !important;
+            }
+            
+            .grid-imagenes-modal {
+                height: 100px;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+            }
+            
+            .modal-header h2 {
+                font-size: 16px;
+            }
+            
+            .btn-whatsapp {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menú lateral fijo -->
+    <aside class="sidebar">
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; color: inherit;">
+                <h1>LIFE <span>TIMES</span></h1>
+            </a>
+            <p>Directorio de Negocios</p>
+        </div>
+        
+        <div class="menu-categorias">
+            <a href="General.html" class="categoria-item">
+                <i class="fas fa-home"></i>
+                <span>General</span>
+            </a>
+            
+            <!-- Menú desplegable para Servicio Minoritario - SIEMPRE ABIERTO -->
+            <div class="categoria-menu-container">
+                <a href="Servicio Minoritario.html" class="categoria-item">
+                    <i class="fas fa-handshake"></i>
+                    <span>Servicio minoritario</span>
+                    <i class="fas fa-chevron-down" style="margin-left: auto; margin-right: 0; font-size: 12px; transform: rotate(180deg);"></i>
+                </a>
+                
+                <!-- Subcategorías SIEMPRE VISIBLES -->
+                <div class="subcategorias">
+                    <a href="Accesorios-minoritario.html" class="subcategoria-item active">
+                        <i class="fas fa-gem"></i>
+                        <span>Accesorios</span>
+                    </a>
+                    <a href="Artesanias-minoritario.html" class="subcategoria-item">
+                        <i class="fas fa-paint-brush"></i>
+                        <span>Artesanias</span>
+                    </a>
+                    <a href="Ropa y calzado-minoritario.html" class="subcategoria-item">
+                        <i class="fas fa-tshirt"></i>
+                        <span>Ropa y calzado</span>
+                    </a>
+                    <a href="Articulos-minoritario.html" class="subcategoria-item">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Artículos</span>
+                    </a>
+                    <a href="Otros-minoritario.html" class="subcategoria-item">
+                        <i class="fas fa-ellipsis-h"></i>
+                        <span>Otros</span>
+                    </a>
+                </div>
+            </div>
+            
+            <a href="Comercio.html" class="categoria-item">
+                <i class="fas fa-store"></i>
+                <span>Comercio</span>
+            </a>
+            <a href="Alimentos y bebidas.html" class="categoria-item">
+                <i class="fas fa-utensils"></i>
+                <span>Alimentos y bebidas</span>
+            </a>
+            <a href="Servicios-general.html" class="categoria-item">
+                <i class="fas fa-concierge-bell"></i>
+                <span>Servicios</span>
+            </a>
+        </div>
+        
+        <!-- Botón para subir negocio -->
+        <a href="Servicios.html" style="text-decoration: none;">
+            <button class="btn-subir-negocio">
+                <i class="fas fa-plus-circle"></i>
+                <span>¿Cómo puedo subir mi negocio?</span>
+            </button>
+        </a>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <!-- Navegación superior -->
+        <nav class="top-nav">
+            <ul class="nav-links">
+                <li><a href="Terminos y Condiciones.html" id="terminos-link">Términos y Condiciones</a></li>
+                <li><a href="Index.html" id="historia-link">La Historia</a></li>
+                <li><a href="Servicios.html" id="servicios-link">Servicios</a></li>
+            </ul>
+        </nav>
+
+        <!-- Contenedor de negocios -->
+        <section class="negocios-container">
+            <!-- BANNER DEL TÍTULO CON FONDO DE ACCESORIOS -->
+            <div class="titulo-banner" id="titulo-banner">
+                <h2>Accesorios Minoritarios y Artículos Especializados</h2>
+                <p>Descubre los mejores accesorios, joyería, bisutería y artículos especializados de diferentes culturas</p>
+                
+                <!-- MENÚ DE DESPLAZAMIENTO EN LA ESQUINA INFERIOR DERECHA -->
+                <div class="menu-desplazamiento" id="menu-desplazamiento">
+                    <!-- Los botones se generarán dinámicamente -->
+                </div>
+            </div>
+            
+            <div class="accesorios-grid" id="accesorios-grid">
+                <!-- Tarjetas de accesorios se cargarán dinámicamente -->
+            </div>
+            
+            <!-- Contador de negocios -->
+            <div style="text-align: center; color: #666; font-size: 14px; margin-top: 20px;">
+                Mostrando <span id="contador-negocios">0</span> de <span id="total-negocios">0</span> negocios de accesorios
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal - Galería de Imágenes -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-galeria">
+            <div class="modal-header">
+                <div class="modal-header-content">
+                    <h2 id="modal-nombre">Nombre del Negocio</h2>
+                    <span class="modal-categoria" id="modal-categoria">Categoría</span>
+                </div>
+                <button class="btn-cerrar-modal" id="btn-cerrar-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="galeria-container">
+                <div class="imagen-grande-container">
+                    <img id="imagen-grande" src="" alt="Imagen principal">
+                </div>
+                
+                <!-- GRID DE 3x2 PARA LAS 6 IMÁGENES -->
+                <div class="grid-imagenes-modal" id="grid-imagenes-modal">
+                </div>
+            </div>
+            
+            <div class="descripcion-container">
+                <div class="descripcion-content">
+                    <div>
+                        <h3 class="descripcion-titulo">Descripción del Negocio</h3>
+                        <p class="descripcion-texto" id="descripcion-texto">
+                            Descripción completa del negocio aparecerá aquí...
+                        </p>
+                        <div class="accesorios-precio" id="modal-precio"></div>
+                    </div>
+                    
+                    <div class="descripcion-contacto">
+                        <h4>Contacto</h4>
+                        <div class="contacto-info" id="contacto-info">
+                            <!-- Solo tendrá el botón de WhatsApp -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos manuales de negocios de accesorios - SIN REDES SOCIALES, SOLO WHATSAPP
+        const negociosAccesorios = [
+            {
+                nombre: "Joyas Étnicas del Mundo",
+                categoria: "Joyería Artesanal",
+                descripcion: "Joyas únicas elaboradas con técnicas tradicionales de diferentes culturas y países.",
+                descripcion_larga: "Joyas Étnicas del Mundo ofrece piezas únicas elaboradas por artesanos de diferentes culturas. Especializados en joyería de plata, turquesa, ámbar, coral y materiales naturales. Cada pieza cuenta una historia y está creada con técnicas tradicionales transmitidas por generaciones. Disponemos de colecciones de joyería mexicana, tibetana, india, africana y de Oriente Medio.",
+                whatsapp: "+15551112233",
+                precio: "$$-$$$",
+                imagen: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                ]
+            },
+            {
+                nombre: "Accesorios Tradicionales Asiáticos",
+                categoria: "Accesorios Culturales",
+                descripcion: "Abalorios, broches, horquillas y adornos tradicionales de diversas culturas asiáticas.",
+                descripcion_larga: "Accesorios Tradicionales Asiáticos importa directamente accesorios auténticos de Japón, China, Corea, India y Tailandia. Especializados en: horquillas para el pelo estilo japonés, broches de jade chino, pulseras de hilo de seda, accesorios para kimono, adornos para sari y bisutería con motivos tradicionales. Cada pieza es seleccionada por su calidad y autenticidad cultural.",
+                whatsapp: "+15552223344",
+                precio: "$$",
+                imagen: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                ]
+            },
+            {
+                nombre: "Bolsos y Carteras Étnicas",
+                categoria: "Marroquinería Artesanal",
+                descripcion: "Bolsos, carteras y mochilas elaboradas con técnicas tradicionales y materiales naturales.",
+                descripcion_larga: "Bolsos y Carteras Étnicas ofrece productos de marroquinería artesanal de diferentes culturas. Especializados en: bolsos de tejido africano, carteras de cuero marroquí, mochilas peruanas, monederos mexicanos y accesorios de cuero beduino. Cada pieza es única, elaborada a mano por artesanos que utilizan técnicas tradicionales y materiales naturales como cuero, lana, algodón y fibras vegetales.",
+                whatsapp: "+15553334455",
+                precio: "$$$",
+                imagen: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                ]
+            },
+            {
+                nombre: "Sombreros y Tocados Culturales",
+                categoria: "Accesorios para la Cabeza",
+                descripcion: "Sombreros, gorros, turbantes y tocados tradicionales de diferentes partes del mundo.",
+                descripcion_larga: "Sombreros y Tocados Culturales ofrece una colección única de accesorios para la cabeza de diversas culturas. Especializados en: sombreros mexicanos, turbantes africanos, gorros peruanos, tocados indígenas, vinchas étnicas y sombreros de paja tradicionales. Cada pieza es funcional y culturalmente significativa, elaborada con materiales naturales y técnicas artesanales.",
+                whatsapp: "+15554445566",
+                precio: "$$",
+                imagen: "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                ]
+            }
+        ];
+
+        // Variables de paginación
+        let paginaActual = 1;
+        const negociosPorPagina = 16; // 4x4 = 16 tarjetas por página
+        const totalNegocios = negociosAccesorios.length;
+        const totalPaginas = Math.ceil(totalNegocios / negociosPorPagina);
+
+        // Elementos DOM
+        const accesoriosGrid = document.getElementById('accesorios-grid');
+        const menuDesplazamiento = document.getElementById('menu-desplazamiento');
+        const contadorNegocios = document.getElementById('contador-negocios');
+        const totalNegociosSpan = document.getElementById('total-negocios');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const btnCerrarModal = document.getElementById('btn-cerrar-modal');
+        const modalNombre = document.getElementById('modal-nombre');
+        const modalCategoria = document.getElementById('modal-categoria');
+        const modalPrecio = document.getElementById('modal-precio');
+        const imagenGrande = document.getElementById('imagen-grande');
+        const gridImagenesModal = document.getElementById('grid-imagenes-modal');
+        const descripcionTexto = document.getElementById('descripcion-texto');
+        const contactoInfo = document.getElementById('contacto-info');
+
+        // Función para formatear número de WhatsApp
+        function formatearWhatsappParaMostrar(whatsapp) {
+            // Limpiar el número
+            const numeroLimpio = whatsapp.replace(/\D/g, '');
+            
+            // Formatear para mostrar: +1 (555) 111-2233
+            if (numeroLimpio.length === 11 && numeroLimpio.startsWith('1')) {
+                return `+1 (${numeroLimpio.substring(1, 4)}) ${numeroLimpio.substring(4, 7)}-${numeroLimpio.substring(7)}`;
+            } else if (numeroLimpio.length === 10) {
+                return `+1 (${numeroLimpio.substring(0, 3)}) ${numeroLimpio.substring(3, 6)}-${numeroLimpio.substring(6)}`;
+            }
+            
+            return whatsapp;
+        }
+
+        // Función para crear enlace de WhatsApp
+        function crearEnlaceWhatsApp(whatsapp) {
+            // Limpiar el número
+            const numeroLimpio = whatsapp.replace(/\D/g, '');
+            
+            // Si empieza con 1 (código de país de EEUU), quitar el +1
+            let numeroParaWhatsapp = numeroLimpio;
+            if (numeroLimpio.length === 11 && numeroLimpio.startsWith('1')) {
+                numeroParaWhatsapp = numeroLimpio.substring(1);
+            }
+            
+            // Crear enlace de WhatsApp
+            return `https://wa.me/${numeroParaWhatsapp}`;
+        }
+
+        // Función para crear el menú de desplazamiento
+        function crearMenuDesplazamiento() {
+            menuDesplazamiento.innerHTML = '';
+            
+            if (totalPaginas <= 1) return; // No mostrar paginación si solo hay una página
+            
+            // Agregar indicador de página actual
+            const paginaActualSpan = document.createElement('span');
+            paginaActualSpan.className = 'pagina-actual';
+            paginaActualSpan.textContent = `Página ${paginaActual}`;
+            menuDesplazamiento.appendChild(paginaActualSpan);
+            
+            // Botón anterior
+            const btnAnterior = document.createElement('button');
+            btnAnterior.className = `pagina-btn ${paginaActual === 1 ? 'disabled' : ''}`;
+            btnAnterior.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            btnAnterior.disabled = paginaActual === 1;
+            btnAnterior.title = "Página anterior";
+            btnAnterior.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (paginaActual > 1) cargarNegociosPagina(paginaActual - 1);
+            });
+            menuDesplazamiento.appendChild(btnAnterior);
+            
+            // Crear botones para las páginas
+            const maxBotonesVisibles = 5;
+            let inicio = Math.max(1, paginaActual - Math.floor(maxBotonesVisibles / 2));
+            let fin = Math.min(totalPaginas, inicio + maxBotonesVisibles - 1);
+            
+            // Ajustar si estamos cerca del final
+            if (fin - inicio + 1 < maxBotonesVisibles) {
+                inicio = Math.max(1, fin - maxBotonesVisibles + 1);
+            }
+            
+            for (let i = inicio; i <= fin; i++) {
+                const btnPagina = document.createElement('button');
+                btnPagina.className = `pagina-btn ${paginaActual === i ? 'active' : ''}`;
+                btnPagina.textContent = i;
+                btnPagina.title = `Ir a página ${i}`;
+                btnPagina.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (paginaActual !== i) cargarNegociosPagina(i);
+                });
+                menuDesplazamiento.appendChild(btnPagina);
+            }
+            
+            // Información de página
+            const info = document.createElement('span');
+            info.className = 'pagina-info';
+            info.textContent = `de ${totalPaginas}`;
+            menuDesplazamiento.appendChild(info);
+            
+            // Botón siguiente
+            const btnSiguiente = document.createElement('button');
+            btnSiguiente.className = `pagina-btn ${paginaActual === totalPaginas ? 'disabled' : ''}`;
+            btnSiguiente.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            btnSiguiente.disabled = paginaActual === totalPaginas;
+            btnSiguiente.title = "Página siguiente";
+            btnSiguiente.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (paginaActual < totalPaginas) cargarNegociosPagina(paginaActual + 1);
+            });
+            menuDesplazamiento.appendChild(btnSiguiente);
+        }
+
+        // Función para crear el grid de imágenes 3x2 en el modal
+        function crearGridImagenesModal(imagenes, imagenPrincipal) {
+            gridImagenesModal.innerHTML = '';
+            
+            // Combinar todas las imágenes (principal + adicionales)
+            const todasImagenes = [imagenPrincipal, ...imagenes];
+            
+            // Tomar solo las primeras 6 imágenes
+            const imagenesParaMostrar = todasImagenes.slice(0, 6);
+            
+            imagenesParaMostrar.forEach((imagen, index) => {
+                const imagenDiv = document.createElement('div');
+                imagenDiv.className = `imagen-modal-mini ${index === 0 ? 'active' : ''}`;
+                imagenDiv.dataset.imagen = imagen;
+                
+                const img = document.createElement('img');
+                img.src = imagen;
+                img.alt = `Imagen ${index + 1} del negocio`;
+                img.loading = 'lazy';
+                
+                imagenDiv.appendChild(img);
+                
+                imagenDiv.addEventListener('click', function() {
+                    // Cambiar la imagen principal
+                    imagenGrande.src = this.dataset.imagen;
+                    
+                    // Actualizar la clase activa
+                    document.querySelectorAll('.imagen-modal-mini').forEach(m => {
+                        m.classList.remove('active');
+                    });
+                    
+                    this.classList.add('active');
+                });
+                
+                gridImagenesModal.appendChild(imagenDiv);
+            });
+        }
+
+        // Función para cargar negocios por página
+        function cargarNegociosPagina(pagina) {
+            paginaActual = pagina;
+            
+            // Calcular índices
+            const inicio = (pagina - 1) * negociosPorPagina;
+            const fin = Math.min(inicio + negociosPorPagina, totalNegocios);
+            const negociosMostrar = negociosAccesorios.slice(inicio, fin);
+            
+            // Limpiar grid
+            accesoriosGrid.innerHTML = '';
+            
+            // Crear tarjetas para cada negocio de accesorios
+            negociosMostrar.forEach(negocio => {
+                const tarjeta = document.createElement('div');
+                tarjeta.className = `accesorios-card`;
+                
+                // Crear enlace de WhatsApp
+                const enlaceWhatsapp = crearEnlaceWhatsApp(negocio.whatsapp);
+                const whatsappFormateado = formatearWhatsappParaMostrar(negocio.whatsapp);
+                
+                // Crear HTML de la tarjeta - SIN UBICACIÓN, SIN EMAIL, SIN REDES SOCIALES
+                tarjeta.innerHTML = `
+                    <div class="card-imagen">
+                        <img src="${negocio.imagen}" alt="${negocio.nombre}" loading="lazy">
+                    </div>
+                    <div class="card-header">
+                        <h3>${negocio.nombre}</h3>
+                        <span class="card-categoria">${negocio.categoria}</span>
+                        <div class="accesorios-precio">Precio: ${negocio.precio}</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-descripcion">${negocio.descripcion}</p>
+                        <button class="btn-ver-mas" data-negocio-id="${negocio.nombre}">
+                            <i class="fas fa-eye"></i>
+                            Ver más
+                        </button>
+                        <a href="${enlaceWhatsapp}" target="_blank" class="btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                            Contactar por WhatsApp
+                        </a>
+                    </div>
+                `;
+                
+                // Agregar tarjeta al grid
+                accesoriosGrid.appendChild(tarjeta);
+                
+                // Agregar evento al botón "Ver más"
+                const btnVerMas = tarjeta.querySelector('.btn-ver-mas');
+                btnVerMas.addEventListener('click', function() {
+                    abrirGaleriaNegocio(negocio);
+                });
+            });
+            
+            // Actualizar contadores
+            contadorNegocios.textContent = negociosMostrar.length;
+            totalNegociosSpan.textContent = totalNegocios;
+            
+            // Actualizar menú de desplazamiento
+            crearMenuDesplazamiento();
+            
+            // Scroll suave hacia el banner del título
+            document.getElementById('titulo-banner').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Función para abrir el modal con la galería del negocio
+        function abrirGaleriaNegocio(negocio) {
+            // Limpiar contenido previo
+            contactoInfo.innerHTML = '';
+            
+            // Establecer información básica
+            modalNombre.textContent = negocio.nombre;
+            modalCategoria.textContent = negocio.categoria;
+            modalPrecio.textContent = `Precio: ${negocio.precio}`;
+            
+            // Establecer imagen grande inicial
+            imagenGrande.src = negocio.imagen;
+            imagenGrande.alt = negocio.nombre;
+            
+            // Establecer descripción
+            descripcionTexto.textContent = negocio.descripcion_larga || negocio.descripcion;
+            
+            // Crear el grid de 6 imágenes (3x2)
+            crearGridImagenesModal(negocio.imagenes_adicionales, negocio.imagen);
+            
+            // Crear enlace de WhatsApp
+            const enlaceWhatsapp = crearEnlaceWhatsApp(negocio.whatsapp);
+            const whatsappFormateado = formatearWhatsappParaMostrar(negocio.whatsapp);
+            
+            // Crear información de contacto - SOLO BOTÓN DE WHATSAPP
+            const contactoHTML = `
+                <a href="${enlaceWhatsapp}" target="_blank" class="btn-whatsapp-modal">
+                    <i class="fab fa-whatsapp"></i>
+                    Contactar por WhatsApp
+                </a>
+            `;
+            contactoInfo.innerHTML = contactoHTML;
+            
+            // Mostrar modal
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Evitar scroll en el fondo
+        }
+
+        // Función para cerrar el modal
+        function cerrarModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restaurar scroll
+        }
+
+        // Event listeners para el modal
+        btnCerrarModal.addEventListener('click', cerrarModal);
+        modalOverlay.addEventListener('click', function(event) {
+            if (event.target === modalOverlay) {
+                cerrarModal();
+            }
+        });
+
+        // Cerrar modal con tecla ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                cerrarModal();
+            }
+        });
+
+        // Cargar página inicial
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarNegociosPagina(1);
+            
+            // CORRECCIÓN: Hacer que el botón de Servicio Minoritario navegue a Servicio-Minoritario.html
+            const servicioMinoritarioBtn = document.querySelector('.categoria-menu-container .categoria-item');
+            
+            servicioMinoritarioBtn.addEventListener('click', function(e) {
+                // Permitir la navegación normal al hacer clic
+                window.location.href = "Servicio-Minoritario.html";
+            });
+        });
+    </script>
+</body>
+</html>

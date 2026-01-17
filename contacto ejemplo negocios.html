@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directorio de Negocios LIFE TIMES - Alimentos y Bebidas Zona Sur</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: #f5f7fa;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(to bottom, #c90f0f, #a00c0c);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            text-align: center;
+            padding: 20px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #fff;
+            transition: transform 0.3s;
+        }
+
+        .logo h1:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            color: #ffffff;
+        }
+
+        .logo p {
+            margin-top: 5px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .menu-categorias {
+            padding: 0 15px;
+            flex: 1;
+        }
+
+        .categoria-item {
+            padding: 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            text-decoration: none;
+            color: white;
+        }
+
+        .categoria-item:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+
+        .categoria-item.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid #ffffff;
+        }
+
+        .categoria-item i {
+            margin-right: 12px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .btn-subir-negocio {
+            margin: 20px 15px;
+            padding: 15px;
+            background-color: rgba(128, 128, 128, 0.3);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: button;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-align: center;
+            width: calc(100% - 30px);
+        }
+
+        .btn-subir-negocio:hover {
+            background-color: rgba(128, 128, 128, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-subir-negocio i {
+            font-size: 18px;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .top-nav {
+            background-color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000000;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: #c90f0f;
+        }
+
+        .negocios-container {
+            padding: 30px;
+            flex: 1;
+            background: white;
+        }
+
+        .titulo-banner {
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), 
+                        url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eaeaea;
+            position: relative;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .titulo-banner h2 {
+            color: #000000;
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .titulo-banner p {
+            color: #444;
+            font-size: 16px;
+            font-weight: 500;
+            padding-left: 5px;
+        }
+
+        .menu-desplazamiento {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            padding: 8px 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 10;
+        }
+
+        .pagina-btn {
+            width: 35px;
+            height: 35px;
+            background: #f8f9fa;
+            color: #555;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagina-btn:hover {
+            background: #f0f0f0;
+            color: #333;
+            border-color: #ccc;
+        }
+
+        .pagina-btn.active {
+            background: #c90f0f;
+            color: white;
+            border-color: #c90f0f;
+        }
+
+        .pagina-btn.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background: #f8f9fa;
+            border-color: #e0e0e0;
+            color: #999;
+        }
+
+        .pagina-info {
+            font-size: 13px;
+            color: #777;
+            font-weight: 500;
+            margin-left: 8px;
+            padding-left: 8px;
+            border-left: 1px solid #e0e0e0;
+            white-space: nowrap;
+        }
+
+        .pagina-actual {
+            font-size: 14px;
+            font-weight: 600;
+            color: #c90f0f;
+            margin-right: 5px;
+        }
+
+        .alimentos-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .alimento-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 420px;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInCard 0.4s ease forwards;
+        }
+
+        @keyframes fadeInCard {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alimento-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-imagen {
+            height: 160px;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .card-imagen.loading {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .card-imagen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card-imagen img.loaded {
+            opacity: 1;
+        }
+
+        .alimento-card:hover .card-imagen img {
+            transform: scale(1.05);
+        }
+
+        .card-header {
+            padding: 20px 20px 10px;
+            background-color: white;
+        }
+
+        .card-header h3 {
+            color: #000000;
+            font-size: 18px;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .card-categoria {
+            color: #c90f0f;
+            font-size: 13px;
+            display: inline-block;
+            padding: 3px 10px;
+            background-color: #ffe6e6;
+            border-radius: 20px;
+        }
+
+        .alimento-precio {
+            color: #2e7d32;
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .card-body {
+            padding: 0 20px 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-descripcion {
+            color: #000000;
+            line-height: 1.5;
+            font-size: 14px;
+            margin-bottom: 15px;
+            flex: 1;
+        }
+
+        .btn-ver-mas {
+            background-color: #000000;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: fit-content;
+        }
+
+        .btn-ver-mas:hover {
+            background-color: #333333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 15px 0 0 0;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .card-contacto {
+            color: #000000;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-contacto i {
+            color: #c90f0f;
+            width: 16px;
+            text-align: center;
+        }
+
+        /* ================================ */
+        /* REDES SOCIALES SIN BOX EXTERIOR - ESTILO DEL SEGUNDO CÓDIGO */
+        /* ================================ */
+        .redes-sociales {
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            margin-top: 10px;
+        }
+
+        .redes-sociales h4 {
+            color: #000000;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .redes-sociales h4 i {
+            color: #c90f0f;
+        }
+
+        .redes-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .red-social-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            border-radius: 6px;
+        }
+
+        .red-social-item:hover {
+            transform: translateY(-3px);
+            background-color: #f8f8f8;
+        }
+
+        .red-social-item.facebook:hover {
+            background-color: #1877f2;
+            color: white;
+        }
+
+        .red-social-item.instagram:hover {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            color: white;
+        }
+
+        .red-social-item.tiktok:hover {
+            background-color: #000000;
+            color: white;
+        }
+
+        .red-social-item i {
+            width: 18px;
+            text-align: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .facebook i {
+            color: #1877f2;
+        }
+
+        .instagram i {
+            color: #E1306C;
+        }
+
+        .tiktok i {
+            color: #000000;
+        }
+
+        .red-social-item:hover i {
+            color: white;
+        }
+
+        .red-social-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .red-social-nombre {
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .red-social-usuario {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .red-social-item:hover .red-social-usuario {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* ================================ */
+        /* MODAL FIXED - MODIFICADO PARA MOSTRAR 6 IMÁGENES */
+        /* ================================ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-galeria {
+            background-color: white;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 1400px;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 0;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow: hidden;
+        }
+
+        .modal-overlay.active .modal-galeria {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            grid-column: 1 / span 2;
+            padding: 25px 30px 15px;
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .modal-header-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .modal-header h2 {
+            color: #000000;
+            font-size: 28px;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .modal-categoria {
+            display: inline-block;
+            background-color: #ffe6e6;
+            color: #c90f0f;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .btn-cerrar-modal {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #888;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 5px;
+            line-height: 1;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-left: 10px;
+        }
+
+        .btn-cerrar-modal:hover {
+            color: #c90f0f;
+            background-color: #f5f5f5;
+        }
+
+        .galeria-container {
+            padding: 30px;
+            grid-column: 1;
+            grid-row: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .imagen-grande-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .imagen-grande-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* GRID DE 3x2 PARA IMÁGENES EN EL MODAL */
+        .grid-imagenes-modal {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 12px;
+            height: 200px;
+        }
+
+        .imagen-modal-mini {
+            border-radius: 6px;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .imagen-modal-mini:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .imagen-modal-mini.active {
+            border-color: #c90f0f;
+            box-shadow: 0 0 0 2px rgba(201, 15, 15, 0.3);
+        }
+
+        .imagen-modal-mini img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .descripcion-container {
+            padding: 30px;
+            grid-column: 2;
+            grid-row: 2;
+            background-color: #fafafa;
+            border-left: 1px solid #eee;
+            overflow-y: auto;
+            max-height: 70vh;
+        }
+
+        .descripcion-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .descripcion-titulo {
+            color: #000000;
+            font-size: 22px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .descripcion-texto {
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        .alimento-precio {
+            color: #2e7d32;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 10px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            margin: 15px 0;
+        }
+
+        /* ================================ */
+        /* SUBMENÚ DE ZONAS PARA ALIMENTOS Y BEBIDAS */
+        /* ================================ */
+
+        .categoria-item.with-submenu {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .submenu-arrow {
+            margin-left: auto;
+            font-size: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .categoria-item.with-submenu.active .submenu-arrow {
+            transform: rotate(180deg);
+        }
+
+        .submenu-zonas {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.3s ease;
+            opacity: 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            margin-left: 15px;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .submenu-zonas.active {
+            max-height: 300px;
+            opacity: 1;
+            padding: 10px 0;
+        }
+
+        .submenu-item {
+            display: block;
+            padding: 12px 15px 12px 40px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .submenu-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding-left: 45px;
+        }
+
+        .submenu-item:before {
+            content: "-";
+            position: absolute;
+            left: 25px;
+            color: white;
+        }
+
+        /* Ajuste para el botón de subir negocio cuando el submenú está abierto */
+        .submenu-active ~ .btn-subir-negocio {
+            margin-top: 10px;
+        }
+
+        /* ================================ */
+        /* RESPONSIVE */
+        /* ================================ */
+        @media (max-width: 1200px) {
+            .alimento-card {
+                min-height: 420px;
+            }
+            
+            .menu-desplazamiento {
+                flex-wrap: wrap;
+                justify-content: center;
+                width: auto;
+            }
+            
+            .imagen-grande-container {
+                height: 350px;
+            }
+            
+            .grid-imagenes-modal {
+                height: 180px;
+            }
+            
+            .modal-galeria {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                max-height: 95vh;
+                overflow-y: auto;
+            }
+
+            .modal-header {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .galeria-container {
+                grid-column: 1;
+                grid-row: 2;
+            }
+
+            .descripcion-container {
+                grid-column: 1;
+                grid-row: 3;
+                border-left: none;
+                border-top: 1px solid #eee;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .alimentos-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .modal-header h2 {
+                font-size: 24px;
+            }
+            
+            .grid-imagenes-modal {
+                grid-template-columns: repeat(3, 1fr);
+                height: 160px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            body {
+                flex-direction: column;
+            }
+            
+            .top-nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+                justify-content: center;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .alimentos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .titulo-banner {
+                padding: 20px;
+                min-height: 120px;
+            }
+
+            .titulo-banner h2 {
+                font-size: 26px;
+            }
+
+            .menu-desplazamiento {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                margin-top: 15px;
+                width: fit-content;
+                align-self: center;
+            }
+            
+            .modal-overlay {
+                padding: 0;
+                align-items: flex-start;
+            }
+            
+            .modal-galeria {
+                border-radius: 0;
+                width: 100%;
+                min-height: 100vh;
+                max-height: none;
+            }
+            
+            .imagen-grande-container {
+                height: 350px !important;
+            }
+            
+            .grid-imagenes-modal {
+                height: 140px;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .modal-header {
+                padding: 20px 15px 15px;
+            }
+            
+            .modal-header h2 {
+                font-size: 20px;
+            }
+            
+            .galeria-container, .descripcion-container {
+                padding: 20px;
+            }
+            
+            .descripcion-titulo {
+                font-size: 18px;
+            }
+            
+            .descripcion-texto {
+                font-size: 15px;
+                line-height: 1.6;
+            }
+            
+            /* RESPONSIVE PARA SUBMENÚ */
+            .submenu-item {
+                padding: 10px 15px 10px 40px;
+            }
+            
+            .submenu-item:hover {
+                padding-left: 45px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .imagen-grande-container {
+                height: 300px !important;
+            }
+            
+            .grid-imagenes-modal {
+                height: 120px;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            
+            .modal-header h2 {
+                font-size: 18px;
+            }
+            
+            .btn-ver-mas {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            .titulo-banner {
+                padding: 15px;
+                min-height: 110px;
+            }
+
+            .titulo-banner h2 {
+                font-size: 22px;
+            }
+
+            .pagina-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 12px;
+            }
+            
+            .pagina-info {
+                font-size: 11px;
+            }
+            
+            .descripcion-texto {
+                font-size: 14px;
+            }
+            
+            .btn-cerrar-modal {
+                width: 35px;
+                height: 35px;
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .imagen-grande-container {
+                height: 250px !important;
+            }
+            
+            .grid-imagenes-modal {
+                height: 100px;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+            }
+            
+            .modal-header h2 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- MENÚ LATERAL -->
+    <aside class="sidebar">
+        <div class="logo">
+            <a href="Index.html" style="text-decoration: none; color: inherit;">
+                <h1>LIFE <span>TIMES</span></h1>
+            </a>
+            <p>Directorio de Negocios</p>
+        </div>
+        
+        <div class="menu-categorias">
+            <a href="General.html" class="categoria-item">
+                <i class="fas fa-home"></i>
+                <span>General</span>
+            </a>
+            <a href="Servicio Minoritario.html" class="categoria-item">
+                <i class="fas fa-handshake"></i>
+                <span>Servicio minoritario</span>
+            </a>
+            <a href="Comercio.html" class="categoria-item">
+                <i class="fas fa-store"></i>
+                <span>Comercio</span>
+            </a>
+            <div class="categoria-item active with-submenu" id="alimentos-menu">
+                <i class="fas fa-utensils"></i>
+                <span>Alimentos y bebidas</span>
+                <i class="fas fa-chevron-down submenu-arrow"></i>
+            </div>
+
+            <div class="submenu-zonas" id="submenu-zonas">
+                <a href="alimentos y bebidas-zona oriente.html" class="submenu-item">Zona Oriente</a>
+                <a href="alimentos y bebidas-zona centro.html" class="submenu-item">Zona Centro</a>
+                <a href="alimentos y bebidas-zona norte.html" class="submenu-item">Zona Norte</a>
+                <a href="alimentos y bebidas-zona poniente.html" class="submenu-item">Zona Poniente</a>
+                <a href="alimentos y bebidas-zona sur.html" class="submenu-item active">Zona Sur</a>
+            </div>
+            
+            <a href="Servicios-general.html" class="categoria-item">
+                <i class="fas fa-concierge-bell"></i>
+                <span>Servicios</span>
+            </a>
+            <a href="Industria y produccion.html" class="categoria-item">
+                <i class="fas fa-industry"></i>
+                <span>Industria y producción</span>
+            </a>
+            <a href="Entretenimiento y educacion.html" class="categoria-item">
+                <i class="fas fa-film"></i>
+                <span>Entretenimiento y educación</span>
+            </a>
+        </div>
+        
+        <a href="subir-negocio.html" style="text-decoration: none;">
+            <button class="btn-subir-negocio">
+                <i class="fas fa-plus-circle"></i>
+                <span>¿Cómo puedo subir mi negocio?</span>
+            </button>
+        </a>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+        <nav class="top-nav">
+            <ul class="nav-links">
+                 <li><a href="Terminos y condiciones.html" id="terminos-link">Términos y Condiciones</a></li>
+                <li><a href="Index.html" id="historia-link">La Historia</a></li>
+                <li><a href="Servicios.html" id="servicios-link">Servicios</a></li>
+            </ul>
+        </nav>
+
+        <section class="negocios-container">
+            <div class="titulo-banner" id="titulo-banner">
+                <h2>Sabores y Experiencias Gastronómicas - Zona Sur</h2>
+                <p>Descubre los mejores restaurantes, cafeterías, panaderías y establecimientos de comida en la Zona Sur de la ciudad</p>
+                
+                <div class="menu-desplazamiento" id="menu-desplazamiento">
+                </div>
+            </div>
+            
+            <!-- ÁREA PARA AÑADIR NEGOCIOS MANUALMENTE -->
+            <div class="agregar-negocio-section" style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 30px; border: 2px dashed #c90f0f;">
+                <h3 style="color: #c90f0f; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-plus-circle"></i> Agregar Nuevo Negocio
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 15px;">
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Nombre del Negocio</label>
+                        <input type="text" id="nombre-negocio" placeholder="Ej: Restaurante La Estrella" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Categoría</label>
+                        <select id="categoria-negocio" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                            <option value="Restaurante">Restaurante</option>
+                            <option value="Cafetería">Cafetería</option>
+                            <option value="Panadería">Panadería</option>
+                            <option value="Supermercado">Supermercado</option>
+                            <option value="Comida Rápida">Comida Rápida</option>
+                            <option value="Bar">Bar</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Descripción Corta</label>
+                        <input type="text" id="descripcion-negocio" placeholder="Breve descripción del negocio" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Precio ($$$)</label>
+                        <select id="precio-negocio" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                            <option value="$">$ (Económico)</option>
+                            <option value="$$">$$ (Moderado)</option>
+                            <option value="$$$">$$$ (Alto)</option>
+                            <option value="$$$$">$$$$ (Premium)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">WhatsApp</label>
+                        <input type="text" id="whatsapp-negocio" placeholder="+1 (555) 123-4567" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Email</label>
+                        <input type="email" id="email-negocio" placeholder="contacto@negocio.com" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Ubicación</label>
+                        <input type="text" id="ubicacion-negocio" placeholder="Dirección exacta en Zona Sur" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">URL Imagen Principal</label>
+                        <input type="text" id="imagen-negocio" placeholder="https://ejemplo.com/imagen.jpg" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Descripción Larga</label>
+                    <textarea id="descripcion-larga-negocio" placeholder="Descripción detallada del negocio, especialidades, historia, etc." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; height: 100px;"></textarea>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 10px; font-weight: 500;">Redes Sociales (opcional)</label>
+                    <div id="redes-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px;">
+                        <!-- Las redes se agregarán dinámicamente -->
+                    </div>
+                    <button type="button" id="agregar-red" style="background: #c90f0f; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 14px;">
+                        <i class="fas fa-plus"></i> Agregar Red Social
+                    </button>
+                </div>
+                <button type="button" id="btn-agregar-negocio" style="background: #000000; color: white; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 16px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-save"></i> Agregar Negocio a la Zona Sur
+                </button>
+                <div id="mensaje-agregado" style="margin-top: 15px; display: none; padding: 10px; background: #d4edda; color: #155724; border-radius: 6px; border: 1px solid #c3e6cb;">
+                    Negocio agregado exitosamente. Recarga la página para verlo en la lista.
+                </div>
+            </div>
+            
+            <div class="alimentos-grid" id="alimentos-grid">
+                <!-- Los negocios se agregarán aquí dinámicamente -->
+            </div>
+            
+            <div style="text-align: center; color: #666; font-size: 14px; margin-top: 20px;">
+                Mostrando <span id="contador-negocios">0</span> de <span id="total-negocios">0</span> negocios de alimentos y bebidas en Zona Sur
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL PRINCIPAL - MODIFICADO CON 6 IMÁGENES -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-galeria">
+            <div class="modal-header">
+                <div class="modal-header-content">
+                    <h2 id="modal-nombre">Nombre del Negocio</h2>
+                    <span class="modal-categoria" id="modal-categoria">Categoría</span>
+                </div>
+                <button class="btn-cerrar-modal" id="btn-cerrar-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="galeria-container">
+                <div class="imagen-grande-container">
+                    <img id="imagen-grande" src="" alt="Imagen principal">
+                </div>
+                
+                <!-- GRID DE 3x2 PARA LAS 6 IMÁGENES -->
+                <div class="grid-imagenes-modal" id="grid-imagenes-modal">
+                </div>
+            </div>
+            
+            <div class="descripcion-container">
+                <div class="descripcion-content">
+                    <div>
+                        <h3 class="descripcion-titulo">Descripción del Negocio</h3>
+                        <p class="descripcion-texto" id="descripcion-texto">
+                            Descripción completa del negocio aparecerá aquí...
+                        </p>
+                    </div>
+                    
+                    <div class="alimento-precio" id="modal-precio"></div>
+                    
+                    <!-- REDES SOCIALES CON EL NUEVO ESTILO -->
+                    <div class="redes-sociales" id="redes-sociales">
+                        <h4><i class="fas fa-hashtag"></i> Síguenos en Redes Sociales</h4>
+                        <div class="redes-grid" id="redes-grid">
+                        </div>
+                    </div>
+                    
+                    <div class="descripcion-contacto">
+                        <h4>Información de Contacto</h4>
+                        <div class="contacto-info" id="contacto-info">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ARRAY VACÍO PARA NEGOCIOS DE ZONA SUR
+        let negociosZonaSur = [];
+
+        // ==============================================
+        // CONFIGURACIÓN DE PAGINACIÓN
+        // ==============================================
+        let paginaActual = 1;
+        const negociosPorPagina = 16;
+        let totalNegocios = 0;
+        let totalPaginas = 0;
+
+        // ==============================================
+        // ELEMENTOS DOM
+        // ==============================================
+        const alimentosGrid = document.getElementById('alimentos-grid');
+        const menuDesplazamiento = document.getElementById('menu-desplazamiento');
+        const contadorNegocios = document.getElementById('contador-negocios');
+        const totalNegociosSpan = document.getElementById('total-negocios');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const btnCerrarModal = document.getElementById('btn-cerrar-modal');
+        const modalNombre = document.getElementById('modal-nombre');
+        const modalCategoria = document.getElementById('modal-categoria');
+        const modalPrecio = document.getElementById('modal-precio');
+        const imagenGrande = document.getElementById('imagen-grande');
+        const gridImagenesModal = document.getElementById('grid-imagenes-modal');
+        const descripcionTexto = document.getElementById('descripcion-texto');
+        const contactoInfo = document.getElementById('contacto-info');
+        const redesGrid = document.getElementById('redes-grid');
+        const redesSocialesSection = document.getElementById('redes-sociales');
+        
+        // Elementos para el submenú
+        const alimentosMenu = document.getElementById('alimentos-menu');
+        const submenuZonas = document.getElementById('submenu-zonas');
+
+        // Elementos para agregar negocios
+        const btnAgregarNegocio = document.getElementById('btn-agregar-negocio');
+        const agregarRedBtn = document.getElementById('agregar-red');
+        const redesContainer = document.getElementById('redes-container');
+        const mensajeAgregado = document.getElementById('mensaje-agregado');
+
+        // ==============================================
+        // SUBMENÚ DE ZONAS
+        // ==============================================
+
+        // Alternar submenú al hacer clic
+        alimentosMenu.addEventListener('click', function(e) {
+            if (!e.target.closest('a')) {
+                submenuZonas.classList.toggle('active');
+                alimentosMenu.classList.toggle('submenu-active');
+            }
+        });
+
+        // Cerrar submenú al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            if (!alimentosMenu.contains(e.target) && !submenuZonas.contains(e.target)) {
+                submenuZonas.classList.remove('active');
+                alimentosMenu.classList.remove('submenu-active');
+            }
+        });
+
+        // Mantener el submenú abierto si estamos en una página de zona
+        const currentPage = window.location.pathname.split('/').pop();
+        const zonaPages = [
+            'alimentos y bebidas-zona oriente.html',
+            'alimentos y bebidas-zona centro.html', 
+            'alimentos y bebidas-zona norte.html',
+            'alimentos y bebidas-zona poniente.html',
+            'alimentos y bebidas-zona sur.html'
+        ];
+
+        if (zonaPages.includes(currentPage)) {
+            submenuZonas.classList.add('active');
+            alimentosMenu.classList.add('submenu-active');
+            
+            // Resaltar la zona actual
+            const submenuItems = document.querySelectorAll('.submenu-item');
+            submenuItems.forEach(item => {
+                const href = item.getAttribute('href');
+                if (href === currentPage) {
+                    item.classList.add('active');
+                    item.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                    item.style.fontWeight = '600';
+                    item.style.color = '#ffd700';
+                }
+            });
+        }
+
+        // ==============================================
+        // FUNCIONES PARA AGREGAR NEGOCIOS
+        // ==============================================
+
+        let contadorRedes = 0;
+
+        function agregarCampoRedSocial() {
+            contadorRedes++;
+            const redDiv = document.createElement('div');
+            redDiv.className = 'campo-red';
+            redDiv.innerHTML = `
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <select class="plataforma-red" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 6px;">
+                        <option value="facebook">Facebook</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="tiktok">TikTok</option>
+                        <option value="twitter">Twitter/X</option>
+                    </select>
+                    <input type="text" class="nombre-red" placeholder="Nombre" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 6px;">
+                    <input type="text" class="usuario-red" placeholder="@usuario" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 6px;">
+                    <input type="text" class="url-red" placeholder="URL" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 6px;">
+                    <button type="button" class="eliminar-red" style="background: #dc3545; color: white; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            redesContainer.appendChild(redDiv);
+
+            // Agregar evento al botón eliminar
+            const btnEliminar = redDiv.querySelector('.eliminar-red');
+            btnEliminar.addEventListener('click', function() {
+                redesContainer.removeChild(redDiv);
+                contadorRedes--;
+            });
+        }
+
+        // Inicializar con un campo de red social
+        agregarCampoRedSocial();
+
+        agregarRedBtn.addEventListener('click', agregarCampoRedSocial);
+
+        btnAgregarNegocio.addEventListener('click', function() {
+            // Obtener valores del formulario
+            const nombre = document.getElementById('nombre-negocio').value;
+            const categoria = document.getElementById('categoria-negocio').value;
+            const descripcion = document.getElementById('descripcion-negocio').value;
+            const descripcionLarga = document.getElementById('descripcion-larga-negocio').value || descripcion;
+            const precio = document.getElementById('precio-negocio').value;
+            const whatsapp = document.getElementById('whatsapp-negocio').value;
+            const email = document.getElementById('email-negocio').value;
+            const ubicacion = document.getElementById('ubicacion-negocio').value;
+            const imagen = document.getElementById('imagen-negocio').value;
+
+            // Validaciones básicas
+            if (!nombre || !categoria || !descripcion || !precio || !whatsapp || !email || !ubicacion || !imagen) {
+                alert('Por favor, completa todos los campos obligatorios.');
+                return;
+            }
+
+            // Obtener redes sociales
+            const redesSociales = [];
+            const camposRedes = document.querySelectorAll('.campo-red');
+            camposRedes.forEach(campo => {
+                const plataforma = campo.querySelector('.plataforma-red').value;
+                const nombreRed = campo.querySelector('.nombre-red').value;
+                const usuario = campo.querySelector('.usuario-red').value;
+                const url = campo.querySelector('.url-red').value;
+
+                if (nombreRed && usuario) {
+                    redesSociales.push({
+                        plataforma: plataforma,
+                        nombre: nombreRed,
+                        usuario: usuario,
+                        url: url || "#"
+                    });
+                }
+            });
+
+            // Crear objeto de negocio
+            const nuevoNegocio = {
+                nombre: nombre,
+                categoria: categoria,
+                descripcion: descripcion,
+                descripcion_larga: descripcionLarga,
+                whatsapp: whatsapp,
+                email: email,
+                ubicacion: ubicacion,
+                precio: precio,
+                imagen: imagen,
+                imagenes_adicionales: [
+                    imagen,
+                    "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                ],
+                redes_sociales: redesSociales
+            };
+
+            // Agregar a la lista de negocios
+            negociosZonaSur.push(nuevoNegocio);
+
+            // Mostrar mensaje de éxito
+            mensajeAgregado.style.display = 'block';
+            setTimeout(() => {
+                mensajeAgregado.style.display = 'none';
+            }, 5000);
+
+            // Limpiar formulario
+            document.getElementById('nombre-negocio').value = '';
+            document.getElementById('descripcion-negocio').value = '';
+            document.getElementById('descripcion-larga-negocio').value = '';
+            document.getElementById('whatsapp-negocio').value = '';
+            document.getElementById('email-negocio').value = '';
+            document.getElementById('ubicacion-negocio').value = '';
+            document.getElementById('imagen-negocio').value = '';
+
+            // Limpiar redes sociales
+            redesContainer.innerHTML = '';
+            contadorRedes = 0;
+            agregarCampoRedSocial();
+
+            // Actualizar la lista de negocios
+            actualizarListaNegocios();
+        });
+
+        // ==============================================
+        // FUNCIONES PRINCIPALES
+        // ==============================================
+
+        function actualizarListaNegocios() {
+            totalNegocios = negociosZonaSur.length;
+            totalPaginas = Math.ceil(totalNegocios / negociosPorPagina);
+            cargarNegociosPagina(1);
+        }
+
+        function crearMenuDesplazamiento() {
+            menuDesplazamiento.innerHTML = '';
+            
+            if (totalPaginas <= 1) return;
+            
+            const paginaActualSpan = document.createElement('span');
+            paginaActualSpan.className = 'pagina-actual';
+            paginaActualSpan.textContent = `Página ${paginaActual}`;
+            menuDesplazamiento.appendChild(paginaActualSpan);
+            
+            const btnAnterior = document.createElement('button');
+            btnAnterior.className = `pagina-btn ${paginaActual === 1 ? 'disabled' : ''}`;
+            btnAnterior.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            btnAnterior.disabled = paginaActual === 1;
+            btnAnterior.title = "Página anterior";
+            btnAnterior.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (paginaActual > 1) cargarNegociosPagina(paginaActual - 1);
+            });
+            menuDesplazamiento.appendChild(btnAnterior);
+            
+            const inicioPagina = Math.max(1, Math.min(paginaActual - 2, totalPaginas - 4));
+            const finPagina = Math.min(totalPaginas, inicioPagina + 4);
+            
+            for (let i = inicioPagina; i <= finPagina; i++) {
+                const btnPagina = document.createElement('button');
+                btnPagina.className = `pagina-btn ${paginaActual === i ? 'active' : ''}`;
+                btnPagina.textContent = i;
+                btnPagina.title = `Ir a página ${i}`;
+                btnPagina.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (paginaActual !== i) cargarNegociosPagina(i);
+                });
+                menuDesplazamiento.appendChild(btnPagina);
+            }
+            
+            const info = document.createElement('span');
+            info.className = 'pagina-info';
+            info.textContent = `de ${totalPaginas}`;
+            menuDesplazamiento.appendChild(info);
+            
+            const btnSiguiente = document.createElement('button');
+            btnSiguiente.className = `pagina-btn ${paginaActual === totalPaginas ? 'disabled' : ''}`;
+            btnSiguiente.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            btnSiguiente.disabled = paginaActual === totalPaginas;
+            btnSiguiente.title = "Página siguiente";
+            btnSiguiente.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (paginaActual < totalPaginas) cargarNegociosPagina(paginaActual + 1);
+            });
+            menuDesplazamiento.appendChild(btnSiguiente);
+        }
+
+        function crearGridImagenesModal(imagenes, imagenPrincipal) {
+            gridImagenesModal.innerHTML = '';
+            
+            const todasImagenes = [imagenPrincipal, ...imagenes];
+            const imagenesParaMostrar = todasImagenes.slice(0, 6);
+            
+            imagenesParaMostrar.forEach((imagen, index) => {
+                const imagenDiv = document.createElement('div');
+                imagenDiv.className = `imagen-modal-mini ${index === 0 ? 'active' : ''}`;
+                imagenDiv.dataset.imagen = imagen;
+                
+                const img = document.createElement('img');
+                img.src = imagen;
+                img.alt = `Imagen ${index + 1} del negocio`;
+                img.loading = 'lazy';
+                
+                imagenDiv.appendChild(img);
+                
+                imagenDiv.addEventListener('click', function() {
+                    imagenGrande.src = this.dataset.imagen;
+                    
+                    document.querySelectorAll('.imagen-modal-mini').forEach(m => {
+                        m.classList.remove('active');
+                    });
+                    
+                    this.classList.add('active');
+                });
+                
+                gridImagenesModal.appendChild(imagenDiv);
+            });
+        }
+
+        function cargarNegociosPagina(pagina) {
+            paginaActual = pagina;
+            
+            const inicio = (pagina - 1) * negociosPorPagina;
+            const fin = inicio + negociosPorPagina;
+            const negociosMostrar = negociosZonaSur.slice(inicio, fin);
+            
+            alimentosGrid.style.opacity = '0.5';
+            
+            setTimeout(() => {
+                alimentosGrid.innerHTML = '';
+                
+                if (negociosMostrar.length === 0) {
+                    alimentosGrid.innerHTML = `
+                        <div style="grid-column: 1 / span 4; text-align: center; padding: 40px; color: #666;">
+                            <i class="fas fa-store-slash" style="font-size: 48px; margin-bottom: 15px; color: #c90f0f;"></i>
+                            <h3 style="margin-bottom: 10px;">No hay negocios en esta zona aún</h3>
+                            <p>Usa el formulario superior para agregar el primer negocio de la Zona Sur</p>
+                        </div>
+                    `;
+                } else {
+                    negociosMostrar.forEach((negocio, index) => {
+                        const tarjeta = document.createElement('div');
+                        tarjeta.className = `alimento-card`;
+                        tarjeta.style.animationDelay = `${index * 0.05}s`;
+                        
+                        tarjeta.innerHTML = `
+                            <div class="card-imagen loading">
+                                <img data-src="${negocio.imagen}" alt="${negocio.nombre}">
+                            </div>
+                            <div class="card-header">
+                                <h3>${negocio.nombre}</h3>
+                                <span class="card-categoria">${negocio.categoria}</span>
+                                <div class="alimento-precio">Precio: ${negocio.precio}</div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-descripcion">${negocio.descripcion}</p>
+                                <button class="btn-ver-mas" data-negocio-id="${negocio.nombre}">
+                                    <i class="fas fa-eye"></i>
+                                    Ver más
+                                </button>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-contacto">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <span>${negocio.whatsapp}</span>
+                                </div>
+                                <div class="card-contacto">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>${negocio.email}</span>
+                                </div>
+                                ${negocio.ubicacion ? `
+                                <div class="card-contacto">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>${negocio.ubicacion}</span>
+                                </div>
+                                ` : ''}
+                            </div>
+                        `;
+                        
+                        alimentosGrid.appendChild(tarjeta);
+                        
+                        const imgElement = tarjeta.querySelector('img');
+                        if (imgElement) {
+                            setTimeout(() => {
+                                imgElement.src = imgElement.getAttribute('data-src');
+                                imgElement.classList.add('loaded');
+                                imgElement.parentElement.classList.remove('loading');
+                            }, 100);
+                        }
+                        
+                        const btnVerMas = tarjeta.querySelector('.btn-ver-mas');
+                        if (btnVerMas) {
+                            btnVerMas.addEventListener('click', () => abrirGaleriaNegocio(negocio));
+                        }
+                    });
+                }
+                
+                alimentosGrid.style.opacity = '1';
+                
+                contadorNegocios.textContent = negociosMostrar.length;
+                totalNegociosSpan.textContent = totalNegocios;
+                
+                crearMenuDesplazamiento();
+                
+            }, 100);
+        }
+
+        function abrirGaleriaNegocio(negocio) {
+            contactoInfo.innerHTML = '';
+            redesGrid.innerHTML = '';
+            
+            modalNombre.textContent = negocio.nombre;
+            modalCategoria.textContent = negocio.categoria;
+            modalPrecio.textContent = `Precio: ${negocio.precio}`;
+            
+            imagenGrande.src = negocio.imagen;
+            imagenGrande.alt = negocio.nombre;
+            
+            crearGridImagenesModal(negocio.imagenes_adicionales, negocio.imagen);
+            
+            descripcionTexto.textContent = negocio.descripcion_larga || negocio.descripcion;
+            
+            const contactoHTML = `
+                <div class="card-contacto">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>${negocio.whatsapp}</span>
+                </div>
+                <div class="card-contacto">
+                    <i class="fas fa-envelope"></i>
+                    <span>${negocio.email}</span>
+                </div>
+                ${negocio.ubicacion ? `
+                <div class="card-contacto">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>${negocio.ubicacion}</span>
+                </div>
+                ` : ''}
+            `;
+            contactoInfo.innerHTML = contactoHTML;
+            
+            if (negocio.redes_sociales && negocio.redes_sociales.length > 0) {
+                redesSocialesSection.style.display = 'block';
+                negocio.redes_sociales.forEach(red => {
+                    const redItem = document.createElement('a');
+                    redItem.href = red.url || "#";
+                    redItem.target = "_blank";
+                    redItem.rel = "noopener noreferrer";
+                    redItem.className = `red-social-item ${red.plataforma}`;
+                    
+                    let iconClass = '';
+                    switch(red.plataforma) {
+                        case 'facebook':
+                            iconClass = 'fab fa-facebook-f';
+                            break;
+                        case 'instagram':
+                            iconClass = 'fab fa-instagram';
+                            break;
+                        case 'tiktok':
+                            iconClass = 'fab fa-tiktok';
+                            break;
+                        case 'twitter':
+                            iconClass = 'fab fa-twitter';
+                            break;
+                        default:
+                            iconClass = 'fas fa-link';
+                    }
+                    
+                    redItem.innerHTML = `
+                        <i class="${iconClass}"></i>
+                        <div class="red-social-info">
+                            <div class="red-social-nombre">${red.nombre}</div>
+                            <div class="red-social-usuario">${red.usuario}</div>
+                        </div>
+                    `;
+                    
+                    redesGrid.appendChild(redItem);
+                });
+            } else {
+                redesSocialesSection.style.display = 'none';
+            }
+            
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // ==============================================
+        // EVENT LISTENERS
+        // ==============================================
+        btnCerrarModal.addEventListener('click', cerrarModal);
+        modalOverlay.addEventListener('click', function(event) {
+            if (event.target === modalOverlay) cerrarModal();
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                cerrarModal();
+            }
+        });
+
+        // ==============================================
+        // INICIALIZACIÓN
+        // ==============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cargar negocios existentes desde localStorage si existen
+            const negociosGuardados = localStorage.getItem('negociosZonaSur');
+            if (negociosGuardados) {
+                negociosZonaSur = JSON.parse(negociosGuardados);
+            }
+            
+            actualizarListaNegocios();
+            
+            // Guardar en localStorage cuando se agrega un negocio
+            btnAgregarNegocio.addEventListener('click', function() {
+                setTimeout(() => {
+                    localStorage.setItem('negociosZonaSur', JSON.stringify(negociosZonaSur));
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>

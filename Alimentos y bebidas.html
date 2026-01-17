@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directorio de Negocios LIFE TIMES - Alimentos y Bebidas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: #f5f7fa;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(to bottom, #c90f0f, #a00c0c);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            text-align: center;
+            padding: 20px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #fff;
+            transition: transform 0.3s;
+        }
+
+        .logo h1:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            color: #ffffff;
+        }
+
+        .logo p {
+            margin-top: 5px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .menu-categorias {
+            padding: 0 15px;
+            flex: 1;
+        }
+
+        .categoria-item {
+            padding: 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            text-decoration: none;
+            color: white;
+        }
+
+        .categoria-item:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+
+        .categoria-item.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid #ffffff;
+        }
+
+        .categoria-item i {
+            margin-right: 12px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .btn-subir-negocio {
+            margin: 20px 15px;
+            padding: 15px;
+            background-color: rgba(128, 128, 128, 0.3);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: button;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-align: center;
+            width: calc(100% - 30px);
+        }
+
+        .btn-subir-negocio:hover {
+            background-color: rgba(128, 128, 128, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-subir-negocio i {
+            font-size: 18px;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .top-nav {
+            background-color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000000;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: #c90f0f;
+        }
+
+        .negocios-container {
+            padding: 30px;
+            flex: 1;
+            background: white;
+        }
+
+        .titulo-banner {
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), 
+                        url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eaeaea;
+            position: relative;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .titulo-banner h2 {
+            color: #000000;
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .titulo-banner p {
+            color: #444;
+            font-size: 16px;
+            font-weight: 500;
+            padding-left: 5px;
+        }
+
+        .menu-desplazamiento {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            padding: 8px 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 10;
+        }
+
+        .pagina-btn {
+            width: 35px;
+            height: 35px;
+            background: #f8f9fa;
+            color: #555;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagina-btn:hover {
+            background: #f0f0f0;
+            color: #333;
+            border-color: #ccc;
+        }
+
+        .pagina-btn.active {
+            background: #c90f0f;
+            color: white;
+            border-color: #c90f0f;
+        }
+
+        .pagina-btn.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background: #f8f9fa;
+            border-color: #e0e0e0;
+            color: #999;
+        }
+
+        .pagina-info {
+            font-size: 13px;
+            color: #777;
+            font-weight: 500;
+            margin-left: 8px;
+            padding-left: 8px;
+            border-left: 1px solid #e0e0e0;
+            white-space: nowrap;
+        }
+
+        .pagina-actual {
+            font-size: 14px;
+            font-weight: 600;
+            color: #c90f0f;
+            margin-right: 5px;
+        }
+
+        /* ================================ */
+        /* NUEVO GRID DE 2 COLUMNAS - TARJETAS MÁS GRANDES */
+        /* ================================ */
+        .alimentos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* ================================ */
+        /* NUEVO DISEÑO DE TARJETA CON FOTO A LA DERECHA */
+        /* ================================ */
+        .alimento-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            height: 400px; /* ALTURA FIJA PARA TODAS LAS TARJETAS */
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInCard 0.4s ease forwards;
+        }
+
+        @keyframes fadeInCard {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alimento-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* CONTENIDO IZQUIERDO - DESCRIPCIÓN */
+        .card-content-left {
+            flex: 1;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            width: 60%;
+            overflow: hidden; /* PARA EVITAR DESBORDAMIENTO */
+        }
+
+        /* CONTENIDO DERECHO - IMAGEN */
+        .card-content-right {
+            width: 40%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-imagen {
+            height: 100%; /* OCUPA EL 100% DE LA ALTURA DE LA TARJETA */
+            overflow: hidden;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .card-imagen.loading {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .card-imagen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* MANTIENE LA PROPORCIÓN Y CUBRE EL ESPACIO */
+            transition: transform 0.5s ease;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card-imagen img.loaded {
+            opacity: 1;
+        }
+
+        .alimento-card:hover .card-imagen img {
+            transform: scale(1.05);
+        }
+
+        .card-header {
+            margin-bottom: 15px;
+        }
+
+        .card-header h3 {
+            color: #000000;
+            font-size: 22px;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .card-categoria {
+            color: #c90f0f;
+            font-size: 14px;
+            display: inline-block;
+            padding: 5px 12px;
+            background-color: #ffe6e6;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        /* DESCRIPCIÓN CON ALTURA LIMITADA Y SCROLL SI ES NECESARIO */
+        .card-descripcion-container {
+            flex: 1;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .card-descripcion {
+            color: #000000;
+            line-height: 1.6;
+            font-size: 16px;
+            max-height: 120px; /* ALTURA MÁXIMA PARA LA DESCRIPCIÓN */
+            overflow-y: auto; /* SCROLL VERTICAL SI EL CONTENIDO ES MUY LARGO */
+            padding-right: 5px;
+            margin-bottom: 15px;
+        }
+
+        /* ESTILOS PARA EL SCROLLBAR */
+        .card-descripcion::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .card-descripcion::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .card-descripcion::-webkit-scrollbar-thumb {
+            background: #c90f0f;
+            border-radius: 10px;
+        }
+
+        .card-descripcion::-webkit-scrollbar-thumb:hover {
+            background: #a00c0c;
+        }
+
+        .btn-ver-mas {
+            background-color: #000000;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 25px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: button;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: fit-content;
+            flex-shrink: 0; /* EVITA QUE SE COMPRIMA */
+        }
+
+        .btn-ver-mas:hover {
+            background-color: #333333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 15px 0 0 0;
+            border-top: 1px solid #f0f0f0;
+            margin-top: auto;
+            flex-shrink: 0; /* EVITA QUE SE COMPRIMA */
+        }
+
+        .card-contacto {
+            color: #000000;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-contacto i {
+            color: #c90f0f;
+            width: 16px;
+            text-align: center;
+        }
+
+        /* ================================ */
+        /* REDES SOCIALES SIN BOX EXTERIOR - ESTILO DEL SEGUNDO CÓDIGO */
+        /* ================================ */
+        .redes-sociales {
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            margin-top: 10px;
+        }
+
+        .redes-sociales h4 {
+            color: #000000;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .redes-sociales h4 i {
+            color: #c90f0f;
+        }
+
+        .redes-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .red-social-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            border-radius: 6px;
+        }
+
+        .red-social-item:hover {
+            transform: translateY(-3px);
+            background-color: #f8f8f8;
+        }
+
+        .red-social-item.facebook:hover {
+            background-color: #1877f2;
+            color: white;
+        }
+
+        .red-social-item.instagram:hover {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            color: white;
+        }
+
+        .red-social-item.tiktok:hover {
+            background-color: #000000;
+            color: white;
+        }
+
+        .red-social-item i {
+            width: 18px;
+            text-align: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .facebook i {
+            color: #1877f2;
+        }
+
+        .instagram i {
+            color: #E1306C;
+        }
+
+        .tiktok i {
+            color: #000000;
+        }
+
+        .red-social-item:hover i {
+            color: white;
+        }
+
+        .red-social-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .red-social-nombre {
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .red-social-usuario {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .red-social-item:hover .red-social-usuario {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* ================================ */
+        /* MODAL FIXED - MODIFICADO PARA MOSTRAR 6 IMÁGENES */
+        /* ================================ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-galeria {
+            background-color: white;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 1400px;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 0;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow: hidden;
+        }
+
+        .modal-overlay.active .modal-galeria {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            grid-column: 1 / span 2;
+            padding: 25px 30px 15px;
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .modal-header-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .modal-header h2 {
+            color: #000000;
+            font-size: 28px;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .modal-categoria {
+            display: inline-block;
+            background-color: #ffe6e6;
+            color: #c90f0f;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .btn-cerrar-modal {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #888;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 5px;
+            line-height: 1;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-left: 10px;
+        }
+
+        .btn-cerrar-modal:hover {
+            color: #c90f0f;
+            background-color: #f5f5f5;
+        }
+
+        .galeria-container {
+            padding: 30px;
+            grid-column: 1;
+            grid-row: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .imagen-grande-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .imagen-grande-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* GRID DE 3x2 PARA IMÁGENES EN EL MODAL */
+        .grid-imagenes-modal {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 12px;
+            height: 200px;
+        }
+
+        .imagen-modal-mini {
+            border-radius: 6px;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .imagen-modal-mini:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .imagen-modal-mini.active {
+            border-color: #c90f0f;
+            box-shadow: 0 0 0 2px rgba(201, 15, 15, 0.3);
+        }
+
+        .imagen-modal-mini img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .descripcion-container {
+            padding: 30px;
+            grid-column: 2;
+            grid-row: 2;
+            background-color: #fafafa;
+            border-left: 1px solid #eee;
+            overflow-y: auto;
+            max-height: 70vh;
+        }
+
+        .descripcion-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .descripcion-titulo {
+            color: #000000;
+            font-size: 22px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .descripcion-texto {
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        /* ================================ */
+        /* SUBMENÚ DE ZONAS PARA ALIMENTOS Y BEBIDAS */
+        /* ================================ */
+
+        .categoria-item.with-submenu {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .submenu-arrow {
+            margin-left: auto;
+            font-size: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .categoria-item.with-submenu.active .submenu-arrow {
+            transform: rotate(180deg);
+        }
+
+        .submenu-zonas {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.3s ease;
+            opacity: 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            margin-left: 15px;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .submenu-zonas.active {
+            max-height: 300px;
+            opacity: 1;
+            padding: 10px 0;
+        }
+
+        .submenu-item {
+            display: block;
+            padding: 12px 15px 12px 40px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .submenu-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding-left: 45px;
+        }
+
+        .submenu-item:before {
+            content: "-";
+            position: absolute;
+            left: 25px;
+            color: white;
+        }
+
+        /* Ajuste para el botón de subir negocio cuando el submenú está abierto */
+        .submenu-active ~ .btn-subir-negocio {
+            margin-top: 10px;
+        }
+
+        /* ================================ */
+        /* RESPONSIVE */
+        /* ================================ */
+        @media (max-width: 1200px) {
+            .menu-desplazamiento {
+                flex-wrap: wrap;
+                justify-content: center;
+                width: auto;
+            }
+            
+            .imagen-grande-container {
+                height: 350px;
+            }
+            
+            .grid-imagenes-modal {
+                height: 180px;
+            }
+            
+            .modal-galeria {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                max-height: 95vh;
+                overflow-y: auto;
+            }
+
+            .modal-header {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .galeria-container {
+                grid-column: 1;
+                grid-row: 2;
+            }
+
+            .descripcion-container {
+                grid-column: 1;
+                grid-row: 3;
+                border-left: none;
+                border-top: 1px solid #eee;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .alimentos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .alimento-card {
+                flex-direction: column;
+                height: 500px; /* ALTURA MAYOR PARA VERSIÓN MÓVIL */
+            }
+            
+            .card-content-left {
+                width: 100%;
+                order: 2;
+                padding: 20px;
+            }
+            
+            .card-content-right {
+                width: 100%;
+                height: 250px; /* ALTURA FIJA PARA LA IMAGEN EN MÓVIL */
+                order: 1;
+            }
+            
+            .card-descripcion {
+                max-height: 100px; /* ALTURA MÁXIMA REDUCIDA PARA MÓVIL */
+            }
+            
+            .modal-header h2 {
+                font-size: 24px;
+            }
+            
+            .grid-imagenes-modal {
+                grid-template-columns: repeat(3, 1fr);
+                height: 160px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            body {
+                flex-direction: column;
+            }
+            
+            .top-nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+                justify-content: center;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .alimentos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .titulo-banner {
+                padding: 20px;
+                min-height: 120px;
+            }
+
+            .titulo-banner h2 {
+                font-size: 26px;
+            }
+
+            .menu-desplazamiento {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                margin-top: 15px;
+                width: fit-content;
+                align-self: center;
+            }
+            
+            .modal-overlay {
+                padding: 0;
+                align-items: flex-start;
+            }
+            
+            .modal-galeria {
+                border-radius: 0;
+                width: 100%;
+                min-height: 100vh;
+                max-height: none;
+            }
+            
+            .imagen-grande-container {
+                height: 350px !important;
+            }
+            
+            .grid-imagenes-modal {
+                height: 140px;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .modal-header {
+                padding: 20px 15px 15px;
+            }
+            
+            .modal-header h2 {
+                font-size: 20px;
+            }
+            
+            .galeria-container, .descripcion-container {
+                padding: 20px;
+            }
+            
+            .descripcion-titulo {
+                font-size: 18px;
+            }
+            
+            .descripcion-texto {
+                font-size: 15px;
+                line-height: 1.6;
+            }
+            
+            /* RESPONSIVE PARA SUBMENÚ */
+            .submenu-item {
+                padding: 10px 15px 10px 40px;
+            }
+            
+            .submenu-item:hover {
+                padding-left: 45px;
+            }
+            
+            .card-header h3 {
+                font-size: 20px;
+            }
+            
+            .card-descripcion {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .alimento-card {
+                height: 450px; /* ALTURA REDUCIDA PARA PANTALLAS PEQUEÑAS */
+            }
+            
+            .card-content-right {
+                height: 200px; /* ALTURA REDUCIDA PARA LA IMAGEN */
+            }
+            
+            .imagen-grande-container {
+                height: 300px !important;
+            }
+            
+            .grid-imagenes-modal {
+                height: 120px;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            
+            .modal-header h2 {
+                font-size: 18px;
+            }
+            
+            .btn-ver-mas {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .titulo-banner {
+                padding: 15px;
+                min-height: 110px;
+            }
+
+            .titulo-banner h2 {
+                font-size: 22px;
+            }
+
+            .pagina-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 12px;
+            }
+            
+            .pagina-info {
+                font-size: 11px;
+            }
+            
+            .descripcion-texto {
+                font-size: 14px;
+            }
+            
+            .btn-cerrar-modal {
+                width: 35px;
+                height: 35px;
+                font-size: 24px;
+            }
+            
+            .card-header h3 {
+                font-size: 18px;
+            }
+            
+            .card-descripcion {
+                font-size: 14px;
+                max-height: 80px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .alimento-card {
+                height: 420px;
+            }
+            
+            .card-content-right {
+                height: 180px;
+            }
+            
+            .imagen-grande-container {
+                height: 250px !important;
+            }
+            
+            .grid-imagenes-modal {
+                height: 100px;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+            }
+            
+            .modal-header h2 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- MENÚ LATERAL -->
+    <aside class="sidebar">
+        <div class="logo">
+            <a href="Index.html" style="text-decoration: none; color: inherit;">
+                <h1>LIFE <span>TIMES</span></h1>
+            </a>
+            <p>Directorio de Negocios</p>
+        </div>
+        
+        <div class="menu-categorias">
+            <a href="General.html" class="categoria-item">
+                <i class="fas fa-home"></i>
+                <span>General</span>
+            </a>
+            <a href="Servicio Minoritario.html" class="categoria-item">
+                <i class="fas fa-handshake"></i>
+                <span>Servicio minoritario</span>
+            </a>
+            <a href="Comercio.html" class="categoria-item">
+                <i class="fas fa-store"></i>
+                <span>Comercio</span>
+            </a>
+            <!-- ALIMENTOS Y BEBIDAS CON SUBMENÚ DE ZONAS -->
+            <div class="categoria-item active with-submenu" id="alimentos-menu">
+                <i class="fas fa-utensils"></i>
+                <span>Alimentos y bebidas</span>
+                <i class="fas fa-chevron-down submenu-arrow"></i>
+            </div>
+
+            <div class="submenu-zonas" id="submenu-zonas">
+                <!-- ZONA ORIENTE AGREGADA -->
+                <a href="alimentos y bebidas-zona centro.html" class="submenu-item">Zona Centro</a>
+                <a href="alimentos y bebidas-zona norte.html" class="submenu-item">Zona Norte</a>
+                <a href="alimentos y bebidas-zona oriente.html" class="submenu-item">Zona Oriente</a>
+                <a href="alimentos y bebidas-zona poniente.html" class="submenu-item">Zona Poniente</a>
+                <a href="alimentos y bebidas-zona sur.html" class="submenu-item">Zona Sur</a>
+            </div>
+            
+            <a href="Servicios-general.html" class="categoria-item">
+                <i class="fas fa-concierge-bell"></i>
+                <span>Servicios</span>
+            </a>
+        </div>
+        
+        <a href="Servicios.html" style="text-decoration: none;">
+            <button class="btn-subir-negocio">
+                <i class="fas fa-plus-circle"></i>
+                <span>¿Cómo puedo subir mi negocio?</span>
+            </button>
+        </a>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+        <nav class="top-nav">
+            <ul class="nav-links">
+                 <li><a href="Terminos y Condiciones.html" id="terminos-link">Términos y Condiciones</a></li>
+                <li><a href="Index.html" id="historia-link">La Historia</a></li>
+                <li><a href="Servicios.html" id="servicios-link">Servicios</a></li>
+            </ul>
+        </nav>
+
+        <section class="negocios-container">
+            <!-- BANNER COMO NEGOCIOS DESTACADOS -->
+            <div class="titulo-banner" id="titulo-banner">
+                <h2>Negocios Destacados de Alimentos y Bebidas</h2>
+                <p>Los mejores restaurantes, cafeterías, panaderías y establecimientos de comida recomendados</p>
+                
+                <div class="menu-desplazamiento" id="menu-desplazamiento">
+                </div>
+            </div>
+            
+            <!-- SECCIÓN DE NEGOCIOS DESTACADOS -->
+            <div class="alimentos-grid" id="alimentos-grid">
+            </div>
+            
+            <div style="text-align: center; color: #666; font-size: 14px; margin-top: 20px;">
+                Mostrando <span id="contador-negocios">0</span> de <span id="total-negocios">0</span> negocios destacados
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL PRINCIPAL - MODIFICADO CON 6 IMÁGENES -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-galeria">
+            <div class="modal-header">
+                <div class="modal-header-content">
+                    <h2 id="modal-nombre">Nombre del Negocio</h2>
+                    <span class="modal-categoria" id="modal-categoria">Categoría</span>
+                </div>
+                <button class="btn-cerrar-modal" id="btn-cerrar-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="galeria-container">
+                <div class="imagen-grande-container">
+                    <img id="imagen-grande" src="" alt="Imagen principal">
+                </div>
+                
+                <!-- GRID DE 3x2 PARA LAS 6 IMÁGENES -->
+                <div class="grid-imagenes-modal" id="grid-imagenes-modal">
+                </div>
+            </div>
+            
+            <div class="descripcion-container">
+                <div class="descripcion-content">
+                    <div>
+                        <h3 class="descripcion-titulo">Descripción del Negocio</h3>
+                        <p class="descripcion-texto" id="descripcion-texto">
+                            Descripción completa del negocio aparecerá aquí...
+                        </p>
+                    </div>
+                    
+                    <!-- REDES SOCIALES CON EL NUEVO ESTILO -->
+                    <div class="redes-sociales" id="redes-sociales">
+                        <h4><i class="fas fa-hashtag"></i> Síguenos en Redes Sociales</h4>
+                        <div class="redes-grid" id="redes-grid">
+                        </div>
+                    </div>
+                    
+                    <div class="descripcion-contacto">
+                        <h4>Información de Contacto</h4>
+                        <div class="contacto-info" id="contacto-info">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DATOS DE NEGOCIOS DESTACADOS (PRECIO ELIMINADO)
+        const negociosAlimentos = [
+            {
+                nombre: "Sabor Mexicano - Destacado",
+                categoria: "Restaurante Mexicano",
+                descripcion: "Auténtica comida mexicana con ingredientes frescos y recetas tradicionales familiares. ★★★★☆",
+                descripcion_larga: "Sabor Mexicano lleva más de 15 años sirviendo la verdadera comida mexicana en la ciudad. Especializados en tacos al pastor, enchiladas suizas, mole poblano y chiles en nogada. Nuestro ambiente familiar y servicio cálido te harán sentir como en casa. Este negocio ha sido seleccionado como destacado por su excelente servicio y calidad.",
+                whatsapp: "+1 (555) 123-4567",
+                ubicacion: "Avenida México 123, Colonia Centro",
+                imagen: "https://lh3.googleusercontent.com/pw/AP1GczPjohrqaCayYu6w06UA7L3LYIe-uYEzg_HZQELRYVSVmTNCTEO4PrABwu4ATx-5lVGwtTHp5XRLKVEMFjqV90QtL8uNRnQXb49sCTG6bco7TOEMVYig8HJqmlIdJ0Mv9KtPJUZj1aETqG2MkOesK-yuvw=w1430-h957-s-no-gm?authuser=4",
+                imagenes_adicionales: [
+                    "https://lh3.googleusercontent.com/pw/AP1GczPjohrqaCayYu6w06UA7L3LYIe-uYEzg_HZQELRYVSVmTNCTEO4PrABwu4ATx-5lVGwtTHp5XRLKVEMFjqV90QtL8uNRnQXb49sCTG6bco7TOEMVYig8HJqmlIdJ0Mv9KtPJUZj1aETqG2MkOesK-yuvw=w1430-h957-s-no-gm?authuser=4",
+                    "https://lh3.googleusercontent.com/pw/AP1GczPjohrqaCayYu6w06UA7L3LYIe-uYEzg_HZQELRYVSVmTNCTEO4PrABwu4ATx-5lVGwtTHp5XRLKVEMFjqV90QtL8uNRnQXb49sCTG6bco7TOEMVYig8HJqmlIdJ0Mv9KtPJUZj1aETqG2MkOesK-yuvw=w1430-h957-s-no-gm?authuser=4",
+                    "https://lh3.googleusercontent.com/pw/AP1GczPjohrqaCayYu6w06UA7L3LYIe-uYEzg_HZQELRYVSVmTNCTEO4PrABwu4ATx-5lVGwtTHp5XRLKVEMFjqV90QtL8uNRnQXb49sCTG6bco7TOEMVYig8HJqmlIdJ0Mv9KtPJUZj1aETqG2MkOesK-yuvw=w1430-h957-s-no-gm?authuser=4",
+                    "https://lh3.googleusercontent.com/pw/AP1GczPjohrqaCayYu6w06UA7L3LYIe-uYEzg_HZQELRYVSVmTNCTEO4PrABwu4ATx-5lVGwtTHp5XRLKVEMFjqV90QtL8uNRnQXb49sCTG6bco7TOEMVYig8HJqmlIdJ0Mv9KtPJUZj1aETqG2MkOesK-yuvw=w1430-h957-s-no-gm?authuser=4",
+                    "https://lh3.googleusercontent.com/pw/AP1GczPjohrqaCayYu6w06UA7L3LYIe-uYEzg_HZQELRYVSVmTNCTEO4PrABwu4ATx-5lVGwtTHp5XRLKVEMFjqV90QtL8uNRnQXb49sCTG6bco7TOEMVYig8HJqmlIdJ0Mv9KtPJUZj1aETqG2MkOesK-yuvw=w1430-h957-s-no-gm?authuser=4",
+                    "https://lh3.googleusercontent.com/pw/AP1GczPjohrqaCayYu6w06UA7L3LYIe-uYEzg_HZQELRYVSVmTNCTEO4PrABwu4ATx-5lVGwtTHp5XRLKVEMFjqV90QtL8uNRnQXb49sCTG6bco7TOEMVYig8HJqmlIdJ0Mv9KtPJUZj1aETqG2MkOesK-yuvw=w1430-h957-s-no-gm?authuser=4"
+                ],
+                redes_sociales: [
+                    { 
+                        plataforma: "facebook", 
+                        nombre: "Sabor Mexicano", 
+                        usuario: "@SaborMexicano",
+                        url: "https://facebook.com/SaborMexicano"
+                    },
+                    { 
+                        plataforma: "instagram", 
+                        nombre: "Sabor Mexicano", 
+                        usuario: "@sabormexicano",
+                        url: "https://instagram.com/sabormexicano"
+                    },
+                    { 
+                        plataforma: "tiktok", 
+                        nombre: "Sabor Mexicano", 
+                        usuario: "@sabormexicano",
+                        url: "https://tiktok.com/@sabormexicano"
+                    }
+                ]
+            },
+            {
+                nombre: "Panadería Dulce Hogar - Destacado",
+                categoria: "Panadería",
+                descripcion: "Panadería tradicional con más de 30 años de experiencia en pan dulce y salado. ★★★★★",
+                descripcion_larga: "Panadería Dulce Hogar es un negocio familiar que ha estado sirviendo a la comunidad por más de tres décadas. Especializados en pan tradicional mexicano como conchas, cuernos, orejas y bolillos recién horneados diariamente. Reconocida como 'Mejor Panadería Tradicional 2023'.",
+                whatsapp: "+1 (555) 123-4568",
+                ubicacion: "Calle Panaderos 45, Colonia Centro",
+                imagen: "https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    "https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1535141192574-5d4897c12636?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1511018556340-d16986a1c194?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                ],
+                redes_sociales: [
+                    { 
+                        plataforma: "facebook", 
+                        nombre: "Panadería Dulce Hogar", 
+                        usuario: "@PanaderiaDulceHogar",
+                        url: "https://facebook.com/PanaderiaDulceHogar"
+                    },
+                    { 
+                        plataforma: "instagram", 
+                        nombre: "Panadería Dulce Hogar", 
+                        usuario: "@panaderiadulcehogar",
+                        url: "https://instagram.com/panaderiadulcehogar"
+                    }
+                ]
+            },
+            {
+                nombre: "Market Fresh - Destacado",
+                categoria: "Supermercado",
+                descripcion: "Supermercado con productos frescos y orgánicos de alta calidad. Certificación ecológica. ★★★★☆",
+                descripcion_larga: "Market Fresh es tu destino para alimentos frescos y orgánicos. Trabajamos directamente con productores locales para ofrecerte las mejores frutas, verduras y productos gourmet en un ambiente moderno y acogedor. Certificación orgánica internacional y premio a la 'Mejor Cadena de Productos Frescos 2023'.",
+                whatsapp: "+1 (555) 123-4569",
+                ubicacion: "Plaza Comercial 89, Zona Norte",
+                imagen: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    "https://images.unsplash.com/photo-1567306301408-9b74779a11af?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                ],
+                redes_sociales: [
+                    { 
+                        plataforma: "facebook", 
+                        nombre: "Market Fresh", 
+                        usuario: "@MarketFresh",
+                        url: "https://facebook.com/MarketFresh"
+                    },
+                    { 
+                        plataforma: "instagram", 
+                        nombre: "Market Fresh", 
+                        usuario: "@marketfresh",
+                        url: "https://instagram.com/marketfresh"
+                    },
+                    { 
+                        plataforma: "tiktok", 
+                        nombre: "Market Fresh", 
+                        usuario: "@marketfresh",
+                        url: "https://tiktok.com/@marketfresh"
+                    }
+                ]
+            },
+            {
+                nombre: "Café del Amanecer - Destacado",
+                categoria: "Cafetería",
+                descripcion: "Café de especialidad tostado localmente en un ambiente acogedor y moderno. ★★★★★",
+                descripcion_larga: "Café del Amanecer se especializa en café de alta calidad tostado localmente. Trabajamos directamente con productores de café en Chiapas y Oaxaca para ofrecer las mejores variedades. Nuestro espacio está diseñado para trabajo remoto y reuniones informales. Premio al 'Mejor Café de la Ciudad 2023'.",
+                whatsapp: "+1 (555) 123-4570",
+                ubicacion: "Calle del Café 78, Zona Centro",
+                imagen: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    "https://images.unsplash.com/photo-1447933601403-0c6688de566e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                ],
+                redes_sociales: [
+                    { 
+                        plataforma: "instagram", 
+                        nombre: "Café del Amanecer", 
+                        usuario: "@cafedelamanecer",
+                        url: "https://instagram.com/cafedelamanecer"
+                    },
+                    { 
+                        plataforma: "tiktok", 
+                        nombre: "Café del Amanecer", 
+                        usuario: "@cafedelamanecer",
+                        url: "https://tiktok.com/@cafedelamanecer"
+                    }
+                ]
+            },
+            {
+                nombre: "La Parrilla Maestra - Destacado",
+                categoria: "Restaurante de Carnes",
+                descripcion: "Cortes premium a la parrilla en un ambiente rústico y elegante. Asador experto. ★★★★☆",
+                descripcion_larga: "La Parrilla Maestra se especializa en cortes premium de carne argentina y nacional preparados por nuestros asadores expertos. Ambiente rústico pero elegante perfecto para ocasiones especiales. Reconocida por la 'Asociación de Parrilleros Profesionales' como el mejor asado de la región.",
+                whatsapp: "+1 (555) 123-4571",
+                ubicacion: "Boulevard de las Carnes 234, Zona Poniente",
+                imagen: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1532550907401-a500c9a57435?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1600891964092-4316c288032e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                ],
+                redes_sociales: [
+                    { 
+                        plataforma: "facebook", 
+                        nombre: "La Parrilla Maestra", 
+                        usuario: "@ParrillaMaestra",
+                        url: "https://facebook.com/ParrillaMaestra"
+                    },
+                    { 
+                        plataforma: "instagram", 
+                        nombre: "La Parrilla Maestra", 
+                        usuario: "@parrillamaestra",
+                        url: "https://instagram.com/parrillamaestra"
+                    }
+                ]
+            },
+            {
+                nombre: "Pizzería Italiana Bella - Destacado",
+                categoria: "Pizzería",
+                descripcion: "Pizza auténtica italiana con masa madre y ingredientes importados. ★★★★★",
+                descripcion_larga: "Pizzería Italiana Bella ofrece la verdadera pizza italiana con masa madre fermentada por 72 horas y ingredientes importados directamente de Italia. Nuestro horno de leña a 400°C garantiza la autenticidad. Reconocida como 'Mejor Pizzería 2023' por la Asociación de Gastronomía Italiana.",
+                whatsapp: "+1 (555) 123-4572",
+                ubicacion: "Calle Italia 567, Zona Sur",
+                imagen: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1552539618-7e6838b45b9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1595708684082-a173bb3a06c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                ],
+                redes_sociales: [
+                    { 
+                        plataforma: "facebook", 
+                        nombre: "Pizzería Italiana Bella", 
+                        usuario: "@PizzeriaBella",
+                        url: "https://facebook.com/PizzeriaBella"
+                    },
+                    { 
+                        plataforma: "instagram", 
+                        nombre: "Pizzería Bella", 
+                        usuario: "@pizzeriabella",
+                        url: "https://instagram.com/pizzeriabella"
+                    }
+                ]
+            },
+            {
+                nombre: "Sushi Master - Destacado",
+                categoria: "Restaurante Japonés",
+                descripcion: "Sushi artesanal preparado por chefs japoneses certificados. Pescado fresco diario. ★★★★☆",
+                descripcion_larga: "Sushi Master cuenta con chefs japoneses certificados que preparan sushi artesanal con técnicas tradicionales. Nuestro pescado llega fresco diariamente desde el mercado y ofrecemos opciones omakase exclusivas. Premio a la 'Excelencia en Cocina Japonesa 2023'.",
+                whatsapp: "+1 (555) 123-4573",
+                ubicacion: "Avenida del Sushi 890, Zona Centro",
+                imagen: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    "https://images.unsplash.com/photo-1563612116625-3012372fccce?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1553621042-f6e147245754?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1558947530-cbcf6e9aeeae?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                ],
+                redes_sociales: [
+                    { 
+                        plataforma: "instagram", 
+                        nombre: "Sushi Master", 
+                        usuario: "@sushimaster",
+                        url: "https://instagram.com/sushimaster"
+                    },
+                    { 
+                        plataforma: "tiktok", 
+                        nombre: "Sushi Master", 
+                        usuario: "@sushimaster",
+                        url: "https://tiktok.com/@sushimaster"
+                    }
+                ]
+            },
+            {
+                nombre: "Heladería Artesanal - Destacado",
+                categoria: "Heladería",
+                descripcion: "Helados artesanales con ingredientes naturales y sabores innovadores. ★★★★★",
+                descripcion_larga: "Heladería Artesanal crea helados únicos usando solo ingredientes naturales sin conservantes ni colorantes artificiales. Sabores innovadores como lavanda-miel, té matcha y chocolate wasabi. Reconocida como 'Mejor Heladería Artesanal 2023' en el concurso nacional de helados.",
+                whatsapp: "+1 (555) 123-4574",
+                ubicacion: "Calle de los Postres 345, Zona Norte",
+                imagen: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                imagenes_adicionales: [
+                    "https://images.unsplash.com/photo-1560008581-09826d1de69e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1517093157656-b9eccef91cb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1488900128323-21503983a07e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1570196912121-0e6fc5c9a6d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                ],
+                redes_sociales: [
+                    { 
+                        plataforma: "facebook", 
+                        nombre: "Heladería Artesanal", 
+                        usuario: "@HeladeriaArtesanal",
+                        url: "https://facebook.com/HeladeriaArtesanal"
+                    },
+                    { 
+                        plataforma: "instagram", 
+                        nombre: "Heladería Artesanal", 
+                        usuario: "@heladeriaartesanal",
+                        url: "https://instagram.com/heladeriaartesanal"
+                    }
+                ]
+            }
+        ];
+
+        // ==============================================
+        // CONFIGURACIÓN DE PAGINACIÓN
+        // ==============================================
+        let paginaActual = 1;
+        const negociosPorPagina = 8; // 2 columnas × 4 filas
+        const totalNegocios = negociosAlimentos.length;
+        const totalPaginas = Math.ceil(totalNegocios / negociosPorPagina);
+
+        // ==============================================
+        // ELEMENTOS DOM
+        // ==============================================
+        const alimentosGrid = document.getElementById('alimentos-grid');
+        const menuDesplazamiento = document.getElementById('menu-desplazamiento');
+        const contadorNegocios = document.getElementById('contador-negocios');
+        const totalNegociosSpan = document.getElementById('total-negocios');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const btnCerrarModal = document.getElementById('btn-cerrar-modal');
+        const modalNombre = document.getElementById('modal-nombre');
+        const modalCategoria = document.getElementById('modal-categoria');
+        const imagenGrande = document.getElementById('imagen-grande');
+        const gridImagenesModal = document.getElementById('grid-imagenes-modal');
+        const descripcionTexto = document.getElementById('descripcion-texto');
+        const contactoInfo = document.getElementById('contacto-info');
+        const redesGrid = document.getElementById('redes-grid');
+        const redesSocialesSection = document.getElementById('redes-sociales');
+        
+        // Elementos para el submenú
+        const alimentosMenu = document.getElementById('alimentos-menu');
+        const submenuZonas = document.getElementById('submenu-zonas');
+
+        // ==============================================
+        // SUBMENÚ DE ZONAS (DENTRO DE ALIMENTOS Y BEBIDAS)
+        // ==============================================
+
+        // Alternar submenú al hacer clic en "Alimentos y bebidas"
+        alimentosMenu.addEventListener('click', function(e) {
+            // Evitar que el clic se propague si estamos en una zona específica
+            if (!e.target.closest('a') && e.target !== this.querySelector('.submenu-arrow')) {
+                submenuZonas.classList.toggle('active');
+                alimentosMenu.classList.toggle('submenu-active');
+            }
+        });
+
+        // Cerrar submenú al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            if (!alimentosMenu.contains(e.target) && !submenuZonas.contains(e.target)) {
+                submenuZonas.classList.remove('active');
+                alimentosMenu.classList.remove('submenu-active');
+            }
+        });
+
+        // Mantener el submenú abierto si estamos en una página de zona
+        const currentPage = window.location.pathname.split('/').pop();
+        const zonaPages = [
+            'alimentos y bebidas-zona centro.html', 
+            'alimentos y bebidas-zona norte.html',
+            'alimentos y bebidas-zona oriente.html',
+            'alimentos y bebidas-zona poniente.html',
+            'alimentos y bebidas-zona sur.html'
+        ];
+
+        if (zonaPages.includes(currentPage)) {
+            // Abrir automáticamente el submenú si estamos en una página de zona
+            submenuZonas.classList.add('active');
+            alimentosMenu.classList.add('submenu-active');
+            
+            // Resaltar la zona actual
+            const submenuItems = document.querySelectorAll('.submenu-item');
+            submenuItems.forEach(item => {
+                const href = item.getAttribute('href');
+                if (href === currentPage) {
+                    item.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                    item.style.fontWeight = '600';
+                    item.style.color = '#ffd700';
+                }
+            });
+            
+            // Cambiar el título y contenido si estamos en una zona
+            document.getElementById('titulo-banner').querySelector('h2').textContent = `Alimentos y Bebidas - ${getZonaName(currentPage)}`;
+            document.getElementById('titulo-banner').querySelector('p').textContent = `Descubre los mejores establecimientos de comida y bebida en la ${getZonaName(currentPage)}`;
+        }
+
+        // Función para obtener el nombre de la zona desde el nombre del archivo
+        function getZonaName(pageName) {
+            const zonaMap = {
+                'alimentos y bebidas-zona centro.html': 'Zona Centro',
+                'alimentos y bebidas-zona norte.html': 'Zona Norte',
+                'alimentos y bebidas-zona oriente.html': 'Zona Oriente',
+                'alimentos y bebidas-zona poniente.html': 'Zona Poniente',
+                'alimentos y bebidas-zona sur.html': 'Zona Sur'
+            };
+            return zonaMap[pageName] || 'Alimentos y Bebidas';
+        }
+
+        // ==============================================
+        // FUNCIONES
+        // ==============================================
+
+        function crearMenuDesplazamiento() {
+            menuDesplazamiento.innerHTML = '';
+            
+            const paginaActualSpan = document.createElement('span');
+            paginaActualSpan.className = 'pagina-actual';
+            paginaActualSpan.textContent = `Página ${paginaActual}`;
+            menuDesplazamiento.appendChild(paginaActualSpan);
+            
+            const btnAnterior = document.createElement('button');
+            btnAnterior.className = `pagina-btn ${paginaActual === 1 ? 'disabled' : ''}`;
+            btnAnterior.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            btnAnterior.disabled = paginaActual === 1;
+            btnAnterior.title = "Página anterior";
+            btnAnterior.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (paginaActual > 1) cargarNegociosPagina(paginaActual - 1);
+            });
+            menuDesplazamiento.appendChild(btnAnterior);
+            
+            const inicioPagina = Math.max(1, Math.min(paginaActual - 2, totalPaginas - 4));
+            const finPagina = Math.min(totalPaginas, inicioPagina + 4);
+            
+            for (let i = inicioPagina; i <= finPagina; i++) {
+                const btnPagina = document.createElement('button');
+                btnPagina.className = `pagina-btn ${paginaActual === i ? 'active' : ''}`;
+                btnPagina.textContent = i;
+                btnPagina.title = `Ir a página ${i}`;
+                btnPagina.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (paginaActual !== i) cargarNegociosPagina(i);
+                });
+                menuDesplazamiento.appendChild(btnPagina);
+            }
+            
+            const info = document.createElement('span');
+            info.className = 'pagina-info';
+            info.textContent = `de ${totalPaginas}`;
+            menuDesplazamiento.appendChild(info);
+            
+            const btnSiguiente = document.createElement('button');
+            btnSiguiente.className = `pagina-btn ${paginaActual === totalPaginas ? 'disabled' : ''}`;
+            btnSiguiente.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            btnSiguiente.disabled = paginaActual === totalPaginas;
+            btnSiguiente.title = "Página siguiente";
+            btnSiguiente.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (paginaActual < totalPaginas) cargarNegociosPagina(paginaActual + 1);
+            });
+            menuDesplazamiento.appendChild(btnSiguiente);
+        }
+
+        function crearGridImagenesModal(imagenes, imagenPrincipal) {
+            gridImagenesModal.innerHTML = '';
+            
+            // Combinar todas las imágenes (principal + adicionales)
+            const todasImagenes = [imagenPrincipal, ...imagenes];
+            
+            // Tomar solo las primeras 6 imágenes
+            const imagenesParaMostrar = todasImagenes.slice(0, 6);
+            
+            imagenesParaMostrar.forEach((imagen, index) => {
+                const imagenDiv = document.createElement('div');
+                imagenDiv.className = `imagen-modal-mini ${index === 0 ? 'active' : ''}`;
+                imagenDiv.dataset.imagen = imagen;
+                
+                const img = document.createElement('img');
+                img.src = imagen;
+                img.alt = `Imagen ${index + 1} del negocio`;
+                img.loading = 'lazy';
+                
+                imagenDiv.appendChild(img);
+                
+                imagenDiv.addEventListener('click', function() {
+                    // Cambiar la imagen principal
+                    imagenGrande.src = this.dataset.imagen;
+                    
+                    // Actualizar la clase activa
+                    document.querySelectorAll('.imagen-modal-mini').forEach(m => {
+                        m.classList.remove('active');
+                    });
+                    
+                    this.classList.add('active');
+                });
+                
+                gridImagenesModal.appendChild(imagenDiv);
+            });
+        }
+
+        function cargarNegociosPagina(pagina) {
+            paginaActual = pagina;
+            
+            const inicio = (pagina - 1) * negociosPorPagina;
+            const fin = inicio + negociosPorPagina;
+            const negociosMostrar = negociosAlimentos.slice(inicio, fin);
+            
+            alimentosGrid.style.opacity = '0.5';
+            
+            setTimeout(() => {
+                alimentosGrid.innerHTML = '';
+                
+                negociosMostrar.forEach((negocio, index) => {
+                    const tarjeta = document.createElement('div');
+                    tarjeta.className = `alimento-card`;
+                    tarjeta.style.animationDelay = `${index * 0.05}s`;
+                    
+                    // NUEVO DISEÑO: DESCRIPCIÓN IZQUIERDA, FOTO DERECHA
+                    tarjeta.innerHTML = `
+                        <!-- CONTENIDO IZQUIERDO - DESCRIPCIÓN -->
+                        <div class="card-content-left">
+                            <div class="card-header">
+                                <h3>${negocio.nombre}</h3>
+                                <span class="card-categoria">${negocio.categoria}</span>
+                            </div>
+                            <div class="card-descripcion-container">
+                                <p class="card-descripcion">${negocio.descripcion}</p>
+                            </div>
+                            <button class="btn-ver-mas" data-negocio-id="${negocio.nombre}">
+                                <i class="fas fa-eye"></i>
+                                Ver más
+                            </button>
+                            <div class="card-footer">
+                                <div class="card-contacto">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <span>${negocio.whatsapp}</span>
+                                </div>
+                                ${negocio.ubicacion ? `
+                                <div class="card-contacto">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>${negocio.ubicacion}</span>
+                                </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                        
+                        <!-- CONTENIDO DERECHO - IMAGEN -->
+                        <div class="card-content-right">
+                            <div class="card-imagen loading">
+                                <img data-src="${negocio.imagen}" alt="${negocio.nombre}">
+                            </div>
+                        </div>
+                    `;
+                    
+                    alimentosGrid.appendChild(tarjeta);
+                    
+                    const imgElement = tarjeta.querySelector('img');
+                    if (imgElement) {
+                        setTimeout(() => {
+                            imgElement.src = imgElement.getAttribute('data-src');
+                            imgElement.classList.add('loaded');
+                            imgElement.parentElement.classList.remove('loading');
+                        }, 100);
+                    }
+                    
+                    const btnVerMas = tarjeta.querySelector('.btn-ver-mas');
+                    if (btnVerMas) {
+                        btnVerMas.addEventListener('click', () => abrirGaleriaNegocio(negocio));
+                    }
+                });
+                
+                alimentosGrid.style.opacity = '1';
+                
+                contadorNegocios.textContent = negociosMostrar.length;
+                totalNegociosSpan.textContent = totalNegocios;
+                
+                crearMenuDesplazamiento();
+                
+            }, 100);
+        }
+
+        function abrirGaleriaNegocio(negocio) {
+            contactoInfo.innerHTML = '';
+            redesGrid.innerHTML = '';
+            
+            modalNombre.textContent = negocio.nombre;
+            modalCategoria.textContent = negocio.categoria;
+            
+            // Configurar la imagen principal
+            imagenGrande.src = negocio.imagen;
+            imagenGrande.alt = negocio.nombre;
+            
+            // Crear el grid de 6 imágenes (3x2)
+            crearGridImagenesModal(negocio.imagenes_adicionales, negocio.imagen);
+            
+            descripcionTexto.textContent = negocio.descripcion_larga || negocio.descripcion;
+            
+            const contactoHTML = `
+                <div class="card-contacto">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>${negocio.whatsapp}</span>
+                </div>
+                ${negocio.ubicacion ? `
+                <div class="card-contacto">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>${negocio.ubicacion}</span>
+                </div>
+                ` : ''}
+            `;
+            contactoInfo.innerHTML = contactoHTML;
+            
+            if (negocio.redes_sociales && negocio.redes_sociales.length > 0) {
+                redesSocialesSection.style.display = 'block';
+                negocio.redes_sociales.forEach(red => {
+                    const redItem = document.createElement('a');
+                    redItem.href = red.url || "#";
+                    redItem.target = "_blank";
+                    redItem.rel = "noopener noreferrer";
+                    redItem.className = `red-social-item ${red.plataforma}`;
+                    
+                    let iconClass = '';
+                    switch(red.plataforma) {
+                        case 'facebook':
+                            iconClass = 'fab fa-facebook-f';
+                            break;
+                        case 'instagram':
+                            iconClass = 'fab fa-instagram';
+                            break;
+                        case 'tiktok':
+                            iconClass = 'fab fa-tiktok';
+                            break;
+                        default:
+                            iconClass = 'fas fa-link';
+                    }
+                    
+                    redItem.innerHTML = `
+                        <i class="${iconClass}"></i>
+                        <div class="red-social-info">
+                            <div class="red-social-nombre">${red.nombre}</div>
+                            <div class="red-social-usuario">${red.usuario}</div>
+                        </div>
+                    `;
+                    
+                    redesGrid.appendChild(redItem);
+                });
+            } else {
+                redesSocialesSection.style.display = 'none';
+            }
+            
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // ==============================================
+        // EVENT LISTENERS
+        // ==============================================
+        btnCerrarModal.addEventListener('click', cerrarModal);
+        modalOverlay.addEventListener('click', function(event) {
+            if (event.target === modalOverlay) cerrarModal();
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                cerrarModal();
+            }
+        });
+
+        // ==============================================
+        // INICIALIZACIÓN
+        // ==============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarNegociosPagina(1);
+        });
+    </script>
+</body>
+</html>

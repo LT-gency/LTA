@@ -1,0 +1,1622 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portal Clientes - Agencia (Admin Tabs)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --card: #111111;
+      --card-light: #1a1a1a;
+      --accent: #ffffff;
+      --accent-dark: #e0e0e0;
+      --accent-light: #f5f5f5;
+      --primary: #d90429;
+      --primary-dark: #b00020;
+      --primary-light: #ff5252;
+      --muted: #a0a0a0;
+      --muted-light: #666666;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --border: #2a2a2a;
+      --border-light: #333333;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(217, 4, 41, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 85% 30%, rgba(217, 4, 41, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 50% 80%, rgba(217, 4, 41, 0.05) 0%, transparent 20%);
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-light);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    }
+    
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-light);
+      position: relative;
+    }
+    
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100px;
+      height: 2px;
+      background: var(--primary);
+    }
+    
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .logo {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      box-shadow: 0 0 10px rgba(217, 4, 41, 0.3);
+    }
+    
+    .cols {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 32px;
+    }
+
+    /* Panels */
+    .panel {
+      background: var(--card-light);
+      padding: 24px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .panel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--primary);
+      transform: scaleY(0);
+      transition: var(--transition);
+    }
+    
+    .panel:hover {
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+      transform: translateY(-2px);
+    }
+    
+    .panel:hover::before {
+      transform: scaleY(1);
+    }
+    
+    label {
+      display: block;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    
+    input[type=text], input[type=password], select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--accent);
+      font-family: inherit;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+    
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(217, 4, 41, 0.1);
+    }
+    
+    button {
+      background: var(--primary);
+      border: 1px solid var(--primary);
+      color: white;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.5px;
+    }
+    
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(217, 4, 41, 0.3);
+    }
+    
+    button:hover::before {
+      left: 100%;
+    }
+    
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 400;
+    }
+    
+    h3, h4 {
+      margin: 0 0 16px 0;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      color: var(--accent);
+    }
+    
+    h3 {
+      font-size: 22px;
+      position: relative;
+      padding-bottom: 8px;
+    }
+    
+    h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--primary);
+    }
+    
+    h4 {
+      font-size: 18px;
+    }
+    
+    hr {
+      margin: 24px 0;
+      border: none;
+      border-top: 1px solid var(--border-light);
+    }
+
+    /* dashboard */
+    .project {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 20px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 16px;
+      background: var(--card);
+      border: 1px solid var(--border-light);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .project::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--primary);
+      transform: scaleY(0);
+      transition: var(--transition);
+    }
+    
+    .project:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .project:hover::before {
+      transform: scaleY(1);
+    }
+    
+    .project .left {
+      flex: 1;
+      max-width: 70%;
+    }
+    
+    .progress-container {
+      margin-top: 16px;
+    }
+    
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    
+    .progress {
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .progress > i {
+      display: block;
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.5s ease;
+      width: 0%;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .progress > i::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    
+    .small {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    
+    .btn-ghost:hover {
+      background: var(--card);
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* messaging */
+    .messages {
+      margin-top: 16px;
+      border-top: 1px solid var(--border-light);
+      padding-top: 16px;
+      max-height: 200px;
+      overflow: auto;
+    }
+    
+    .msg {
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      max-width: 78%;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      position: relative;
+      transition: var(--transition);
+    }
+    
+    .msg:hover {
+      transform: translateX(4px);
+    }
+    
+    .msg.client {
+      background: var(--card);
+      text-align: left;
+      margin-right: auto;
+      border-left: 3px solid var(--primary);
+    }
+    
+    .msg.admin {
+      background: linear-gradient(135deg, var(--card-light), var(--card));
+      color: var(--accent);
+      text-align: right;
+      margin-left: auto;
+      border-right: 3px solid var(--primary);
+    }
+    
+    .msg-time {
+      font-size: 11px;
+      opacity: 0.7;
+      margin-top: 4px;
+      font-weight: 400;
+    }
+
+    /* admin modal / tabs */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+    }
+    
+    .modal.open {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .admin-shell {
+      width: 100%;
+      max-width: 1100px;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      gap: 24px;
+      min-height: 600px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-light);
+      max-height: 90vh;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .admin-shell::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    }
+    
+    .admin-left {
+      width: 280px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border-light);
+      padding-right: 20px;
+    }
+    
+    .tabs {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .tab {
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: var(--transition);
+      text-align: left;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .tab::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--primary);
+      transform: scaleX(0);
+      transition: var(--transition);
+    }
+    
+    .tab:hover {
+      background: var(--card-light);
+      color: var(--accent);
+    }
+    
+    .tab.active {
+      background: var(--card-light);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    
+    .tab.active::before {
+      transform: scaleX(1);
+    }
+    
+    .tab-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .admin-main {
+      flex: 1;
+      overflow: auto;
+      padding: 8px;
+    }
+    
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .list {
+      max-height: 380px;
+      overflow: auto;
+      border-top: 1px solid var(--border-light);
+      padding-top: 16px;
+    }
+    
+    .item {
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+      background: var(--card-light);
+      border: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--primary);
+      transform: scaleX(0);
+      transition: var(--transition);
+    }
+    
+    .item:hover {
+      background: var(--card);
+      transform: translateX(4px);
+    }
+    
+    .item:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .item .meta {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    
+    .small-note {
+      font-size: 13px;
+      color: var(--muted-light);
+      margin-top: 8px;
+      line-height: 1.4;
+      font-weight: 400;
+    }
+
+    footer {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-light);
+    }
+    
+    .code-pill {
+      background: var(--card-light);
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      font-size: 13px;
+    }
+    
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+    
+    .status-planning {
+      background: rgba(254, 243, 199, 0.1);
+      color: #fef3c7;
+      border: 1px solid rgba(254, 243, 199, 0.2);
+    }
+    
+    .status-design {
+      background: rgba(219, 234, 254, 0.1);
+      color: #dbeafe;
+      border: 1px solid rgba(219, 234, 254, 0.2);
+    }
+    
+    .status-development {
+      background: rgba(209, 250, 229, 0.1);
+      color: #d1fae5;
+      border: 1px solid rgba(209, 250, 229, 0.2);
+    }
+    
+    .status-review {
+      background: rgba(252, 231, 243, 0.1);
+      color: #fce7f3;
+      border: 1px solid rgba(252, 231, 243, 0.2);
+    }
+    
+    .status-finished {
+      background: rgba(220, 252, 231, 0.1);
+      color: #dcfce7;
+      border: 1px solid rgba(220, 252, 231, 0.2);
+    }
+
+    /* New interactive elements */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      color: var(--accent);
+      z-index: 1001;
+      transform: translateX(150%);
+      transition: transform 0.3s ease;
+      border-left: 4px solid var(--primary);
+      font-weight: 500;
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+    
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .stat-card {
+      background: var(--card-light);
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-light);
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--primary);
+      transform: scaleX(0);
+      transition: var(--transition);
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    .stat-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    
+    .search-box {
+      position: relative;
+      margin-bottom: 16px;
+    }
+    
+    .search-box input {
+      padding-left: 40px;
+    }
+    
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+    
+    .welcome-section {
+      text-align: center;
+      padding: 20px;
+      margin-bottom: 24px;
+      background: var(--card-light);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-light);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .welcome-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+    }
+    
+    .welcome-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+    
+    .welcome-subtitle {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+      font-weight: 400;
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .cols {
+        grid-template-columns: 1fr;
+      }
+      
+      header h1 {
+        font-size: 22px;
+      }
+      
+      .admin-shell {
+        flex-direction: column;
+      }
+      
+      .admin-left {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+        padding-right: 0;
+        padding-bottom: 20px;
+      }
+      
+      .tabs {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 8px;
+      }
+      
+      .stats-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="notification" id="notification"></div>
+  
+  <div class="container" role="main">
+    <header>
+      <h1><span class="logo">LTA</span> Life Times Agency •   </h1>
+      <div class="muted">Accede con tu código de cliente o administra desde el panel</div>
+    </header>
+
+    <div class="welcome-section">
+      <div class="welcome-title">Bienvenido al Portal de Clientes</div>
+      <div class="welcome-subtitle">Gestiona tus proyectos, comunícate con nuestro equipo y realiza un seguimiento del progreso de tus trabajos de forma sencilla y eficiente.</div>
+    </div>
+
+    <div class="cols">
+      <!-- Left: Login / Registro -->
+      <div>
+        <div class="panel" id="authPanel">
+          <h3>Iniciar sesión</h3>
+          <p class="small">Introduce tu correo y el <strong>código de cliente</strong> que te facilitó la agencia.</p>
+          <label>Correo</label>
+          <input id="loginEmail" type="text" placeholder="cliente@empresa.com">
+          <label>Código de cliente</label>
+          <input id="loginCode" type="text" placeholder="ABC12345">
+          <div style="height:12px"></div>
+          <button id="btnLogin">Entrar al portal</button>
+
+          <hr>
+          <h4>¿Aún no tienes código?</h4>
+          <p class="small">Solicítalo a tu ejecutivo. También puedes registrarte provisoriamente y pedir que el administrador valide tu cuenta.</p>
+          <label>Correo</label>
+          <input id="regEmail" type="text" placeholder="cliente@empresa.com">
+          <label>Código temporal (opcional)</label>
+          <input id="regCode" type="text" placeholder="Si tienes, ingrésalo">
+          <div style="height:12px"></div>
+          <button id="btnRegister" style="background:var(--primary); color:white;">Registrarme</button>
+
+          <hr>
+          <div class="small">Panel administrativo</div>
+          <label>Contraseña admin</label>
+          <input id="adminPw" type="password" placeholder="(solo para dueños/ejecutivos)">
+          <div style="height:8px"></div>
+          <button id="btnAdminLogin" class="btn-ghost">Abrir panel admin</button>
+        </div>
+
+        <div class="panel" style="margin-top:20px">
+          <h4>Información</h4>
+          <p class="small">Este prototipo funciona con <strong>localStorage</strong> en el navegador para que puedas probarlo sin backend. Al exportar datos o conectar un servidor, podrá persistir de forma centralizada.</p>
+          <ul class="small">
+            <li>Crear clientes con su código único</li>
+            <li>Asignarles proyectos y actualizar progreso</li>
+            <li>Clientes ven su tablero tras iniciar sesión</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right: Dashboard -->
+      <div>
+        <div class="panel" id="dashboard" style="display:none">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div>
+              <h3 id="dashTitle">Bienvenido</h3>
+              <div class="small" id="dashEmail">cliente@empresa.com</div>
+            </div>
+            <div>
+              <button id="btnLogout" class="btn-ghost">Cerrar sesión</button>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- Stats Section (New Feature) -->
+          <div class="stats-container" id="statsContainer"></div>
+
+          <h4>Proyectos</h4>
+          <div id="projectsList" style="margin-top:16px"></div>
+
+          <footer>
+            <div class="muted">Código cliente:</div>
+            <div id="clientCode" class="code-pill">—</div>
+            <div style="flex:1"></div>
+            <button id="btnRequestUpdate" class="btn-ghost">Solicitar actualización</button>
+          </footer>
+        </div>
+
+        <!-- Admin modal with tabs -->
+        <div class="modal" id="adminModal">
+          <div class="admin-shell" role="dialog" aria-modal="true">
+            <div class="admin-left">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+                <h3>Panel Administrador</h3>
+                <button id="closeAdmin" class="btn-ghost">Cerrar</button>
+              </div>
+              
+              <!-- Search Box (New Feature) -->
+              <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="adminSearch" placeholder="Buscar...">
+              </div>
+              
+              <div class="tabs">
+                <div class="tab active" data-tab="pending">
+                  <span class="tab-icon">📋</span>
+                  Proyectos Pendientes
+                </div>
+                <div class="tab" data-tab="finalized">
+                  <span class="tab-icon">✅</span>
+                  Proyectos Finalizados
+                </div>
+                <div class="tab" data-tab="messages">
+                  <span class="tab-icon">💬</span>
+                  Mensajes
+                </div>
+                <div class="tab" data-tab="clients">
+                  <span class="tab-icon">👥</span>
+                  Clientes
+                </div>
+                <hr style="border:none;border-top:1px solid var(--border-light);margin:12px 0">
+                <div style="font-size:12px;color:var(--muted)">Acciones rápidas</div>
+                <button id="genCode" class="btn-ghost">Generar código</button>
+                <div style="height:8px"></div>
+                <input id="newClientCode" type="text" placeholder="Código generado" readonly>
+                <div style="height:8px"></div>
+                <input id="newClientEmail" type="text" placeholder="Correo cliente">
+                <button id="createClient" style="background:var(--primary); color:white;">Crear cliente</button>
+              </div>
+            </div>
+
+            <div class="admin-main">
+              <!-- PENDING -->
+              <div class="tab-panel" data-panel="pending">
+                <div class="section-title">
+                  <h4>Proyectos Pendientes</h4>
+                  <div class="small-note">Actualiza progreso, responde mensajes o marca como terminado.</div>
+                </div>
+                <div id="pendingList" class="list"></div>
+                <div style="margin-top:16px">
+                  <h4>Crear nuevo proyecto para cliente</h4>
+                  <label>Título</label>
+                  <input id="newProjTitle" type="text" placeholder="Nombre del proyecto">
+                  <label>Cliente (código)</label>
+                  <input id="newProjClient" type="text" placeholder="LIVES-001">
+                  <label>% avance inicial</label>
+                  <input id="newProjPct" type="text" placeholder="0">
+                  <div style="height:8px"></div>
+                  <button id="createProj">Crear proyecto</button>
+                </div>
+              </div>
+
+              <!-- FINALIZED -->
+              <div class="tab-panel" data-panel="finalized" style="display:none">
+                <div class="section-title">
+                  <h4>Proyectos Finalizados</h4>
+                  <div class="small-note">Proyectos con fecha final acordada. Puedes iniciar nuevos proyectos para esos clientes.</div>
+                </div>
+                <div id="finalizedList" class="list"></div>
+              </div>
+
+              <!-- MESSAGES -->
+              <div class="tab-panel" data-panel="messages" style="display:none">
+                <div class="section-title">
+                  <h4>Mensajes</h4>
+                  <div class="small-note">Bandeja de mensajes agrupada por proyecto. Responde desde aquí.</div>
+                </div>
+                <div id="messagesList" class="list"></div>
+                <div id="messageThreadArea" style="margin-top:16px"></div>
+              </div>
+
+              <!-- CLIENTS -->
+              <div class="tab-panel" data-panel="clients" style="display:none">
+                <div class="section-title">
+                  <h4>Clientes</h4>
+                  <div class="small-note">Lista de clientes. Selecciona para ver historial o iniciar proyecto.</div>
+                </div>
+                <div id="clientsList" class="list"></div>
+                <div style="margin-top:16px">
+                  <h4>Iniciar proyecto para cliente existente</h4>
+                  <label>Selecciona cliente (código)</label>
+                  <input id="selClientCode" type="text" placeholder="LIVES-001">
+                  <label>Título</label>
+                  <input id="selProjTitle" type="text">
+                  <label>% avance inicial</label>
+                  <input id="selProjPct" type="text" placeholder="0">
+                  <div style="height:8px"></div>
+                  <button id="createProjForClient">Crear proyecto</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<script>
+/* -------------------------
+   Core prototype (local)
+   ------------------------- */
+const ADMIN_PASS = 'L!v3sT1m3s#2025';
+const qs = s => document.querySelector(s);
+const qsa = s => Array.from(document.querySelectorAll(s));
+const DBKEY = 'agencia_db';
+
+function getDB(){ return JSON.parse(localStorage.getItem(DBKEY)||'null') || {clients:[],projects:[]}; }
+function saveDB(db){ localStorage.setItem(DBKEY, JSON.stringify(db)); }
+const uid = ()=> Math.random().toString(36).slice(2,9).toUpperCase();
+
+function generateClientCode(db){
+  const next = (db.clients.length + 1);
+  return 'LIVES-' + String(next).padStart(3,'0');
+}
+function addDays(d, days){ const x=new Date(d); x.setDate(x.getDate()+days); return x; }
+function formatDate(d){ if(!d) return '—'; const dt=new Date(d); return dt.toLocaleDateString(); }
+
+// Función para obtener el color del progreso según el porcentaje
+function getProgressColor(percent) {
+  // Degradado de rojo (0%) a verde (100%)
+  const hue = (percent * 1.2); // 0-120 (rojo a verde)
+  return `hsl(${hue}, 80%, 50%)`;
+}
+
+// Función para mostrar notificaciones
+function showNotification(message, type = 'info') {
+  const notification = qs('#notification');
+  notification.textContent = message;
+  notification.className = 'notification show';
+  
+  // Auto-hide after 3 seconds
+  setTimeout(() => {
+    notification.classList.remove('show');
+  }, 3000);
+}
+
+/* bootstrap sample */
+let db = getDB();
+if(db.clients.length===0 && db.projects.length===0){
+  const sampleCode='LIVES-001';
+  db.clients.push({id:uid(),email:'cliente@ejemplo.com',code:sampleCode});
+  db.projects.push({id:uid(),title:'Sitio web corporativo',clientCode:sampleCode,progress:45,status:'Desarrollo',notes:'Maquetación y API pendientes.',messages:[],createdAt:new Date().toISOString()});
+  db.projects.push({id:uid(),title:'Video promocional 60s',clientCode:sampleCode,progress:70,status:'Revisión',notes:'Últimos ajustes de color.',messages:[],createdAt:new Date().toISOString()});
+  saveDB(db);
+}
+
+/* ---------- AUTH / UI entry ---------- */
+qs('#btnRegister').addEventListener('click', ()=>{
+  const email = qs('#regEmail').value.trim();
+  const code = qs('#regCode').value.trim();
+  if(!email) return showNotification('Ingresa un correo válido.', 'error');
+  db = getDB();
+  if(db.clients.find(c=>c.email===email)) return showNotification('Ya existe un cliente con ese correo.', 'error');
+  const existingByCode = code ? db.clients.find(c=>c.code===code) : null;
+  if(code && !existingByCode) return showNotification('Código inválido.', 'error');
+  const newCode = existingByCode ? existingByCode.code : generateClientCode(db);
+  db.clients.push({id:uid(),email,code:newCode});
+  saveDB(db);
+  showNotification('Cuenta creada. Tu código: '+newCode, 'success');
+  qs('#regEmail').value=''; qs('#regCode').value='';
+});
+
+qs('#btnLogin').addEventListener('click', ()=>{
+  const email = qs('#loginEmail').value.trim();
+  const code = qs('#loginCode').value.trim();
+  if(!email||!code) return showNotification('Correo y código requeridos.', 'error');
+  db = getDB();
+  const client = db.clients.find(c=>c.email.toLowerCase()===email.toLowerCase() && c.code===code);
+  if(!client) return showNotification('Credenciales incorrectas.', 'error');
+  localStorage.setItem('agencia_session', JSON.stringify({email:client.email,code:client.code}));
+  renderDashboard(client);
+  showNotification(`Bienvenido, ${client.email.split('@')[0]}`, 'success');
+});
+
+qs('#btnLogout').addEventListener('click', ()=>{ 
+  localStorage.removeItem('agencia_session'); 
+  showNotification('Sesión cerrada correctamente.', 'info');
+  location.reload(); 
+});
+
+/* ---------- ADMIN OPEN ---------- */
+qs('#btnAdminLogin').addEventListener('click', ()=>{
+  const pw = qs('#adminPw').value;
+  if(pw!==ADMIN_PASS) return showNotification('Contraseña incorrecta.', 'error');
+  openAdmin();
+  showNotification('Panel de administración abierto.', 'success');
+});
+
+/* tab behavior */
+qsa('.tab').forEach(t=>t.addEventListener('click', ()=>{
+  qsa('.tab').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  const tab = t.dataset.tab;
+  qsa('.tab-panel').forEach(p=>p.style.display = (p.dataset.panel===tab ? '' : 'none'));
+  // refresh lists when switching
+  if(tab==='pending') renderPending();
+  if(tab==='finalized') renderFinalized();
+  if(tab==='messages') renderMessagesList();
+  if(tab==='clients') renderClientsList();
+}));
+
+qs('#closeAdmin').addEventListener('click', ()=> {
+  qs('#adminModal').classList.remove('open');
+  showNotification('Panel de administración cerrado.', 'info');
+});
+
+function openAdmin(){ 
+  qs('#adminModal').classList.add('open'); 
+  renderPending(); 
+  renderFinalized(); 
+  renderMessagesList(); 
+  renderClientsList(); 
+}
+
+/* ---------- RENDER DASHBOARD (CLIENT) ---------- */
+function estimateDaysRemaining(project){
+  if(project.etaDays && Number(project.etaDays)>0) return Number(project.etaDays);
+  const remaining = Math.max(0,100 - (project.progress||0));
+  return Math.max(1, Math.round(remaining / 5));
+}
+
+function getStatusClass(status) {
+  switch(status) {
+    case 'Planificación': return 'status-planning';
+    case 'Diseño': return 'status-design';
+    case 'Desarrollo': return 'status-development';
+    case 'Revisión': return 'status-review';
+    case 'Terminado': return 'status-finished';
+    default: return 'status-planning';
+  }
+}
+
+// New function to render stats
+function renderStats(client) {
+  const db = getDB();
+  const projs = db.projects.filter(p=>p.clientCode===client.code);
+  const completed = projs.filter(p => p.status === 'Terminado').length;
+  const inProgress = projs.filter(p => p.status !== 'Terminado').length;
+  const totalProgress = projs.length > 0 
+    ? Math.round(projs.reduce((sum, p) => sum + (p.progress || 0), 0) / projs.length) 
+    : 0;
+  
+  const statsContainer = qs('#statsContainer');
+  statsContainer.innerHTML = `
+    <div class="stat-card">
+      <div class="stat-value">${projs.length}</div>
+      <div class="stat-label">Proyectos Totales</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">${completed}</div>
+      <div class="stat-label">Completados</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">${totalProgress}%</div>
+      <div class="stat-label">Progreso Promedio</div>
+    </div>
+  `;
+}
+
+function renderDashboard(client){
+  qs('#authPanel').style.display='none';
+  qs('#dashboard').style.display='block';
+  qs('#dashTitle').innerText = client.email.split('@')[0].replace(/\./g,' ');
+  qs('#dashEmail').innerText = client.email;
+  qs('#clientCode').innerText = client.code;
+  
+  // Render stats
+  renderStats(client);
+  
+  const projs = getDB().projects.filter(p=>p.clientCode===client.code);
+  const list = qs('#projectsList'); list.innerHTML='';
+  if(projs.length===0) list.innerHTML='<div class="small">No hay proyectos asignados aún.</div>';
+  projs.forEach(p=>{
+    const eta = estimateDaysRemaining(p);
+    const progressColor = getProgressColor(p.progress);
+
+   // if finished and no proposedFinalDate set, set one
+    if(p.status==='Terminado' && !p.proposedFinalDate){
+      const d = addDays(new Date(), Math.floor(Math.random()*6));
+      p.proposedFinalDate = d.toISOString();
+      saveDB(getDB());
+    }
+    let finalHtml = '';
+    if(p.status==='Terminado' && p.proposedFinalDate){
+      finalHtml = `<div class="small" style="margin-top:8px">Fecha propuesta: <strong>${formatDate(p.proposedFinalDate)}</strong></div>`;
+      finalHtml += `<div style="margin-top:8px"><button class="btn-ghost acceptDate" data-id="${p.id}">Aceptar fecha</button>&nbsp;<button class="btn-ghost proposeDate" data-id="${p.id}">Proponer otra</button></div>`;
+    }
+    const el = document.createElement('div'); el.className='project';
+    el.innerHTML = `<div class="left">
+      <div style="font-weight:700">${p.title}</div>
+      <div class="small">Estado: <span class="status-badge ${getStatusClass(p.status)}">${p.status}</span> · ${p.notes||''}</div>
+      <div class="small">Tiempo estimado restante: ${eta} día(s)</div>
+      <div class="progress-container">
+        <div class="progress-info">
+          <span>Progreso</span>
+          <span>${p.progress}%</span>
+        </div>
+        <div class="progress"><i style="width:${p.progress}%; background: ${progressColor}"></i></div>
+      </div>
+      ${finalHtml}
+      <div class="messages" id="msgs-${p.id}"></div>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <input id="msgin-${p.id}" type="text" placeholder="Escribe un mensaje al ejecutivo...">
+        <button class="btn-ghost sendMsg" data-id="${p.id}">Enviar</button>
+      </div>
+    </div>
+    <div style="text-align:right"><div style="font-weight:700">${p.progress}%</div><div class="small">Última actualización</div></div>`;
+    list.appendChild(el);
+
+  // render messages list inside project
+    const msgsDiv = el.querySelector('#msgs-'+p.id);
+    msgsDiv.innerHTML = (p.messages||[]).map(m=>{
+      const time = new Date(m.ts).toLocaleString();
+      return `<div class="msg ${m.from==='client'?'client':'admin'}"><div>${m.text}</div><div class="msg-time">${m.from==='client'?'Tú':m.from} · ${time}</div></div>`;
+    }).join('');
+  });
+
+
+  // Escuchar cambios en los inputs de mensaje del cliente
+qsa('input[id^="msgin-"]').forEach(inp => {
+  inp.addEventListener('input', (e) => {
+    const id = e.target.id; 
+    localStorage.setItem('draft-'+id, e.target.value); // Guardar lo que va escribiendo
+  });
+
+  // Al volver a renderizar, restaurar el texto si existe
+  const draft = localStorage.getItem('draft-'+inp.id);
+  if (draft) inp.value = draft;
+});
+
+// Cuando se envía un mensaje
+qsa('.sendMsg').forEach(b => b.addEventListener('click', (e) => {
+  const id = e.currentTarget.dataset.id;
+  const input = qs('#msgin-'+id);
+  const txt = input.value.trim();
+  if(!txt) return;
+  db = getDB();
+  const proj = db.projects.find(x=>x.id===id);
+  if(!proj) return;
+  proj.messages = proj.messages||[];
+  proj.messages.push({from:'client',text:txt,ts:new Date().toISOString()});
+  saveDB(db);
+
+  // Limpiar input y borrador después de enviar
+  localStorage.removeItem('draft-msgin-'+id);
+  input.value='';
+  renderDashboard(client);
+  showNotification('Mensaje enviado correctamente.', 'success');
+}));
+
+
+  // bind send message handlers
+  qsa('.sendMsg').forEach(b=>b.addEventListener('click', (e)=>{
+    const id = e.currentTarget.dataset.id;
+    const input = qs('#msgin-'+id);
+    const txt = input.value.trim();
+    if(!txt) return;
+    db = getDB();
+    const proj = db.projects.find(x=>x.id===id);
+    if(!proj) return;
+    proj.messages = proj.messages||[];
+    proj.messages.push({from:'client',text:txt,ts:new Date().toISOString()});
+    saveDB(db);
+    input.value='';
+    // re-render dashboard for client
+    const sess = JSON.parse(localStorage.getItem('agencia_session')||'null');
+    if(sess) {
+      const client = getDB().clients.find(c=>c.email===sess.email && c.code===sess.code);
+      if(client) renderDashboard(client);
+    }
+  }));
+
+
+
+  // client accept/propose date handlers
+  qsa('.acceptDate').forEach(b=>b.addEventListener('click', (e)=>{
+    const id = e.currentTarget.dataset.id;
+    db = getDB();
+    const proj = db.projects.find(x=>x.id===id);
+    if(!proj) return;
+    proj.finalDate = proj.proposedFinalDate;
+    delete proj.proposedFinalDate;
+    proj.dateAcceptedByClient = new Date().toISOString();
+    saveDB(db);
+    showNotification('Has aceptado la fecha.', 'success');
+    const sess = JSON.parse(localStorage.getItem('agencia_session')||'null');
+    if(sess) {
+      const client = getDB().clients.find(c=>c.email===sess.email && c.code===sess.code);
+      if(client) renderDashboard(client);
+    }
+  }));
+  qsa('.proposeDate').forEach(b=>b.addEventListener('click', (e)=>{
+    const id = e.currentTarget.dataset.id;
+    const newDate = prompt('Ingresa la nueva fecha propuesta (YYYY-MM-DD)');
+    if(!newDate) return;
+    const d = new Date(newDate);
+    if(isNaN(d)) return showNotification('Fecha inválida', 'error');
+    db = getDB();
+    const proj = db.projects.find(x=>x.id===id);
+    if(!proj) return;
+    proj.proposedFinalDate = d.toISOString();
+    proj.dateProposedByClient = new Date().toISOString();
+    saveDB(db);
+    showNotification('Propuesta enviada al ejecutivo.', 'success');
+    const sess = JSON.parse(localStorage.getItem('agencia_session')||'null');
+    if(sess) {
+      const client = getDB().clients.find(c=>c.email===sess.email && c.code===sess.code);
+      if(client) renderDashboard(client);
+    }
+  }));
+}
+
+/* ---------- ADMIN: render lists & interactions ---------- */
+function renderPending(){
+  const db = getDB();
+  const pending = db.projects.filter(p => !(p.finalDate)); // projects without agreed finalDate
+  const container = qs('#pendingList');
+  container.innerHTML = '';
+  if(pending.length===0) container.innerHTML = '<div class="small">No hay proyectos pendientes.</div>';
+  pending.forEach(p=>{
+    const cli = db.clients.find(c=>c.code===p.clientCode) || {email:'—'};
+    const el = document.createElement('div'); el.className='item';
+    const left = document.createElement('div');
+    left.innerHTML = `<div style="font-weight:700">${p.title}</div><div class="meta">${p.clientCode} · ${cli.email}</div><div class="small-note">Estado: <span class="status-badge ${getStatusClass(p.status)}">${p.status}</span> · ${p.progress}% · ${p.notes||''}</div>`;
+    const right = document.createElement('div');
+    right.innerHTML = `<button class="btn-ghost viewProject" data-id="${p.id}">Ver / Editar</button><div style="height:8px"></div><button class="btn-ghost viewMsgs" data-id="${p.id}">Mensajes</button>`;
+    el.appendChild(left); el.appendChild(right);
+    container.appendChild(el);
+  });
+  // attach handlers
+  qsa('.viewProject').forEach(b=>b.addEventListener('click', e=>{
+    const id = e.currentTarget.dataset.id; openProjectEditor(id);
+  }));
+  qsa('.viewMsgs').forEach(b=>b.addEventListener('click', e=>{
+    const id = e.currentTarget.dataset.id; openMessageThread(id);
+  }));
+}
+
+function renderFinalized(){
+  const db = getDB();
+  const finals = db.projects.filter(p => p.finalDate); // projects with agreed finalDate
+  const container = qs('#finalizedList'); container.innerHTML='';
+  if(finals.length===0) container.innerHTML='<div class="small">No hay proyectos finalizados aún.</div>';
+  finals.forEach(p=>{
+    const cli = db.clients.find(c=>c.code===p.clientCode) || {email:'—'};
+    const el = document.createElement('div'); el.className='item';
+    el.innerHTML = `<div><div style="font-weight:700">${p.title}</div><div class="meta">${p.clientCode} · ${cli.email}</div><div class="small-note">Fecha final acordada: <strong>${formatDate(p.finalDate)}</strong></div></div>
+      <div><button class="btn-ghost newForClient" data-code="${p.clientCode}">Nuevo proyecto</button></div>`;
+    container.appendChild(el);
+  });
+  qsa('.newForClient').forEach(b=>b.addEventListener('click', e=>{
+    const code = e.currentTarget.dataset.code;
+    qs('#selClientCode').value = code;
+    // switch to clients tab
+    qsa('.tab').forEach(x=>x.classList.remove('active'));
+    const t = qsa('.tab').find(x=>x.dataset.tab==='clients'); t.classList.add('active');
+    qsa('.tab-panel').forEach(p=>p.style.display = (p.dataset.panel==='clients' ? '' : 'none'));
+    renderClientsList();
+  }));
+}
+
+function renderMessagesList(){
+  const db = getDB();
+  const threads = db.projects.map(p=>({project:p, last: (p.messages && p.messages.length) ? p.messages[p.messages.length-1] : null})).filter(x=>x.last);
+  const container = qs('#messagesList'); container.innerHTML='';
+  if(threads.length===0) container.innerHTML = '<div class="small">No hay mensajes nuevos.</div>';
+  threads.forEach(t=>{
+    const p = t.project;
+    const cli = db.clients.find(c=>c.code===p.clientCode) || {email:'—'};
+    const el = document.createElement('div'); el.className='item';
+    el.innerHTML = `<div><div style="font-weight:700">${p.title}</div><div class="meta">${p.clientCode} · ${cli.email}</div><div class="small-note">${t.last.from} · ${new Date(t.last.ts).toLocaleString()}</div></div>
+      <div><button class="btn-ghost openThread" data-id="${p.id}">Abrir</button></div>`;
+    container.appendChild(el);
+  });
+  qsa('.openThread').forEach(b=>b.addEventListener('click', e=> openMessageThread(e.currentTarget.dataset.id)));
+}
+
+function renderClientsList(){
+  const db = getDB();
+  const container = qs('#clientsList'); container.innerHTML='';
+  if(db.clients.length===0) container.innerHTML = '<div class="small">No hay clientes registrados.</div>';
+  db.clients.forEach(c=>{
+    const count = db.projects.filter(p=>p.clientCode===c.code).length;
+    const el = document.createElement('div'); el.className='item';
+    el.innerHTML = `<div><div style="font-weight:700">${c.email}</div><div class="meta">${c.code} · ${count} proyectos</div></div>
+      <div><button class="btn-ghost startFor" data-code="${c.code}">Nuevo proyecto</button></div>`;
+    container.appendChild(el);
+  });
+  qsa('.startFor').forEach(b=>b.addEventListener('click', e=>{
+    qs('#selClientCode').value = e.currentTarget.dataset.code;
+  }));
+}
+
+/* ---------- Admin actions: open editor / messages / reply / accept/reject ---------- */
+function openProjectEditor(id){
+  const db = getDB();
+  const p = db.projects.find(x=>x.id===id);
+  if(!p) return showNotification('Proyecto no encontrado', 'error');
+  // open a simple prompt-based editor for quick actions
+  const newTitle = prompt('Título', p.title); if(newTitle===null) return;
+  p.title = newTitle;
+  const newProgress = prompt('Progreso (%)', p.progress||0); if(newProgress===null) return;
+  p.progress = Math.max(0, Math.min(100, Number(newProgress)||0));
+  const newStatus = prompt('Estado (Planificación, Diseño, Desarrollo, Revisión, Terminado)', p.status||'Planificación'); if(newStatus===null) return;
+  const prev = p.status;
+  p.status = newStatus;
+  // if changed to Terminado and no proposedFinalDate -> generate one
+  if(prev!=='Terminado' && p.status==='Terminado' && !p.proposedFinalDate){
+    const d = addDays(new Date(), Math.floor(Math.random()*6));
+    p.proposedFinalDate = d.toISOString();
+  }
+  saveDB(db);
+  renderPending();
+  renderFinalized();
+  renderMessagesList();
+  showNotification('Proyecto actualizado correctamente.', 'success');
+}
+
+function openMessageThread(projId){
+  const db = getDB();
+  const proj = db.projects.find(x=>x.id===projId);
+  if(!proj) return showNotification('Proyecto no encontrado', 'error');
+  // show thread area
+  const area = qs('#messageThreadArea');
+  area.innerHTML = `<div style="padding:16px;background:var(--card-light);border-radius:var(--radius-sm);border:1px solid var(--border-light)">
+    <h4>Hilo: ${proj.title} · ${proj.clientCode}</h4>
+    <div id="threadMsgs" style="max-height:260px;overflow:auto;padding:12px;border-radius:var(--radius-sm);background:var(--card);margin-bottom:16px"></div>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <input id="adminReply" type="text" placeholder="Responder al cliente..." style="flex:1">
+      <button id="sendReply" class="btn-ghost">Enviar</button>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button id="acceptProp" class="btn-ghost">Aceptar fecha propuesta</button>
+      <button id="rejectProp" class="btn-ghost">Rechazar propuesta</button>
+      <button id="proposeNew" class="btn-ghost">Proponer nueva fecha</button>
+    </div>
+  </div>`;
+  const threadDiv = qs('#threadMsgs');
+  threadDiv.innerHTML = (proj.messages||[]).map(m=>{
+    const time = new Date(m.ts).toLocaleString();
+    return `<div style="margin-bottom:12px"><div style="font-size:12px;color:var(--muted)">${m.from} · ${time}</div><div style="padding:8px 12px;border-radius:8px;background:${m.from==='client'?'var(--card)':'var(--primary)'};color:${m.from==='client'?'var(--accent)':'white'}">${m.text}</div></div>`;
+  }).join('');
+  // handlers
+  qs('#sendReply').onclick = ()=>{
+    const txt = qs('#adminReply').value.trim(); if(!txt) return showNotification('Escribe un mensaje', 'error');
+    proj.messages = proj.messages||[];
+    proj.messages.push({from:'admin',text:txt,ts:new Date().toISOString()});
+    saveDB(db);
+    qs('#adminReply').value='';
+    openMessageThread(projId); // refresh
+    renderMessagesList();
+    renderPending();
+    showNotification('Respuesta enviada.', 'success');
+  };
+  qs('#acceptProp').onclick = ()=>{
+    if(!proj.proposedFinalDate) return showNotification('No hay fecha propuesta', 'error');
+    proj.finalDate = proj.proposedFinalDate;
+    delete proj.proposedFinalDate;
+    proj.dateAcceptedByAdmin = new Date().toISOString();
+    saveDB(db);
+    showNotification('Fecha aceptada y proyecto movido a finalizados.', 'success');
+    renderPending(); renderFinalized(); renderMessagesList();
+  };
+  qs('#rejectProp').onclick = ()=>{
+    if(!proj.proposedFinalDate) return showNotification('No hay fecha propuesta', 'error');
+    delete proj.proposedFinalDate;
+    proj.proposalRejectedAt = new Date().toISOString();
+    saveDB(db);
+    showNotification('Propuesta rechazada.', 'info');
+    renderPending(); renderMessagesList();
+    openMessageThread(projId);
+  };
+  qs('#proposeNew').onclick = ()=>{
+    const dstr = prompt('Fecha nueva (YYYY-MM-DD)'); if(!dstr) return;
+    const d = new Date(dstr); if(isNaN(d)) return showNotification('Fecha inválida', 'error');
+    proj.proposedFinalDate = d.toISOString();
+    proj.proposedByAdminAt = new Date().toISOString();
+    saveDB(db);
+    showNotification('Nueva fecha propuesta enviada al cliente.', 'success');
+    renderPending(); renderMessagesList();
+    openMessageThread(projId);
+  };
+}
+
+/* ---------- Admin quick actions ---------- */
+qs('#genCode').addEventListener('click', ()=> {
+  qs('#newClientCode').value = generateClientCode(getDB());
+  showNotification('Código generado correctamente.', 'success');
+});
+
+qs('#createClient').addEventListener('click', ()=>{
+  const email = qs('#newClientEmail').value.trim(); const code = qs('#newClientCode').value.trim();
+  if(!email||!code) return showNotification('Email y código requeridos.', 'error');
+  db = getDB(); if(db.clients.find(c=>c.code===code||c.email===email)) return showNotification('Código o email ya en uso.', 'error');
+  db.clients.push({id:uid(),email,code}); saveDB(db); qs('#newClientEmail').value=''; qs('#newClientCode').value=''; renderClientsList(); showNotification('Cliente creado correctamente.', 'success');
+});
+
+qs('#createProj').addEventListener('click', ()=>{
+  const t=qs('#newProjTitle').value.trim(); const c=qs('#newProjClient').value.trim(); const p=Number(qs('#newProjPct').value)||0;
+  if(!t||!c) return showNotification('Título y código cliente requeridos.', 'error');
+  db=getDB(); if(!db.clients.find(x=>x.code===c)) return showNotification('Código cliente no existe.', 'error');
+  db.projects.push({id:uid(),title:t,clientCode:c,progress:Math.max(0,Math.min(100,p)),status:'Planificación',notes:'',messages:[],createdAt:new Date().toISOString()});
+  saveDB(db); qs('#newProjTitle').value=''; qs('#newProjClient').value=''; qs('#newProjPct').value=''; renderPending(); showNotification('Proyecto creado correctamente.', 'success');
+});
+
+qs('#createProjForClient').addEventListener('click', ()=>{
+  const c = qs('#selClientCode').value.trim(); const t = qs('#selProjTitle').value.trim(); const p = Number(qs('#selProjPct').value)||0;
+  if(!c||!t) return showNotification('Cliente y título requeridos.', 'error');
+  db=getDB(); if(!db.clients.find(x=>x.code===c)) return showNotification('Cliente no existe.', 'error');
+  db.projects.push({id:uid(),title:t,clientCode:c,progress:Math.max(0,Math.min(100,p)),status:'Planificación',notes:'',messages:[],createdAt:new Date().toISOString()});
+  saveDB(db); qs('#selProjTitle').value=''; qs('#selProjPct').value=''; renderClientsList(); showNotification('Proyecto creado para cliente.', 'success');
+});
+
+/* ---------- Search functionality (New Feature) ---------- */
+qs('#adminSearch').addEventListener('input', (e) => {
+  const searchTerm = e.target.value.toLowerCase();
+  const currentTab = document.querySelector('.tab.active').dataset.tab; 
+  
+  // Filter items based on current tab
+  if (currentTab === 'pending') {
+    filterItems('#pendingList .item', searchTerm);
+  } else if (currentTab === 'finalized') {
+    filterItems('#finalizedList .item', searchTerm);
+  } else if (currentTab === 'messages') {
+    filterItems('#messagesList .item', searchTerm);
+  } else if (currentTab === 'clients') {
+    filterItems('#clientsList .item', searchTerm);
+  }
+});
+
+function filterItems(selector, searchTerm) {
+  const items = document.querySelectorAll(selector);
+  items.forEach(item => {
+    const text = item.textContent.toLowerCase();
+    if (text.includes(searchTerm)) {
+      item.style.display = 'flex';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+
+/* ---------- Export / Import (keep existing) ---------- */
+qs('#exportBtn')?.addEventListener('click', ()=>{
+  const data = JSON.stringify(getDB(),null,2); const w=window.open(); w.document.write('<pre>'+data.replace(/</g,'&lt;')+'</pre>');
+});
+qs('#importBtn')?.addEventListener('click', ()=>{
+  try{ const data = JSON.parse(qs('#importArea').value); if(!data) throw 0; localStorage.setItem(DBKEY,JSON.stringify(data)); alert('Importado. Recarga la página.'); }catch(e){alert('JSON inválido.');}
+});
+
+/* ---------- Auto-login session if exists ---------- */
+const sess = JSON.parse(localStorage.getItem('agencia_session')||'null');
+if(sess){
+  const client = getDB().clients.find(c=>c.email===sess.email && c.code===sess.code);
+  if(client) renderDashboard(client);
+}
+
+/* ---------- Periodic UI refresh to simulate "realtime" updates in admin when client sends messages ---------- */
+setInterval(()=>{
+  if(document.querySelector('.modal.open')){ renderMessagesList(); renderPending(); renderFinalized(); renderClientsList(); }
+  // if client dashboard open, refresh it (so messages appear)
+  const s = JSON.parse(localStorage.getItem('agencia_session')||'null');
+  if(s){
+    const client = getDB().clients.find(c=>c.email===s.email && c.code===s.code);
+    if(client) renderDashboard(client);
+  }
+}, 2000);
+
+/* MESSAGE THREAD */
+function viewThread(projId){
+  const project = db.projects.find(p=>p.id===projId);
+  const area = qs('#messageThreadArea');
+  area.innerHTML=`<h4>Mensajes: ${project.title}</h4>`;
+  project.messages.forEach(m=>{
+    const div=document.createElement('div');
+    div.className='msg '+(m.from==='client'?'client':'admin');
+    div.innerHTML=`<div>${m.text}</div><div class="small">${new Date(m.time).toLocaleString()}</div>`;
+    area.appendChild(div);
+  });
+  const txt = document.createElement('textarea'); txt.placeholder='Responder...'; txt.style.width='100%';
+  const btn = document.createElement('button'); btn.textContent='Enviar respuesta';
+  btn.addEventListener('click',()=>{
+    if(!txt.value) return; project.messages.push({from:'admin',text:txt.value,time:new Date().toISOString()});
+    saveDB(db); viewThread(projId);
+  });
+  area.appendChild(txt); area.appendChild(btn);
+}
+
+// New feature: Request update button
+qs('#btnRequestUpdate').addEventListener('click', () => {
+  showNotification('Solicitud de actualización enviada al administrador.', 'info');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LIFETIMES AGENCY - Arquitectos de Marcas y Estrategias</title>
+  <meta name="description" content="LIFETIMES AGENCY - Arquitectos de marcas y estrategias de impacto" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ===== NUEVA INTRO ANIMATION COMPLETAMENTE REDISEÑADA ===== */
+    #intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      overflow: hidden;
+    }
+    
+    .intro-fullscreen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://static.muanhanh.com/images/dia-diem/ho-chi-minh/the-log/the-log-1.jpg') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+    }
+    
+    .intro-fullscreen.active {
+      transform: translateY(-100%);
+    }
+    
+    /* Texto agregado para "Ejemplo Producción Audiovisual" */
+    .intro-text {
+      position: absolute;
+      top: 50%;
+      left: 10%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: left;
+      max-width: 500px;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+      font-family: 'Inter', sans-serif;
+      opacity: 0;
+      animation: fadeInText 1s ease 0.5s forwards;
+    }
+    
+    @keyframes fadeInText {
+      to {
+        opacity: 1;
+      }
+    }
+    
+    .intro-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transform: translateY(100%);
+      transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1) 0.8s;
+    }
+    
+    .intro-content.active {
+      transform: translateY(0);
+    }
+    
+    .intro-logo {
+      font-size: 5rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      color: #000000;
+      margin-bottom: 2rem;
+      font-family: 'Inter', sans-serif;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease 1.5s forwards;
+    }
+    
+    .intro-tagline {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #666;
+      text-align: center;
+      max-width: 500px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease 1.8s forwards;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ===== VARIABLES Y ESTILOS GENERALES ===== */
+    :root{
+      --bg:#ffffff;
+      --fg:#111111;
+      --muted:#6b7280;
+      --accent:#000000;
+      --accent-2:#f5f5f5;
+      --ring:#11111133;
+      --success:#2da316;
+      --primary: #1a1a1a;
+      --secondary: #4a4a4a;
+      --accent-color: #e72525;
+      --light-bg: #f8f9fa;
+      --border: #e0e0e0;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.6;}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:1200px;margin-inline:auto;padding-inline:20px}
+    
+    /* ===== BOTONES MEJORADOS ===== */
+    .btn{
+      display:inline-flex;
+      gap:.6rem;
+      align-items:center;
+      font-weight:600;
+      border:1px solid var(--primary);
+      padding:.85rem 1.5rem;
+      border-radius:8px;
+      transition:all 0.3s ease;
+      font-size: 0.95rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    }
+    .btn.fill{
+      background:var(--primary);
+      color:#fff;
+    }
+    .btn.fill:hover{
+      background:var(--secondary);
+      border-color:var(--secondary);
+    }
+    .btn.ghost{
+      background:transparent;
+      color:var(--primary);
+    }
+    .btn.ghost:hover{
+      background:var(--primary);
+      color:#fff;
+    }
+    .btn.outline{
+      background:transparent;
+      border:2px solid var(--accent-color);
+      color:var(--accent-color);
+    }
+    .btn.outline:hover{
+      background:var(--accent-color);
+      color:#fff;
+    }
+    
+    /* ===== BOTÓN LEER MÁS MEJORADO ===== */
+    .btn-read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #000;
+      color: #fff;
+      border: 2px solid #000;
+      padding: 10px 20px;
+      border-radius: 8px; /* Cambiado de 6px a 8px */
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-read-more:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.1);
+      transition: left 0.5s ease;
+    }
+    
+    .btn-read-more:hover:before {
+      left: 100%;
+    }
+    
+    .btn-read-more:hover {
+      background: var(--accent-color); /* Cambiado a rojo */
+      border-color: var(--accent-color); /* Cambiado a rojo */
+      color: #fff; /* Letras blancas */
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
+      border:1px solid var(--fg);
+      border-radius:999px;
+      padding:.25rem .6rem;
+      font-size:.75rem;
+      background: var(--light-bg);
+    }
+   
+    /* ===== NAV RESTAURADO AL ESTILO ORIGINAL ===== */
+    .nav{
+      position:sticky;
+      top:0;
+      background:rgba(255,255,255,.9);
+      backdrop-filter:saturate(180%) blur(10px);
+      border-bottom:1px solid #eee;
+      z-index:50;
+    }
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      height:64px;
+    }
+    .logo{
+      font-weight:900;
+      letter-spacing:.02em;
+      font-size:1.25rem;
+    }
+    .nav-links{
+      display:flex;
+      gap:1.2rem;
+      align-items:center;
+    }
+    .nav-links a{
+      font-weight:600;
+    }
+    .nav-cta{
+      display:flex;
+      gap:.6rem;
+      align-items:center;
+    }
+    .mobile-toggle{
+      display:none;
+      background:#000;
+      color:#fff;
+      border:none;
+      width:40px;
+      height:40px;
+      border-radius:10px;
+    }
+    @media (max-width: 960px){
+      .nav-links{display:none}
+      .mobile-toggle{display:inline-grid;place-items:center}
+    }
+    .mobile-menu{
+      position:fixed;
+      inset:0 0 auto 0;
+      top:64px;
+      background:#fff;
+      border-top:1px solid #eee;
+      display:none;
+    }
+    .mobile-menu.open{display:block}
+    .mobile-menu a{
+      display:block;
+      padding:16px 20px;
+      border-bottom:1px solid #eee;
+      font-weight:600;
+    }
+   
+    /* ===== HERO COMPLETAMENTE REDISEÑADO ===== */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), 
+                  url('https://foodandpleasure.com/wp-content/uploads/2018/06/restaurantes-bonitos-cdmx-aromas-.jpg') no-repeat center center;
+      background-size: cover;
+      color: white;
+      padding: 0;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50px;
+      padding: 8px 16px;
+      margin-bottom: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    
+    .hero-badge .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--success);
+      display: inline-block;
+    }
+    
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      margin: 0 0 30px;
+      font-weight: 800;
+      max-width: 800px;
+    }
+    
+    .hero-description {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      max-width: 600px;
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+    
+    .hero-actions {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+    
+    .hero-btn.primary {
+      background: var(--accent-color);
+      color: white;
+      border: 2px solid var(--accent-color);
+    }
+    
+    .hero-btn.primary:hover {
+      background: transparent;
+      border-color: white;
+    }
+    
+    .hero-btn.secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+    
+    .hero-btn.secondary:hover {
+      background: white;
+      color: var(--primary);
+    }
+    
+    .hero-scroll {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      40% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+      60% {
+        transform: translateX(-50%) translateY(-5px);
+      }
+    }
+    
+    /* ===== SLIDER DE VALORES Y ASOCIACIONES REDISEÑADO - BOXES RECTANGULARES PROFESIONALES ===== */
+    .values-slider-section {
+      padding: 60px 0;
+      background: white;
+      overflow: hidden;
+      position: relative;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .values-slider-container {
+      overflow: hidden;
+      padding: 10px 0;
+      position: relative;
+    }
+    
+    .values-track {
+      display: flex;
+      gap: 25px;
+      animation: scrollValues 40s linear infinite;
+      width: max-content;
+      padding: 5px 0;
+    }
+    
+    @keyframes scrollValues {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    
+    /* MEJORAS EN EL DISEÑO DE TODAS LAS TARJETAS */
+    .value-item {
+      min-width: 300px; /* Aumentado para mejor presentación */
+      height: 150px; /* Aumentado para mejor presentación */
+      border-radius: 10px; /* Bordes más suaves */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px; /* Reducido para mejor espaciado */
+      padding: 20px 15px; /* Ajustado para mejor distribución */
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animación mejorada */
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+    }
+    
+    /* Estilos para cada tipo de fondo */
+    .value-item.type-red {
+      background: linear-gradient(135deg, #e72525 0%, #c41c1c 100%);
+      color: white;
+    }
+    
+    .value-item.type-black {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+      color: white;
+    }
+    
+    .value-item.type-white {
+      background: #ffffff;
+      color: var(--primary);
+      border: 2px solid rgba(0,0,0,0.1);
+    }
+    
+    /* NUEVA TARJETA: Medios de Comunicación - AZUL PROFESIONAL */
+    .value-item.type-blue {
+      background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    /* TARJETA: Life Times × Brand and Frame - ESTILO NEGRO */
+    .value-item.type-lifetimes-brand {
+      background: #000000;
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      justify-content: center;
+      gap: 5px; /* Reducido para mejor espaciado */
+      padding: 15px 10px; /* Reducido para centrar mejor */
+    }
+    
+    /* TARJETA: Life Times × CodeCrafts - FONDO BLANCO CON MARCO VERDE */
+    .value-item.type-lifetimes-codecrafts {
+      background: #ffffff;
+      color: var(--primary);
+      border: 3px solid #27ae60;
+      box-shadow: 0 6px 20px rgba(39, 174, 96, 0.15);
+      justify-content: center;
+      gap: 5px; /* Reducido para mejor espaciado */
+      padding: 15px 10px; /* Reducido para centrar mejor */
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .value-item.type-lifetimes-codecrafts:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #27ae60, #2ecc71);
+    }
+    
+    /* Efecto hover para cada tipo - MEJORADO */
+    .value-item:hover {
+      transform: translateY(-10px) scale(1.03); /* Efecto más pronunciado */
+    }
+    
+    .value-item.type-red:hover {
+      box-shadow: 0 15px 35px rgba(231, 37, 37, 0.3);
+      background: linear-gradient(135deg, #d32020 0%, #a81818 100%);
+    }
+    
+    .value-item.type-black:hover {
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    }
+    
+    .value-item.type-white:hover {
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      border-color: var(--accent-color);
+      background: #f8f9fa;
+    }
+    
+    .value-item.type-blue:hover {
+      box-shadow: 0 15px 35px rgba(33, 150, 243, 0.3);
+      background: linear-gradient(135deg, #1976D2 0%, #0D47A1 100%);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+    
+    .value-item.type-lifetimes-brand:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    }
+    
+    .value-item.type-lifetimes-codecrafts:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(39, 174, 96, 0.25);
+      border-color: #229954;
+      background: #f9fdfb;
+    }
+    
+    /* Efecto de brillo sutil en hover */
+    .value-item:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.8s ease;
+    }
+    
+    .value-item:hover:before {
+      left: 100%;
+    }
+    
+    /* Contenedor de icono profesional */
+    .value-icon-container {
+      width: 60px; /* Tamaño aumentado */
+      height: 60px; /* Tamaño aumentado */
+      border-radius: 12px; /* Bordes más redondeados */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s ease;
+      margin-bottom: 15px; /* Más espacio */
+    }
+    
+    /* Iconos según tipo de fondo - MEJORADO */
+    .value-item.type-red .value-icon-container {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+    }
+    
+    .value-item.type-black .value-icon-container {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+    }
+    
+    .value-item.type-white .value-icon-container {
+      background: rgba(231, 37, 37, 0.1);
+      border: 2px solid rgba(231, 37, 37, 0.3);
+    }
+    
+    .value-item.type-blue .value-icon-container {
+      background: rgba(255, 255, 255, 0.25);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+    }
+    
+    /* Para tarjetas especiales SIN icono contenedor */
+    .value-item.type-lifetimes-brand .value-icon-container,
+    .value-item.type-lifetimes-codecrafts .value-icon-container {
+      display: none; /* Eliminamos el contenedor de icono */
+    }
+    
+    /* Icono de Brand and Frame y CodeCrafts al lado del nombre - NUEVO ESTILO */
+    .brand-frame-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 8px;
+      color: #ffb74d; /* Naranja para Brand and Frame */
+      font-size: 1.2rem;
+      vertical-align: middle;
+    }
+    
+    .codecrafts-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 8px;
+      color: #27ae60; /* Verde para CodeCrafts */
+      font-size: 1.2rem;
+      vertical-align: middle;
+    }
+    
+    .value-item.type-lifetimes-brand .brand-frame-icon {
+      color: #ffffff; /* Blanco para fondo negro */
+    }
+    
+    .value-item:hover .value-icon-container {
+      transform: scale(1.15);
+    }
+    
+    .value-item.type-white:hover .value-icon-container {
+      background: rgba(231, 37, 37, 0.2);
+      border-color: rgba(231, 37, 37, 0.4);
+    }
+    
+    .value-item.type-blue:hover .value-icon-container {
+      background: rgba(255, 255, 255, 0.35);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: scale(1.15) rotate(5deg);
+    }
+    
+    /* Estilo de iconos - MEJORADO */
+    .value-icon {
+      font-size: 1.6rem; /* Iconos más grandes */
+      transition: all 0.3s ease;
+    }
+    
+    .value-item.type-red .value-icon,
+    .value-item.type-black .value-icon,
+    .value-item.type-blue .value-icon {
+      color: white;
+    }
+    
+    .value-item.type-white .value-icon {
+      color: var(--accent-color);
+    }
+    
+    /* Texto profesional - MEJORADO */
+    .value-text {
+      font-weight: 800; /* Más negrita */
+      font-size: 1.1rem; /* Tamaño ligeramente mayor */
+      line-height: 1.4; /* Mejor interlineado */
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      padding: 0 10px;
+      letter-spacing: 0.03em; /* Mejor espaciado */
+      text-transform: uppercase; /* Todo en mayúsculas para profesionalismo */
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .value-item.type-white .value-text {
+      color: var(--primary);
+    }
+    
+    /* TEXTO ESPECIAL PARA TARJETAS DE COLABORACIÓN - MEJORADO Y CORREGIDO */
+    .value-item.type-lifetimes-brand .value-text,
+    .value-item.type-lifetimes-codecrafts .value-text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 900;
+      font-size: 1.3rem; /* Ajustado para mejor ajuste */
+      letter-spacing: 0.02em; /* Mejor espaciado */
+      color: white;
+      text-align: center;
+      line-height: 1.2; /* Mejor interlineado */
+      display: flex;
+      flex-direction: column;
+      gap: 3px; /* Reducido para mejor espaciado */
+      text-transform: none;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+    }
+    
+    .value-item.type-lifetimes-codecrafts .value-text {
+      color: #1a1a1a;
+    }
+    
+    .collaboration-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      flex-wrap: nowrap;
+      margin-bottom: 5px;
+    }
+    
+    .lifetimes-name {
+      font-weight: 900;
+      font-size: 1.4rem; /* Tamaño ajustado */
+      letter-spacing: 0.03em; /* Más espaciado para elegancia */
+    }
+    
+    .value-item.type-lifetimes-codecrafts .lifetimes-name {
+      color: #1a1a1a;
+    }
+    
+    .collaboration-symbol {
+      font-size: 1.2rem;
+      font-weight: 300;
+      margin: 0 3px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .value-item.type-lifetimes-codecrafts .collaboration-symbol {
+      color: #666;
+    }
+    
+    .partner-name {
+      font-weight: 700;
+      font-size: 1.2rem; /* Tamaño ajustado */
+      color: white;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+    
+    .value-item.type-lifetimes-brand .partner-name {
+      color: #ffb74d; /* Naranja para Brand and Frame */
+    }
+    
+    .value-item.type-lifetimes-codecrafts .partner-name {
+      color: #27ae60; /* Verde para CodeCrafts */
+    }
+    
+    .partner-subtitle {
+      font-weight: 600;
+      font-size: 0.75rem; /* Reducido para que no se corte */
+      color: rgba(255, 255, 255, 0.8); /* Más visible */
+      margin-top: 5px; /* Más espacio */
+      letter-spacing: 1px; /* Más espaciado */
+      text-transform: uppercase;
+    }
+    
+    .value-item.type-lifetimes-codecrafts .partner-subtitle {
+      color: #666; /* Gris para buen contraste */
+    }
+    
+    /* Badge especial en tarjetas asociados */
+    .partner-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-size: 0.65rem; /* Reducido */
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      backdrop-filter: blur(4px);
+      z-index: 3;
+    }
+    
+    .value-item.type-lifetimes-brand .partner-badge {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .value-item.type-lifetimes-codecrafts .partner-badge {
+      background: #27ae60;
+      color: white;
+      border: 1px solid #229954;
+    }
+    
+    /* Indicador de pausa en hover */
+    .values-track.paused {
+      animation-play-state: paused;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .value-item {
+        min-width: 250px;
+        height: 130px;
+        padding: 15px 10px;
+      }
+      
+      .value-icon-container {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .value-icon {
+        font-size: 1.4rem;
+      }
+      
+      .value-text {
+        font-size: 1rem;
+      }
+      
+      /* Ajustes responsive para tarjetas especiales */
+      .value-item.type-lifetimes-brand .value-text,
+      .value-item.type-lifetimes-codecrafts .value-text {
+        font-size: 1.1rem;
+        gap: 2px;
+      }
+      
+      .lifetimes-name {
+        font-size: 1.2rem;
+      }
+      
+      .partner-name {
+        font-size: 1rem;
+      }
+      
+      .collaboration-symbol {
+        font-size: 1rem;
+      }
+      
+      .partner-subtitle {
+        font-size: 0.7rem;
+      }
+      
+      .brand-frame-icon,
+      .codecrafts-icon {
+        font-size: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .value-item {
+        min-width: 220px;
+        height: 120px;
+        padding: 12px 8px;
+      }
+      
+      .value-item.type-lifetimes-brand .value-text,
+      .value-item.type-lifetimes-codecrafts .value-text {
+        font-size: 1rem;
+        gap: 1px;
+      }
+      
+      .lifetimes-name {
+        font-size: 1.1rem;
+      }
+      
+      .partner-name {
+        font-size: 0.9rem;
+      }
+      
+      .partner-subtitle {
+        font-size: 0.65rem;
+      }
+      
+      .brand-frame-icon,
+      .codecrafts-icon {
+        font-size: 0.9rem;
+      }
+    }
+    
+    /* ===== SECCIÓN GENERAL ===== */
+    .section{
+      padding:60px 0;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section h2{
+      font-size:2.2rem;
+      margin:0 0 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      position: relative;
+      display: inline-block;
+    }
+    .section h2:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--accent-color);
+    }
+    .section-subtitle {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:30px;
+    }
+    @media (max-width: 1100px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width: 800px){.grid{grid-template-columns:1fr}}
+    
+    /* ===== SECCIÓN PROCESOS COMPACTOS ===== */
+    .process-section {
+      background: var(--light-bg);
+      padding: 80px 0;
+    }
+    
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .process-card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.05);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .process-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .process-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--accent-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: white;
+      font-size: 1.8rem;
+    }
+    
+    .process-number {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 30px;
+      margin-bottom: 15px;
+    }
+    
+    .process-card h3 {
+      font-size: 1.2rem;
+      margin: 0 0 15px;
+      color: var(--primary);
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .process-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+    
+    .process-connector {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+    
+    .process-connector:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent-color);
+      opacity: 0.3;
+      z-index: 1;
+    }
+    
+    .process-connector i {
+      background: white;
+      padding: 10px;
+      border-radius: 50%;
+      color: var(--accent-color);
+      z-index: 2;
+      position: relative;
+      border: 2px solid var(--accent-color);
+    }
+    
+    @media (max-width: 1100px) {
+      .process-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+      
+      .process-connector {
+        display: none;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .process-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+      
+      .process-card {
+        padding: 20px 15px;
+      }
+    }
+    
+    /* ===== SECCIÓN HISTORIA CON TARJETAS ROTADAS E ICONOS COLORIDOS ===== */
+    .history-section {
+      padding: 80px 0;
+      background: white;
+    }
+    
+    .history-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .history-card {
+      background: var(--light-bg);
+      border-radius: 12px;
+      padding: 40px 30px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.05);
+      transform: rotate(var(--rotation));
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      opacity: 0;
+    }
+    
+    .history-card.visible {
+      opacity: 1;
+      transform: rotate(var(--rotation));
+    }
+    
+    .history-card:nth-child(1) {
+      --rotation: -4deg;
+    }
+    
+    .history-card:nth-child(2) {
+      --rotation: 3deg;
+    }
+    
+    .history-card:nth-child(3) {
+      --rotation: -5deg;
+    }
+    
+    .history-card:nth-child(4) {
+      --rotation: 2deg;
+    }
+    
+    .history-card:nth-child(5) {
+      --rotation: -3deg;
+    }
+    
+    .history-card:nth-child(6) {
+      --rotation: 4deg;
+    }
+    
+    .history-card:hover {
+      transform: rotate(0deg) translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+    
+    .history-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 15px;
+    }
+    
+    .history-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: white;
+      flex-shrink: 0;
+    }
+    
+    /* Colores diferentes para cada icono */
+    .history-card:nth-child(1) .history-icon {
+      background: #FF6B6B; /* Rojo coral */
+    }
+    
+    .history-card:nth-child(2) .history-icon {
+      background: #4ECDC4; /* Verde azulado */
+    }
+    
+    .history-card:nth-child(3) .history-icon {
+      background: #FFD166; /* Amarillo */
+    }
+    
+    .history-card:nth-child(4) .history-icon {
+      background: #06D6A0; /* Verde esmeralda */
+    }
+    
+    .history-card:nth-child(5) .history-icon {
+      background: #118AB2; /* Azul */
+    }
+    
+    .history-card:nth-child(6) .history-icon {
+      background: #9B5DE5; /* Púrpura */
+    }
+    
+    .history-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0 0 15px;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+    
+    .history-description {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+    
+    @media (max-width: 900px) {
+      .history-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .history-card {
+        padding: 30px 25px;
+        transform: rotate(0deg) !important;
+      }
+      
+      .history-card:hover {
+        transform: translateY(-5px) !important;
+      }
+    }
+    
+    /* ===== SECCIÓN NEGOCIO DEL MES REDISEÑADA ===== */
+    .business-of-month {
+      position: relative;
+      padding: 80px 0;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: white;
+      overflow: hidden;
+    }
+    
+    .business-of-month::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/1e/05/96/parole-polanco.jpg?w=300&h=-1&s=1') center/cover;
+      opacity: 0.1;
+    }
+    
+    .business-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    
+    .business-text {
+      padding-right: 40px;
+    }
+    
+    .business-badge {
+      display: inline-block;
+      background: #000000;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    
+    .business-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin: 0 0 20px;
+      line-height: 1.2;
+    }
+    
+    .business-description {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+    
+    .business-stats {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .stat {
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ff6b00;
+      display: block;
+    }
+    
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    
+    .business-gallery {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .featured-image {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      transition: transform 0.5s ease;
+    }
+    
+    .featured-image:hover {
+      transform: scale(1.03);
+    }
+    
+    .featured-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    @media (max-width: 900px) {
+      .business-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .business-text {
+        padding-right: 0;
+      }
+      
+      .business-stats {
+        justify-content: center;
+      }
+    }
+    
+    /* ===== FOOTER (MANTENIDO COMO ESTÁ) ===== */
+    .footer{border-top:1px solid #eee;padding:28px 0 48px;color:#444}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:16px}
+    .footer h4{margin:0 0 8px}
+    .footer a{display:block;padding:4px 0;color:#444}
+    @media (max-width: 900px){.footer-grid{grid-template-columns:1fr 1fr}}
+    @media (max-width: 560px){.footer-grid{grid-template-columns:1fr}}
+   
+    /* ===== UTILIDADES ===== */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    
+    /* SOCIAL ICONS */
+    .fa-instagram { color: #C13584; }
+    .fa-youtube { color: #FF0000; }
+    .fa-tiktok { color: #000000; }
+
+    /* MAIN CONTENT - inicialmente oculto */
+    #main-content {
+      display: none;
+    }
+    
+    /* ===== NUEVOS ESTILOS PARA FUNCIONALIDADES ADICIONALES ===== */
+    .stats-section {
+      background: var(--light-bg);
+      padding: 60px 0;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      text-align: center;
+    }
+    .stat-item {
+      padding: 20px;
+    }
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent-color);
+      margin-bottom: 10px;
+    }
+    .stat-label {
+      color: var(--muted);
+      font-weight: 600;
+    }
+    
+    .testimonial-section {
+      padding: 60px 0;
+      background: white;
+    }
+    .testimonial {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 40px;
+      background: var(--light-bg);
+      border-radius: 12px;
+    }
+    .testimonial-text {
+      font-size: 1.2rem;
+      font-style: italic;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .testimonial-author {
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .testimonial-role {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero {
+        min-height: 80vh;
+        text-align: center;
+      }
+      .hero-content {
+        padding: 0 15px;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .intro-logo {
+        font-size: 3rem;
+      }
+      .intro-text {
+        font-size: 1.8rem;
+        left: 5%;
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NUEVA INTRO ANIMATION COMPLETAMENTE REDISEÑADA -->
+  <div id="intro">
+    <div class="intro-fullscreen" id="introFullscreen">
+      <!-- Texto agregado para "Ejemplo Producción Audiovisual" -->
+      <div class="intro-text">Asociados con Nauctic Estudio</div>
+    </div>
+    <div class="intro-content" id="introContent">
+      <div class="intro-logo">LIFETIMES</div>
+      <div class="intro-tagline">Arquitectos de marcas y estrategias de impacto</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT (hidden initially) -->
+  <div id="main-content">
+    <header class="nav">
+      <div class="container nav-inner">
+        <button class="mobile-toggle" aria-label="Abrir menú" id="menuBtn">≡</button>
+        <a class="logo" href="#" aria-label="Inicio" title="Inicio">
+          LIFETIMES<span style="font-weight:300"> AGENCY</span>
+        </a>
+        <nav class="nav-links" aria-label="Principal">
+          <a href="General.html">Novedades</a>
+          <a href="Terminos y Condiciones.html">Terminos y Condiciones</a>
+          <a href="Servicios.html">Servicios</a>
+        </nav>
+        <div class="nav-cta">
+          <a class="btn ghost" href="portal.html" aria-label="Buscar">Portal</a>
+        </div>
+      </div>
+      <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <a href="Servicios.html">Servicios</a>
+        <a href="General.html">Novedades</a>
+        <a href="Terminos y Condiciones.html">Terminos y Condiciones</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO COMPLETAMENTE REDISEÑADO -->
+      <section class="hero">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="dot"></span> Agencia Certificada
+          </div>
+          <h1>Arquitectura de Marcas que Transforma Negocios</h1>
+          <div class="hero-description">
+            <p>En LIFETIMES somos arquitectos de marcas y estrategias de impacto. Diseñamos campañas publicitarias de alto nivel, marketing digital inteligente y experiencias creativas que impulsan negocios a crecer y liderar en su sector.</p>
+            <p>Si buscas posicionar tu negocio, destacar sobre la competencia y generar resultados tangibles, somos el socio estratégico que necesitas.</p>
+          </div>
+          <div class="hero-actions">
+            <a href="Servicios.html" class="hero-btn primary">Conoce Nuestros Servicios</a>
+            <a href="Contacto.html" class="hero-btn secondary">Solicitar Consultoría</a>
+          </div>
+        </div>
+        <div class="hero-scroll">
+          <span>Desplázate para descubrir</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </section>
+
+      <!-- SLIDER DE VALORES Y ASOCIACIONES REDISEÑADO - BOXES RECTANGULARES PROFESIONALES -->
+      <section class="values-slider-section">
+        <div class="container">
+          <div class="values-slider-container">
+            <div class="values-track" id="valuesTrack">
+              <!-- NUEVO ORDEN CON LA TARJETA AZUL AGREGADA -->
+              
+              <!-- 1. Estrategias Personalizadas (ROJO) -->
+              <div class="value-item type-red">
+                <div class="value-icon-container">
+                  <i class="fas fa-chess value-icon"></i>
+                </div>
+                <div class="value-text">Estrategias Personalizadas</div>
+              </div>
+              
+              <!-- 2. Life Times × Brand and Frame (NEGRO) -->
+              <div class="value-item type-lifetimes-brand">
+                <div class="partner-badge">CREATIVE PARTNER</div>
+                <div class="value-text">
+                  <div class="collaboration-title">
+                    <span class="lifetimes-name">Life Times</span>
+                    <span class="collaboration-symbol">×</span>
+                    <span class="partner-name">
+                      Brand and Frame
+                      <span class="brand-frame-icon">
+                        <i class="fas fa-palette"></i>
+                      </span>
+                    </span>
+                  </div>
+                  <div class="partner-subtitle">COLABORACIÓN CREATIVA</div>
+                </div>
+              </div>
+              
+              <!-- 3. Campañas de Alto Impacto (NEGRO) -->
+              <div class="value-item type-black">
+                <div class="value-icon-container">
+                  <i class="fas fa-bullhorn value-icon"></i>
+                </div>
+                <div class="value-text">Campañas de Alto Impacto</div>
+              </div>
+              
+              <!-- 4. Life Times × CodeCrafts (BLANCO CON MARCO VERDE) -->
+              <div class="value-item type-lifetimes-codecrafts">
+                <div class="partner-badge">TECH PARTNER</div>
+                <div class="value-text">
+                  <div class="collaboration-title">
+                    <span class="lifetimes-name">Life Times</span>
+                    <span class="collaboration-symbol">×</span>
+                    <span class="partner-name">
+                      CodeCrafts
+                      <span class="codecrafts-icon">
+                        <i class="fas fa-code"></i>
+                      </span>
+                    </span>
+                  </div>
+                  <div class="partner-subtitle">DESARROLLO TECNOLÓGICO</div>
+                </div>
+              </div>
+              
+              <!-- 5. Comunidad de Negocios (BLANCO) -->
+              <div class="value-item type-white">
+                <div class="value-icon-container">
+                  <i class="fas fa-users value-icon"></i>
+                </div>
+                <div class="value-text">Comunidad de Negocios</div>
+              </div>
+              
+              <!-- 6. Soporte Especializado (ROJO) -->
+              <div class="value-item type-red">
+                <div class="value-icon-container">
+                  <i class="fas fa-headset value-icon"></i>
+                </div>
+                <div class="value-text">Soporte Especializado</div>
+              </div>
+              
+              <!-- 7. NUEVA TARJETA: Medios de Comunicación (AZUL) -->
+              <div class="value-item type-blue">
+                <div class="value-icon-container">
+                  <i class="fas fa-globe-americas value-icon"></i>
+                </div>
+                <div class="value-text">Medio de Comunicación</div>
+              </div>
+              
+              <!-- 8. Resultados Medibles (NEGRO) -->
+              <div class="value-item type-black">
+                <div class="value-icon-container">
+                  <i class="fas fa-chart-line value-icon"></i>
+                </div>
+                <div class="value-text">Resultados Medibles</div>
+              </div>
+              
+              <!-- DUPLICADOS PARA EFECTO INFINITO (mismo orden) -->
+              
+              <!-- 1. Estrategias Personalizadas (ROJO) -->
+              <div class="value-item type-red">
+                <div class="value-icon-container">
+                  <i class="fas fa-chess value-icon"></i>
+                </div>
+                <div class="value-text">Estrategias Personalizadas</div>
+              </div>
+              
+              <!-- 2. Life Times × Brand and Frame (NEGRO) -->
+              <div class="value-item type-lifetimes-brand">
+                <div class="partner-badge">CREATIVE PARTNER</div>
+                <div class="value-text">
+                  <div class="collaboration-title">
+                    <span class="lifetimes-name">Life Times</span>
+                    <span class="collaboration-symbol">×</span>
+                    <span class="partner-name">
+                      Brand and Frame
+                      <span class="brand-frame-icon">
+                        <i class="fas fa-palette"></i>
+                      </span>
+                    </span>
+                  </div>
+                  <div class="partner-subtitle">COLABORACIÓN CREATIVA</div>
+                </div>
+              </div>
+              
+              <!-- 3. Campañas de Alto Impacto (NEGRO) -->
+              <div class="value-item type-black">
+                <div class="value-icon-container">
+                  <i class="fas fa-bullhorn value-icon"></i>
+                </div>
+                <div class="value-text">Campañas de Alto Impacto</div>
+              </div>
+              
+              <!-- 4. Life Times × CodeCrafts (BLANCO CON MARCO VERDE) -->
+              <div class="value-item type-lifetimes-codecrafts">
+                <div class="partner-badge">TECH PARTNER</div>
+                <div class="value-text">
+                  <div class="collaboration-title">
+                    <span class="lifetimes-name">Life Times</span>
+                    <span class="collaboration-symbol">×</span>
+                    <span class="partner-name">
+                      CodeCrafts
+                      <span class="codecrafts-icon">
+                        <i class="fas fa-code"></i>
+                      </span>
+                    </span>
+                  </div>
+                  <div class="partner-subtitle">DESARROLLO TECNOLÓGICO</div>
+                </div>
+              </div>
+              
+              <!-- 5. Comunidad de Negocios (BLANCO) -->
+              <div class="value-item type-white">
+                <div class="value-icon-container">
+                  <i class="fas fa-users value-icon"></i>
+                </div>
+                <div class="value-text">Comunidad de Negocios</div>
+              </div>
+              
+              <!-- 6. Soporte Especializado (ROJO) -->
+              <div class="value-item type-red">
+                <div class="value-icon-container">
+                  <i class="fas fa-headset value-icon"></i>
+                </div>
+                <div class="value-text">Soporte Especializado</div>
+              </div>
+              
+              <!-- 7. NUEVA TARJETA: Medios de Comunicación (AZUL) -->
+              <div class="value-item type-blue">
+                <div class="value-icon-container">
+                  <i class="fas fa-globe-americas value-icon"></i>
+                </div>
+                <div class="value-text">Medios de Comunicación</div>
+              </div>
+              
+              <!-- 8. Resultados Medibles (NEGRO) -->
+              <div class="value-item type-black">
+                <div class="value-icon-container">
+                  <i class="fas fa-chart-line value-icon"></i>
+                </div>
+                <div class="value-text">Resultados Medibles</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN DE ESTADÍSTICAS (NUEVA) -->
+      <section class="stats-section">
+        <div class="container">
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-number" data-target="150">0</div>
+              <div class="stat-label">Clientes Satisfechos</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" data-target="240">0</div>
+              <div class="stat-label">Proyectos Completados</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" data-target="80">0</div>
+              <div class="stat-label">Tasa de Éxito</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" data-target="5">0</div>
+              <div class="stat-label">Años de Experiencia</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN DE PROCESOS COMPACTOS -->
+      <section class="process-section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Nuestro Proceso de Trabajo</h2>
+            <p class="section-subtitle">Seguimos una metodología probada para garantizar el éxito de cada proyecto</p>
+          </div>
+          
+          <div class="process-grid">
+            <!-- Paso 1 -->
+            <div class="process-card">
+              <div class="process-number">1</div>
+              <div class="process-icon">
+                <i class="fas fa-search"></i>
+              </div>
+              <h3>Consulta Inicial y Análisis</h3>
+              <p>Comprendemos tus objetivos, audiencia y desafíos mediante un análisis exhaustivo de mercado.</p>
+            </div>
+            
+            <!-- Conector -->
+            <div class="process-connector">
+              <i class="fas fa-arrow-right"></i>
+            </div>
+            
+            <!-- Paso 2 -->
+            <div class="process-card">
+              <div class="process-number">2</div>
+              <div class="process-icon">
+                <i class="fas fa-chess-knight"></i>
+              </div>
+              <h3>Desarrollo de Estrategia</h3>
+              <p>Creamos un plan personalizado con branding, posicionamiento y métricas de éxito.</p>
+            </div>
+            
+            <!-- Conector -->
+            <div class="process-connector">
+              <i class="fas fa-arrow-right"></i>
+            </div>
+            
+            <!-- Paso 3 -->
+            <div class="process-card">
+              <div class="process-number">3</div>
+              <div class="process-icon">
+                <i class="fas fa-paint-brush"></i>
+              </div>
+              <h3>Implementación Creativa</h3>
+              <p>Nuestro equipo desarrolla todos los elementos creativos y tácticos necesarios.</p>
+            </div>
+            
+            <!-- Conector -->
+            <div class="process-connector">
+              <i class="fas fa-arrow-right"></i>
+            </div>
+            
+            <!-- Paso 4 -->
+            <div class="process-card">
+              <div class="process-number">4</div>
+              <div class="process-icon">
+                <i class="fas fa-rocket"></i>
+              </div>
+              <h3>Lanzamiento y Seguimiento</h3>
+              <p>Implementamos la campaña y monitoreamos resultados en tiempo real para optimizar.</p>
+            </div>
+            
+            <!-- Conector -->
+            <div class="process-connector">
+              <i class="fas fa-arrow-right"></i>
+            </div>
+            
+            <!-- Paso 5 -->
+            <div class="process-card">
+              <div class="process-number">5</div>
+              <div class="process-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h3>Evaluación y Escalamiento</h3>
+              <p>Analizamos resultados finales y desarrollamos estrategias para escalar el éxito.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN NEGOCIO DEL MES REDISEÑADA -->
+      <section class="business-of-month">
+        <div class="container">
+          <div class="business-content">
+            <div class="business-text">
+              <span class="business-badge">Negocio del Mes</span>
+              <h2 class="business-title">Sabores de Chile: Una Historia de Éxito</h2>
+              <p class="business-description">
+                Camila y José trajeron a la Ciudad de México los auténticos sabores de Chile. 
+                En su local encontrarás empanadas de pino hechas a mano, mote con huesillo y 
+                postres tradicionales que te harán viajar al corazón de su tierra natal.
+              </p>
+              <p class="business-description">
+                Más que comida, ofrecen una experiencia cultural: cada platillo cuenta una
+                historia y cada bocado conecta México con Chile. Ven y descubre un pedacito
+                de Chile sin salir de la ciudad.
+              </p>
+              
+              <div class="business-stats">
+                <div class="stat">
+                  <span class="stat-number">+300%</span>
+                  <span class="stat-label">Crecimiento</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-number">4.9★</span>
+                  <span class="stat-label">Rating</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-number">2</span>
+                  <span class="stat-label">Sucursales</span>
+                </div>
+              </div>
+              
+              <div style="display:flex;gap:15px;flex-wrap:wrap;">
+                <a href="Novedades.html" class="btn-read-more">
+                  <i class="fas fa-book-open"></i> Ver Historia Completa
+                </a>
+                <a href="Contacto.html" class="btn ghost" style="background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.3);">
+                  <i class="fas fa-star"></i> ¿Es tu negocio el próximo?
+                </a>
+              </div>
+            </div>
+            
+            <div class="business-gallery">
+              <div class="featured-image">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/24/6e/86/96/parole-polanco.jpg?w=1400&h=800&s=1" alt="Sabores de Chile - Negocio del Mes">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN DE HISTORIA CON TARJETAS ROTADAS E ICONOS COLORIDOS -->
+      <section class="history-section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Nuestra Historia y Valores</h2>
+            <p class="section-subtitle">Conoce lo que nos hace únicos y cómo trabajamos para transformar marcas</p>
+          </div>
+          
+          <div class="history-grid">
+            <div class="history-card">
+              <div class="history-header">
+                <div class="history-icon">
+                  <i class="fas fa-handshake"></i>
+                </div>
+                <h3 class="history-title">Asociados con Negocios Nacionales</h3>
+              </div>
+              <p class="history-description">
+                Colaboramos estrechamente con empresas mexicanas de todos los tamaños, desde startups hasta corporativos establecidos. Nuestra experiencia local nos permite entender las particularidades del mercado mexicano y crear estrategias que realmente funcionan en este ecosistema empresarial.
+              </p>
+            </div>
+            
+            <div class="history-card">
+              <div class="history-header">
+                <div class="history-icon">
+                  <i class="fas fa-video"></i>
+                </div>
+                <h3 class="history-title">Nauctic Studio - Nuestro Socio Principal</h3>
+              </div>
+              <p class="history-description">
+                Trabajamos en estrecha colaboración con Nauctic Studio, un estudio de edición y producción audiovisual de primer nivel. Su equipo de expertos en postproducción, animación y edición nos permite ofrecer contenido visual de alta calidad que complementa perfectamente nuestras estrategias de marca.
+              </p>
+            </div>
+            
+            <div class="history-card">
+              <div class="history-header">
+                <div class="history-icon">
+                  <i class="fas fa-users"></i>
+                </div>
+                <h3 class="history-title">Equipo Profesional y Colaboradores</h3>
+              </div>
+              <p class="history-description">
+                Contamos con un equipo central de especialistas en branding, marketing y estrategia, complementado por una red de profesionales independientes altamente calificados. Esta estructura nos permite escalar según las necesidades de cada proyecto manteniendo los más altos estándares de calidad.
+              </p>
+            </div>
+            
+            <div class="history-card">
+              <div class="history-header">
+                <div class="history-icon">
+                  <i class="fas fa-briefcase"></i>
+                </div>
+                <h3 class="history-title">Abiertos a Todo Tipo de Proyectos</h3>
+              </div>
+              <p class="history-description">
+                Aceptamos una amplia variedad de trabajos y publicaciones, desde campañas corporativas hasta proyectos creativos innovadores. Nuestra flexibilidad nos permite adaptarnos a diferentes industrias, presupuestos y objetivos, siempre buscando superar las expectativas de nuestros clientes.
+              </p>
+            </div>
+            
+            <div class="history-card">
+              <div class="history-header">
+                <div class="history-icon">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="history-title">Comprometidos con Nuestros Valores</h3>
+              </div>
+              <p class="history-description">
+                Nos reservamos el derecho de rechazar proyectos que vayan en contra de nuestros valores empresariales. Creemos en construir marcas con propósito, que contribuyan positivamente a la sociedad y operen con integridad. La ética y la responsabilidad social son pilares fundamentales de nuestro trabajo.
+              </p>
+            </div>
+            
+            <div class="history-card">
+              <div class="history-header">
+                <div class="history-icon">
+                  <i class="fas fa-rocket"></i>
+                </div>
+                <h3 class="history-title">Enfoque en Resultados Tangibles</h3>
+              </div>
+              <p class="history-description">
+                Más allá de crear diseños atractivos, nos enfocamos en generar resultados medibles para nuestros clientes. Cada estrategia está diseñada para impulsar el crecimiento, aumentar la visibilidad y mejorar el posicionamiento en el mercado. Tu éxito es nuestra principal métrica de éxito.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER (MANTENIDO EXACTAMENTE COMO ESTABA) -->
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <h4>Acerca de los Términos y Condiciones</h4>
+          <p class="muted">Cualquier inconformidad contactar a Soporte o en caso mayor a WhatsApp.</p>
+        </div>
+
+        <div>
+          <h4>Servicios</h4>
+          <a href="Servicios.html">Branding</a>
+          <a href="Servicios.html">Campañas publicitarias</a>
+          <a href="Servicios.html">Videos</a>
+          <a href="Servicios.html">Anuncios</a>
+        </div>
+
+        <div>
+          <h4>Ayuda</h4>
+          <a href="Contacto.html">Cambios de Edición</a>
+          <a href="Contacto.html">Devoluciones</a>
+          <a href="Contacto.html">Soporte</a>
+        </div>
+
+        <div>
+          <h4>Síguenos</h4>
+          <p class="muted">@LIFETIMES AGENCY</p>
+          <a href="https://www.instagram.com/crxz_xs?igsh=M3J3aGhmaHVoNmk2"_blank" rel="noopener noreferrer">
+            <i class="fab fa-instagram"></i> Instagram
+          </a>
+          <a href="https://www.youtube.com/channel/UCqsIJHzN5N47KUR-lrV8kag" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-youtube"></i> YouTube
+          </a>
+          <a href="https://www.tiktok.com/@cxrz_xs" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-tiktok"></i> TikTok
+          </a>
+        </div>
+      </div>
+
+      <div class="container" style="padding-top:20px;color:#666;font-size:.9rem;text-align:center;">
+        © <span id="year"></span> LIFETIMES AGENCY. Marca Registrada.
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // INTRO ANIMATION
+    window.addEventListener('load', () => {
+      const intro = document.getElementById('intro');
+      const introFullscreen = document.getElementById('introFullscreen');
+      const introContent = document.getElementById('introContent');
+      const mainContent = document.getElementById('main-content');
+      
+      setTimeout(() => {
+        introFullscreen.classList.add('active');
+        introContent.classList.add('active');
+        
+        setTimeout(() => {
+          intro.style.display = 'none';
+          mainContent.style.display = 'block';
+        }, 2000);
+      }, 1000);
+    });
+
+    // MOBILE MENU
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      const mobileMenu = document.getElementById('mobileMenu');
+      mobileMenu.classList.toggle('open');
+    });
+
+    // ANIMACIÓN DE ESTADÍSTICAS
+    function animateStats() {
+      const statNumbers = document.querySelectorAll('.stat-number');
+      
+      statNumbers.forEach(stat => {
+        const target = parseInt(stat.getAttribute('data-target'));
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+        
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          stat.textContent = Math.floor(current) + (stat.getAttribute('data-target') === '80' ? '%' : '+');
+        }, 16);
+      });
+    }
+
+    // ANIMACIÓN DE LAS TARJETAS DE HISTORIA
+    function animateHistoryCards() {
+      const historyCards = document.querySelectorAll('.history-card');
+      
+      historyCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('visible');
+        }, index * 200);
+      });
+    }
+
+    // CONTROL DE ANIMACIÓN DEL SLIDER AL HOVER
+    const valuesTrack = document.getElementById('valuesTrack');
+    const valueItems = document.querySelectorAll('.value-item');
+    
+    if (valuesTrack) {
+      valuesTrack.addEventListener('mouseenter', () => {
+        valuesTrack.classList.add('paused');
+      });
+      
+      valuesTrack.addEventListener('mouseleave', () => {
+        valuesTrack.classList.remove('paused');
+      });
+      
+      // Añadir interactividad especial a las tarjetas de asociados
+      valueItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const text = item.querySelector('.value-text').textContent;
+          
+          // Efecto especial para tarjetas de asociados
+          if (item.classList.contains('type-lifetimes-brand') || item.classList.contains('type-lifetimes-codecrafts')) {
+            // Efecto de pulso
+            item.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+              item.style.transform = '';
+            }, 200);
+            
+            // Mostrar mensaje en consola (podría ser un modal en producción)
+            console.log(`¡Has hecho clic en nuestro partner: ${text}!`);
+          }
+        });
+      });
+    }
+
+    // Iniciar animación de estadísticas cuando sean visibles
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (entry.target.classList.contains('stats-section')) {
+            animateStats();
+          } else if (entry.target.classList.contains('history-section')) {
+            animateHistoryCards();
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+
+    observer.observe(document.querySelector('.stats-section'));
+    observer.observe(document.querySelector('.history-section'));
+
+    // AÑO ACTUAL EN FOOTER
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+
