@@ -783,7 +783,7 @@
             font-size: 11px;
         }
 
-        /* MODAL - Galería de Imágenes CON VIDEO */
+        /* MODAL - Galería de Imágenes CON VIDEO - MODIFICADO PARA SCROLL ÚNICO */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -814,21 +814,19 @@
             max-height: 90vh;
             overflow: hidden;
             position: relative;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto 1fr;
-            gap: 0;
+            display: flex;
+            flex-direction: column;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
         .modal-header {
-            grid-column: 1 / span 2;
             padding: 25px 30px 15px;
             background: white;
             border-bottom: 1px solid #e0e0e0;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-shrink: 0;
         }
 
         .modal-header h2 {
@@ -872,15 +870,22 @@
             background-color: #f8f8f8;
         }
 
-        /* CONTENEDOR DE VIDEO/IMAGEN GRANDE */
-        .galeria-container {
+        /* CONTENEDOR PRINCIPAL CON SCROLL */
+        .modal-content-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* COLUMNA IZQUIERDA - GALERÍA DE IMÁGENES */
+        .modal-galeria-columna {
             padding: 25px;
-            grid-column: 1;
-            grid-row: 2;
             display: flex;
             flex-direction: column;
-            gap: 20px;
             background: #fafafa;
+            overflow-y: auto;
+            height: calc(100% - 25px);
         }
 
         /* BOX GRANDE PARA VIDEO O IMAGEN */
@@ -898,6 +903,7 @@
             margin-bottom: 20px;
             position: relative;
             cursor: pointer;
+            flex-shrink: 0;
         }
 
         .video-box-grande img {
@@ -981,7 +987,8 @@
             grid-template-columns: repeat(3, 1fr); /* 3 columnas */
             grid-template-rows: repeat(2, 1fr); /* 2 filas */
             gap: 12px; /* Espacio entre imágenes */
-            height: 220px; /* Altura fija para el contenedor */
+            margin-top: 20px;
+            flex-shrink: 0;
         }
 
         .imagen-miniatura {
@@ -1012,15 +1019,14 @@
             object-fit: cover;
         }
 
-        .descripcion-container {
+        /* COLUMNA DERECHA - DESCRIPCIÓN Y CONTACTO */
+        .modal-descripcion-columna {
             padding: 25px;
-            grid-column: 2;
-            grid-row: 2;
             background: white;
             border-left: 1px solid #f0f0f0;
             overflow-y: auto;
-            max-height: none;
-            height: auto;
+            display: flex;
+            flex-direction: column;
         }
 
         .descripcion-titulo {
@@ -1038,7 +1044,6 @@
             line-height: 1.7;
             font-size: 15px;
             margin-bottom: 25px;
-            max-height: none;
             overflow-y: visible;
             padding: 0;
             background: transparent;
@@ -1256,28 +1261,27 @@
                 min-height: 220px;
             }
 
-            .modal-galeria {
+            .modal-content-container {
                 grid-template-columns: 1fr;
-                grid-template-rows: auto 1fr auto;
-                max-height: 95vh;
+                max-height: 80vh;
                 overflow-y: auto;
             }
 
-            .modal-header {
-                grid-column: 1;
-                grid-row: 1;
-            }
-
-            .galeria-container {
-                grid-column: 1;
-                grid-row: 2;
-            }
-
-            .descripcion-container {
-                grid-column: 1;
-                grid-row: 3;
+            .modal-galeria-columna {
+                border-bottom: 1px solid #eee;
                 border-left: none;
-                border-top: 1px solid #eee;
+                padding: 20px;
+                height: auto;
+            }
+
+            .modal-descripcion-columna {
+                border-left: none;
+                padding: 20px;
+                height: auto;
+            }
+            
+            .video-box-grande {
+                height: 350px;
             }
             
             .card-descripcion {
@@ -1292,11 +1296,6 @@
                 grid-template-columns: repeat(3, 1fr);
                 grid-template-rows: repeat(2, 1fr);
                 height: auto;
-                min-height: 220px;
-            }
-            
-            .video-box-grande {
-                height: 350px;
             }
             
             .btn-play-central {
@@ -1344,7 +1343,6 @@
                 grid-template-columns: repeat(3, 1fr);
                 grid-template-rows: repeat(2, 1fr);
                 height: auto;
-                min-height: 200px;
             }
             
             .boxes-imagenes-container {
@@ -1412,19 +1410,21 @@
                 grid-template-columns: 1fr;
             }
 
-            .todas-imagenes-container {
-                grid-template-columns: repeat(3, 1fr);
-                grid-template-rows: repeat(2, 1fr);
-                height: auto;
-                min-height: 180px;
+            .modal-content-container {
+                grid-template-columns: 1fr;
+                max-height: 75vh;
+            }
+
+            .modal-galeria-columna, .modal-descripcion-columna {
+                padding: 20px;
             }
 
             .modal-header {
-                padding: 20px 20px 10px;
+                padding: 20px 20px 15px;
             }
 
-            .galeria-container, .descripcion-container {
-                padding: 20px;
+            .modal-header h2 {
+                font-size: 24px;
             }
 
             .titulo-banner {
@@ -1468,6 +1468,13 @@
                 height: 250px;
             }
             
+            .todas-imagenes-container {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                height: auto;
+                min-height: 180px;
+            }
+            
             .btn-play-central {
                 width: 30px;
                 height: 30px;
@@ -1497,6 +1504,11 @@
 
             .modal-header h2 {
                 font-size: 22px;
+            }
+
+            .modal-categoria {
+                font-size: 12px;
+                padding: 4px 10px;
             }
 
             .btn-ver-galeria-principal {
@@ -1738,7 +1750,7 @@
         </section>
     </main>
 
-    <!-- Modal - Galería de Imágenes CON VIDEO -->
+    <!-- Modal - Galería de Imágenes CON VIDEO - MODIFICADO PARA SCROLL ÚNICO -->
     <div class="modal-overlay" id="modal-overlay">
         <div class="modal-galeria">
             <div class="modal-header">
@@ -1751,44 +1763,49 @@
                 </button>
             </div>
             
-            <div class="galeria-container">
-                <!-- BOX GRANDE PARA VIDEO O IMAGEN -->
-                <div class="video-box-grande" id="video-box-grande">
-                    <img id="imagen-grande" src="" alt="">
-                    <video class="video-player" id="video-player" playsinline>
-                        Tu navegador no soporta la reproducción de videos.
-                    </video>
-                    <!-- BOTÓN PLAY CENTRAL - OCULTO POR DEFECTO, SÓLO PARA VIDEOS -->
-                    <button class="btn-play-central" id="btn-play-central">
-                        <div class="play-triangle"></div>
-                    </button>
-                </div>
-                
-                <!-- CONTENEDOR DE MINIATURAS CON VIDEO - AHORA 3x2 -->
-                <div class="todas-imagenes-container" id="todas-imagenes-container">
-                    <!-- Las imágenes/videos se cargarán dinámicamente aquí -->
-                </div>
-            </div>
-            
-            <div class="descripcion-container">
-                <h3 class="descripcion-titulo">Descripción del Negocio</h3>
-                <div class="descripcion-texto" id="descripcion-contenido">
-                    <!-- La descripción se cargará dinámicamente aquí -->
-                </div>
-                
-                <!-- REDES SOCIALES MINIMALISTAS - SIN BOX, SOLO RECTÁNGULOS -->
-                <div class="redes-sociales" id="redes-sociales">
-                    <h4><i class="fas fa-hashtag"></i> Redes Sociales</h4>
-                    <div class="redes-grid" id="redes-grid">
-                        <!-- Las redes sociales se cargarán dinámicamente -->
+            <!-- CONTENEDOR PRINCIPAL CON SCROLL SEPARADO -->
+            <div class="modal-content-container">
+                <!-- COLUMNA IZQUIERDA - GALERÍA DE IMÁGENES -->
+                <div class="modal-galeria-columna">
+                    <!-- BOX GRANDE PARA VIDEO O IMAGEN -->
+                    <div class="video-box-grande" id="video-box-grande">
+                        <img id="imagen-grande" src="" alt="">
+                        <video class="video-player" id="video-player" playsinline>
+                            Tu navegador no soporta la reproducción de videos.
+                        </video>
+                        <!-- BOTÓN PLAY CENTRAL - OCULTO POR DEFECTO, SÓLO PARA VIDEOS -->
+                        <button class="btn-play-central" id="btn-play-central">
+                            <div class="play-triangle"></div>
+                        </button>
+                    </div>
+                    
+                    <!-- CONTENEDOR DE MINIATURAS CON VIDEO - AHORA 3x2 -->
+                    <div class="todas-imagenes-container" id="todas-imagenes-container">
+                        <!-- Las imágenes/videos se cargarán dinámicamente aquí -->
                     </div>
                 </div>
                 
-                <!-- SECCIÓN DE CONTACTO EN EL MODAL - SIN COSTOS, CORREO Y WEB - MODIFICADO SIN BOX -->
-                <div class="modal-contacto" id="modal-contacto">
-                    <h4><i class="fas fa-address-card"></i> Información de Contacto</h4>
-                    <div class="contacto-modal-grid" id="contacto-modal-grid">
-                        <!-- La información de contacto se cargará dinámicamente -->
+                <!-- COLUMNA DERECHA - DESCRIPCIÓN Y CONTACTO -->
+                <div class="modal-descripcion-columna">
+                    <h3 class="descripcion-titulo">Descripción del Negocio</h3>
+                    <div class="descripcion-texto" id="descripcion-contenido">
+                        <!-- La descripción se cargará dinámicamente aquí -->
+                    </div>
+                    
+                    <!-- REDES SOCIALES MINIMALISTAS - SIN BOX, SOLO RECTÁNGULOS -->
+                    <div class="redes-sociales" id="redes-sociales">
+                        <h4><i class="fas fa-hashtag"></i> Redes Sociales</h4>
+                        <div class="redes-grid" id="redes-grid">
+                            <!-- Las redes sociales se cargarán dinámicamente -->
+                        </div>
+                    </div>
+                    
+                    <!-- SECCIÓN DE CONTACTO EN EL MODAL - SIN COSTOS, CORREO Y WEB - MODIFICADO SIN BOX -->
+                    <div class="modal-contacto" id="modal-contacto">
+                        <h4><i class="fas fa-address-card"></i> Información de Contacto</h4>
+                        <div class="contacto-modal-grid" id="contacto-modal-grid">
+                            <!-- La información de contacto se cargará dinámicamente -->
+                        </div>
                     </div>
                 </div>
             </div>
