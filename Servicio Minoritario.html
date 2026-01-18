@@ -6,11 +6,12 @@
     <title>LIFE TIMES - Descubre lo que la gente tiene para ofrecer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
@@ -19,6 +20,7 @@
             color: white;
             min-height: 100vh;
             overflow: hidden;
+            font-family: 'Inter', sans-serif;
         }
 
         /* Barra lateral con menú fijo */
@@ -210,11 +212,11 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #000000; /* Cambiado de #333 a #000000 */
+            color: #000000;
             font-weight: 500;
             transition: color 0.3s;
             padding: 5px 0;
-            font-size: 16px; /* Aseguramos tamaño de fuente */
+            font-size: 16px;
         }
 
         /* NAVBAR SÍ SE PONE ROJO AL PASAR EL MOUSE - COMO EL PRIMER CÓDIGO */
@@ -269,52 +271,58 @@
         }
 
         .main-title {
-            font-size: 4rem;
-            font-weight: 900;
-            line-height: 1.1;
+            font-family: 'Poppins', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1;
             margin-bottom: 25px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             color: white;
-            text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7);
+            text-shadow: 3px 3px 20px rgba(0, 0, 0, 0.8);
         }
 
         .highlight-text {
-            font-size: 2rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2rem;
             font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 30px;
+            line-height: 1.2;
+            margin-bottom: 40px;
             color: white;
-            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.6);
         }
 
         .highlight-text .accent {
             color: #c90f0f;
             font-weight: 800;
+            text-shadow: 0 0 10px rgba(201, 15, 15, 0.5);
         }
 
         .description-text {
-            font-size: 1.4rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
             line-height: 1.6;
-            margin-bottom: 50px;
-            color: rgba(255, 255, 255, 0.9);
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-            max-width: 600px;
+            margin-bottom: 60px;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7);
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .description-text .call-to-action {
-            color: #ffcccb;
-            font-weight: 800;
+            color: #ff6b6b;
+            font-weight: 700;
             text-transform: uppercase;
             display: block;
-            margin-top: 20px;
-            font-size: 1.6rem;
-            letter-spacing: 1px;
+            margin-top: 25px;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255, 107, 107, 0.7);
+            animation: pulse 2s infinite;
         }
 
-        /* 5 BOTONES DE CATEGORÍAS - MINIMALISTAS, NEUTROS Y MÁS PEQUEÑOS */
+        /* 5 BOTONES MÁS PEQUEÑOS, TRANSPARENTES CON NUEVO ESTILO DE LETRA */
         .categorias-buttons {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -325,10 +333,8 @@
         }
 
         .categoria-btn {
-            padding: 20px 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 6px;
+            padding: 18px 10px;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
@@ -340,57 +346,70 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
-            color: #333;
-            background-color: white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        /* Efecto sutil al pasar el mouse */
-        .categoria-btn:hover {
-            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-            background-color: #f8f9fa;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            outline: none !important;
         }
 
-        /* Colores de fondo neutros y sutiles para cada botón */
-        .categoria-btn:nth-child(1) {
-            background-color: #ffffff;
+        /* QUITAR EL FOCO Y CONTORNO */
+        .categoria-btn:focus,
+        .categoria-btn:active {
+            outline: none !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
         }
-        
-        .categoria-btn:nth-child(2) {
-            background-color: #f8f9fa;
+
+        /* Efecto sutil al pasar el mouse - SIN ROJO */
+        .categoria-btn:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.2);
         }
-        
-        .categoria-btn:nth-child(3) {
-            background-color: #ffffff;
+
+        /* Efecto de luz interior sutil */
+        .categoria-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
         }
-        
-        .categoria-btn:nth-child(4) {
-            background-color: #f8f9fa;
-        }
-        
-        .categoria-btn:nth-child(5) {
-            background-color: #ffffff;
+
+        .categoria-btn:hover::before {
+            opacity: 0.5;
         }
 
         .categoria-icon {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-            color: #c90f0f; /* Color rojo para mantener la identidad */
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: white;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
             transition: all 0.3s ease;
+            z-index: 2;
         }
 
         .categoria-btn:hover .categoria-icon {
-            transform: scale(1.1);
-            color: #a00c0c; /* Rojo más oscuro al hover */
+            transform: scale(1.05);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
         }
 
         .categoria-btn span {
+            font-family: 'Poppins', sans-serif;
             font-size: 1.1rem;
-            color: #333;
             font-weight: 600;
-            letter-spacing: 0.3px;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+            z-index: 2;
         }
 
         /* Elementos decorativos */
@@ -406,9 +425,10 @@
 
         .floating-icon {
             position: absolute;
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: rgba(255, 255, 255, 0.1);
             animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(201, 15, 15, 0.2));
         }
 
         .floating-icon:nth-child(1) {
@@ -473,24 +493,39 @@
             }
         }
 
-        /* Responsividad */
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 15px rgba(255, 107, 107, 0.7);
+            }
+            50% {
+                opacity: 0.9;
+                text-shadow: 0 0 25px rgba(255, 107, 107, 0.9);
+            }
+        }
+
+        /* RESPONSIVIDAD */
         @media (max-width: 1200px) {
             .main-title {
-                font-size: 3.5rem;
+                font-size: 4rem;
             }
             
             .highlight-text {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             
             .description-text {
-                font-size: 1.3rem;
+                font-size: 1.4rem;
             }
             
             .categorias-buttons {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 15px;
                 max-width: 800px;
+            }
+            
+            .categoria-btn span {
+                font-size: 1rem;
             }
         }
 
@@ -500,7 +535,7 @@
             }
             
             .main-title {
-                font-size: 3rem;
+                font-size: 3.5rem;
             }
             
             .categorias-buttons {
@@ -509,16 +544,15 @@
             }
             
             .categoria-btn {
-                padding: 18px 8px;
-                font-size: 0.95rem;
+                padding: 16px 8px;
             }
             
             .categoria-icon {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
             
             .categoria-btn span {
-                font-size: 1rem;
+                font-size: 0.95rem;
             }
         }
 
@@ -540,12 +574,15 @@
                 overflow-y: auto;
             }
             
+            /* NAVBAR RESPONSIVE - CENTRADO COMO EL PRIMER CÓDIGO */
             .top-nav {
-                justify-content: flex-end;
                 padding: 15px 20px;
+                justify-content: center;
             }
             
             .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
                 gap: 15px;
             }
             
@@ -560,42 +597,42 @@
             }
             
             .main-title {
-                font-size: 2.5rem;
+                font-size: 3rem;
                 margin-bottom: 20px;
             }
             
             .highlight-text {
-                font-size: 1.5rem;
-                margin-bottom: 25px;
+                font-size: 1.8rem;
+                margin-bottom: 30px;
             }
             
             .description-text {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
                 margin-bottom: 40px;
                 max-width: 500px;
             }
             
             .description-text .call-to-action {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
             
             .categorias-buttons {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
-                margin-top: 30px;
+                margin-top: 35px;
             }
             
             .categoria-btn {
-                padding: 16px 8px;
-                font-size: 0.9rem;
+                padding: 14px 8px;
             }
             
             .categoria-icon {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
             
             .categoria-btn span {
-                font-size: 0.95rem;
+                font-size: 0.9rem;
+                letter-spacing: 0.8px;
             }
             
             .floating-icon {
@@ -609,11 +646,11 @@
 
         @media (max-width: 480px) {
             .main-title {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
             
             .highlight-text {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
             
             .description-text {
@@ -621,7 +658,7 @@
             }
             
             .description-text .call-to-action {
-                font-size: 1.1rem;
+                font-size: 1.3rem;
             }
             
             .content-overlay {
@@ -631,49 +668,72 @@
             .categorias-buttons {
                 grid-template-columns: 1fr;
                 gap: 10px;
+                max-width: 300px;
             }
             
             .categoria-btn {
-                padding: 18px 10px;
-                font-size: 1rem;
+                padding: 16px 12px;
                 flex-direction: row;
-                justify-content: center;
+                justify-content: flex-start;
                 gap: 15px;
+                text-align: left;
             }
             
             .categoria-icon {
-                font-size: 1.4rem;
+                font-size: 1.5rem;
                 margin-bottom: 0;
+                flex-shrink: 0;
+                width: 40px;
+            }
+            
+            .categoria-btn span {
+                font-size: 1rem;
+                text-align: left;
+                flex: 1;
             }
             
             .logo h1 {
                 font-size: 22px;
             }
             
+            /* NAVBAR EN MÓVIL PEQUEÑO - MANTENIENDO CENTRADO */
+            .top-nav {
+                padding: 12px 15px;
+            }
+            
             .nav-links {
-                flex-wrap: wrap;
-                justify-content: flex-end;
+                gap: 10px;
+                justify-content: center;
             }
             
             .nav-links a {
                 font-size: 13px;
+                padding: 8px 12px;
+                background-color: #f8f9fa;
+                border-radius: 20px;
+                transition: all 0.3s ease;
+            }
+            
+            .nav-links a:hover {
+                background-color: #C90F0F;
+                color: white !important;
             }
         }
 
         @media (max-height: 700px) {
             .main-title {
-                font-size: 2.5rem;
+                font-size: 3rem;
                 margin-bottom: 15px;
             }
             
             .highlight-text {
-                font-size: 1.5rem;
-                margin-bottom: 20px;
+                font-size: 1.8rem;
+                margin-bottom: 25px;
             }
             
             .description-text {
-                font-size: 1.1rem;
-                margin-bottom: 30px;
+                font-size: 1.2rem;
+                margin-bottom: 35px;
             }
             
             .categorias-buttons {
@@ -789,13 +849,13 @@
                     <p>En LIFE TIMES conectamos talentos con oportunidades. <span class="call-to-action">¡Sé parte del cambio!</span></p>
                 </div>
                 
-                <!-- 5 BOTONES MINIMALISTAS, NEUTROS Y PEQUEÑOS -->
+                <!-- 5 BOTONES PEQUEÑOS, TRANSPARENTES CON NUEVO ESTILO DE LETRA -->
                 <div class="categorias-buttons">
                     <a href="Ropa y calzado-minoritario.html" class="categoria-btn">
                         <div class="categoria-icon">
                             <i class="fas fa-tshirt"></i>
                         </div>
-                        <span>Ropa</span>
+                        <span>Ropa y Calzado</span>
                     </a>
                     
                     <a href="Otros-minoritario.html" class="categoria-btn">
@@ -894,13 +954,29 @@
             const buttons = document.querySelectorAll('.categoria-btn');
             buttons.forEach((button, index) => {
                 button.style.opacity = '0';
-                button.style.transform = 'translateY(20px)';
+                button.style.transform = 'translateY(20px) scale(0.95)';
                 
                 setTimeout(() => {
-                    button.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    button.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
                     button.style.opacity = '1';
-                    button.style.transform = 'translateY(0)';
+                    button.style.transform = 'translateY(0) scale(1)';
                 }, 400 + (index * 100));
+            });
+            
+            // Eliminar contorno de enfoque de todos los botones
+            buttons.forEach(button => {
+                button.addEventListener('focus', function() {
+                    this.style.outline = 'none';
+                    this.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
+                });
+                
+                button.addEventListener('mousedown', function() {
+                    this.style.transform = 'translateY(0) scale(0.98)';
+                });
+                
+                button.addEventListener('mouseup', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
             });
         });
     </script>
