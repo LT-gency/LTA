@@ -6,6 +6,7 @@
     <title>Directorio de Negocios LIFE TIMES - Alimentos y Bebidas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* MANTENGO EXACTAMENTE LOS MISMOS ESTILOS DEL CÓDIGO DE COMERCIO */
         * {
             margin: 0;
             padding: 0;
@@ -22,7 +23,7 @@
 
         .sidebar {
             width: 280px;
-            background: linear-gradient(to bottom, #c90f0f, #a00c0c);
+            background: linear-gradient(to bottom, #C90F0F, #A00C0C);
             color: white;
             position: fixed;
             height: 100vh;
@@ -104,7 +105,7 @@
             border-radius: 12px;
             font-size: 16px;
             font-weight: 600;
-            cursor: pointer;
+            cursor: button;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
@@ -161,7 +162,7 @@
         }
 
         .nav-links a:hover {
-            color: #c90f0f;
+            color: #C90F0F;
         }
 
         .negocios-container {
@@ -239,9 +240,9 @@
         }
 
         .pagina-btn.active {
-            background: #c90f0f;
+            background: #C90F0F;
             color: white;
-            border-color: #c90f0f;
+            border-color: #C90F0F;
         }
 
         .pagina-btn.disabled {
@@ -265,22 +266,22 @@
         .pagina-actual {
             font-size: 14px;
             font-weight: 600;
-            color: #c90f0f;
+            color: #C90F0F;
             margin-right: 5px;
         }
 
         /* ================================ */
-        /* NUEVO GRID DE 2 COLUMNAS - TARJETAS MÁS GRANDES */
+        /* CAMBIO PRINCIPAL: USAR EL MISMO GRID DE 4 COLUMNAS */
         /* ================================ */
         .alimentos-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
             margin-bottom: 30px;
         }
 
         /* ================================ */
-        /* NUEVO DISEÑO DE TARJETA CON FOTO A LA DERECHA - ALTURA REDUCIDA */
+        /* USAR EL MISMO ESTILO DE TARJETA QUE EN COMERCIO */
         /* ================================ */
         .alimento-card {
             background-color: white;
@@ -289,7 +290,8 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             display: flex;
-            height: 350px; /* ALTURA REDUCIDA A 350px (antes 400px) */
+            flex-direction: column;
+            min-height: 420px;
             opacity: 0;
             transform: translateY(10px);
             animation: fadeInCard 0.4s ease forwards;
@@ -307,25 +309,8 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
-        /* CONTENIDO IZQUIERDO - DESCRIPCIÓN */
-        .card-content-left {
-            flex: 1;
-            padding: 20px; /* PADDING REDUCIDO */
-            display: flex;
-            flex-direction: column;
-            width: 60%;
-            overflow: hidden; /* PARA EVITAR DESBORDAMIENTO */
-        }
-
-        /* CONTENIDO DERECHO - IMAGEN */
-        .card-content-right {
-            width: 40%;
-            position: relative;
-            overflow: hidden;
-        }
-
         .card-imagen {
-            height: 100%; /* OCUPA EL 100% DE LA ALTURA DE LA TARJETA */
+            height: 160px;
             overflow: hidden;
             background-color: #f8f9fa;
             display: flex;
@@ -348,7 +333,7 @@
         .card-imagen img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* MANTIENE LA PROPORCIÓN Y CUBRE EL ESPACIO */
+            object-fit: cover;
             transition: transform 0.5s ease;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -363,83 +348,61 @@
         }
 
         .card-header {
-            margin-bottom: 12px; /* MARGIN REDUCIDO */
+            padding: 20px 20px 10px;
+            background-color: white;
         }
 
         .card-header h3 {
             color: #000000;
-            font-size: 20px; /* TAMAÑO DE FUENTE REDUCIDO */
-            margin-bottom: 8px; /* MARGIN REDUCIDO */
+            font-size: 18px;
+            margin-bottom: 8px;
             line-height: 1.3;
         }
 
         .card-categoria {
-            color: #c90f0f;
-            font-size: 13px; /* TAMAÑO DE FUENTE REDUCIDO */
+            color: #C90F0F;
+            font-size: 13px;
             display: inline-block;
-            padding: 4px 10px; /* PADDING REDUCIDO */
-            background-color: #ffe6e6;
+            padding: 3px 10px;
+            background-color: #FFE6E6;
             border-radius: 20px;
-            font-weight: 500;
         }
 
-        /* DESCRIPCIÓN CON ALTURA LIMITADA Y SCROLL SI ES NECESARIO */
-        .card-descripcion-container {
+        .card-body {
+            padding: 0 20px 15px;
             flex: 1;
-            overflow: hidden;
-            margin-bottom: 12px; /* MARGIN REDUCIDO */
+            display: flex;
+            flex-direction: column;
         }
 
         .card-descripcion {
             color: #000000;
-            line-height: 1.5; /* LINE-HEIGHT REDUCIDO */
-            font-size: 15px; /* TAMAÑO DE FUENTE REDUCIDO */
-            max-height: 100px; /* ALTURA MÁXIMA REDUCIDA (antes 120px) */
-            overflow-y: auto; /* SCROLL VERTICAL SI EL CONTENIDO ES MUY LARGO */
-            padding-right: 5px;
-            margin-bottom: 12px; /* MARGIN REDUCIDO */
-        }
-
-        /* ESTILOS PARA EL SCROLLBAR */
-        .card-descripcion::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .card-descripcion::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .card-descripcion::-webkit-scrollbar-thumb {
-            background: #c90f0f;
-            border-radius: 10px;
-        }
-
-        .card-descripcion::-webkit-scrollbar-thumb:hover {
-            background: #a00c0c;
+            line-height: 1.5;
+            font-size: 14px;
+            margin-bottom: 15px;
+            flex: 1;
         }
 
         .btn-ver-mas {
-            background-color: #000000;
+            background-color: #C90F0F;
             color: white;
             border: none;
             border-radius: 6px;
-            padding: 10px 20px; /* PADDING REDUCIDO */
-            font-size: 14px; /* TAMAÑO DE FUENTE REDUCIDO */
+            padding: 10px 20px;
+            font-size: 14px;
             font-weight: 600;
-            cursor: pointer;
+            cursor: button;
             transition: all 0.3s ease;
-            margin-bottom: 12px; /* MARGIN REDUCIDO */
+            margin-bottom: 15px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             width: fit-content;
-            flex-shrink: 0; /* EVITA QUE SE COMPRIMA */
         }
 
         .btn-ver-mas:hover {
-            background-color: #333333;
+            background-color: #A00C0C;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
@@ -447,29 +410,83 @@
         .card-footer {
             display: flex;
             flex-direction: column;
-            gap: 8px; /* GAP REDUCIDO */
-            padding: 12px 0 0 0; /* PADDING REDUCIDO */
+            gap: 10px;
+            padding: 15px 0 0 0;
             border-top: 1px solid #f0f0f0;
-            margin-top: auto;
-            flex-shrink: 0; /* EVITA QUE SE COMPRIMA */
         }
 
         .card-contacto {
             color: #000000;
-            font-size: 13px; /* TAMAÑO DE FUENTE REDUCIDO */
+            font-size: 13px;
             display: flex;
             align-items: center;
-            gap: 8px; /* GAP REDUCIDO */
+            gap: 8px;
         }
 
         .card-contacto i {
-            color: #c90f0f;
-            width: 14px; /* TAMAÑO REDUCIDO */
+            color: #C90F0F;
+            width: 16px;
             text-align: center;
         }
 
         /* ================================ */
-        /* REDES SOCIALES SIN BOX EXTERIOR - ESTILO DEL SEGUNDO CÓDIGO */
+        /* SUBMENÚ DE ZONAS - MANTENIDO DEL CÓDIGO ORIGINAL */
+        /* ================================ */
+        .categoria-item.with-submenu {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .submenu-arrow {
+            margin-left: auto;
+            font-size: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .categoria-item.with-submenu.active .submenu-arrow {
+            transform: rotate(180deg);
+        }
+
+        .submenu-zonas {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.3s ease;
+            opacity: 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            margin-left: 15px;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .submenu-zonas.active {
+            max-height: 300px;
+            opacity: 1;
+            padding: 10px 0;
+        }
+
+        .submenu-item {
+            display: block;
+            padding: 12px 15px 12px 40px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .submenu-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding-left: 45px;
+        }
+
+        .submenu-item:before {
+            content: "-";
+            position: absolute;
+            left: 25px;
+            color: white;
+        }
+
+        /* ================================ */
+        /* REDES SOCIALES - IGUAL QUE COMERCIO */
         /* ================================ */
         .redes-sociales {
             padding-top: 15px;
@@ -488,7 +505,7 @@
         }
 
         .redes-sociales h4 i {
-            color: #c90f0f;
+            color: #C90F0F;
         }
 
         .redes-grid {
@@ -572,7 +589,7 @@
         }
 
         /* ================================ */
-        /* MODAL FIXED - MODIFICADO PARA MOSTRAR 6 IMÁGENES */
+        /* MODAL FIXED - IGUAL QUE COMERCIO */
         /* ================================ */
         .modal-overlay {
             position: fixed;
@@ -642,8 +659,8 @@
 
         .modal-categoria {
             display: inline-block;
-            background-color: #ffe6e6;
-            color: #c90f0f;
+            background-color: #FFE6E6;
+            color: #C90F0F;
             padding: 5px 15px;
             border-radius: 20px;
             font-size: 14px;
@@ -670,7 +687,7 @@
         }
 
         .btn-cerrar-modal:hover {
-            color: #c90f0f;
+            color: #C90F0F;
             background-color: #f5f5f5;
         }
 
@@ -725,7 +742,7 @@
         }
 
         .imagen-modal-mini.active {
-            border-color: #c90f0f;
+            border-color: #C90F0F;
             box-shadow: 0 0 0 2px rgba(201, 15, 15, 0.3);
         }
 
@@ -767,440 +784,13 @@
         }
 
         /* ================================ */
-        /* SUBMENÚ DE ZONAS PARA ALIMENTOS Y BEBIDAS */
+        /* RESPONSIVE - IGUAL QUE COMERCIO */
         /* ================================ */
-
-        .categoria-item.with-submenu {
-            position: relative;
-            cursor: pointer;
-        }
-
-        .submenu-arrow {
-            margin-left: auto;
-            font-size: 12px;
-            transition: transform 0.3s ease;
-        }
-
-        .categoria-item.with-submenu.active .submenu-arrow {
-            transform: rotate(180deg);
-        }
-
-        .submenu-zonas {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease, opacity 0.3s ease;
-            opacity: 0;
-            background-color: rgba(0, 0, 0, 0.1);
-            margin-left: 15px;
-            border-radius: 0 0 8px 8px;
-        }
-
-        .submenu-zonas.active {
-            max-height: 300px;
-            opacity: 1;
-            padding: 10px 0;
-        }
-
-        .submenu-item {
-            display: block;
-            padding: 12px 15px 12px 40px;
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .submenu-item:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding-left: 45px;
-        }
-
-        .submenu-item:before {
-            content: "-";
-            position: absolute;
-            left: 25px;
-            color: white;
-        }
-
-        /* Ajuste para el botón de subir negocio cuando el submenú está abierto */
-        .submenu-active ~ .btn-subir-negocio {
-            margin-top: 10px;
-        }
-
-        /* ================================ */
-        /* MEJORAS ESPECÍFICAS PARA MÓVIL */
-        /* ================================ */
-        @media (max-width: 1024px) {
-            .alimentos-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .alimento-card {
-                flex-direction: column;
-                height: auto; /* ALTURA AUTOMÁTICA PARA MÓVIL */
-                min-height: 350px;
-            }
-            
-            .card-content-left {
-                width: 100%;
-                order: 2;
-                padding: 20px;
-                flex: 1;
-            }
-            
-            .card-content-right {
-                width: 100%;
-                height: 250px; /* ALTURA FIJA PARA LA IMAGEN EN MÓVIL */
-                order: 1;
-                flex-shrink: 0;
-            }
-            
-            .card-descripcion {
-                max-height: none; /* QUITAR LÍMITE DE ALTURA EN MÓVIL */
-                overflow-y: visible;
-            }
-            
-            .card-descripcion-container {
-                flex: 1;
-                overflow: visible;
-            }
-            
-            .modal-header h2 {
-                font-size: 24px;
-            }
-            
-            .grid-imagenes-modal {
-                grid-template-columns: repeat(3, 1fr);
-                height: 160px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                position: relative;
-                height: auto;
-                max-height: 80vh;
-                overflow-y: auto;
-            }
-            
-            .main-content {
-                margin-left: 0;
-                padding: 0;
-                width: 100%;
-            }
-            
-            body {
-                flex-direction: column;
-                min-height: 100vh;
-            }
-            
-            .top-nav {
-                flex-direction: column;
-                gap: 15px;
-                padding: 15px;
-                justify-content: center;
-                position: relative;
-            }
-            
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-                width: 100%;
-            }
-            
-            .alimentos-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .titulo-banner {
-                padding: 20px;
-                min-height: auto;
-                margin-bottom: 20px;
-            }
-
-            .titulo-banner h2 {
-                font-size: 26px;
-                line-height: 1.2;
-            }
-
-            .titulo-banner p {
-                font-size: 14px;
-                margin-bottom: 15px;
-            }
-
-            .menu-desplazamiento {
-                position: relative;
-                bottom: auto;
-                right: auto;
-                margin-top: 15px;
-                width: 100%;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-            
-            .modal-overlay {
-                padding: 10px;
-                align-items: flex-start;
-            }
-            
-            .modal-galeria {
-                border-radius: 8px;
-                width: 100%;
-                min-height: auto;
-                max-height: 90vh;
-                overflow-y: auto;
-            }
-            
-            .imagen-grande-container {
-                height: 300px !important;
-            }
-            
-            .grid-imagenes-modal {
-                height: 140px;
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .modal-header {
-                padding: 15px;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .modal-header h2 {
-                font-size: 20px;
-                margin-bottom: 5px;
-            }
-            
-            .modal-header-content {
-                width: 100%;
-            }
-            
-            .btn-cerrar-modal {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                margin-left: 0;
-            }
-            
-            .galeria-container, .descripcion-container {
-                padding: 15px;
-            }
-            
-            .descripcion-titulo {
-                font-size: 18px;
-            }
-            
-            .descripcion-texto {
-                font-size: 15px;
-                line-height: 1.6;
-            }
-            
-            /* RESPONSIVE PARA SUBMENÚ */
-            .submenu-item {
-                padding: 10px 15px 10px 40px;
-            }
-            
-            .submenu-item:hover {
-                padding-left: 45px;
-            }
-            
-            .card-header h3 {
-                font-size: 18px;
-            }
-            
-            .card-descripcion {
-                font-size: 14px;
-            }
-            
-            /* MEJORAS ESPECÍFICAS PARA TARJETAS EN MÓVIL */
-            .alimento-card {
-                height: auto;
-                min-height: 320px;
-                flex-direction: column;
-            }
-            
-            .card-content-right {
-                height: 200px;
-                width: 100%;
-                flex-shrink: 0;
-            }
-            
-            .card-content-left {
-                width: 100%;
-                padding: 15px;
-                flex: 1;
-            }
-            
-            .card-descripcion {
-                max-height: none;
-                overflow-y: visible;
-                margin-bottom: 15px;
-            }
-            
-            .card-descripcion-container {
-                flex: 1;
-                min-height: 80px;
-            }
-            
-            .btn-ver-mas {
-                width: 100%;
-                margin-top: 10px;
-            }
-            
-            .negocios-container {
-                padding: 20px 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .alimento-card {
-                min-height: 300px;
-            }
-            
-            .card-content-right {
-                height: 180px;
-            }
-            
-            .imagen-grande-container {
-                height: 250px !important;
-            }
-            
-            .grid-imagenes-modal {
-                height: 120px;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 8px;
-            }
-            
-            .modal-header h2 {
-                font-size: 18px;
-            }
-            
-            .btn-ver-mas {
-                padding: 10px 16px;
-                font-size: 14px;
-                width: 100%;
-            }
-
-            .titulo-banner {
-                padding: 15px;
-                min-height: auto;
-            }
-
-            .titulo-banner h2 {
-                font-size: 22px;
-                margin-bottom: 8px;
-            }
-
-            .titulo-banner p {
-                font-size: 13px;
-                margin-bottom: 12px;
-            }
-
-            .pagina-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 13px;
-            }
-            
-            .pagina-info {
-                font-size: 12px;
-            }
-            
-            .descripcion-texto {
-                font-size: 14px;
-            }
-            
-            .btn-cerrar-modal {
-                width: 35px;
-                height: 35px;
-                font-size: 24px;
-            }
-            
-            .card-header h3 {
-                font-size: 17px;
-            }
-            
-            .card-descripcion {
-                font-size: 13px;
-            }
-            
-            .card-categoria {
-                font-size: 12px;
-                padding: 3px 8px;
-            }
-            
-            /* AJUSTES ESPECÍFICOS PARA PANTALLAS MUY PEQUEÑAS */
-            .nav-links {
-                flex-direction: column;
-                gap: 10px;
-                align-items: center;
-            }
-            
-            .nav-links a {
-                padding: 8px 0;
-                font-size: 14px;
-            }
-            
-            .menu-categorias {
-                padding: 0 10px;
-            }
-            
-            .categoria-item {
-                padding: 12px 10px;
-                font-size: 14px;
-            }
-            
-            .btn-subir-negocio {
-                margin: 15px 10px;
-                padding: 12px;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .alimento-card {
-                min-height: 280px;
-            }
-            
-            .card-content-right {
-                height: 160px;
-            }
-            
-            .imagen-grande-container {
-                height: 200px !important;
-            }
-            
-            .grid-imagenes-modal {
-                height: 100px;
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: repeat(3, 1fr);
-            }
-            
-            .modal-header h2 {
-                font-size: 16px;
-            }
-            
-            .titulo-banner h2 {
-                font-size: 20px;
-            }
-            
-            .card-header h3 {
-                font-size: 16px;
-            }
-            
-            .btn-ver-mas {
-                font-size: 13px;
-                padding: 8px 12px;
-            }
-        }
-
         @media (max-width: 1200px) {
+            .alimentos-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
             .menu-desplazamiento {
                 flex-wrap: wrap;
                 justify-content: center;
@@ -1240,10 +830,184 @@
                 max-height: none;
             }
         }
+
+        @media (max-width: 1024px) {
+            .alimentos-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .modal-header h2 {
+                font-size: 24px;
+            }
+            
+            .grid-imagenes-modal {
+                grid-template-columns: repeat(3, 1fr);
+                height: 160px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            body {
+                flex-direction: column;
+            }
+            
+            .top-nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+                justify-content: center;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .alimentos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .titulo-banner {
+                padding: 20px;
+                min-height: 120px;
+            }
+
+            .titulo-banner h2 {
+                font-size: 26px;
+            }
+
+            .menu-desplazamiento {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                margin-top: 15px;
+                width: fit-content;
+                align-self: center;
+            }
+            
+            .modal-overlay {
+                padding: 0;
+                align-items: flex-start;
+            }
+            
+            .modal-galeria {
+                border-radius: 0;
+                width: 100%;
+                min-height: 100vh;
+                max-height: none;
+            }
+            
+            .imagen-grande-container {
+                height: 350px !important;
+            }
+            
+            .grid-imagenes-modal {
+                height: 140px;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .modal-header {
+                padding: 20px 15px 15px;
+            }
+            
+            .modal-header h2 {
+                font-size: 20px;
+            }
+            
+            .galeria-container, .descripcion-container {
+                padding: 20px;
+            }
+            
+            .descripcion-titulo {
+                font-size: 18px;
+            }
+            
+            .descripcion-texto {
+                font-size: 15px;
+                line-height: 1.6;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .imagen-grande-container {
+                height: 300px !important;
+            }
+            
+            .grid-imagenes-modal {
+                height: 120px;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            
+            .modal-header h2 {
+                font-size: 18px;
+            }
+            
+            .btn-ver-mas {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            .titulo-banner {
+                padding: 15px;
+                min-height: 110px;
+            }
+
+            .titulo-banner h2 {
+                font-size: 22px;
+            }
+
+            .pagina-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 12px;
+            }
+            
+            .pagina-info {
+                font-size: 11px;
+            }
+            
+            .descripcion-texto {
+                font-size: 14px;
+            }
+            
+            .btn-cerrar-modal {
+                width: 35px;
+                height: 35px;
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .imagen-grande-container {
+                height: 250px !important;
+            }
+            
+            .grid-imagenes-modal {
+                height: 100px;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+            }
+            
+            .modal-header h2 {
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- MENÚ LATERAL -->
+    <!-- MENÚ LATERAL - MANTENIENDO EL SUBMENÚ DE ZONAS -->
     <aside class="sidebar">
         <div class="logo">
             <a href="Index.html" style="text-decoration: none; color: inherit;">
@@ -1295,18 +1059,17 @@
         </a>
     </aside>
 
-    <!-- CONTENIDO PRINCIPAL -->
+    <!-- CONTENIDO PRINCIPAL - CON EL MISMO NAVBAR QUE COMERCIO -->
     <main class="main-content">
         <nav class="top-nav">
             <ul class="nav-links">
-                 <li><a href="Terminos y Condiciones.html" id="terminos-link">Términos y Condiciones</a></li>
+                <li><a href="Terminos y Condiciones.html" id="terminos-link">Términos y Condiciones</a></li>
                 <li><a href="Index.html" id="historia-link">La Historia</a></li>
                 <li><a href="Servicios.html" id="servicios-link">Servicios</a></li>
             </ul>
         </nav>
 
         <section class="negocios-container">
-            <!-- BANNER COMO NEGOCIOS DESTACADOS -->
             <div class="titulo-banner" id="titulo-banner">
                 <h2>Negocios Destacados de Alimentos y Bebidas</h2>
                 <p>Los mejores restaurantes, cafeterías, panaderías y establecimientos de comida recomendados</p>
@@ -1315,7 +1078,7 @@
                 </div>
             </div>
             
-            <!-- SECCIÓN DE NEGOCIOS DESTACADOS -->
+            <!-- CAMBIO PRINCIPAL: USAR EL MISMO GRID DE 4 COLUMNAS -->
             <div class="alimentos-grid" id="alimentos-grid">
             </div>
             
@@ -1325,7 +1088,7 @@
         </section>
     </main>
 
-    <!-- MODAL PRINCIPAL - MODIFICADO CON 6 IMÁGENES -->
+    <!-- MODAL PRINCIPAL - IGUAL QUE COMERCIO -->
     <div class="modal-overlay" id="modal-overlay">
         <div class="modal-galeria">
             <div class="modal-header">
@@ -1375,7 +1138,7 @@
     </div>
 
     <script>
-        // DATOS DE NEGOCIOS DESTACADOS (PRECIO ELIMINADO)
+        // DATOS DE NEGOCIOS DESTACADOS (MANTENIENDO LOS MISMOS DATOS)
         const negociosAlimentos = [
             {
                 nombre: "Sabor Mexicano - Destacado",
@@ -1640,10 +1403,10 @@
         ];
 
         // ==============================================
-        // CONFIGURACIÓN DE PAGINACIÓN
+        // CONFIGURACIÓN DE PAGINACIÓN - IGUAL QUE COMERCIO
         // ==============================================
         let paginaActual = 1;
-        const negociosPorPagina = 8; // 2 columnas × 4 filas
+        const negociosPorPagina = 16; // 4 columnas × 4 filas
         const totalNegocios = negociosAlimentos.length;
         const totalPaginas = Math.ceil(totalNegocios / negociosPorPagina);
 
@@ -1670,7 +1433,7 @@
         const submenuZonas = document.getElementById('submenu-zonas');
 
         // ==============================================
-        // SUBMENÚ DE ZONAS (DENTRO DE ALIMENTOS Y BEBIDAS)
+        // SUBMENÚ DE ZONAS (DENTRO DE ALIMENTOS Y BEBIDAS) - MANTENIDO
         // ==============================================
 
         // Alternar submenú al hacer clic en "Alimentos y bebidas"
@@ -1734,7 +1497,7 @@
         }
 
         // ==============================================
-        // FUNCIONES
+        // FUNCIONES - IGUALES QUE COMERCIO
         // ==============================================
 
         function crearMenuDesplazamiento() {
@@ -1842,40 +1605,33 @@
                     tarjeta.className = `alimento-card`;
                     tarjeta.style.animationDelay = `${index * 0.05}s`;
                     
-                    // NUEVO DISEÑO: DESCRIPCIÓN IZQUIERDA, FOTO DERECHA
+                    // NUEVO DISEÑO: TARJETA VERTICAL COMO EN COMERCIO
                     tarjeta.innerHTML = `
-                        <!-- CONTENIDO IZQUIERDO - DESCRIPCIÓN -->
-                        <div class="card-content-left">
-                            <div class="card-header">
-                                <h3>${negocio.nombre}</h3>
-                                <span class="card-categoria">${negocio.categoria}</span>
-                            </div>
-                            <div class="card-descripcion-container">
-                                <p class="card-descripcion">${negocio.descripcion}</p>
-                            </div>
+                        <div class="card-imagen loading">
+                            <img data-src="${negocio.imagen}" alt="${negocio.nombre}">
+                        </div>
+                        <div class="card-header">
+                            <h3>${negocio.nombre}</h3>
+                            <span class="card-categoria">${negocio.categoria}</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-descripcion">${negocio.descripcion}</p>
                             <button class="btn-ver-mas" data-negocio-id="${negocio.nombre}">
                                 <i class="fas fa-eye"></i>
                                 Ver más
                             </button>
-                            <div class="card-footer">
-                                <div class="card-contacto">
-                                    <i class="fab fa-whatsapp"></i>
-                                    <span>${negocio.whatsapp}</span>
-                                </div>
-                                ${negocio.ubicacion ? `
-                                <div class="card-contacto">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span>${negocio.ubicacion}</span>
-                                </div>
-                                ` : ''}
-                            </div>
                         </div>
-                        
-                        <!-- CONTENIDO DERECHO - IMAGEN -->
-                        <div class="card-content-right">
-                            <div class="card-imagen loading">
-                                <img data-src="${negocio.imagen}" alt="${negocio.nombre}">
+                        <div class="card-footer">
+                            <div class="card-contacto">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>${negocio.whatsapp}</span>
                             </div>
+                            ${negocio.ubicacion ? `
+                            <div class="card-contacto">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${negocio.ubicacion}</span>
+                            </div>
+                            ` : ''}
                         </div>
                     `;
                     
@@ -1984,7 +1740,7 @@
         }
 
         // ==============================================
-        // EVENT LISTENERS
+        // EVENT LISTENERS - IGUAL QUE COMERCIO
         // ==============================================
         btnCerrarModal.addEventListener('click', cerrarModal);
         modalOverlay.addEventListener('click', function(event) {
@@ -1998,7 +1754,7 @@
         });
 
         // ==============================================
-        // INICIALIZACIÓN
+        // INICIALIZACIÓN - IGUAL QUE COMERCIO
         // ==============================================
         document.addEventListener('DOMContentLoaded', function() {
             cargarNegociosPagina(1);
