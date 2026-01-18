@@ -574,10 +574,12 @@
                 overflow-y: auto;
             }
             
-            /* NAVBAR RESPONSIVE - CENTRADO COMO EL PRIMER CÓDIGO */
+            /* NAVBAR RESPONSIVE - CENTRADO COMO EL SEGUNDO CÓDIGO (SIN BOXES) */
             .top-nav {
                 padding: 15px 20px;
                 justify-content: center;
+                flex-direction: column;
+                gap: 15px;
             }
             
             .nav-links {
@@ -588,42 +590,74 @@
             
             .nav-links a {
                 font-size: 14px;
+                padding: 5px 0;
+                /* Eliminamos el estilo de boxes que estaba antes */
+                background-color: transparent !important;
+                border-radius: 0 !important;
+                transition: color 0.3s !important;
             }
             
+            /* Mantenemos el efecto hover rojo como en desktop */
+            .nav-links a:hover {
+                color: #C90F0F !important;
+                background-color: transparent !important;
+            }
+            
+            /* CENTRAMOS LOS BOTONES EN MÓVIL */
             .content-overlay {
                 padding: 30px 20px;
                 justify-content: flex-start;
                 margin-top: 20px;
             }
             
+            .main-text {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+            }
+            
             .main-title {
                 font-size: 3rem;
                 margin-bottom: 20px;
+                text-align: center;
             }
             
             .highlight-text {
                 font-size: 1.8rem;
                 margin-bottom: 30px;
+                text-align: center;
             }
             
             .description-text {
                 font-size: 1.2rem;
                 margin-bottom: 40px;
                 max-width: 500px;
+                text-align: center;
             }
             
             .description-text .call-to-action {
                 font-size: 1.5rem;
+                text-align: center;
             }
             
+            /* BOTONES CENTRADOS Y EN GRID DE 2 COLUMNAS */
             .categorias-buttons {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
                 margin-top: 35px;
+                width: 100%;
+                max-width: 500px;
+                justify-content: center;
+                margin-left: auto;
+                margin-right: auto;
             }
             
             .categoria-btn {
                 padding: 14px 8px;
+                justify-content: center;
+                align-items: center;
             }
             
             .categoria-icon {
@@ -633,6 +667,7 @@
             .categoria-btn span {
                 font-size: 0.9rem;
                 letter-spacing: 0.8px;
+                text-align: center;
             }
             
             .floating-icon {
@@ -665,6 +700,7 @@
                 padding: 20px 15px;
             }
             
+            /* BOTONES EN UNA SOLA COLUMNA EN MÓVIL PEQUEÑO */
             .categorias-buttons {
                 grid-template-columns: 1fr;
                 gap: 10px;
@@ -696,7 +732,7 @@
                 font-size: 22px;
             }
             
-            /* NAVBAR EN MÓVIL PEQUEÑO - MANTENIENDO CENTRADO */
+            /* NAVBAR EN MÓVIL PEQUEÑO - MANTENIENDO CENTRADO Y SIN BOXES */
             .top-nav {
                 padding: 12px 15px;
             }
@@ -708,15 +744,16 @@
             
             .nav-links a {
                 font-size: 13px;
-                padding: 8px 12px;
-                background-color: #f8f9fa;
-                border-radius: 20px;
-                transition: all 0.3s ease;
+                padding: 5px 0;
+                /* SIN BACKGROUND NI BORDER-RADIUS */
+                background-color: transparent !important;
+                border-radius: 0 !important;
             }
             
+            /* Mantenemos el hover rojo como en desktop */
             .nav-links a:hover {
-                background-color: #C90F0F;
-                color: white !important;
+                color: #C90F0F !important;
+                background-color: transparent !important;
             }
         }
 
