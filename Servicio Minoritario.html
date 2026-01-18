@@ -189,28 +189,17 @@
             font-size: 18px;
         }
 
-        /* Contenido principal - Sin scroll, imagen de fondo completa */
-        .main-content {
-            flex: 1;
-            margin-left: 280px;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* NAVBAR SUPERIOR BLANCO A LA DERECHA */
+        /* NAVBAR SUPERIOR BLANCO A LA DERECHA - AJUSTADO COMO EL PRIMER CÓDIGO */
         .top-nav {
             background-color: white;
             padding: 15px 30px;
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            position: relative;
-            z-index: 50;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 50;
         }
 
         .nav-links {
@@ -221,17 +210,28 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: #000000; /* Cambiado de #333 a #000000 */
             font-weight: 500;
             transition: color 0.3s;
             padding: 5px 0;
-            position: relative;
-            font-size: 16px;
+            font-size: 16px; /* Aseguramos tamaño de fuente */
         }
 
-        /* NAVBAR NO SE PONE ROJO AL PASAR EL MOUSE */
+        /* NAVBAR SÍ SE PONE ROJO AL PASAR EL MOUSE - COMO EL PRIMER CÓDIGO */
         .nav-links a:hover {
-            color: #333; /* Mantiene el mismo color, no se pone rojo */
+            color: #C90F0F;
+        }
+
+        /* Contenido principal - Sin scroll, imagen de fondo completa */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
         }
 
         /* Fondo de pantalla completa */
@@ -314,125 +314,83 @@
             letter-spacing: 1px;
         }
 
-        /* 5 BOTONES DE CATEGORÍAS - MEJORADOS Y MÁS LLAMATIVOS */
+        /* 5 BOTONES DE CATEGORÍAS - MINIMALISTAS, NEUTROS Y MÁS PEQUEÑOS */
         .categorias-buttons {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
+            gap: 15px;
             margin-top: 40px;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1000px;
         }
 
         .categoria-btn {
-            padding: 30px 15px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            border-radius: 12px;
+            padding: 20px 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
             text-decoration: none;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             border: none;
             position: relative;
             overflow: hidden;
             z-index: 1;
-            color: white;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            /* Sin borde/contorno */
-            border: none;
-            /* Efecto de brillo interior */
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
-            backdrop-filter: blur(10px);
+            color: #333;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        /* Efecto de brillo al pasar el mouse */
-        .categoria-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-            z-index: -1;
-        }
-
-        .categoria-btn:hover::before {
-            left: 100%;
-        }
-
+        /* Efecto sutil al pasar el mouse */
         .categoria-btn:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            background-color: #f8f9fa;
         }
 
-        /* Colores de fondo específicos para cada botón */
+        /* Colores de fondo neutros y sutiles para cada botón */
         .categoria-btn:nth-child(1) {
-            background: linear-gradient(145deg, rgba(201, 15, 15, 0.9), rgba(160, 12, 12, 0.9));
+            background-color: #ffffff;
         }
         
         .categoria-btn:nth-child(2) {
-            background: linear-gradient(145deg, rgba(15, 150, 201, 0.9), rgba(12, 120, 160, 0.9));
+            background-color: #f8f9fa;
         }
         
         .categoria-btn:nth-child(3) {
-            background: linear-gradient(145deg, rgba(201, 150, 15, 0.9), rgba(160, 120, 12, 0.9));
+            background-color: #ffffff;
         }
         
         .categoria-btn:nth-child(4) {
-            background: linear-gradient(145deg, rgba(15, 201, 120, 0.9), rgba(12, 160, 95, 0.9));
+            background-color: #f8f9fa;
         }
         
         .categoria-btn:nth-child(5) {
-            background: linear-gradient(145deg, rgba(150, 15, 201, 0.9), rgba(120, 12, 160, 0.9));
+            background-color: #ffffff;
         }
 
         .categoria-icon {
-            font-size: 2.8rem;
+            font-size: 1.8rem;
             margin-bottom: 5px;
-            color: white;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            color: #c90f0f; /* Color rojo para mantener la identidad */
             transition: all 0.3s ease;
-            position: relative;
-            z-index: 2;
         }
 
         .categoria-btn:hover .categoria-icon {
-            transform: scale(1.2) rotate(5deg);
-            color: #fff;
+            transform: scale(1.1);
+            color: #a00c0c; /* Rojo más oscuro al hover */
         }
 
         .categoria-btn span {
-            position: relative;
-            z-index: 2;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            font-size: 1.3rem;
-            letter-spacing: 0.5px;
-        }
-
-        /* Efecto de partículas/brillo alrededor del icono */
-        .categoria-icon::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-
-        .categoria-btn:hover .categoria-icon::after {
-            opacity: 1;
+            font-size: 1.1rem;
+            color: #333;
+            font-weight: 600;
+            letter-spacing: 0.3px;
         }
 
         /* Elementos decorativos */
@@ -483,6 +441,17 @@
             animation-delay: 4s;
         }
 
+        /* Flecha para menú desplegable */
+        .menu-arrow {
+            margin-left: auto;
+            transition: transform 0.3s ease;
+            font-size: 12px;
+        }
+
+        .menu-arrow.rotated {
+            transform: rotate(180deg);
+        }
+
         /* Animaciones */
         @keyframes fadeInUp {
             from {
@@ -504,41 +473,6 @@
             }
         }
 
-        /* Nueva animación para el brillo de botones */
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            }
-            50% {
-                box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
-            }
-            100% {
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            }
-        }
-
-        /* Aplicar animación sutil a los botones */
-        .categoria-btn {
-            animation: pulse 3s infinite ease-in-out;
-        }
-
-        .categoria-btn:nth-child(1) { animation-delay: 0s; }
-        .categoria-btn:nth-child(2) { animation-delay: 0.3s; }
-        .categoria-btn:nth-child(3) { animation-delay: 0.6s; }
-        .categoria-btn:nth-child(4) { animation-delay: 0.9s; }
-        .categoria-btn:nth-child(5) { animation-delay: 1.2s; }
-
-        /* Flecha para menú desplegable */
-        .menu-arrow {
-            margin-left: auto;
-            transition: transform 0.3s ease;
-            font-size: 12px;
-        }
-
-        .menu-arrow.rotated {
-            transform: rotate(180deg);
-        }
-
         /* Responsividad */
         @media (max-width: 1200px) {
             .main-title {
@@ -555,7 +489,7 @@
             
             .categorias-buttons {
                 grid-template-columns: repeat(3, 1fr);
-                gap: 20px;
+                gap: 15px;
                 max-width: 800px;
             }
         }
@@ -571,16 +505,20 @@
             
             .categorias-buttons {
                 grid-template-columns: repeat(3, 1fr);
-                gap: 20px;
+                gap: 15px;
             }
             
             .categoria-btn {
-                padding: 25px 10px;
-                font-size: 1.1rem;
+                padding: 18px 8px;
+                font-size: 0.95rem;
             }
             
             .categoria-icon {
-                font-size: 2.3rem;
+                font-size: 1.6rem;
+            }
+            
+            .categoria-btn span {
+                font-size: 1rem;
             }
         }
 
@@ -643,17 +581,21 @@
             
             .categorias-buttons {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
+                gap: 12px;
                 margin-top: 30px;
             }
             
             .categoria-btn {
-                padding: 25px 10px;
-                font-size: 1rem;
+                padding: 16px 8px;
+                font-size: 0.9rem;
             }
             
             .categoria-icon {
-                font-size: 2rem;
+                font-size: 1.5rem;
+            }
+            
+            .categoria-btn span {
+                font-size: 0.95rem;
             }
             
             .floating-icon {
@@ -688,12 +630,20 @@
             
             .categorias-buttons {
                 grid-template-columns: 1fr;
-                gap: 12px;
+                gap: 10px;
             }
             
             .categoria-btn {
-                padding: 25px 15px;
-                font-size: 1.1rem;
+                padding: 18px 10px;
+                font-size: 1rem;
+                flex-direction: row;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .categoria-icon {
+                font-size: 1.4rem;
+                margin-bottom: 0;
             }
             
             .logo h1 {
@@ -817,7 +767,7 @@
             <div class="floating-icon"><i class="fas fa-gem"></i></div>
         </div>
         
-        <!-- NAVBAR SUPERIOR BLANCO A LA DERECHA -->
+        <!-- NAVBAR SUPERIOR BLANCO A LA DERECHA - AJUSTADO -->
         <nav class="top-nav">
             <ul class="nav-links">
                 <li><a href="Terminos y Condiciones.html" id="terminos-link">Términos y Condiciones</a></li>
@@ -839,7 +789,7 @@
                     <p>En LIFE TIMES conectamos talentos con oportunidades. <span class="call-to-action">¡Sé parte del cambio!</span></p>
                 </div>
                 
-                <!-- 5 BOTONES MEJORADOS - MÁS LLAMATIVOS Y SIN BORDE -->
+                <!-- 5 BOTONES MINIMALISTAS, NEUTROS Y PEQUEÑOS -->
                 <div class="categorias-buttons">
                     <a href="Ropa y calzado-minoritario.html" class="categoria-btn">
                         <div class="categoria-icon">
@@ -940,17 +890,17 @@
                 mainText.style.transform = 'translateY(0)';
             }, 300);
             
-            // Efecto adicional para los botones
+            // Efecto sutil para los botones
             const buttons = document.querySelectorAll('.categoria-btn');
             buttons.forEach((button, index) => {
                 button.style.opacity = '0';
-                button.style.transform = 'translateY(30px)';
+                button.style.transform = 'translateY(20px)';
                 
                 setTimeout(() => {
-                    button.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    button.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
                     button.style.opacity = '1';
                     button.style.transform = 'translateY(0)';
-                }, 500 + (index * 100));
+                }, 400 + (index * 100));
             });
         });
     </script>
