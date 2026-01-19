@@ -111,20 +111,6 @@
             position: relative;
             padding: 8px 0;
         }
-        /* ELIMINADO: Efecto hover del navbar */
-        /* .nav-links a::after{
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--primary);
-            transition: width 0.3s ease;
-        }
-        .nav-links a:hover::after{
-            width: 100%;
-        } */
         .nav-cta{
             display:flex;
             gap:.8rem;
@@ -357,7 +343,7 @@
         }
         
         .service-item:nth-child(2) .service-background {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://lh3.googleusercontent.com/pw/AP1GczPA50mRimZMGOxEymxj05q6sAvu_vJp3DRwz_fkIgIKiTc8PI1trbKVzl0itmdwIMkRGzd3OP7yc9PBhTk5sQAhbcj7KxXjPwR-Wzqo-_R89RvCkVk0457vs4dqBfpTCeCfOuxpyylus-0DCRQZnZl7hA=w1436-h957-s-no-gm?authuser=4');
             background-position: center 30%;
         }
         
@@ -629,72 +615,116 @@
             to { transform: translateY(0); }
         }
         
+        /* BOTÓN DE CERRAR MEJORADO - X VISIBLE */
         .modal-close {
             position: absolute;
-            top: 1.2rem;
-            right: 1.2rem;
-            background: #f8f9fa;
+            top: 20px;
+            right: 20px;
+            background: white;
             color: var(--dark);
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: 10;
+            z-index: 2010;
             transition: all 0.3s ease;
-            font-size: 1.1rem;
-            border: 1px solid #e9ecef;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 2px solid #f0f0f0;
         }
         
         .modal-close:hover {
             background: var(--primary);
             color: white;
             transform: rotate(90deg);
+            box-shadow: 0 6px 20px rgba(201, 15, 15, 0.4);
         }
         
-        /* Header del modal minimalista */
+        /* Header del modal con imagen de fondo */
         .modal-header {
-            padding: 3rem 3rem 1.5rem;
-            background: white;
-            color: var(--dark);
+            padding: 5rem 3rem 3rem;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
             border-radius: 16px 16px 0 0;
             position: relative;
-            border-bottom: 1px solid #f0f0f0;
+            text-align: center;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
-        
+
+        /* Overlay para el header del modal */
+        .modal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+            z-index: 1;
+            border-radius: 16px 16px 0 0;
+        }
+
+        /* Asegurar que el contenido esté sobre el overlay */
+        .modal-header > * {
+            position: relative;
+            z-index: 2;
+        }
+
         .modal-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
             line-height: 1.2;
-            color: var(--dark);
-        }
-        
-        .modal-subtitle {
-            font-size: 1.1rem;
-            color: var(--gray);
-            line-height: 1.5;
+            color: white;
             max-width: 800px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            max-width: 700px;
             margin: 0 auto;
             font-weight: 400;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
         }
         
         /* Contenido del modal */
         .modal-body {
-            padding: 2rem 3rem;
+            padding: 3rem;
+            background: white;
         }
         
-        .modal-section {
-            margin-bottom: 2.5rem;
+        /* Sección de descripción centrada */
+        .description-section {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            text-align: center;
         }
-        
-        .modal-section:last-child {
-            margin-bottom: 0;
+
+        /* Contenedor de texto centrado */
+        .description-centered {
+            color: var(--dark-light);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
         }
-        
+
+        /* Subtítulo de sección centrado */
         .section-title-modal {
             font-size: 1.4rem;
             font-weight: 600;
@@ -706,351 +736,269 @@
             align-items: center;
             gap: 0.8rem;
         }
-        
-        .section-title-modal i {
-            color: var(--primary);
-            font-size: 1.2rem;
+
+        .section-title-modal.centered {
+            text-align: center;
+            justify-content: center;
+            border-bottom: none;
+            margin-bottom: 2rem;
         }
-        
-        /* Nueva sección de descripción con imagen */
-        .description-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin: 2rem 0;
-            align-items: start;
-        }
-        
-        .description-text {
-            color: var(--dark-light);
-            line-height: 1.8;
-            font-size: 1.05rem;
-            text-align: left;
-        }
-        
-        .description-image {
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            height: 300px;
-        }
-        
-        .description-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .description-image:hover img {
-            transform: scale(1.05);
-        }
-        
-        /* Lista de puntos para características (REEMPLAZA A LAS TARJETAS EXPANDIBLES) */
-        .features-list-modal {
-            margin: 1.5rem 0;
-            padding-left: 1.5rem;
-        }
-        
-        .features-list-modal ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .features-list-modal li {
-            margin-bottom: 1.2rem;
-            padding-left: 0.5rem;
-            position: relative;
-            color: var(--dark-light);
-            line-height: 1.7;
-            font-size: 1.05rem;
-        }
-        
-        .features-list-modal li:before {
-            content: "•";
-            color: var(--primary);
-            font-weight: bold;
-            font-size: 1.5rem;
-            position: absolute;
-            left: -1.5rem;
-            top: -0.2rem;
-        }
-        
-        .feature-item-title {
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 0.3rem;
-            font-size: 1.1rem;
-            display: block;
-        }
-        
-        .feature-item-description {
-            color: var(--dark-light);
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-        
-        /* Grid de características con 3 boxes y descripciones expandibles (MANTENIDO POR SI ACASO) */
-        .features-grid-modal {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin: 2rem 0;
-            display: none; /* OCULTO AHORA */
-        }
-        
-        .feature-card-modal {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 1.8rem;
-            border: 1px solid #e9ecef;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .feature-card-modal:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            border-color: var(--primary-light);
-        }
-        
-        .feature-card-modal.expanded {
-            background: white;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-icon-modal {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 1.2rem;
-            display: inline-block;
-            transition: transform 0.3s ease;
-        }
-        
-        .feature-card-modal:hover .feature-icon-modal {
-            transform: scale(1.1);
-        }
-        
-        .feature-title-modal {
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 0.8rem;
-            font-size: 1.15rem;
-            line-height: 1.3;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-grow: 1;
-        }
-        
-        .feature-toggle {
-            color: var(--primary);
-            font-size: 1rem;
-            transition: transform 0.3s ease;
-            flex-shrink: 0;
-            margin-left: 0.5rem;
-        }
-        
-        .feature-card-modal.expanded .feature-toggle {
-            transform: rotate(180deg);
-        }
-        
-        .feature-description-modal {
-            color: var(--dark-light);
-            line-height: 1.6;
-            font-size: 0.95rem;
-            margin-top: 1rem;
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            transition: all 0.4s ease;
-        }
-        
-        .feature-card-modal.expanded .feature-description-modal {
-            max-height: 500px;
-            opacity: 1;
-        }
-        
-        /* Lista de beneficios */
-        .benefits-list {
-            margin: 2rem 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .benefit-item {
-            background: white;
-            border-radius: 12px;
-            padding: 1.8rem;
-            border: 1px solid #e9ecef;
-            transition: all 0.3s ease;
-        }
-        
-        .benefit-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-            border-color: var(--primary-light);
-        }
-        
-        .benefit-icon {
+
+        .section-title-modal.centered i {
             background: var(--primary-light);
-            color: var(--primary);
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-            font-size: 1.2rem;
-            margin-bottom: 1.2rem;
+        }
+        
+        /* Grid de características */
+        .features-grid-modal {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card-modal {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature-card-modal:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .feature-icon-modal {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            background: var(--primary-light);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: all 0.3s ease;
         }
-        
-        .benefit-item:hover .benefit-icon {
+
+        .feature-card-modal:hover .feature-icon-modal {
             background: var(--primary);
             color: white;
-            transform: rotate(5deg);
+            transform: scale(1.1) rotate(5deg);
         }
-        
-        .benefit-content h4 {
-            font-weight: 600;
+
+        .feature-title-modal {
+            font-weight: 700;
             color: var(--dark);
-            margin-bottom: 0.8rem;
-            font-size: 1.15rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            line-height: 1.4;
         }
-        
-        .benefit-content p {
+
+        .feature-description-modal {
             color: var(--dark-light);
             line-height: 1.6;
-            font-size: 0.95rem;
+            font-size: 1rem;
             margin: 0;
         }
         
-        /* Sección de precio minimalista */
+        /* Sección de beneficios */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .benefit-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .benefit-icon {
+            background: var(--primary-light);
+            color: var(--primary);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover .benefit-icon {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .benefit-content h4 {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .benefit-content p {
+            color: var(--dark-light);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        /* Sección de precio */
         .pricing-section-modal {
             background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
             border-radius: 16px;
-            padding: 2.5rem;
-            margin: 2.5rem 0;
+            padding: 3rem;
+            margin: 3rem 0;
             text-align: center;
             border: 1px solid #e9ecef;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        
+
         .pricing-badge-modal {
             display: inline-block;
             background: var(--primary);
             color: white;
-            padding: 0.6rem 1.5rem;
-            border-radius: 20px;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            font-size: 1rem;
             letter-spacing: 0.5px;
         }
-        
+
         .pricing-amount-modal {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
             color: var(--dark);
             margin-bottom: 0.5rem;
             line-height: 1;
         }
-        
+
         .pricing-period-modal {
             color: var(--gray);
-            margin-bottom: 2rem;
-            font-size: 1rem;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
             font-weight: 400;
         }
-        
+
         .pricing-features-modal {
             background: white;
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 2rem;
             border: 1px solid #e9ecef;
-            max-width: 400px;
+            max-width: 500px;
             margin: 0 auto;
         }
-        
+
         .pricing-feature-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 1rem;
             margin-bottom: 1rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid #f0f0f0;
         }
-        
+
         .pricing-feature-item:last-child {
             margin-bottom: 0;
             padding-bottom: 0;
             border-bottom: none;
         }
-        
+
         .pricing-feature-item i {
             color: var(--primary);
-            font-size: 0.9rem;
-            width: 20px;
+            font-size: 1rem;
+            margin-top: 0.2rem;
+            flex-shrink: 0;
         }
-        
+
         .pricing-feature-item span {
             color: var(--dark-light);
-            font-size: 0.95rem;
+            font-size: 1rem;
             flex: 1;
+            text-align: left;
         }
         
-        /* Footer del modal minimalista */
+        /* Footer del modal */
         .modal-footer {
-            padding: 2rem 3rem;
+            padding: 3rem;
             background: #f8f9fa;
             border-top: 1px solid #e9ecef;
             border-radius: 0 0 16px 16px;
             text-align: center;
         }
-        
+
         .modal-footer-text {
             color: var(--dark-light);
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
             line-height: 1.6;
-            max-width: 600px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
-        
+
         .modal-cta {
             background: var(--primary);
             color: white;
             border: none;
             border-radius: 10px;
-            padding: 1rem 2.5rem;
-            font-weight: 600;
+            padding: 1.2rem 3rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.8rem;
-            font-size: 1rem;
+            gap: 1rem;
+            font-size: 1.1rem;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 5px 15px rgba(201, 15, 15, 0.3);
         }
-        
+
         .modal-cta:hover {
             background: var(--primary-dark);
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(201, 15, 15, 0.2);
+            box-shadow: 0 10px 25px rgba(201, 15, 15, 0.4);
         }
-        
+
         .modal-cta i {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
         
         /* ====== CTA SECTION ====== */
@@ -1242,12 +1190,17 @@
                 font-size: 1.1rem;
             }
             
-            .features-grid-modal {
-                grid-template-columns: repeat(2, 1fr);
+            .modal-header {
+                padding: 4rem 2rem 2rem;
+                min-height: 250px;
             }
             
-            .modal-header {
-                padding: 2.5rem 2rem 1.5rem;
+            .modal-title {
+                font-size: 2.2rem;
+            }
+            
+            .modal-subtitle {
+                font-size: 1.1rem;
             }
             
             .modal-body {
@@ -1258,12 +1211,12 @@
                 padding: 2rem;
             }
             
-            .modal-title {
-                font-size: 2rem;
+            .pricing-section-modal {
+                padding: 2.5rem;
             }
             
-            .modal-subtitle {
-                font-size: 1.1rem;
+            .pricing-amount-modal {
+                font-size: 3rem;
             }
             
             .footer-grid {
@@ -1301,8 +1254,13 @@
                 padding: 1rem;
             }
             
+            .modal-header {
+                padding: 3rem 1.5rem 1.5rem;
+                min-height: 200px;
+            }
+            
             .modal-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             
             .modal-body {
@@ -1313,16 +1271,36 @@
                 padding: 1.5rem;
             }
             
-            .section-title-modal {
-                font-size: 1.3rem;
+            .features-grid-modal,
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
             
-            .description-text {
-                font-size: 1rem;
-            }
-            
-            .feature-card-modal {
+            .feature-card-modal,
+            .benefit-card {
                 padding: 1.5rem;
+            }
+            
+            .pricing-section-modal {
+                padding: 2rem 1.5rem;
+            }
+            
+            .pricing-amount-modal {
+                font-size: 2.5rem;
+            }
+            
+            .modal-cta {
+                width: 100%;
+                padding: 1rem 1.5rem;
+            }
+            
+            .modal-close {
+                width: 44px;
+                height: 44px;
+                font-size: 1.3rem;
+                top: 15px;
+                right: 15px;
             }
             
             .footer-grid {
@@ -1357,24 +1335,31 @@
             }
             
             .modal-header {
-                padding: 2rem 1.5rem 1.5rem;
+                padding: 2.5rem 1rem 1rem;
+                min-height: 180px;
             }
             
-            .modal-body {
-                padding: 1.5rem;
+            .modal-title {
+                font-size: 1.8rem;
             }
             
-            .modal-footer {
-                padding: 1.5rem;
+            .modal-subtitle {
+                font-size: 0.95rem;
             }
             
-            .pricing-amount-modal {
-                font-size: 2.5rem;
+            .description-centered {
+                font-size: 1rem;
+                padding: 0;
             }
             
-            .modal-cta {
-                width: 100%;
-                padding: 1rem 1.5rem;
+            .feature-icon-modal {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+            
+            .feature-title-modal {
+                font-size: 1.2rem;
             }
             
             .expand-btn {
@@ -1387,10 +1372,6 @@
                 font-size: 2.5rem;
             }
             
-            .description-image {
-                height: 200px;
-            }
-            
             .service-price-exterior {
                 font-size: 2.2rem;
             }
@@ -1399,8 +1380,12 @@
                 font-size: 2.2rem;
             }
             
-            .features-grid-modal {
-                grid-template-columns: 1fr;
+            .modal-close {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                top: 10px;
+                right: 10px;
             }
         }
     </style>
@@ -1411,21 +1396,22 @@
         <div class="nav-inner">
             <button class="mobile-toggle" aria-label="Abrir menú" id="menuBtn">≡</button>
             <a class="logo" href="index.html" aria-label="Inicio" title="Inicio">
-                LIFETIMES<span></span>
+                LIFETIMES<span>AGENCY</span>
             </a>
             <nav class="nav-links" aria-label="Principal">
-                <a href="General.html">Novedades</a>
-                <a href="Terminos y Condiciones.html">Términos y Condiciones</a>
-                <a href="Index.html">La Historia</a>
+                <a href="general.html">Novedades</a>
+                <a href="terminos-y-condiciones.html">Términos y Condiciones</a>
+                <a href="contacto.html">Contacto</a>
             </nav>
             <div class="nav-cta">
                 <a class="btn ghost" href="portal.html" aria-label="Portal">Portal</a>
             </div>
         </div>
         <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-            <a href="General.html">Novedades</a>
+            <a href="general.html">Novedades</a>
             <a href="Terminos y Condiciones.html">Términos y Condiciones</a>
-            <a href="Index.html">La Historia</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="servicios.html">Servicios</a>
         </div>
     </header>
 
@@ -1468,7 +1454,7 @@
                                 <div class="feature-icon">
                                     <i class="fas fa-check-circle"></i>
                                 </div>
-                                <div class="feature-text">Producción de video promocional con enfoque profesional</div>
+                                <div class="feature-text">Producción de video promocional con reportero</div>
                             </div>
                             <div class="feature-item">
                                 <div class="feature-icon">
@@ -1497,7 +1483,7 @@
                     </div>
                     
                     <div class="service-image-container">
-                        <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Producción de Video Promocional">
+                        <img src="https://elysiamstudio.com/wp-content/uploads/2022/10/Produccion-medios-digitales.jpg" alt="Producción de Video Promocional">
                     </div>
                 </div>
             </div>
@@ -1536,7 +1522,7 @@
                         </div>
                         
                         <div class="service-price">
-                            <div class="service-price-exterior free">GRATIS</div>
+                            <div class="service-price-exterior free">Conceta con más personas que buscan lo mismo</div>
                             <div class="service-price-note">Servicio completamente gratuito sin límite de tiempo</div>
                         </div>
                         
@@ -1620,7 +1606,7 @@
                     </div>
                     
                     <div class="service-image-container">
-                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Página Web de Presentación">
+                        <img src="https://lh3.googleusercontent.com/pw/AP1GczNFC5h8XY7nOosgm9HM9ctb3HBVC3ycNuqlJc9q5vwW8QNK7PziBy2i1GNLCGBUwM0s_qZPOLbk-6Ymv67IrALU9qrQEdWhl6a-2vaPDursS3dq8wMguJAUMnO5mRc_zRwzPKbCWaZR-K3mpIVXXQ=w1600-h900-s-no-gm?authuser=4" alt="Página Web de Presentación">
                     </div>
                 </div>
             </div>
@@ -1759,22 +1745,22 @@
                 title: "Producción de Video Promocional",
                 subtitle: "Contenido audiovisual profesional para destacar tu negocio y conectar con tu audiencia objetivo",
                 description: "En LIFETIMES nos especializamos en crear videos promocionales de alta calidad que no solo muestran tu negocio, sino que cuentan su historia de manera emocionante y memorable. Nuestro proceso comienza con una consulta detallada para entender tu visión, valores y objetivos de negocio.",
-                image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                image: "https://elysiamstudio.com/wp-content/uploads/2022/10/Produccion-medios-digitales.jpg",
                 features: [
                     {
                         icon: "fa-camera",
-                        title: "Filmación profesional",
-                        description: "Utilizamos cámaras 4K, sistemas de audio profesional, iluminación de estudio y equipos de estabilización para capturar cada detalle con la máxima calidad. Nuestro equipo técnico se encarga de todo el proceso de producción, garantizando tomas nítidas, audio claro y composición visual atractiva."
+                        title: "Producción musical personalizada",
+                        description: "Si lo deseas, podemos desarrollar un beat o música personalizada, definiendo el estilo y los detalles conforme a lo que se converse y se llegue a un acuerdo."
                     },
                     {
                         icon: "fa-film",
-                        title: "Edición creativa",
-                        description: "Nuestros editores especializados trabajan con software profesional para crear secuencias dinámicas, agregar efectos visuales sutiles, corrección de color cinematográfica, gráficos animados y banda sonora personalizada. Cada video se optimiza para transmitir el mensaje clave de tu marca de manera impactante."
+                        title: "Presencia en el catalogo web",
+                        description: "La publicación también forma parte de nuestro catálogo web, manteniéndose disponible dentro de la plataforma."
                     },
                     {
                         icon: "fa-mobile-screen",
-                        title: "Optimización multiplataforma",
-                        description: "Creamos versiones específicas para diferentes plataformas: formatos verticales para Instagram Stories y TikTok, formatos cuadrados para Instagram Feed, y versiones horizontales para YouTube y sitio web. Además, incluimos subtítulos para mejorar la accesibilidad y el engagement en redes sociales."
+                        title: "Gestión y publicación de Contenido",
+                        description: "El servicio incluye la creación del video y su publicación en nuestras plataformas durante un mes, como parte de un plan integral para que el contenido se mantenga activo."
                     }
                 ],
                 benefits: [
@@ -1785,8 +1771,8 @@
                     },
                     {
                         icon: "fa-repeat",
-                        title: "Contenido versátil",
-                        description: "Recibirás un paquete completo con todas las versiones del video, material crudo seleccionado, y archivos editables para utilizar en múltiples contextos."
+                        title: "Menciones TV",
+                        description: "Recibirás menciones en Historias o videos cortos en plataformas digitales como un plan para conectar clientes a tu negocio, esto de manera cuando LIFE TIMES haga contenido tipo Noticiero"
                     }
                 ],
                 pricing: {
@@ -1796,7 +1782,6 @@
                         "Desarrollo de guión y planificación estratégica incluidos",
                         "Hasta 3 revisiones completas de edición sin costo adicional",
                         "Entrega en todos los formatos necesarios para redes sociales",
-                        "Derechos de uso completo y perpetuo del material",
                         "Soporte post-entrega por 30 días para ajustes menores"
                     ]
                 }
@@ -1805,7 +1790,7 @@
                 title: "Catálogo Web LIFETIMES",
                 subtitle: "Presencia digital gratuita que conecta tu negocio con clientes locales en toda la CDMX",
                 description: "Nuestro catálogo web es una plataforma diseñada específicamente para dar visibilidad a negocios locales de toda la Ciudad de México sin necesidad de inversión inicial. Es más que un simple directorio: es un espacio digital donde los clientes pueden descubrir, comparar y contactar negocios como el tuyo de manera intuitiva, con cobertura en toda la CDMX.",
-                image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                image: "https://lh3.googleusercontent.com/pw/AP1GczPA50mRimZMGOxEymxj05q6sAvu_vJp3DRwz_fkIgIKiTc8PI1trbKVzl0itmdwIMkRGzd3OP7yc9PBhTk5sQAhbcj7KxXjPwR-Wzqo-_R89RvCkVk0457vs4dqBfpTCeCfOuxpyylus-0DCRQZnZl7hA=w1436-h957-s-no-gm?authuser=4",
                 features: [
                     {
                         icon: "fa-store",
@@ -1816,11 +1801,6 @@
                         icon: "fa-tags",
                         title: "Categorización por zona CDMX",
                         description: "Tu negocio aparece clasificado no solo por rubro principal, sino por múltiples categorías secundarias, servicios específicos, ubicación geográfica dentro de la CDMX y características especiales. Esto aumenta exponencialmente las posibilidades de que te encuentren clientes que buscan exactamente lo que ofreces en su zona."
-                    },
-                    {
-                        icon: "fa-magnifying-glass",
-                        title: "Optimización SEO",
-                        description: "Cada perfil está optimizado técnicamente para aparecer en búsquedas de Google y otros motores de búsqueda. Implementamos meta tags, descripciones optimizadas, estructura de datos organizada, y técnicas de SEO local que mejoran tu visibilidad digital en la CDMX."
                     }
                 ],
                 benefits: [
@@ -1836,14 +1816,13 @@
                     }
                 ],
                 pricing: {
-                    amount: "GRATIS",
+                    amount: "Llega y conecta con más gente",
                     period: "Servicio completamente gratuito sin límite de tiempo",
                     features: [
                         "Publicación completa y permanente del perfil de tu negocio",
                         "Actualizaciones ilimitadas y gratuitas cuando las necesites",
                         "Sin límite de tiempo - permanece en el catálogo indefinidamente",
                         "Soporte básico incluido para consultas y modificaciones",
-                        "Optimización SEO continua para mantener visibilidad en CDMX"
                     ]
                 }
             },
@@ -1851,53 +1830,49 @@
                 title: "Creación de Página Web de Presentación",
                 subtitle: "Tu espacio digital personalizado que funciona como el escaparate perfecto de tu negocio",
                 description: "Desarrollamos páginas web de presentación que van mucho más allá de una simple página informativa. Creamos experiencias digitales completas que funcionan como la extensión natural de tu negocio en el mundo online.",
-                image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80",
                 features: [
                     {
                         icon: "fa-paintbrush",
-                        title: "Diseño personalizado",
-                        description: "No utilizamos plantillas genéricas. Cada elemento visual se diseña específicamente para reflejar la personalidad de tu marca. Creamos interfaces intuitivas que guían al visitante naturalmente hacia la información más importante y los llamados a acción más efectivos."
-                    },
+                      title: "Pagina web",
+                        description: "Se trata de páginas web de presentación donde los clientes pueden conocer tu negocio, ver información clave y entender fácilmente lo que ofreces."
+                       },
                     {
                         icon: "fa-mobile-screen-button",
                         title: "Diseño responsive",
-                        description: "Tu sitio web se verá y funcionará perfectamente en cualquier dispositivo: desde smartphones pequeños hasta tablets, laptops y monitores de escritorio grandes. Implementamos técnicas de diseño adaptativo que reorganizan contenido, ajustan tamaños de texto, y optimizan imágenes automáticamente según el dispositivo del usuario."
+                        description: "Tu sitio web se verá y funcionará perfectamente en cualquier dispositivo: desde smartphones pequeños hasta laptops y monitores de escritorio grandes. Implementamos técnicas de diseño adaptativo que reorganizan contenido, ajustan tamaños de texto, y optimizan imágenes automáticamente según el dispositivo del usuario."
                     },
                     {
                         icon: "fa-bolt",
-                        title: "Optimización de rendimiento",
-                        description: "Implementamos técnicas avanzadas de optimización: compresión de imágenes sin pérdida de calidad, minificación de código, carga diferida de recursos, y configuración de caché inteligente. El resultado es un sitio web que carga en menos de 3 segundos."
+                      title: "Diseño personalizado",
+                        description: "Cada elemento visual se diseña específicamente para reflejar la personalidad de tu marca. Creamos interfaces intuitivas que guían al visitante naturalmente hacia la información más importante y los llamados a la acción más efectivos."
                     }
                 ],
+              
                 benefits: [
                     {
                         icon: "fa-link",
                         title: "Integración automática",
                         description: "Al crear tu página web con nosotros, automáticamente recibes un enlace destacado y posición preferencial dentro del catálogo web de LIFETIMES."
                     },
-                    {
-                        icon: "fa-shield-halved",
-                        title: "Credibilidad profesional",
-                        description: "En la era digital actual, un sitio web profesional ya no es un lujo sino una expectativa básica de los consumidores."
-                    }
+                   
                 ],
                 pricing: {
                     amount: "Consultar",
                     period: "Precio variable según complejidad, funcionalidades y escala del proyecto",
                     features: [
                         "Diseño 100% personalizado y único para tu marca",
-                        "Hasta 5 secciones principales completamente desarrolladas",
-                        "Formulario de contacto funcional con sistema anti-spam",
+                        "1 sección principal completamente desarrollada",
                         "Integración completa con tus redes sociales principales",
                         "Panel de administración intuitivo para actualizaciones básicas",
-                        "Configuración de dominio y hosting incluidos (primer año)"
+                        "Inclusión de google Map con tu ubicación"
                     ]
                 }
             },
             4: {
                 title: "Publicación en Redes Sociales LIFETIMES",
                 subtitle: "Amplificación estratégica del alcance de tu contenido a través de nuestras audiencias establecidas en CDMX",
-                description: "Nuestro servicio de publicación en redes sociales no es simplemente compartir tu contenido; es una estrategia de amplificación cuidadosamente planificada. Publicamos tu contenido en nuestras cuentas principales de Instagram y Facebook con alcance específico en la Ciudad de México.",
+                description: "Nuestro servicio de publicación en redes sociales no es simplemente compartir tu contenido; es una estrategia de amplificación cuidadosamente planificada. Publicamos tu contenido en nuestras cuentas principales de Instagram,Tik Tok y Facebook con alcance en la Ciudad de México y más.",
                 image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
                 features: [
                     {
@@ -1913,7 +1888,7 @@
                     {
                         icon: "fa-calendar-check",
                         title: "Planificación estratégica",
-                        description: "Analizamos patrones de actividad de nuestra audiencia en la CDMX para publicar tu contenido en los momentos de mayor actividad y receptividad. Consideramos días de la semana, horas específicas, eventos locales relevantes, y tendencias estacionales en la ciudad."
+                        description: "El contenido se publica siguiendo un plan mensual, donde se definen tiempos y publicaciones."
                     }
                 ],
                 benefits: [
@@ -1949,7 +1924,7 @@
         const modalClose = document.getElementById('modalClose');
         const expandButtons = document.querySelectorAll('.expand-btn');
         
-        // Función para crear el contenido del modal
+        // Función para crear el contenido del modal con la nueva estructura
         function createModalContent(serviceId) {
             const service = servicesData[serviceId];
             if (!service) {
@@ -1957,17 +1932,22 @@
                 return '';
             }
             
-            // Crear características HTML como lista de puntos (REEMPLAZO DE LAS TARJETAS EXPANDIBLES)
-            const featuresHTML = service.features.slice(0, 3).map(feature => `
-                <li>
-                    <span class="feature-item-title">${feature.title}</span>
-                    <div class="feature-item-description">${feature.description}</div>
-                </li>
+            // Crear características HTML
+            const featuresHTML = service.features.map(feature => `
+                <div class="feature-card-modal">
+                    <div class="feature-icon-modal">
+                        <i class="fas ${feature.icon}"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h4 class="feature-title-modal">${feature.title}</h4>
+                        <p class="feature-description-modal">${feature.description}</p>
+                    </div>
+                </div>
             `).join('');
             
             // Crear beneficios HTML
             const benefitsHTML = service.benefits.map(benefit => `
-                <div class="benefit-item">
+                <div class="benefit-card">
                     <div class="benefit-icon">
                         <i class="fas ${benefit.icon}"></i>
                     </div>
@@ -1987,24 +1967,22 @@
             `).join('');
             
             return `
-                <div class="modal-header">
+                <button class="modal-close" id="modalCloseInside">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="modal-header" style="background-image: url('${service.image}')">
                     <h3 class="modal-title">${service.title}</h3>
                     <div class="modal-subtitle">${service.subtitle}</div>
                 </div>
                 
                 <div class="modal-body">
-                    <div class="modal-section">
-                        <h3 class="section-title-modal">
+                    <div class="description-section">
+                        <h3 class="section-title-modal centered">
                             <i class="fas fa-file-alt"></i>
                             Descripción detallada del servicio
                         </h3>
-                        <div class="description-grid">
-                            <div class="description-text">
-                                ${service.description}
-                            </div>
-                            <div class="description-image">
-                                <img src="${service.image}" alt="${service.title}">
-                            </div>
+                        <div class="description-centered">
+                            ${service.description}
                         </div>
                     </div>
                     
@@ -2013,10 +1991,8 @@
                             <i class="fas fa-list-check"></i>
                             Características principales
                         </h3>
-                        <div class="features-list-modal">
-                            <ul>
-                                ${featuresHTML}
-                            </ul>
+                        <div class="features-grid-modal">
+                            ${featuresHTML}
                         </div>
                     </div>
                     
@@ -2025,20 +2001,20 @@
                             <i class="fas fa-gift"></i>
                             Beneficios exclusivos para tu negocio
                         </h3>
-                        <div class="benefits-list">
+                        <div class="benefits-grid">
                             ${benefitsHTML}
                         </div>
                     </div>
                     
                     <div class="modal-section">
-                        <h3 class="section-title-modal">
+                        <h3 class="section-title-modal centered">
                             <i class="fas fa-dollar-sign"></i>
                             Inversión requerida y lo que incluye
                         </h3>
                         
                         <div class="pricing-section-modal">
                             <div class="pricing-badge-modal">
-                                ${service.pricing.amount === 'GRATIS' ? 'Servicio completamente gratuito' : 'Inversión estratégica'}
+                                ${service.pricing.amount === 'Consultar' ? 'Servicio personalizado' : (service.pricing.amount.includes('MXN') ? 'Inversión estratégica' : 'Servicio gratuito')}
                             </div>
                             <div class="pricing-amount-modal">${service.pricing.amount}</div>
                             <div class="pricing-period-modal">${service.pricing.period}</div>
@@ -2048,9 +2024,9 @@
                             </div>
                         </div>
                         
-                        <p class="description-text" style="margin-top: 2rem;">
+                        <div class="description-centered" style="margin-top: 2rem;">
                             <strong>Importante:</strong> Todos los precios son transparentes y sin cargos ocultos. Para servicios personalizados como producción de video o desarrollo web, ofrecemos cotizaciones detalladas después de entender exactamente tus necesidades específicas. Contáctanos para una evaluación gratuita y una propuesta personalizada.
-                        </p>
+                        </div>
                     </div>
                 </div>
                 
@@ -2094,10 +2070,10 @@
                 });
             }
             
-            // Asegurarse de que el botón de cerrar funcione
-            const modalCloseInModal = modalContainer.querySelector('.modal-close');
-            if (modalCloseInModal) {
-                modalCloseInModal.addEventListener('click', closeModal);
+            // Asegurarse de que el botón de cerrar dentro del modal funcione
+            const modalCloseInside = document.getElementById('modalCloseInside');
+            if (modalCloseInside) {
+                modalCloseInside.addEventListener('click', closeModal);
             }
         }
         
@@ -2175,6 +2151,4 @@
         });
     </script>
 </body>
-
 </html>
-
