@@ -2605,16 +2605,17 @@
             });
         }
 
-        // Función para cargar información de contacto en el modal (SOLO WHATSAPP, TELÉFONO, UBICACIÓN Y HORARIO)
+        // Función para cargar información de contacto en el modal (SOLO WHATSAPP, UBICACIÓN Y HORARIO - SIN TELÉFONO)
         function cargarContactoModal(contactoArray) {
             contactoModalGrid.innerHTML = '';
             
-            // Filtrar solo los tipos de contacto que queremos mostrar
+            // Filtrar SOLO los tipos de contacto que queremos mostrar
+            // AHORA EXCLUIMOS "telefono" explícitamente
             const contactosFiltrados = contactoArray.filter(contacto => 
                 contacto.tipo === "whatsapp" || 
-                contacto.tipo === "telefono" || 
                 contacto.tipo === "ubicacion" || 
                 contacto.tipo === "horario"
+                // Nota: "telefono" ha sido ELIMINADO de esta lista
             );
             
             contactosFiltrados.forEach(contacto => {
@@ -2643,7 +2644,7 @@
             
             descripcionContenido.innerHTML = negocio.descripcion_larga;
             
-            // Cargar información de contacto (FILTRADA: solo whatsapp, teléfono, ubicación y horario)
+            // Cargar información de contacto (FILTRADA: solo whatsapp, ubicación y horario)
             if (negocio.contacto) {
                 cargarContactoModal(negocio.contacto);
             }
