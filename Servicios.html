@@ -343,8 +343,7 @@
         }
         
         .service-item:nth-child(2) .service-background {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://lh3.googleusercontent.com/pw/AP1GczPA50mRimZMGOxEymxj05q6sAvu_vJp3DRwz_fkIgIKiTc8PI1trbKVzl0itmdwIMkRGzd3OP7yc9PBhTk5sQAhbcj7KxXjPwR-Wzqo-_R89RvCkVk0457vs4dqBfpTCeCfOuxpyylus-0DCRQZnZl7hA=w1436-h957-s-no-gm?authuser=4');
-            background-position: center 30%;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
         }
         
         /* SERVICIO 3 CON IMAGEN NUEVA */
@@ -354,7 +353,8 @@
         
         /* SERVICIO 4 CON IMAGEN NUEVA */
         .service-item:nth-child(4) .service-background {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://lh3.googleusercontent.com/pw/AP1GczPA50mRimZMGOxEymxj05q6sAvu_vJp3DRwz_fkIgIKiTc8PI1trbKVzl0itmdwIMkRGzd3OP7yc9PBhTk5sQAhbcj7KxXjPwR-Wzqo-_R89RvCkVk0457vs4dqBfpTCeCfOuxpyylus-0DCRQZnZl7hA=w1436-h957-s-no-gm?authuser=4');
+            background-position: center 30%;
         }
         
         /* Overlay para mejorar legibilidad */
@@ -875,7 +875,488 @@
             font-size: 1rem;
         }
         
-        /* Sección de precio */
+        /* ====== SECCIÓN DE PAQUETES DE CONTENIDO ====== */
+        .packages-section {
+            margin: 4rem 0;
+            padding: 3rem 0;
+            background: #fafafa;
+            border-radius: 16px;
+            border: 1px solid #eaeaea;
+        }
+
+        .packages-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .packages-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .packages-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            padding: 0 1rem;
+        }
+
+        .packages-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            padding: 0 1rem;
+        }
+        
+        .package-card {
+            background-color: white;
+            border-radius: 12px;
+            border: 1px solid #eaeaea;
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            transition: all 0.25s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .package-card:hover {
+            border-color: #ddd;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transform: translateY(-5px);
+        }
+        
+        .package-header {
+            padding: 30px 30px 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .package-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .package-price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: baseline;
+        }
+        
+        .price-note {
+            font-size: 0.85rem;
+            color: #888;
+        }
+        
+        .package-content {
+            padding: 30px;
+        }
+        
+        .section-title-package {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .features-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .features-list li {
+            padding: 10px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: #444;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .features-list li i {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+        
+        .platforms {
+            display: flex;
+            gap: 20px;
+            margin: 25px 0 30px;
+            flex-wrap: wrap;
+        }
+        
+        .platform {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #666;
+            font-size: 0.9rem;
+            background: #f5f5f5;
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+        
+        .platform i {
+            font-size: 1.1rem;
+        }
+
+        .fa-tiktok {
+            color: #000;
+        }
+
+        .fa-instagram {
+            color: #C13584;
+        }
+
+        .fa-facebook {
+            color: #1877F2;
+        }
+        
+        .support-section {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .support-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .support-features {
+            list-style: none;
+        }
+        
+        .support-features li {
+            padding: 6px 0;
+            font-size: 0.9rem;
+            color: #555;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .support-features li i {
+            font-size: 0.8rem;
+            margin-top: 4px;
+            color: var(--primary);
+        }
+        
+        .package-note {
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .divider {
+            height: 1px;
+            background-color: #f0f0f0;
+            margin: 30px 0;
+        }
+
+        /* Botón de contacto para paquetes */
+        .package-cta {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .package-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(201, 15, 15, 0.2);
+        }
+        
+        /* ====== SECCIÓN DE PLANES DE MARKETING EN REDES SOCIALES - NUEVO ESTILO ====== */
+        .marketing-plans-section {
+            margin: 4rem 0;
+            padding: 3rem 0;
+            background: #fafafa;
+            border-radius: 16px;
+            border: 1px solid #eaeaea;
+        }
+
+        .marketing-plans-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .marketing-plans-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .marketing-plans-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            padding: 0 1rem;
+        }
+
+        .marketing-plans-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            padding: 0 1rem;
+        }
+        
+        /* Estilos IDÉNTICOS a los paquetes de producción */
+        .marketing-plan-card {
+            background-color: white;
+            border-radius: 12px;
+            border: 1px solid #eaeaea;
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            transition: all 0.25s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .marketing-plan-card:hover {
+            border-color: #ddd;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transform: translateY(-5px);
+        }
+        
+        .marketing-plan-header {
+            padding: 30px 30px 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .marketing-plan-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .marketing-plan-price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: baseline;
+        }
+        
+        .marketing-price-note {
+            font-size: 0.85rem;
+            color: #888;
+        }
+        
+        .marketing-plan-content {
+            padding: 30px;
+        }
+        
+        .marketing-section-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .marketing-features-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .marketing-features-list li {
+            padding: 10px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: #444;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .marketing-features-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .marketing-features-list li i {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+        
+        .marketing-platforms {
+            display: flex;
+            gap: 20px;
+            margin: 25px 0 30px;
+            flex-wrap: wrap;
+        }
+        
+        .marketing-platform {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #666;
+            font-size: 0.9rem;
+            background: #f5f5f5;
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+        
+        .marketing-platform i {
+            font-size: 1.1rem;
+        }
+
+        .marketing-support-section {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .marketing-support-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .marketing-support-features {
+            list-style: none;
+        }
+        
+        .marketing-support-features li {
+            padding: 6px 0;
+            font-size: 0.9rem;
+            color: #555;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .marketing-support-features li i {
+            font-size: 0.8rem;
+            margin-top: 4px;
+            color: var(--primary);
+        }
+        
+        .marketing-note {
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .marketing-divider {
+            height: 1px;
+            background-color: #f0f0f0;
+            margin: 30px 0;
+        }
+
+        /* Botón de contacto para planes de marketing - Mismo estilo que producción */
+        .marketing-cta {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .marketing-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(201, 15, 15, 0.2);
+        }
+        
+        /* Sección de precio - ELIMINADA para servicio 4 */
         .pricing-section-modal {
             background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
             border-radius: 16px;
@@ -1174,6 +1655,17 @@
             .service-image-container, .service-map-container {
                 height: 400px;
             }
+            
+            .packages-container,
+            .marketing-plans-container {
+                flex-wrap: wrap;
+            }
+            
+            .package-card,
+            .marketing-plan-card {
+                max-width: 100%;
+                min-width: 280px;
+            }
         }
         
         @media (max-width: 992px) {
@@ -1222,6 +1714,21 @@
             .footer-grid {
                 grid-template-columns: 1fr 1fr;
                 padding: 0 24px;
+            }
+
+            .packages-container,
+            .marketing-plans-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .package-card,
+            .marketing-plan-card {
+                max-width: 100%;
+            }
+            
+            .marketing-plan-card {
+                min-width: 100%;
             }
         }
         
@@ -1310,6 +1817,26 @@
             .nav-inner {
                 padding: 0 20px;
             }
+
+            .packages-title,
+            .marketing-plans-title {
+                font-size: 1.8rem;
+            }
+            
+            .package-header,
+            .marketing-plan-header {
+                padding: 20px 20px 15px;
+            }
+
+            .package-content,
+            .marketing-plan-content {
+                padding: 20px;
+            }
+
+            .package-price,
+            .marketing-plan-price {
+                font-size: 1.8rem;
+            }
         }
         
         @media (max-width: 576px) {
@@ -1387,6 +1914,11 @@
                 top: 10px;
                 right: 10px;
             }
+
+            .package-card,
+            .marketing-plan-card {
+                min-width: 100%;
+            }
         }
     </style>
 </head>
@@ -1437,7 +1969,7 @@
     <!-- ====== SERVICES SECTION ====== -->
     <section class="services">
         <div class="services-container">
-            <!-- Servicio 1: Producción de Video -->
+            <!-- Servicio 1: Producción de Video (MANTENIDO) -->
             <div class="service-item">
                 <div class="service-background"></div>
                 <div class="service-overlay"></div>
@@ -1488,16 +2020,16 @@
                 </div>
             </div>
             
-            <!-- Servicio 2: Catálogo Web -->
+            <!-- Servicio 2: Publicación en Redes (NUEVO ORDEN) -->
             <div class="service-item">
                 <div class="service-background"></div>
                 <div class="service-overlay"></div>
                 
                 <div class="service-content-wrapper">
                     <div class="service-content">
-                        <h3>Catalogo Web</h3>
+                        <h3>Publicación en Redes Sociales LIFETIMES</h3>
                         <p class="service-description">
-                            Publicamos tu negocio dentro de nuestro catálogo web, donde las personas pueden descubrir diferentes opciones de comercios y servicios en toda la Ciudad de México.
+                            Difundimos tu contenido en nuestras cuentas principales para aumentar su alcance y visibilidad en toda la CDMX.
                         </p>
                         
                         <div class="service-features">
@@ -1505,56 +2037,41 @@
                                 <div class="feature-icon">
                                     <i class="fas fa-check-circle"></i>
                                 </div>
-                                <div class="feature-text">Publicación de tu negocio en el catálogo</div>
+                                <div class="feature-text">Publicación en Instagram y Facebook</div>
                             </div>
                             <div class="feature-item">
                                 <div class="feature-icon">
                                     <i class="fas fa-check-circle"></i>
                                 </div>
-                                <div class="feature-text">Clasificación por categoría y zona de la CDMX</div>
+                                <div class="feature-text">Alcance a una audiencia ya establecida en CDMX</div>
                             </div>
                             <div class="feature-item">
                                 <div class="feature-icon">
                                     <i class="fas fa-check-circle"></i>
                                 </div>
-                                <div class="feature-text">Información básica y datos de contacto</div>
+                                <div class="feature-text">Entrega de reporte de métricas (KPIs)</div>
                             </div>
                         </div>
                         
                         <div class="service-price">
-                            <div class="service-price-exterior free">Conceta con más personas que buscan lo mismo</div>
-                            <div class="service-price-note">Servicio completamente gratuito sin límite de tiempo</div>
-                        </div>
-                        
-                        <div class="service-benefit">
-                            <div class="benefit-title">Beneficio:</div>
-                            <div class="benefit-description">
-                                Este servicio permite que tu negocio tenga presencia digital sin costo dentro de nuestra plataforma, con alcance en toda la Ciudad de México.
+                            <div class="service-price-exterior">
+                                $54.00 <span class="currency">MXN</span>
                             </div>
+                            <div class="service-price-note">Costo por publicación o video</div>
                         </div>
                         
-                        <button class="expand-btn" data-service="2">
+                        <button class="expand-btn" data-service="4">
                             Ver detalles <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
                     
-                    <div class="service-map-container">
-                        <div class="map-indicator">
-                            <i class="fas fa-map-marker-alt"></i> CDMX
-                        </div>
-                        <!-- Mapa de Google Maps -->
-                        <iframe 
-                            id="cdmx-map"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120409.91956113874!2d-99.20539920000001!3d19.4326296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce0026db097507%3A0x54061076265ee841!2sCiudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1710304281311!5m2!1ses-419!2smx"
-                            allowfullscreen=""
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                    <div class="service-image-container">
+                        <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Publicación en Redes Sociales">
                     </div>
                 </div>
             </div>
             
-            <!-- Servicio 3: Página Web -->
+            <!-- Servicio 3: Página Web (NUEVO ORDEN) -->
             <div class="service-item">
                 <div class="service-background"></div>
                 <div class="service-overlay"></div>
@@ -1606,21 +2123,21 @@
                     </div>
                     
                     <div class="service-image-container">
-                        <img src="https://lh3.googleusercontent.com/pw/AP1GczNFC5h8XY7nOosgm9HM9ctb3HBVC3ycNuqlJc9q5vwW8QNK7PziBy2i1GNLCGBUwM0s_qZPOLbk-6Ymv67IrALU9qrQEdWhl6a-2vaPDursS3dq8wMguJAUMnO5mRc_zRwzPKbCWaZR-K3mpIVXXQ=w1600-h900-s-no-gm?authuser=4" alt="Página Web de Presentación">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Página Web de Presentación">
                     </div>
                 </div>
             </div>
             
-            <!-- Servicio 4: Publicación en Redes -->
+            <!-- Servicio 4: Catálogo Web (NUEVO ORDEN - ÚLTIMO) -->
             <div class="service-item">
                 <div class="service-background"></div>
                 <div class="service-overlay"></div>
                 
                 <div class="service-content-wrapper">
                     <div class="service-content">
-                        <h3>Publicación en Redes Sociales LIFETIMES</h3>
+                        <h3>Catalogo Web</h3>
                         <p class="service-description">
-                            Difundimos tu contenido en nuestras cuentas principales para aumentar su alcance y visibilidad en toda la CDMX.
+                            Publicamos tu negocio dentro de nuestro catálogo web, donde las personas pueden descubrir diferentes opciones de comercios y servicios en toda la Ciudad de México.
                         </p>
                         
                         <div class="service-features">
@@ -1628,36 +2145,51 @@
                                 <div class="feature-icon">
                                     <i class="fas fa-check-circle"></i>
                                 </div>
-                                <div class="feature-text">Publicación en Instagram y Facebook</div>
+                                <div class="feature-text">Publicación de tu negocio en el catálogo</div>
                             </div>
                             <div class="feature-item">
                                 <div class="feature-icon">
                                     <i class="fas fa-check-circle"></i>
                                 </div>
-                                <div class="feature-text">Alcance a una audiencia ya establecida en CDMX</div>
+                                <div class="feature-text">Clasificación por categoría y zona de la CDMX</div>
                             </div>
                             <div class="feature-item">
                                 <div class="feature-icon">
                                     <i class="fas fa-check-circle"></i>
                                 </div>
-                                <div class="feature-text">Entrega de reporte de métricas (KPIs)</div>
+                                <div class="feature-text">Información básica y datos de contacto</div>
                             </div>
                         </div>
                         
                         <div class="service-price">
-                            <div class="service-price-exterior">
-                                $54.00 <span class="currency">MXN</span>
-                            </div>
-                            <div class="service-price-note">Costo por publicación o video</div>
+                            <div class="service-price-exterior free">Conecta con más personas que buscan lo mismo</div>
+                            <div class="service-price-note">Servicio completamente gratuito sin límite de tiempo</div>
                         </div>
                         
-                        <button class="expand-btn" data-service="4">
+                        <div class="service-benefit">
+                            <div class="benefit-title">Beneficio:</div>
+                            <div class="benefit-description">
+                                Este servicio permite que tu negocio tenga presencia digital sin costo dentro de nuestra plataforma, con alcance en toda la Ciudad de México.
+                            </div>
+                        </div>
+                        
+                        <button class="expand-btn" data-service="2">
                             Ver detalles <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
                     
-                    <div class="service-image-container">
-                        <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Publicación en Redes Sociales">
+                    <div class="service-map-container">
+                        <div class="map-indicator">
+                            <i class="fas fa-map-marker-alt"></i> CDMX
+                        </div>
+                        <!-- Mapa de Google Maps -->
+                        <iframe 
+                            id="cdmx-map"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120409.91956113874!2d-99.20539920000001!3d19.4326296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce0026db097507%3A0x54061076265ee841!2sCiudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1710304281311!5m2!1ses-419!2smx"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
                     </div>
                 </div>
             </div>
@@ -1703,9 +2235,9 @@
             <div>
                 <h4>Servicios</h4>
                 <a href="servicios.html">Producción de Video</a>
-                <a href="servicios.html">Catálogo Web</a>
-                <a href="servicios.html">Páginas Web</a>
                 <a href="servicios.html">Publicación en Redes</a>
+                <a href="servicios.html">Páginas Web</a>
+                <a href="servicios.html">Catálogo Web</a>
             </div>
 
             <div>
@@ -1775,14 +2307,90 @@
                         description: "Recibirás menciones en Historias o videos cortos en plataformas digitales como un plan para conectar clientes a tu negocio, esto de manera cuando LIFE TIMES haga contenido tipo Noticiero"
                     }
                 ],
-                pricing: {
-                    amount: "Consultar",
-                    period: "Precio personalizado según duración, complejidad y requerimientos específicos",
-                    features: [
-                        "Desarrollo de guión y planificación estratégica incluidos",
-                        "Hasta 3 revisiones completas de edición sin costo adicional",
-                        "Entrega en todos los formatos necesarios para redes sociales",
-                        "Soporte post-entrega por 30 días para ajustes menores"
+                packages: {
+                    title: "Paquetes de Contenido",
+                    subtitle: "Solución profesional para la presencia digital de tu negocio",
+                    description: "Ofrecemos diferentes paquetes de producción de contenido para adaptarnos a las necesidades específicas de cada negocio, desde proyectos puntuales hasta planes mensuales y bimestrales.",
+                    packages: [
+                        {
+                            title: "Reportero",
+                            price: "$499 MXN",
+                            priceNote: "Precio base • Puede variar según duración",
+                            features: [
+                                "1 video con reportero profesional",
+                                "Grabación dentro del local",
+                                "Edición y postproducción",
+                                "Guion adaptado y narración"
+                            ],
+                            platforms: ["TikTok", "Instagram", "Facebook"],
+                            support: [
+                                "Soporte básico LIFETIME",
+                                "Hasta 1 revisión de edición sin costo",
+                                "Ajustes menores de texto o cortes",
+                                "Atención vía WhatsApp para seguimiento",
+                                "Entrega final optimizada para redes"
+                            ],
+                            note: "Pensado para proyectos puntuales con acompañamiento básico."
+                        },
+                        {
+                            title: "Plan de Contenido Mensual",
+                            price: "$2,900 MXN",
+                            priceNote: "Plan mensual • Producción constante",
+                            features: [
+                                "2 videos narrados por reportero",
+                                "1 video estilo TikTok (tomas rápidas)",
+                                "1 video estilo Instagram",
+                                "Planificación de contenido mensual"
+                            ],
+                            monthlyPlan: [
+                                "1 video por semana",
+                                "Repetición estratégica de contenido",
+                                "Optimización según engagement",
+                                "Análisis de resultados"
+                            ],
+                            platforms: ["TikTok", "Instagram", "Facebook"],
+                            support: [
+                                "Soporte completo LIFETIME",
+                                "Hasta 3 revisiones completas sin costo",
+                                "Ajustes de ritmo, texto o estructura",
+                                "Soporte vía WhatsApp durante todo el mes",
+                                "Asesoría estratégica continua"
+                            ],
+                            note: "Ideal para mantener presencia constante con contenido variado."
+                        },
+                        {
+                            title: "Plan de Contenido Bimestral",
+                            price: "$8,699 MXN",
+                            priceNote: "Plan bimestral • Contenido y publicación continua",
+                            features: [
+                                "Producción de contenido (2 meses)",
+                                "4 videos estilo TikTok (tomas rápidas y dinámicas)",
+                                "4 videos estilo Instagram",
+                                "2 video clips cortos",
+                                "+2 historias",
+                                "Edición y postproducción profesional",
+                                "Adaptación a formato vertical",
+                                "(Contenido creado sin reportero)"
+                            ],
+                            monthlyPlan: [
+                                "Planificación de contenido bimestral",
+                                "Contenido todas las semanas",
+                                "Distribución estratégica del contenido durante 2 meses",
+                                "Repetición planificada de los mejores videos"
+                            ],
+                            platforms: ["TikTok", "Instagram", "Facebook"],
+                            optimization: [
+                                "Ajustes de contenido según desempeño",
+                                "Optimización básica según engagement"
+                            ],
+                            support: [
+                                "Soporte premium LIFETIME",
+                                "Hasta 5 revisiones completas sin costo",
+                                "Ajustes de texto, ritmo o estructura",
+                                "Soporte vía WhatsApp durante los 2 meses"
+                            ],
+                            note: "Solución integral para 2 meses de contenido continuo y estrategia de publicación."
+                        }
                     ]
                 }
             },
@@ -1872,7 +2480,7 @@
             4: {
                 title: "Publicación en Redes Sociales LIFETIMES",
                 subtitle: "Amplificación estratégica del alcance de tu contenido a través de nuestras audiencias establecidas en CDMX",
-                description: "Nuestro servicio de publicación en redes sociales no es simplemente compartir tu contenido; es una estrategia de amplificación cuidadosamente planificada. Publicamos tu contenido en nuestras cuentas principales de Instagram,Tik Tok y Facebook con alcance en la Ciudad de México y más.",
+                description: "Nuestro servicio de publicación en redes sociales no es simplemente compartir tu contenido; es una estrategia de amplificación cuidadosamente planificada. Publicamos tu contenido en nuestras cuentas principales de Instagram, TikTok y Facebook con alcance en la Ciudad de México y más. Además, ofrecemos planes mensuales completos de gestión de contenido para mantener presencia constante en redes sociales.",
                 image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
                 features: [
                     {
@@ -1903,27 +2511,289 @@
                         description: "Cada peso invertido en este servicio es completamente rastreable. Recibirás capturas de pantalla de las publicaciones, acceso a métricas de la plataforma y análisis interpretado."
                     }
                 ],
-                pricing: {
-                    amount: "$54.00 MXN",
-                    period: "Costo fijo por cada publicación individual en ambas plataformas",
-                    features: [
-                        "Publicación simultánea en Instagram Feed y Facebook Page",
-                        "Reporte completo de métricas con análisis interpretado",
-                        "Optimización de horarios de publicación según datos de audiencia CDMX",
-                        "Segmentación por ubicación específica en la Ciudad de México",
-                        "Copywriting estratégico y selección de hashtags relevantes",
-                        "Monitoreo de comentarios y engagement durante 48 horas"
+                marketingPlans: {
+                    title: "Planes de Marketing en Redes Sociales",
+                    subtitle: "Selecciona el plan que mejor se adapte a las necesidades de tu negocio. Todos incluyen publicación en Instagram, TikTok y Facebook, más calendario de publicación.",
+                    packages: [
+                        {
+                            title: "Presencia Mensual",
+                            price: "$799 MXN",
+                            priceNote: "Plan mensual • Presencia básica",
+                            features: [
+                                "Duración: 1 mes",
+                                "4 videos totales",
+                                "1 publicación por semana",
+                                "1 video principal tipo clip",
+                                "Repetición estratégica de un video"
+                            ],
+                            platforms: ["TikTok", "Instagram", "Facebook"],
+                            support: [
+                                "Soporte básico LIFETIME",
+                                "Calendario de publicación mensual",
+                                "Optimización para cada plataforma",
+                                "Atención vía WhatsApp para seguimiento",
+                                "Entrega final optimizada para redes"
+                            ],
+                            note: "Pensado para negocios que quieren estar activos sin saturar."
+                        },
+                        {
+                            title: "Difusión Constante",
+                            price: "$1,480 MXN",
+                            priceNote: "Plan mensual • Mayor movimiento",
+                            features: [
+                                "Duración: 1 mes",
+                                "7 videos en total",
+                                "Publicaciones semanales + refuerzos",
+                                "Videos originales + reutilización estratégica",
+                                "Mayor frecuencia de contenido"
+                            ],
+                            monthlyPlan: [
+                                "Contenido variado semanalmente",
+                                "Estrategia de refuerzos planificada",
+                                "Optimización según engagement",
+                                "Análisis de resultados y ajustes"
+                            ],
+                            platforms: ["TikTok", "Instagram", "Facebook"],
+                            support: [
+                                "Soporte completo LIFETIME",
+                                "Hasta 3 revisiones de contenido sin costo",
+                                "Ajustes de estrategia según resultados",
+                                "Soporte vía WhatsApp durante todo el mes",
+                                "Asesoría estratégica continua"
+                            ],
+                            note: "Ideal para negocios que quieren mayor movimiento durante el mes."
+                        },
+                        {
+                            title: "Posicionamiento Fuerte",
+                            price: "$2,720 MXN",
+                            priceNote: "Plan mensual • Máxima visibilidad",
+                            features: [
+                                "Duración: 1 mes",
+                                "10 videos en total",
+                                "Publicaciones constantes durante el mes",
+                                "Refuerzos y repeticiones planificadas",
+                                "Estrategia de máxima exposición"
+                            ],
+                            monthlyPlan: [
+                                "Contenido diario estratégico",
+                                "Planificación de repeticiones optimizadas",
+                                "Máximo alcance en todas las plataformas",
+                                "Análisis profundo de métricas y KPIs"
+                            ],
+                            platforms: ["TikTok", "Instagram", "Facebook"],
+                            support: [
+                                "Soporte premium LIFETIME",
+                                "Revisiones ilimitadas de contenido",
+                                "Ajustes de estrategia en tiempo real",
+                                "Soporte prioritario vía WhatsApp 24/7",
+                                "Asesoría estratégica personalizada",
+                                "Reportes semanales de desempeño"
+                            ],
+                            note: "Para negocios que buscan máxima visibilidad y posicionamiento."
+                        }
                     ]
                 }
             }
         };
 
-        // Elementos DOM
-        const modalOverlay = document.getElementById('modalOverlay');
-        const modalContainer = document.getElementById('modalContainer');
-        const modalClose = document.getElementById('modalClose');
-        const expandButtons = document.querySelectorAll('.expand-btn');
-        
+        // Función para crear la sección de planes de marketing en redes sociales
+        function createMarketingPlansSection(marketingPlansData) {
+            if (!marketingPlansData || !marketingPlansData.packages) return '';
+            
+            return `
+                <div class="marketing-plans-section">
+                    <h3 class="marketing-plans-title">${marketingPlansData.title}</h3>
+                    <div class="marketing-plans-subtitle">${marketingPlansData.subtitle}</div>
+                    
+                    <div class="marketing-plans-container">
+                        ${marketingPlansData.packages.map((pkg, index) => `
+                            <div class="marketing-plan-card">
+                                <div class="marketing-plan-header">
+                                    <h2 class="marketing-plan-title">
+                                        <span>${pkg.title}</span>
+                                    </h2>
+                                    <div class="marketing-plan-price">${pkg.price}</div>
+                                    <p class="marketing-price-note">${pkg.priceNote}</p>
+                                </div>
+                                
+                                <div class="marketing-plan-content">
+                                    <h3 class="marketing-section-title">
+                                        <i class="far fa-check-circle"></i> Incluye
+                                    </h3>
+                                    <ul class="marketing-features-list">
+                                        ${pkg.features.map(feature => `
+                                            <li><i class="fas fa-check"></i> ${feature}</li>
+                                        `).join('')}
+                                    </ul>
+                                    
+                                    ${pkg.optimization ? `
+                                        <div class="marketing-divider"></div>
+                                        
+                                        <h3 class="marketing-section-title">
+                                            <i class="fas fa-chart-line"></i> Optimización y seguimiento
+                                        </h3>
+                                        <ul class="marketing-features-list">
+                                            ${pkg.optimization.map(item => `
+                                                <li><i class="fas fa-check"></i> ${item}</li>
+                                            `).join('')}
+                                        </ul>
+                                    ` : ''}
+                                    
+                                    <div class="marketing-section-title">
+                                        <i class="fas fa-share-alt"></i> Publicación en
+                                    </div>
+                                    <div class="marketing-platforms">
+                                        ${pkg.platforms.map(platform => {
+                                            let icon = '';
+                                            if (platform === 'TikTok') icon = 'fa-tiktok';
+                                            if (platform === 'Instagram') icon = 'fa-instagram';
+                                            if (platform === 'Facebook') icon = 'fa-facebook';
+                                            return `
+                                                <div class="marketing-platform">
+                                                    <i class="fab ${icon}"></i>
+                                                    <span>${platform}</span>
+                                                </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                    
+                                    ${pkg.monthlyPlan ? `
+                                        <div class="marketing-divider"></div>
+                                        
+                                        <h3 class="marketing-section-title">
+                                            <i class="far fa-calendar-alt"></i> Planificación y publicación
+                                        </h3>
+                                        <ul class="marketing-features-list">
+                                            ${pkg.monthlyPlan.map(item => `
+                                                <li><i class="fas fa-check"></i> ${item}</li>
+                                            `).join('')}
+                                        </ul>
+                                    ` : ''}
+                                    
+                                    <div class="marketing-support-section">
+                                        <h4 class="marketing-support-title">
+                                            <i class="fas fa-life-ring"></i> Soporte incluido
+                                        </h4>
+                                        <ul class="marketing-support-features">
+                                            ${pkg.support.map(item => `
+                                                <li><i class="fas fa-circle"></i> ${item}</li>
+                                            `).join('')}
+                                        </ul>
+                                        <p class="marketing-note">
+                                            ${pkg.note}
+                                        </p>
+                                    </div>
+                                    
+                                    <button class="marketing-cta" data-package="${pkg.title}">
+                                        <i class="fas fa-whatsapp"></i> Solicitar este plan
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Función para crear la sección de paquetes de contenido
+        function createPackagesSection(packagesData) {
+            if (!packagesData || !packagesData.packages) return '';
+            
+            return `
+                <div class="packages-section">
+                    <h3 class="packages-title">${packagesData.title}</h3>
+                    <div class="packages-subtitle">${packagesData.subtitle}</div>
+                    
+                    <div class="packages-container">
+                        ${packagesData.packages.map((pkg, index) => `
+                            <div class="package-card">
+                                <div class="package-header">
+                                    <h2 class="package-title">
+                                        <span>${pkg.title}</span>
+                                    </h2>
+                                    <div class="package-price">${pkg.price}</div>
+                                    <p class="price-note">${pkg.priceNote}</p>
+                                </div>
+                                
+                                <div class="package-content">
+                                    <h3 class="section-title-package">
+                                        <i class="far fa-check-circle"></i> Incluye
+                                    </h3>
+                                    <ul class="features-list">
+                                        ${pkg.features.map(feature => `
+                                            <li><i class="fas fa-check"></i> ${feature}</li>
+                                        `).join('')}
+                                    </ul>
+                                    
+                                    ${pkg.optimization ? `
+                                        <div class="divider"></div>
+                                        
+                                        <h3 class="section-title-package">
+                                            <i class="fas fa-chart-line"></i> Optimización y seguimiento
+                                        </h3>
+                                        <ul class="features-list">
+                                            ${pkg.optimization.map(item => `
+                                                <li><i class="fas fa-check"></i> ${item}</li>
+                                            `).join('')}
+                                        </ul>
+                                    ` : ''}
+                                    
+                                    <div class="section-title-package">
+                                        <i class="fas fa-share-alt"></i> Publicación en
+                                    </div>
+                                    <div class="platforms">
+                                        ${pkg.platforms.map(platform => {
+                                            let icon = '';
+                                            if (platform === 'TikTok') icon = 'fa-tiktok';
+                                            if (platform === 'Instagram') icon = 'fa-instagram';
+                                            if (platform === 'Facebook') icon = 'fa-facebook';
+                                            return `
+                                                <div class="platform">
+                                                    <i class="fab ${icon}"></i>
+                                                    <span>${platform}</span>
+                                                </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                    
+                                    ${pkg.monthlyPlan ? `
+                                        <div class="divider"></div>
+                                        
+                                        <h3 class="section-title-package">
+                                            <i class="far fa-calendar-alt"></i> Planificación y publicación
+                                        </h3>
+                                        <ul class="features-list">
+                                            ${pkg.monthlyPlan.map(item => `
+                                                <li><i class="fas fa-check"></i> ${item}</li>
+                                            `).join('')}
+                                        </ul>
+                                    ` : ''}
+                                    
+                                    <div class="support-section">
+                                        <h4 class="support-title">
+                                            <i class="fas fa-life-ring"></i> Soporte ${pkg.title === 'Reportero' ? 'básico' : (pkg.title.includes('Bimestral') ? 'premium' : 'completo')}
+                                        </h4>
+                                        <ul class="support-features">
+                                            ${pkg.support.map(item => `
+                                                <li><i class="fas fa-circle"></i> ${item}</li>
+                                            `).join('')}
+                                        </ul>
+                                        <p class="package-note">
+                                            ${pkg.note}
+                                        </p>
+                                    </div>
+                                    
+                                    <button class="package-cta" data-package="${pkg.title}">
+                                        <i class="fas fa-whatsapp"></i> Solicitar este paquete
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
         // Función para crear el contenido del modal con la nueva estructura
         function createModalContent(serviceId) {
             const service = servicesData[serviceId];
@@ -1958,13 +2828,44 @@
                 </div>
             `).join('');
             
-            // Crear características de precio HTML
-            const pricingFeaturesHTML = service.pricing.features.map(feature => `
-                <div class="pricing-feature-item">
-                    <i class="fas fa-check"></i>
-                    <span>${feature}</span>
+            // Crear sección de paquetes si existe (solo para servicio 1)
+            const packagesSection = serviceId === '1' && service.packages ? createPackagesSection(service.packages) : '';
+            
+            // Crear sección de planes de marketing si existe (solo para servicio 4)
+            const marketingPlansSection = serviceId === '4' && service.marketingPlans ? createMarketingPlansSection(service.marketingPlans) : '';
+            
+            // Crear sección de precio solo si existe (no para servicios 1 y 4)
+            const pricingSection = serviceId !== '1' && serviceId !== '4' && service.pricing ? `
+                <div class="modal-section">
+                    <h3 class="section-title-modal centered">
+                        <i class="fas fa-dollar-sign"></i>
+                        Inversión requerida y lo que incluye
+                    </h3>
+                    
+                    <div class="pricing-section-modal">
+                        <div class="pricing-badge-modal">
+                            ${service.pricing.amount === 'Consultar' ? 'Servicio personalizado' : (service.pricing.amount.includes('MXN') ? 'Inversión estratégica' : 'Servicio gratuito')}
+                        </div>
+                        <div class="pricing-amount-modal">${service.pricing.amount}</div>
+                        <div class="pricing-period-modal">${service.pricing.period}</div>
+                        
+                        <div class="pricing-features-modal">
+                            ${service.pricing.features.map(feature => `
+                                <div class="pricing-feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>${feature}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    ${serviceId === '2' ? '' : `
+                        <div class="description-centered" style="margin-top: 2rem;">
+                            <strong>Importante:</strong> Todos los precios son transparentes y sin cargos ocultos. Para servicios personalizados como producción de video o desarrollo web, ofrecemos cotizaciones detalladas después de entender exactamente tus necesidades específicas. Contáctanos para una evaluación gratuita y una propuesta personalizada.
+                        </div>
+                    `}
                 </div>
-            `).join('');
+            ` : '';
             
             return `
                 <button class="modal-close" id="modalCloseInside">
@@ -2006,28 +2907,11 @@
                         </div>
                     </div>
                     
-                    <div class="modal-section">
-                        <h3 class="section-title-modal centered">
-                            <i class="fas fa-dollar-sign"></i>
-                            Inversión requerida y lo que incluye
-                        </h3>
-                        
-                        <div class="pricing-section-modal">
-                            <div class="pricing-badge-modal">
-                                ${service.pricing.amount === 'Consultar' ? 'Servicio personalizado' : (service.pricing.amount.includes('MXN') ? 'Inversión estratégica' : 'Servicio gratuito')}
-                            </div>
-                            <div class="pricing-amount-modal">${service.pricing.amount}</div>
-                            <div class="pricing-period-modal">${service.pricing.period}</div>
-                            
-                            <div class="pricing-features-modal">
-                                ${pricingFeaturesHTML}
-                            </div>
-                        </div>
-                        
-                        <div class="description-centered" style="margin-top: 2rem;">
-                            <strong>Importante:</strong> Todos los precios son transparentes y sin cargos ocultos. Para servicios personalizados como producción de video o desarrollo web, ofrecemos cotizaciones detalladas después de entender exactamente tus necesidades específicas. Contáctanos para una evaluación gratuita y una propuesta personalizada.
-                        </div>
-                    </div>
+                    ${packagesSection}
+                    
+                    ${marketingPlansSection}
+                    
+                    ${pricingSection}
                 </div>
                 
                 <div class="modal-footer">
@@ -2070,6 +2954,26 @@
                 });
             }
             
+            // Agregar eventos a los botones de paquetes
+            const packageCtaButtons = document.querySelectorAll('.package-cta');
+            packageCtaButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const packageName = this.getAttribute('data-package');
+                    const message = `Hola, estoy interesado en el paquete "${packageName}" del servicio de Producción de Video Promocional. ¿Podrían darme más información?`;
+                    window.open(`https://wa.me/5539445908?text=${encodeURIComponent(message)}`, '_blank');
+                });
+            });
+            
+            // Agregar eventos a los botones de planes de marketing
+            const marketingCtaButtons = document.querySelectorAll('.marketing-cta');
+            marketingCtaButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const packageName = this.getAttribute('data-package');
+                    const message = `Hola, estoy interesado en el plan "${packageName}" de Publicación en Redes Sociales. ¿Podrían darme más información?`;
+                    window.open(`https://wa.me/5539445908?text=${encodeURIComponent(message)}`, '_blank');
+                });
+            });
+            
             // Asegurarse de que el botón de cerrar dentro del modal funcione
             const modalCloseInside = document.getElementById('modalCloseInside');
             if (modalCloseInside) {
@@ -2088,6 +2992,7 @@
             console.log('Página cargada, inicializando botones...');
             
             // Botones "Ver detalles" - Asegurarnos de que funcionen
+            const expandButtons = document.querySelectorAll('.expand-btn');
             expandButtons.forEach(button => {
                 console.log('Configurando botón:', button);
                 button.addEventListener('click', function() {
