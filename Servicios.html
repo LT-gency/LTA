@@ -449,7 +449,7 @@
             line-height: 1.6;
         }
         
-        /* Precio sin box */
+        /* Precio sin box - MODIFICADO PARA SERVICIO 1 CON DOS PRECIOS */
         .service-price {
             margin: 2rem 0;
         }
@@ -479,6 +479,45 @@
             font-size: 1rem;
             color: rgba(255, 255, 255, 0.8);
             margin-bottom: 2rem;
+        }
+        
+        /* Estilos para mostrar dos precios */
+        .dual-price-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .dual-price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .price-label {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+        
+        .price-amount {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: baseline;
+            gap: 0.2rem;
+        }
+        
+        .price-amount .currency {
+            font-size: 1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
         }
         
         /* Botón expandir */
@@ -1356,7 +1395,216 @@
             box-shadow: 0 5px 15px rgba(201, 15, 15, 0.2);
         }
         
-        /* Sección de precio - ELIMINADA para servicio 4 */
+        /* ====== SECCIÓN DE PAQUETES WEB - NUEVO ESTILO CONSISTENTE ====== */
+        .web-plans-section {
+            margin: 4rem 0;
+            padding: 3rem 0;
+            background: #fafafa;
+            border-radius: 16px;
+            border: 1px solid #eaeaea;
+        }
+
+        .web-plans-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .web-plans-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .web-plans-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            padding: 0 1rem;
+            line-height: 1.6;
+        }
+
+        .web-plans-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            padding: 0 1rem;
+        }
+        
+        /* Tabla para planes web - Estilo consistente con los otros paquetes */
+        .web-plan-card {
+            background-color: white;
+            border-radius: 12px;
+            border: 1px solid #eaeaea;
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            transition: all 0.25s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .web-plan-card:hover {
+            border-color: #ddd;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transform: translateY(-5px);
+        }
+        
+        .web-plan-header {
+            padding: 30px 30px 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .web-plan-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .web-plan-price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: baseline;
+        }
+        
+        .web-price-note {
+            font-size: 0.85rem;
+            color: #888;
+        }
+        
+        .web-plan-content {
+            padding: 30px;
+        }
+        
+        .web-section-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .web-features-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .web-features-list li {
+            padding: 10px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: #444;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .web-features-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .web-features-list li i {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+        
+        .web-features-list li i.fa-times-circle {
+            color: #e0e0e0;
+        }
+        
+        .feature-disabled {
+            opacity: 0.6;
+        }
+        
+        .feature-highlight {
+            background-color: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-top: 5px;
+            font-size: 0.85rem;
+            border-left: 3px solid var(--primary);
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        /* Etiqueta "Sin costo extra" */
+        .tag {
+            display: inline-block;
+            background-color: #2ecc71;
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            font-weight: 600;
+            vertical-align: middle;
+        }
+        
+        /* Botón de CTA con colores de cada plan */
+        .web-plan-cta {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .web-plan-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(201, 15, 15, 0.2);
+        }
+        
+        .web-plan-note {
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        .web-plan-note strong {
+            color: var(--dark);
+        }
+        
+        /* Sección de precio */
         .pricing-section-modal {
             background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
             border-radius: 16px;
@@ -1657,12 +1905,14 @@
             }
             
             .packages-container,
-            .marketing-plans-container {
+            .marketing-plans-container,
+            .web-plans-container {
                 flex-wrap: wrap;
             }
             
             .package-card,
-            .marketing-plan-card {
+            .marketing-plan-card,
+            .web-plan-card {
                 max-width: 100%;
                 min-width: 280px;
             }
@@ -1717,17 +1967,19 @@
             }
 
             .packages-container,
-            .marketing-plans-container {
+            .marketing-plans-container,
+            .web-plans-container {
                 flex-direction: column;
                 align-items: center;
             }
             
             .package-card,
-            .marketing-plan-card {
+            .marketing-plan-card,
+            .web-plan-card {
                 max-width: 100%;
             }
             
-            .marketing-plan-card {
+            .web-plan-card {
                 min-width: 100%;
             }
         }
@@ -1768,6 +2020,10 @@
             
             .modal-title {
                 font-size: 2rem;
+            }
+            
+            .modal-subtitle {
+                font-size: 0.95rem;
             }
             
             .modal-body {
@@ -1819,22 +2075,26 @@
             }
 
             .packages-title,
-            .marketing-plans-title {
+            .marketing-plans-title,
+            .web-plans-title {
                 font-size: 1.8rem;
             }
             
             .package-header,
-            .marketing-plan-header {
+            .marketing-plan-header,
+            .web-plan-header {
                 padding: 20px 20px 15px;
             }
 
             .package-content,
-            .marketing-plan-content {
+            .marketing-plan-content,
+            .web-plan-content {
                 padding: 20px;
             }
 
             .package-price,
-            .marketing-plan-price {
+            .marketing-plan-price,
+            .web-plan-price {
                 font-size: 1.8rem;
             }
         }
@@ -1916,8 +2176,13 @@
             }
 
             .package-card,
-            .marketing-plan-card {
+            .marketing-plan-card,
+            .web-plan-card {
                 min-width: 100%;
+            }
+            
+            .web-plan-footer {
+                padding: 20px 15px;
             }
         }
     </style>
@@ -1927,23 +2192,22 @@
     <header class="nav">
         <div class="nav-inner">
             <button class="mobile-toggle" aria-label="Abrir menú" id="menuBtn">≡</button>
-            <a class="logo" href="index.html" aria-label="Inicio" title="Inicio">
+            <a class="logo" href="Index.html" aria-label="Inicio" title="Inicio">
                 LIFETIMES<span>AGENCY</span>
             </a>
             <nav class="nav-links" aria-label="Principal">
-                <a href="general.html">Novedades</a>
-                <a href="terminos-y-condiciones.html">Términos y Condiciones</a>
-                <a href="contacto.html">Contacto</a>
+                <a href="General.html">Novedades</a>
+                <a href="Terminos y Condiciones.html">Términos y Condiciones</a>
+                <a href="Index.html">La Historia</a>
             </nav>
             <div class="nav-cta">
                 <a class="btn ghost" href="portal.html" aria-label="Portal">Portal</a>
             </div>
         </div>
         <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-            <a href="general.html">Novedades</a>
+            <a href="General.html">Novedades</a>
             <a href="Terminos y Condiciones.html">Términos y Condiciones</a>
-            <a href="contacto.html">Contacto</a>
-            <a href="servicios.html">Servicios</a>
+            <a href="Servicios.html">La Historia</a>
         </div>
     </header>
 
@@ -1969,7 +2233,7 @@
     <!-- ====== SERVICES SECTION ====== -->
     <section class="services">
         <div class="services-container">
-            <!-- Servicio 1: Producción de Video (MANTENIDO) -->
+            <!-- Servicio 1: Producción de Video (MODIFICADO CON DOS PRECIOS) -->
             <div class="service-item">
                 <div class="service-background"></div>
                 <div class="service-overlay"></div>
@@ -2009,6 +2273,18 @@
                             </div>
                         </div>
                         
+                        <!-- SECCIÓN MODIFICADA: MOSTRAR DOS PRECIOS -->
+                        <div class="dual-price-container">
+                            <div class="dual-price-item">
+                                <div class="price-label">Con tarjeta LTA Community:</div>
+                                <div class="price-amount">$499 <span class="currency">MXN</span></div>
+                            </div>
+                            <div class="dual-price-item">
+                                <div class="price-label">Precio regular:</div>
+                                <div class="price-amount">$899 <span class="currency">MXN</span></div>
+                            </div>
+                        </div>
+                        
                         <button class="expand-btn" data-service="1">
                             Ver detalles <i class="fas fa-arrow-right"></i>
                         </button>
@@ -2020,7 +2296,7 @@
                 </div>
             </div>
             
-            <!-- Servicio 2: Publicación en Redes (NUEVO ORDEN) -->
+            <!-- Servicio 2: Publicación en Redes (ELIMINADO EL PRECIO DE $54) -->
             <div class="service-item">
                 <div class="service-background"></div>
                 <div class="service-overlay"></div>
@@ -2053,12 +2329,7 @@
                             </div>
                         </div>
                         
-                        <div class="service-price">
-                            <div class="service-price-exterior">
-                                $54.00 <span class="currency">MXN</span>
-                            </div>
-                            <div class="service-price-note">Costo por publicación o video</div>
-                        </div>
+                        <!-- SE ELIMINÓ LA SECCIÓN DE PRECIO DE $54 -->
                         
                         <button class="expand-btn" data-service="4">
                             Ver detalles <i class="fas fa-arrow-right"></i>
@@ -2205,7 +2476,6 @@
         </div>
     </div>
 
-   
     <section class="cta">
         <div class="cta-container">
             <h2 class="cta-title">¿Listo para Impulsar tu Negocio?</h2>
@@ -2224,7 +2494,6 @@
         </div>
     </section>
 
- 
     <footer class="footer">
         <div class="footer-grid">
             <div>
@@ -2271,7 +2540,7 @@
     </footer>
 
     <script>
-        // Datos de los servicios actualizados con 3 características
+        // Datos de los servicios actualizados
         const servicesData = {
             1: {
                 title: "Producción de Video Promocional",
@@ -2315,7 +2584,7 @@
                         {
                             title: "Reportero",
                             price: "$499 MXN",
-                            priceNote: "Precio base • Puede variar según duración",
+                            priceNote: "Con tarjeta LTA Community • Precio regular $899 MXN",
                             features: [
                                 "1 video con reportero profesional",
                                 "Grabación dentro del local",
@@ -2442,9 +2711,9 @@
                 features: [
                     {
                         icon: "fa-paintbrush",
-                      title: "Pagina web",
+                        title: "Pagina web",
                         description: "Se trata de páginas web de presentación donde los clientes pueden conocer tu negocio, ver información clave y entender fácilmente lo que ofreces."
-                       },
+                    },
                     {
                         icon: "fa-mobile-screen-button",
                         title: "Diseño responsive",
@@ -2452,29 +2721,86 @@
                     },
                     {
                         icon: "fa-bolt",
-                      title: "Diseño personalizado",
+                        title: "Diseño personalizado",
                         description: "Cada elemento visual se diseña específicamente para reflejar la personalidad de tu marca. Creamos interfaces intuitivas que guían al visitante naturalmente hacia la información más importante y los llamados a la acción más efectivos."
                     }
                 ],
-              
                 benefits: [
                     {
                         icon: "fa-link",
                         title: "Integración automática",
                         description: "Al crear tu página web con nosotros, automáticamente recibes un enlace destacado y posición preferencial dentro del catálogo web de LIFETIMES."
-                    },
-                   
+                    }
                 ],
-                pricing: {
-                    amount: "Consultar",
-                    period: "Precio variable según complejidad, funcionalidades y escala del proyecto",
-                    features: [
-                        "Diseño 100% personalizado y único para tu marca",
-                        "1 sección principal completamente desarrollada",
-                        "Integración completa con tus redes sociales principales",
-                        "Panel de administración intuitivo para actualizaciones básicas",
-                        "Inclusión de google Map con tu ubicación"
-                    ]
+                webPlans: {
+                    title: "Planes de Servicios Web",
+                    subtitle: "Selecciona el plan que mejor se adapte a las necesidades de tu negocio. Todos los planes incluyen diseño responsive, estructura profesional y optimización básica.",
+                    packages: [
+                        {
+                            title: "Plan Básico",
+                            price: "$2,499",
+                            priceNote: "Precio base • Ideal para comenzar",
+                            features: [
+                                "Diseño responsive (celular, tablet, computadora)",
+                                "Barra de navegación (Navbar) superior",
+                                "Presentación del negocio (sección institucional)",
+                                "Hasta 5 productos con descripción y costo",
+                                "Galería de productos básica",
+                                "Información de contacto (teléfono, email)",
+                                "Footer informativo con datos del negocio"
+                            ],
+                            excluded: [
+                                { text: "Dominio personalizado (.com)", included: false },
+                                { text: "Google Maps integrado", included: false },
+                                { text: "Redes sociales integradas", included: false },
+                                { text: "Fotografía profesional de productos", included: false }
+                            ],
+                            note: "Ideal para comenzar tu presencia digital."
+                        },
+                        {
+                            title: "Plan Profesional",
+                            price: "$6,699",
+                            priceNote: "Precio completo • Solución establecida",
+                            features: [
+                                "Dominio personalizado (.com por 1 año)",
+                                "Diseño responsive (celular, tablet, computadora)",
+                                "Barra de navegación (Navbar) superior",
+                                "Presentación del negocio (sección institucional)",
+                                "Hasta 12 productos con descripción, costo y categoría",
+                                "Galería de productos ordenada y atractiva",
+                                "Google Maps con ubicación exacta del negocio",
+                                "Información de contacto (teléfono, WhatsApp, email)",
+                                "Redes sociales integradas (TikTok, Instagram, Facebook)",
+                                "Footer informativo con datos clave",
+                                "Soporte inicial para ajustes básicos"
+                            ],
+                            excluded: [
+                                { text: "Fotografía profesional ", included: false }
+                            ],
+                            note: "La solución completa para negocios establecidos."
+                        },
+                        {
+                            title: "Plan Premium",
+                            price: "$8,590",
+                            priceNote: "Precio completo • Todo incluido",
+                            features: [
+                                "Dominio personalizado (.com por 3 años) <span class='tag'>Sin costo extra</span>",
+                                "Diseño responsive (celular, tablet, computadora)",
+                                "Barra de navegación (Navbar) superior avanzada",
+                                "Presentación del negocio con identidad y propósito",
+                                "Hasta 30 productos con descripción, costo y categoría",
+                                "Galería de productos premium y ordenada",
+                                "Google Maps integrado con ubicación exacta",
+                                "Información de contacto completa",
+                                "Redes sociales integradas (TikTok, Instagram, Facebook)",
+                                "Footer informativo avanzado",
+                                "Soporte inicial para ajustes básicos"
+                            ],
+                            highlight: "Servicio de fotografía a domicilio para una mejor presentación de tus productos",
+                            note: "Todo incluido para máxima presencia digital."
+                        }
+                    ],
+                    note: "Todos los planes incluyen estructura clara y profesional, optimización básica para carga rápida y soporte inicial para ajustes básicos posteriores a la entrega. Los precios son referenciales y pueden variar según requerimientos específicos. <strong>Exclusivo Plan Premium:</strong> Servicio de fotografía profesional in situ (¡vamos a tu negocio a tomar las fotos!)."
                 }
             },
             4: {
@@ -2595,6 +2921,84 @@
                 }
             }
         };
+
+        // Función para crear la sección de tablas de planes web
+        function createWebPlansSection(webPlansData) {
+            if (!webPlansData || !webPlansData.packages) return '';
+            
+            return `
+                <div class="packages-section">
+                    <h3 class="packages-title">${webPlansData.title}</h3>
+                    <div class="packages-subtitle">${webPlansData.subtitle}</div>
+                    
+                    <div class="packages-container">
+                        ${webPlansData.packages.map((pkg, index) => `
+                            <div class="package-card">
+                                <div class="package-header">
+                                    <h2 class="package-title">
+                                        <span>${pkg.title}</span>
+                                    </h2>
+                                    <div class="package-price">${pkg.price}</div>
+                                    <p class="price-note">${pkg.priceNote}</p>
+                                </div>
+                                
+                                <div class="package-content">
+                                    <h3 class="section-title-package">
+                                        <i class="far fa-check-circle"></i> Incluye
+                                    </h3>
+                                    <ul class="features-list">
+                                        ${pkg.features.map(feature => `
+                                            <li><i class="fas fa-check"></i> ${feature}</li>
+                                        `).join('')}
+                                    </ul>
+                                    
+                                    ${pkg.excluded ? `
+                                        <div class="divider"></div>
+                                        
+                                        <h3 class="section-title-package">
+                                            <i class="fas fa-times-circle"></i> No incluye
+                                        </h3>
+                                        <ul class="features-list">
+                                            ${pkg.excluded.map(item => `
+                                                <li class="feature-disabled"><i class="fas fa-times-circle"></i> ${item.text}</li>
+                                            `).join('')}
+                                        </ul>
+                                    ` : ''}
+                                    
+                                    ${pkg.highlight ? `
+                                        <div class="support-section">
+                                            <h4 class="support-title">
+                                                <i class="fas fa-star"></i> Beneficio Exclusivo
+                                            </h4>
+                                            <p class="package-note">
+                                                ${pkg.highlight}
+                                            </p>
+                                        </div>
+                                    ` : ''}
+                                    
+                                    <div class="support-section">
+                                        <h4 class="support-title">
+                                            <i class="fas fa-info-circle"></i> Nota
+                                        </h4>
+                                        <p class="package-note">
+                                            ${pkg.note}
+                                        </p>
+                                    </div>
+                                    
+                                    <button class="package-cta" data-plan="${pkg.title}">
+                                        <i class="fas fa-whatsapp"></i> Solicitar ${pkg.title}
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    ${webPlansData.note ? `
+                        <div class="web-plan-note">${webPlansData.note}</div>
+                    ` : ''}
+                </div>
+            `;
+        }
 
         // Función para crear la sección de planes de marketing en redes sociales
         function createMarketingPlansSection(marketingPlansData) {
@@ -2831,11 +3235,14 @@
             // Crear sección de paquetes si existe (solo para servicio 1)
             const packagesSection = serviceId === '1' && service.packages ? createPackagesSection(service.packages) : '';
             
+            // Crear sección de planes web si existe (solo para servicio 3)
+            const webPlansSection = serviceId === '3' && service.webPlans ? createWebPlansSection(service.webPlans) : '';
+            
             // Crear sección de planes de marketing si existe (solo para servicio 4)
             const marketingPlansSection = serviceId === '4' && service.marketingPlans ? createMarketingPlansSection(service.marketingPlans) : '';
             
-            // Crear sección de precio solo si existe (no para servicios 1 y 4)
-            const pricingSection = serviceId !== '1' && serviceId !== '4' && service.pricing ? `
+            // Crear sección de precio solo si existe (no para servicios 1, 3 y 4)
+            const pricingSection = serviceId !== '1' && serviceId !== '3' && serviceId !== '4' && service.pricing ? `
                 <div class="modal-section">
                     <h3 class="section-title-modal centered">
                         <i class="fas fa-dollar-sign"></i>
@@ -2908,6 +3315,8 @@
                     </div>
                     
                     ${packagesSection}
+                    
+                    ${webPlansSection}
                     
                     ${marketingPlansSection}
                     
